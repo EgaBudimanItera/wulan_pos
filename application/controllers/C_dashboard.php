@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class C_dashboard extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -10,8 +10,7 @@ class Welcome extends CI_Controller {
 
 	public function index(){
 		$data=array(
-			'page'=>'contoh',
-			
+			'page'=>'dashboard',
 			'link'=>'beranda'
 		);
 		$this->load->view('partials/back/wrapper',$data);

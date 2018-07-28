@@ -13,113 +13,55 @@
 			<!-- BEGIN SIDEBAR MENU -->
             <ul class="sidebar-menu">
                 <li class="<?php if($link=='' ||$link=="dashboard"){echo'active';}?>">
-                    <a href="<?=base_url()?>dashboard" class="">
+                    <a href="<?=base_url()?>" class="">
                         <span class="icon-box"> <i class="icon-home"></i></span> Dashboard
                         
                     </a>
                 </li>
-                <?php 
-                  
-
-                  if($hakakses=='Admin'){
-                ?>
-                <li class="has-sub <?php if($link=='calonnasabah' ||$link=="nasabah"){echo'active';}?>">
+                
+                <li class="has-sub <?php if($link=='satuan'||$link=="barang"||$link=="pelanggan"||$link=="supplier"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-book"></i></span> Master
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="<?php if($link=='calonnasabah'){echo'active';}?>"><a href="<?=base_url()?>nasabah_control/listcalonnasabah">Calon Nasabah </a></li>
-                        <li class="<?php if($link=='nasabah'){echo'active';}?>"><a href="<?=base_url()?>nasabah_control/listnasabah">Nasabah</a></li>
+                        <li class="<?php if($link=='satuan'){echo'active';}?>"><a href="<?=base_url()?>c_satuan">Satuan</a></li>
+                        <li class="<?php if($link=='barang'){echo'active';}?>"><a href="<?=base_url()?>c_barang">Barang</a></li>
+                        <li class="<?php if($link=='pelanggan'){echo'active';}?>"><a href="<?=base_url()?>c_pelanggan">Pelanggan</a></li>
+                        <li class="<?php if($link=='supplier'){echo'active';}?>"><a href="<?=base_url()?>c_supplier">Supplier</a></li>
                     </ul>
                 </li>
-                <li class="has-sub <?php if($link=='pengajuan' ||$link=="diterima"||$link=="ditolak"||$link=="pembayaran"){echo'active';}?>">
+                <li class="has-sub <?php if($link=='pembelian' ||$link=="penjualan"||$link=="returpembelian"||$link=="returpenjualan"||$link=="bayarutang"||$link=="bayarpiutang"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"><i class="icon-cogs"></i></span> Transaksi
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="<?php if($link=='pengajuan'){echo'active';}?>"><a href="<?=base_url()?>pembiayaan_control">Pengajuan Pembiayaan</a></li>
-                        <li class="<?php if($link=='diterima'){echo'active';}?>" ><a href="<?=base_url()?>pembiayaan_control/listditerimaadmin">Pembiayaan Diterima</a></li>
-                        <li class="<?php if($link=='ditolak'){echo'active';}?>" ><a href="<?=base_url()?>pembiayaan_control/listditolakadmin">Pembiayaan Ditolak</a></li>
-                       
+                        <li class="<?php if($link=='pembelian'){echo'active';}?>"><a href="<?=base_url()?>c_pembelian">Pembelian</a></li>
+                        <li class="<?php if($link=='penjualan'){echo'active';}?>" ><a href="#">Penjualan</a></li>
+                        <li class="<?php if($link=='returpembelian'){echo'active';}?>" ><a href="#">Retur Pembelian</a></li>
+                        <li class="<?php if($link=='returpenjualan'){echo'active';}?>" ><a href="#">Retur Penjualan</a></li>
+                        <li class="<?php if($link=='bayarutang'){echo'active';}?>" ><a href="#">Pembayaran Hutang</a></li>
+                        <li class="<?php if($link=='bayarpiutang'){echo'active';}?>" ><a href="#">Pembayaran Piutang</a></li>
                     </ul>
                 </li>
-                <li class="has-sub <?php if($link=="laporanditerima"||$link=="laporanditolak"){echo'active';}?>">
+                <li class="has-sub <?php if($link=="lapstok"||$link=="laphutang"||$link=="lappiutang"||$link=="lappembelian"||$link=="lappenjualan"||$link=="lapreturbeli"||$link=="lapreturjual"||$link=="lapkaskeluar"||$link=="lapkasmasuk"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"><i class="icon-tasks"></i></span> Laporan
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="<?php if($link=="laporanditerima"){echo'active';}?>"><a class="" href="<?=base_url()?>laporan_control">Laporan Pembiayaan Diterima</a></li>
-                        <li class="<?php if($link=="laporanditolak"){echo'active';}?>"><a class="" href="<?=base_url()?>laporan_control/ditolak">Laporan Pembiayaan Ditolak</a></li>
+                        <li class="<?php if($link=="lapstok"){echo'active';}?>"><a class="" href="#">Stok</a></li>
+                        <li class="<?php if($link=="laphutang"){echo'active';}?>"><a class="" href="#">Hutang</a></li>
+                        <li class="<?php if($link=="lappiutang"){echo'active';}?>"><a class="" href="#">Piutang</a></li>
+                        <li class="<?php if($link=="lappembelian"){echo'active';}?>"><a class="" href="#">Pembelian</a></li>
+                        <li class="<?php if($link=="lappenjualan"){echo'active';}?>"><a class="" href="#">Penjualan</a></li>
+                        <li class="<?php if($link=="lapreturbeli"){echo'active';}?>"><a class="" href="#">Retur Pembelian</a></li>
+                        <li class="<?php if($link=="lapreturjual"){echo'active';}?>"><a class="" href="#">Retur Penjualan</a></li>
+                        <li class="<?php if($link=="lapkaskeluar"){echo'active';}?>"><a class="" href="#">Pengeluaran Kas</a></li>
+                        <li class="<?php if($link=="lapkasmasuk"){echo'active';}?>"><a class="" href="#">Penerimaan Kas</a></li>
                     </ul>
                 </li>
-                <?php
-                  }elseif ($hakakses=='Teller'){
-                ?>
-                <li class="has-sub <?php if($link=='pengajuan' ||$link=="diterima"||$link=="ditolak"||$link=="pembayaran"){echo'active';}?>">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-cogs"></i></span> Transaksi
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        
-                        <li class="<?php if($link=='diterima'){echo'active';}?>" ><a href="<?=base_url()?>pembiayaan_control/listditerimaadmin">Pembiayaan Diterima</a></li>
-                        
-                       
-                    </ul>
-                </li>
-                <?php     
-                  }else{
-                ?>
-                <!-- <li><a class="" href="<?php echo base_url() ?>Adm_dash"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a></li>   -->              
-                <li class="has-sub <?php if($link=='calonnasabah' ||$link=="nasabah"){echo'active';}?>">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-book"></i></span> Master
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li class="<?php if($link=='calonnasabah'){echo'active';}?>"><a href="<?=base_url()?>nasabah_control/listcalonnasabah">Calon Nasabah </a></li>
-                        <li class="<?php if($link=='nasabah'){echo'active';}?>"><a href="<?=base_url()?>nasabah_control/listnasabah">Nasabah</a></li>
-                    </ul>
-                </li>
-                <li class="has-sub <?php if($link=='pengajuan' ||$link=="diterima"||$link=="ditolak"||$link=="pembayaran"){echo'active';}?>">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-cogs"></i></span> Transaksi
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li class="<?php if($link=='pengajuan'){echo'active';}?>"><a href="<?=base_url()?>pembiayaan_control">Pengajuan Pembiayaan</a></li>
-                        <li class="<?php if($link=='diterima'){echo'active';}?>" ><a href="<?=base_url()?>pembiayaan_control/listditerimaadmin">Pembiayaan Diterima</a></li>
-                        <li class="<?php if($link=='ditolak'){echo'active';}?>" ><a href="<?=base_url()?>pembiayaan_control/listditolakadmin">Pembiayaan Ditolak</a></li>
-                       
-                    </ul>
-                </li>
-                 <li class="has-sub <?php if($link=="laporanditerima"||$link=="laporanditolak"){echo'active';}?>">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-tasks"></i></span> Laporan
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li class="<?php if($link=="laporanditerima"){echo'active';}?>"><a class="" href="<?=base_url()?>laporan_control">Laporan Pembiayaan Diterima</a></li>
-                        <li class="<?php if($link=="laporanditolak"){echo'active';}?>"><a class="" href="<?=base_url()?>laporan_control/ditolak">Laporan Pembiayaan Ditolak</a></li>
-                    </ul>
-                </li>
-                <li class="has-sub <?php if($link=='userlogin'){echo'active';}?>">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-user"></i></span> User
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li class="<?php if($link=='userlogin'){echo'active';}?>"><a class="" href="<?=base_url()?>userlogin_control">List User</a></li>
-                    </ul>
-                </li>
-                <?php
-                  }
-                ;?>
-
-            	
             </ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
