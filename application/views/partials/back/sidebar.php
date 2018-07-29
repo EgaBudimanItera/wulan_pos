@@ -45,21 +45,21 @@
                         <li class="<?php if($link=='bayarpiutang'){echo'active';}?>" ><a href="<?=base_url()?>c_bayarpiutang">Pembayaran Piutang</a></li>
                     </ul>
                 </li>
-                <li class="has-sub <?php if($link=="lapstok"||$link=="laphutang"||$link=="lappiutang"||$link=="lappembelian"||$link=="lappenjualan"||$link=="lapreturbeli"||$link=="lapreturjual"||$link=="lapkaskeluar"||$link=="lapkasmasuk"){echo'active';}?>">
+                <li class="has-sub <?php if($link=="lapstok"||$link=="laputang"||$link=="lappiutang"||$link=="lappembelian"||$link=="lappenjualan"||$link=="lapreturbeli"||$link=="lapreturjual"||$link=="lapkaskeluar"||$link=="lapkasmasuk"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"><i class="icon-tasks"></i></span> Laporan
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
                         <li class="<?php if($link=="lapstok"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapstok">Stok</a></li>
-                        <li class="<?php if($link=="laphutang"){echo'active';}?>"><a class="" href="#">Hutang</a></li>
-                        <li class="<?php if($link=="lappiutang"){echo'active';}?>"><a class="" href="#">Piutang</a></li>
-                        <li class="<?php if($link=="lappembelian"){echo'active';}?>"><a class="" href="#">Pembelian</a></li>
-                        <li class="<?php if($link=="lappenjualan"){echo'active';}?>"><a class="" href="#">Penjualan</a></li>
-                        <li class="<?php if($link=="lapreturbeli"){echo'active';}?>"><a class="" href="#">Retur Pembelian</a></li>
-                        <li class="<?php if($link=="lapreturjual"){echo'active';}?>"><a class="" href="#">Retur Penjualan</a></li>
-                        <li class="<?php if($link=="lapkaskeluar"){echo'active';}?>"><a class="" href="#">Pengeluaran Kas</a></li>
-                        <li class="<?php if($link=="lapkasmasuk"){echo'active';}?>"><a class="" href="#">Penerimaan Kas</a></li>
+                        <li class="<?php if($link=="laputang"){echo'active';}?>"><a class="" href="<?=base_url()?>c_laputang">Hutang</a></li>
+                        <li class="<?php if($link=="lappiutang"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lappiutang">Piutang</a></li>
+                        <li class="<?php if($link=="lappembelian"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lappembelian">Pembelian</a></li>
+                        <li class="<?php if($link=="lappenjualan"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lappenjualan">Penjualan</a></li>
+                        <li class="<?php if($link=="lapreturbeli"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapreturbeli">Retur Pembelian</a></li>
+                        <li class="<?php if($link=="lapreturjual"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapreturjual">Retur Penjualan</a></li>
+                        <li class="<?php if($link=="lapkaskeluar"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapkaskeluar">Pengeluaran Kas</a></li>
+                        <li class="<?php if($link=="lapkasmasuk"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapkasmasuk">Penerimaan Kas</a></li>
                     </ul>
                 </li>
             </ul>
