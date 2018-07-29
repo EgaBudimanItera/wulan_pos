@@ -66,7 +66,7 @@
                     <td>Budiman</td>
                     <td>1.000.000</td>
                     <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>formtambah/1" title="Detail"><i class="icon-eye-open"></i></a>
+                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formtambah/1" title="Detail"><i class="icon-eye-open"></i></a>
                     </td>
                   </tr>
                 </tbody>
