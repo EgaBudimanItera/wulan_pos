@@ -24,7 +24,7 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
     <div id="page" class="dashboard"> 
-        <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
+        
         <div class="row-fluid">
           <div class="span12">
             <!-- BEGIN EXAMPLE TABLE widget-->
@@ -37,6 +37,13 @@
                   </span>
               </div>
               <div class="widget-body">
+                <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
+                <div>
+                  <button type="button" class="btn btn-primary" onclick="self.history.back()">
+                    <i class="icon-arrow-left"></i> Kembali
+                  </button>
+                </div>
+                <br>
                 <form action="#" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Barang</label>
@@ -78,7 +85,6 @@
                     </div>
                   </div> 
                   
-                </div> 
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Simpan Data</button>
                     <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button>

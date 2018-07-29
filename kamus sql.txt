@@ -1,0 +1,11 @@
+jumlah retur pembelian
+
+select *,COALESCE((select drpbJumlah from detreturpembelian_temp where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahretur 
+from detpembelian
+join pembelian on(dtpbPmblId=pmblId)
+
+
+jumlah retur penjualan
+select *,COALESCE((select drpjJumlah from detreturpenjualan_temp where drpjBrngId=dtpjBrngId and drpjPnjlId=drpjPnjlId),0) as jumlahretur 
+from detpenjualan
+join penjualan on(dtpjPnjlId=pnjlId)

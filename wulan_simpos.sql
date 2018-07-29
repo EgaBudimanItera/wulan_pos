@@ -45,9 +45,11 @@ CREATE TABLE `detpembelian` (
   `dtpbJumlah` int(11) NOT NULL,
   `dtpbHarga` double DEFAULT NULL,
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
+
+insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`) values (65,5,1,100,10);
 
 /*Table structure for table `detpembelian_temp` */
 
@@ -94,6 +96,35 @@ CREATE TABLE `detpenjualan_temp` (
 
 /*Data for the table `detpenjualan_temp` */
 
+/*Table structure for table `detreturpembelian` */
+
+DROP TABLE IF EXISTS `detreturpembelian`;
+
+CREATE TABLE `detreturpembelian` (
+  `drpbId` int(11) NOT NULL AUTO_INCREMENT,
+  `drpbRtpbId` int(11) NOT NULL,
+  `drpbBrngId` int(11) NOT NULL,
+  `drpbJumlah` int(11) NOT NULL,
+  PRIMARY KEY (`drpbId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `detreturpembelian` */
+
+/*Table structure for table `detreturpembelian_temp` */
+
+DROP TABLE IF EXISTS `detreturpembelian_temp`;
+
+CREATE TABLE `detreturpembelian_temp` (
+  `drpbId` int(11) NOT NULL AUTO_INCREMENT,
+  `drpbBrngId` int(11) NOT NULL,
+  `drpbJumlah` int(11) NOT NULL,
+  `drpbPmblId` int(11) DEFAULT NULL,
+  `drpbCreatedby` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`drpbId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `detreturpembelian_temp` */
+
 /*Table structure for table `detreturpenjualan` */
 
 DROP TABLE IF EXISTS `detreturpenjualan`;
@@ -116,6 +147,7 @@ CREATE TABLE `detreturpenjualan_temp` (
   `drpjId` int(11) NOT NULL AUTO_INCREMENT,
   `drpjBrngId` int(11) NOT NULL,
   `drpjJumlah` int(11) NOT NULL,
+  `drpjPnjlId` int(11) DEFAULT NULL,
   `drpjCreatedby` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`drpjId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -152,8 +184,6 @@ CREATE TABLE `pelanggan` (
   `plgnNamaKontak` varchar(50) DEFAULT NULL,
   `plgnTelp1` varchar(12) NOT NULL,
   `plgnTelp2` varchar(12) DEFAULT NULL,
-  `plgnNpwp` varchar(40) DEFAULT NULL,
-  `plgnNik` varchar(30) NOT NULL,
   `plgnAlamat` text,
   `plgnPiutang` double DEFAULT NULL,
   PRIMARY KEY (`plgnId`)
@@ -168,7 +198,7 @@ DROP TABLE IF EXISTS `pembelian`;
 CREATE TABLE `pembelian` (
   `pmblId` int(11) NOT NULL AUTO_INCREMENT,
   `pmblNoFaktur` varchar(40) NOT NULL,
-  `pmblTanggal` datetime DEFAULT NULL,
+  `pmblTanggal` date DEFAULT NULL,
   `pmblSplrId` int(11) NOT NULL,
   `pmblKet` text NOT NULL,
   `pmblTotalBeli` double DEFAULT NULL,
@@ -176,9 +206,11 @@ CREATE TABLE `pembelian` (
   `pmblUangMuka` double DEFAULT NULL,
   `pmblJatuhTempo` date DEFAULT NULL,
   PRIMARY KEY (`pmblId`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
+
+insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`) values (5,'B001','2018-07-28',0,'a',1000,1000,0,'2018-08-28');
 
 /*Table structure for table `penjualan` */
 
@@ -217,6 +249,21 @@ CREATE TABLE `piutang` (
 ) ENGINE=MyISAM AUTO_INCREMENT=166 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `piutang` */
+
+/*Table structure for table `returpembelian` */
+
+DROP TABLE IF EXISTS `returpembelian`;
+
+CREATE TABLE `returpembelian` (
+  `rtpbId` int(11) NOT NULL AUTO_INCREMENT,
+  `rtpbNoFaktur` varchar(40) NOT NULL,
+  `rtpbTanggal` datetime DEFAULT NULL,
+  `rtpbPmblId` int(11) NOT NULL,
+  `rtpbKet` text NOT NULL,
+  PRIMARY KEY (`rtpbId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `returpembelian` */
 
 /*Table structure for table `returpenjualan` */
 
@@ -274,8 +321,8 @@ CREATE TABLE `supplier` (
   `splrKode` varchar(10) NOT NULL,
   `splrNama` varchar(50) NOT NULL,
   `splrAlamat` text,
-  `splrNoKontak1` varchar(12) DEFAULT NULL,
-  `splrNoKontak2` varchar(12) DEFAULT NULL,
+  `splrTelp1` varchar(12) DEFAULT NULL,
+  `splrTelp2` varchar(12) DEFAULT NULL,
   `splrHutang` double DEFAULT NULL,
   PRIMARY KEY (`splrId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;

@@ -9,13 +9,13 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Data Pembelian
+          Data Penjualan
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Pembelian</a><span class="divider">&nbsp;</span></li>
+          <li><a href="#">Penjualan</a><span class="divider">&nbsp;</span></li>
           <li><a href="#">Tambah Data</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -48,21 +48,21 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblKode" required name="pmblKode" />
+                       <input type="text" class="span6" id="pnjlNoFaktur" required name="pnjlNoFaktur" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblNama" required name="pmblNama" />
+                       <input type="text" class="span6" id="pnjlTanggal" required name="pnjlTanggal" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group">
-                    <label class="control-label">Supplier</label>
+                    <label class="control-label">Pelanggan</label>
                     <div class="controls">
-                       <select class="span6 chosen" data-placeholder="Pilih Supplier" tabindex="1" name="pmblStunId">
+                       <select class="span6 chosen" data-placeholder="Pilih Pelanggan" tabindex="1" name="pnjlPlgnId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
                           <option value="Category 1">Category 1</option>
@@ -72,7 +72,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Keterangan</label>
                     <div class="controls">
-                       <textarea name="pmblKet" class="span6"></textarea>
+                       <textarea name="pnjlKet" class="span6"></textarea>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
@@ -81,20 +81,20 @@
                       </a>
                   </div>
                 
-                  <!-- tempat menampilkan table detailpembelian temp -->
-                  <div id="tampilpembelian">
+                  <!-- tempat menampilkan table detailPenjualan temp -->
+                  <div id="tampilpenjualan">
                   </div>
                   <br>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Uang Muka</label>
                     <div class="controls">
-                        <input type="number" class="span6" id="pmblNama" required name="pmblNama" />
+                        <input type="number" class="span6" id="pnjlUangMuka" required name="pnjlUangMuka" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
               
                   <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Pembelian</button>
+                    <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Penjualan</button>
                     
                   </div>
                 </form>
@@ -124,7 +124,7 @@
             <div class="control-group">
               <label class="control-label">Nama Barang</label>
               <div class="controls">
-                 <select class="span12 chosen" data-placeholder="Pilih Barang" tabindex="1" name="dtpbBrngId" id="dtpbBrngId">
+                 <select class="span12 chosen" data-placeholder="Pilih Barang" tabindex="1" name="dtpjBrngId" id="dtpjBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
                     <option value="Category 1">Barang 1</option>
@@ -132,16 +132,16 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputWarning">HPP Satuan Barang</label>
+              <label class="control-label" for="inputWarning">Harga Jual Satuan</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpbHarga" readonly="" name="dtpbHarga" />
+                 <input type="text" class="span12" id="dtpjHarga" readonly="" name="dtpjHarga" />
                  
               </div>
             </div> 
             <div class="control-group">
-              <label class="control-label" for="inputWarning">Jumlah Beli</label>
+              <label class="control-label" for="inputWarning">Jumlah Jual</label>
               <div class="controls">
-                 <input type="number" class="span12" id="dtpbJumlah" required name="dtpbJumlah" />
+                 <input type="number" class="span12" id="dtpjJumlah" required name="dtpjJumlah" />
                  
               </div>
             </div> 

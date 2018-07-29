@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_pembelian extends CI_Controller {
+class C_penjualan extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -9,30 +9,30 @@ class C_pembelian extends CI_Controller {
 
 	public function index(){
 		$data=array(
-			'page'=>'pembelian/datapembelian',
-			'link'=>'pembelian'
+			'page'=>'penjualan/datapenjualan',
+			'link'=>'penjualan'
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
 	public function formtambah(){
 		$data=array(
-			'page'=>'pembelian/formtambah',
-			'link'=>'pembelian',
-			'script'=>'script/pembelian',
+			'page'=>'penjualan/formtambah',
+			'link'=>'penjualan',
+			'script'=>'script/penjualan',
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
 	public function tabeldetailtemp(){
 		$data=array();
-		$this->load->view('pembelian/datadetailtemp',$data);
+		$this->load->view('penjualan/datadetailtemp',$data);
 	}
 
 	public function formdetail($nofaktur){
 		$data=array(
-			'page'=>'pembelian/detailpembelian',
-			'link'=>'pembelian',
+			'page'=>'penjualan/detailpenjualan',
+			'link'=>'penjualan',
 			
 		);
 		$this->load->view('partials/back/wrapper',$data);
