@@ -9,17 +9,17 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Data Returpembelian
+          Data Retur Penjualan
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
           <li>
-              <a href="#">Retur Pembelian</i></a><span class="divider">&nbsp;</span>
+              <a href="#">Retur Penjualan</i></a><span class="divider">&nbsp;</span>
           </li>
           <li>
-              <a href="#">Pilih Pembelian</i></a><span class="divider">&nbsp;</span>
+              <a href="#">Pilih Penjualan</i></a><span class="divider">&nbsp;</span>
           </li>
           <li><a href="#">Tambah Retur</a><span class="divider-last">&nbsp;</span></li>
         </ul>
@@ -29,7 +29,6 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
     <div id="page" class="dashboard">                                                              
-      
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
@@ -43,6 +42,12 @@
             </div>
             <div class="widget-body">
              <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
+              <div>
+                <button type="button" class="btn btn-primary" onclick="self.history.back()">
+                  <i class="icon-arrow-left"></i> Kembali
+                </button>
+              </div>
+              <br>
               <table class="table table-striped table-bordered" id="sample_1">
                 <thead>
                   <tr>
@@ -55,7 +60,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                 <!-- ambil dari kamus sql retur pembelian -->
+                 <!-- ambil dari kamus sql retur penjualan -->
                  <tr>
                     <td>1</td>
                     <td>a</td>
@@ -63,7 +68,7 @@
                     <td>10</td>
                     <td>0</td>
                     <td>
-                      <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
+                      <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -80,7 +85,7 @@
 </div>
 <!-- END PAGE -->
   
-<div class="modal fade" id="returbeliModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+<div class="modal fade" id="returjualModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
   <div class="modal-wrapper">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -96,21 +101,21 @@
               <label class="control-label" for="inputWarning">Nama Barang</label>
               <div class="controls">
                  <input type="text" class="span12" id="brngNama" readonly="" name="brngNama" />
-                 <input type="hidden" class="span12" id="dtpbBrngId" readonly="" name="dtpbBrngId" />
-                 <input type="hidden" class="span12" id="dtpbPmblId" readonly="" name="dtpbPmblId" />
+                 <input type="hidden" class="span12" id="dtpjBrngId" readonly="" name="dtpjBrngId" />
+                 <input type="hidden" class="span12" id="dtpjPnjlId" readonly="" name="dtpjPnjlId" />
               </div>
             </div> 
             <div class="control-group">
-              <label class="control-label" for="inputWarning">Jumlah Beli</label>
+              <label class="control-label" for="inputWarning">Jumlah Jual</label>
               <div class="controls">
-                 <input type="number" class="span12" id="dtpbJumlah" required name="dtpbJumlah" />
+                 <input type="number" class="span12" id="dtpjJumlahJual" readonly="" name="dtpjJumlahJual" />
                  
               </div>
             </div> 
             <div class="control-group">
               <label class="control-label" for="inputWarning">Jumlah Retur</label>
               <div class="controls">
-                 <input type="number" class="span12" id="drpbJumlah" required name="drpbJumlah" />
+                 <input type="number" class="span12" id="drpjJumlah" required name="drpjJumlah" />
                  
               </div>
             </div> 

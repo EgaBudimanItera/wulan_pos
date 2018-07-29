@@ -33,7 +33,6 @@ class C_pembelian extends CI_Controller {
 		$data=array(
 			'page'=>'pembelian/detailpembelian',
 			'link'=>'pembelian',
-			
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

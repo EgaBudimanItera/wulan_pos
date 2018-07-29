@@ -34,6 +34,92 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
+/*Table structure for table `bayarpiutang` */
+
+DROP TABLE IF EXISTS `bayarpiutang`;
+
+CREATE TABLE `bayarpiutang` (
+  `byrpId` int(11) NOT NULL AUTO_INCREMENT,
+  `byrpNoFaktur` varchar(20) DEFAULT NULL,
+  `byrpTanggal` date DEFAULT NULL,
+  `byrpTotalBayar` double DEFAULT NULL,
+  `byrpKet` text,
+  PRIMARY KEY (`byrpId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `bayarpiutang` */
+
+/*Table structure for table `bayarutang` */
+
+DROP TABLE IF EXISTS `bayarutang`;
+
+CREATE TABLE `bayarutang` (
+  `byruId` int(11) NOT NULL AUTO_INCREMENT,
+  `byruNoFaktur` varchar(20) DEFAULT NULL,
+  `byruTanggal` date DEFAULT NULL,
+  `byruTotalBayar` double DEFAULT NULL,
+  `byruKet` text,
+  PRIMARY KEY (`byruId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `bayarutang` */
+
+/*Table structure for table `detbayarpiutang` */
+
+DROP TABLE IF EXISTS `detbayarpiutang`;
+
+CREATE TABLE `detbayarpiutang` (
+  `dbypId` int(11) NOT NULL AUTO_INCREMENT,
+  `dbypByrpId` int(11) NOT NULL,
+  `dbypPnjlId` int(11) NOT NULL,
+  `dbypBayar` double NOT NULL,
+  PRIMARY KEY (`dbypId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `detbayarpiutang` */
+
+/*Table structure for table `detbayarpiutang_temp` */
+
+DROP TABLE IF EXISTS `detbayarpiutang_temp`;
+
+CREATE TABLE `detbayarpiutang_temp` (
+  `dbypId` int(11) NOT NULL AUTO_INCREMENT,
+  `dbypPnjlId` int(11) NOT NULL,
+  `dbypBayar` double NOT NULL,
+  `dbypCreatedBy` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`dbypId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `detbayarpiutang_temp` */
+
+/*Table structure for table `detbayarutang` */
+
+DROP TABLE IF EXISTS `detbayarutang`;
+
+CREATE TABLE `detbayarutang` (
+  `dbyuId` int(11) NOT NULL AUTO_INCREMENT,
+  `dbyuByruId` int(11) NOT NULL,
+  `dbyuPmblId` int(11) NOT NULL,
+  `dbyuBayar` double NOT NULL,
+  PRIMARY KEY (`dbyuId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `detbayarutang` */
+
+/*Table structure for table `detbayarutang_temp` */
+
+DROP TABLE IF EXISTS `detbayarutang_temp`;
+
+CREATE TABLE `detbayarutang_temp` (
+  `dbyuId` int(11) NOT NULL AUTO_INCREMENT,
+  `dbyuPmblId` int(11) NOT NULL,
+  `dbyuBayar` double NOT NULL,
+  `dbyuCreatedBy` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`dbyuId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `detbayarutang_temp` */
+
 /*Table structure for table `detpembelian` */
 
 DROP TABLE IF EXISTS `detpembelian`;

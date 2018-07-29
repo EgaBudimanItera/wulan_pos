@@ -41,8 +41,8 @@
                         <li class="<?php if($link=='penjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_penjualan">Penjualan</a></li>
                         <li class="<?php if($link=='returpembelian'){echo'active';}?>" ><a href="<?=base_url()?>c_returpembelian">Retur Pembelian</a></li>
                         <li class="<?php if($link=='returpenjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_returpenjualan">Retur Penjualan</a></li>
-                        <li class="<?php if($link=='bayarutang'){echo'active';}?>" ><a href="#">Pembayaran Hutang</a></li>
-                        <li class="<?php if($link=='bayarpiutang'){echo'active';}?>" ><a href="#">Pembayaran Piutang</a></li>
+                        <li class="<?php if($link=='bayarutang'){echo'active';}?>" ><a href="<?=base_url()?>c_bayarutang">Pembayaran Hutang</a></li>
+                        <li class="<?php if($link=='bayarpiutang'){echo'active';}?>" ><a href="<?=base_url()?>c_bayarpiutang">Pembayaran Piutang</a></li>
                     </ul>
                 </li>
                 <li class="has-sub <?php if($link=="lapstok"||$link=="laphutang"||$link=="lappiutang"||$link=="lappembelian"||$link=="lappenjualan"||$link=="lapreturbeli"||$link=="lapreturjual"||$link=="lapkaskeluar"||$link=="lapkasmasuk"){echo'active';}?>">
@@ -51,7 +51,7 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="<?php if($link=="lapstok"){echo'active';}?>"><a class="" href="#">Stok</a></li>
+                        <li class="<?php if($link=="lapstok"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapstok">Stok</a></li>
                         <li class="<?php if($link=="laphutang"){echo'active';}?>"><a class="" href="#">Hutang</a></li>
                         <li class="<?php if($link=="lappiutang"){echo'active';}?>"><a class="" href="#">Piutang</a></li>
                         <li class="<?php if($link=="lappembelian"){echo'active';}?>"><a class="" href="#">Pembelian</a></li>

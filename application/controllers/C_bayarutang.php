@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_returpenjualan extends CI_Controller {
+class C_bayarutang extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -9,38 +9,39 @@ class C_returpenjualan extends CI_Controller {
 
 	public function index(){
 		$data=array(
-			'page'=>'returpenjualan/datareturpenjualan',
-			'link'=>'returpenjualan'
+			'page'=>'bayarutang/databayarutang',
+			'link'=>'bayarutang'
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
-	public function pilihpenjualan(){
+	public function formtambah1(){
 		$data=array(
-			'page'=>'returpenjualan/pilihpenjualan',
-			'link'=>'returpenjualan',
+			'page'=>'bayarutang/formtambah1',
+			'link'=>'bayarutang',
+			// 'script'=>'script/bayarutang',
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
-	public function formtambah($nofaktur){
+	public function formtambah2(){
 		$data=array(
-			'page'=>'returpenjualan/formtambah',
-			'link'=>'returpenjualan',
-			
+			'page'=>'bayarutang/formtambah2',
+			'link'=>'bayarutang',
+			'script'=>'script/bayarutang',
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
 	public function tabeldetailtemp(){
 		$data=array();
-		$this->load->view('returpenjualan/datadetailtemp',$data);
+		$this->load->view('bayarutang/datadetailtemp',$data);
 	}
 
 	public function formdetail($nofaktur){
 		$data=array(
-			'page'=>'returpenjualan/detailreturpenjualan',
-			'link'=>'returpenjualan',
+			'page'=>'bayarutang/detailbayarutang',
+			'link'=>'bayarutang',
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

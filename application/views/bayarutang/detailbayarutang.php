@@ -9,13 +9,14 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Data Retur Penjualan
+          Detail Pembayaran Hutang
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Retur Penjualan</a><span class="divider-last">&nbsp;</span></li>
+          <li><a href="#">Pembayaran Hutang</a><span class="divider">&nbsp;</span></li>
+          <li><a href="#">Detail Pembayaran Hutang</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
       </div>
@@ -36,31 +37,31 @@
                 </span>
             </div>
             <div class="widget-body">
-             <div><a href="<?=base_url()?>c_returpenjualan/pilihpenjualan" class="btn btn-primary">Tambah Data</a></div>
-             <br>
-             <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
-
-              <table class="table table-striped table-bordered" id="sample_1">
+              
+              <div>
+                <button type="button" class="btn btn-primary" onclick="self.history.back()">
+                  <i class="icon-arrow-left"></i> Kembali
+                </button>
+              </div>
+              <br>
+              <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">No Faktur</th>
-                    <th class="hidden-phone">Tanggal</th>
-                    <th class="hidden-phone">Supplier</th>
-                    <th class="hidden-phone">Total</th>
+                    <th class="hidden-phone">Nama Supplier</th>
+                    <th class="hidden-phone">Jumlah Bayar</th>
+                    
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>F01</td>
-                    <td>2018-07-30</td>
-                    <td>budiman</td>
-                    <td>1000</td>
-                    <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>c_returpenjualan/formdetail/1" title="Detail"><i class="icon-eye-open"></i></a>
-                    </td>
+                    <!-- isi tabel det pembelian dengan no faktur terpilih -->
+                  </tr>
+                  
+                  <tr>
+                      <!--  penjumlahan dari subtotal-->
                   </tr> 
                 </tbody>
               </table>

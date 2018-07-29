@@ -9,16 +9,16 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Data Retur Pembelian
+          Data Retur Penjualan
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
           <li>
-              <a href="#">Retur Pembelian</i></a><span class="divider">&nbsp;</span>
+              <a href="#">Retur Penjualan</i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Pilih Pembelian</a><span class="divider-last">&nbsp;</span></li>
+          <li><a href="#">Pilih Penjualan</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
       </div>
@@ -66,7 +66,7 @@
                     <td>Budiman</td>
                     <td>1.000.000</td>
                     <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formtambah/1" title="Detail"><i class="icon-eye-open"></i></a>
+                      <a class="btn btn-primary" href="<?=base_url()?>c_returpenjualan/formtambah/1" title="Detail"><i class="icon-eye-open"></i></a>
                     </td>
                   </tr>
                 </tbody>

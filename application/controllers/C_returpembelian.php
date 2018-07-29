@@ -27,7 +27,7 @@ class C_returpembelian extends CI_Controller {
 		$data=array(
 			'page'=>'returpembelian/formtambah',
 			'link'=>'returpembelian',
-			'script'=>'script/returpembelian',
+			
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

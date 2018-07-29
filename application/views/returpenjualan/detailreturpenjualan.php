@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <!-- isi tabel det pembelian dengan no faktur terpilih -->
+                    <!-- isi tabel det penjualan dengan no faktur terpilih -->
                   </tr>
                   
                   <tr>

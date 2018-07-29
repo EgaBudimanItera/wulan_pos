@@ -52,7 +52,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                  <tr>
+                    <td>1</td>
+                    <td>F01</td>
+                    <td>2018-07-30</td>
+                    <td>budiman</td>
+                    <td>1000</td>
+                    <td>
+                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formdetail/1" title="Detail"><i class="icon-eye-open"></i></a>
+                    </td>
+                  </tr> 
                 </tbody>
               </table>
             </div>
