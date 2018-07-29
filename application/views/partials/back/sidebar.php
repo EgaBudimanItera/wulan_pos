@@ -40,7 +40,7 @@
                         <li class="<?php if($link=='pembelian'){echo'active';}?>"><a href="<?=base_url()?>c_pembelian">Pembelian</a></li>
                         <li class="<?php if($link=='penjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_penjualan">Penjualan</a></li>
                         <li class="<?php if($link=='returpembelian'){echo'active';}?>" ><a href="<?=base_url()?>c_returpembelian">Retur Pembelian</a></li>
-                        <li class="<?php if($link=='returpenjualan'){echo'active';}?>" ><a href="#">Retur Penjualan</a></li>
+                        <li class="<?php if($link=='returpenjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_returpenjualan">Retur Penjualan</a></li>
                         <li class="<?php if($link=='bayarutang'){echo'active';}?>" ><a href="#">Pembayaran Hutang</a></li>
                         <li class="<?php if($link=='bayarpiutang'){echo'active';}?>" ><a href="#">Pembayaran Piutang</a></li>
                     </ul>

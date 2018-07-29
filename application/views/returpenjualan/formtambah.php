@@ -29,6 +29,7 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
     <div id="page" class="dashboard">                                                              
+      
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
@@ -42,12 +43,6 @@
             </div>
             <div class="widget-body">
              <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
-              <div>
-                <button type="button" class="btn btn-primary" onclick="self.history.back()">
-                  <i class="icon-arrow-left"></i> Kembali
-                </button>
-              </div>
-              <br>
               <table class="table table-striped table-bordered" id="sample_1">
                 <thead>
                   <tr>

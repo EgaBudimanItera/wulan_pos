@@ -9,13 +9,13 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Data Returpembelian
+          Data Retur Pembelian
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Returpembelian</a><span class="divider-last">&nbsp;</span></li>
+          <li><a href="#">Retur Pembelian</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
       </div>
