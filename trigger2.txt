@@ -1,0 +1,96 @@
+trigger2
+
+===============================insert_pembelian==========================================================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_pembelian` AFTER INSERT
+   
+ ON `wulan_simpos`.`pembelian`
+    
+FOR EACH ROW BEGIN
+     
+     if pmblSisaBayar>0 then
+     begin  
+       declare hutangawal double;
+       declare hutangakhir double;
+       
+       set hutangawal=(select htngAkhir from hutang where htngSplrId=new.pmblSplrId);
+       set hutangakhir=hutangawal+new.pmblSisaBayar;
+  
+       insert into hutang values
+       ('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,new.pmblSisaBayar,0,hutangakhir);
+     end;
+     end if;
+    
+END$$
+
+DELIMITER ;
+========================================================================================================================
+
+=================================================insert_detpembelian====================================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_detpembelian` AFTER INSERT
+ 
+   ON `wulan_simpos`.`detpembelian`
+    
+FOR EACH ROW BEGIN
+      
+    update barang set brngStokAkhir=brngStokAkhir+new.dtpbJumlah where brngId=new.dtpbBrngId;
+    
+END$$
+
+DELIMITER ;
+========================================================================================================================
+
+============================================insert_penjualan============================================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_penjualan` AFTER INSERT
+ 
+   ON `wulan_simpos`.`penjualan`
+    
+FOR EACH ROW BEGIN
+    
+     if pnjlSisaBayar>0 then
+     begin  
+       declare piutangawal double;
+       declare piutangakhir double;
+       
+       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
+       set piutangakhir=piutangawal+new.pnjlSisaBayar;
+  
+       insert into piutang values
+       ('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,pnjlSisaBayar,0,piutangakhir);
+     end;
+     end if;
+    
+END$$
+
+DELIMITER ;
+========================================================================================================================
+
+
+===================================================insert_detpenjualan==================================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_detpenjualan` AFTER INSERT
+ 
+   ON `wulan_simpos`.`detpenjualan`
+    
+FOR EACH ROW BEGIN
+    
+ update barang set brngStokAkhir=brngStokAkhir+new.dtpjJumlah where brngId=new.dtpjBrngId;
+  
+END$$
+
+DELIMITER ;
+========================================================================================================================

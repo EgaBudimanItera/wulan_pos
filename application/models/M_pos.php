@@ -52,6 +52,8 @@ class M_pos extends CI_Model {
         return $query = $this->db->get()->result();
     }
     
+    
+
     function kode_barang(){
         //K002
         $this->db->select('Right(brngKode,3) as kode',false);
