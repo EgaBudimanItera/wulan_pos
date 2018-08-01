@@ -44,50 +44,54 @@
                   </button>
                 </div>
                 <br>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_barang/ubah_barang/<?=$barang->brngId?>" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Barang</label>
                     <div class="controls">
                        <input type="hidden" class="span6" id="brngId" required name="brngId" />
-                       <input type="text" class="span6" id="brngKode" required name="brngKode" />
+                       <input type="text" class="span6" id="brngKode" required name="brngKode" value="<?=$barang->brngKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Nama Barang</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="brngNama" required name="brngNama" />
+                       <input type="text" class="span6" id="brngNama" required name="brngNama" value="<?=$barang->brngNama?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group">
                     <label class="control-label">Satuan</label>
                     <div class="controls">
-                       <select class="span6 chosen" data-placeholder="Pilih Satuan" tabindex="1" name="brngStunId">
+                       <select class="span6 chosen" data-placeholder="Pilih Satuan" tabindex="1" name="brngStunId" >
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <?php 
+                          foreach ($list_satuan as $ls){
+                          ?>
+                          <option value="<?=$ls->stunId?>" <?php if($barang->brngStunId == $ls->stunId){ echo "selected"; }?> ><?=$ls->stunNama?></option>
+                          <?php } ?>
                        </select>
                     </div>
                  </div>
                  <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Hpp</label>
                     <div class="controls">
-                       <input type="number" class="span6" id="brngHpp" required name="brngHpp" />
+                       <input type="number" class="span6" id="brngHpp" required name="brngHpp" value="<?=$barang->brngHpp?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Harga Jual</label>
                     <div class="controls">
-                       <input type="number" class="span6" id="brngHargaJual" required name="brngHargaJual" />
+                       <input type="number" class="span6" id="brngHargaJual" required name="brngHargaJual" value="<?=$barang->brngHargaJual?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   
                   <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Simpan Data</button>
-                    <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button>
+                    <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Ubah Data</button>
+                    <!-- <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button> -->
                   </div>
                 </form>
               </div>

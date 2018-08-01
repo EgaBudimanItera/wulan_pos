@@ -54,7 +54,30 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                 <?php
+                    $no = 1;
+                    foreach ($list as $l) {
+                  ?>
+                  <tr>
+                    <td><?=$no++?>.</td>
+                    <td><?=$l->brngKode?></td>
+                    <td><?=$l->brngNama?></td>
+                    <td><?=$l->stunNama?></td>
+                    <td>Rp. <?=number_format($l->brngHpp)?></td>
+                    <td>Rp. <?=number_format($l->brngHargaJual)?></td>
+                    <td><?=number_format($l->brngStokAkhir)?></td>
+                    <td>
+                      <center>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-xs btn-warning" href="<?=base_url()?>c_barang/formubah/<?=$l->brngId?>">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Ubah Data                    
+                          </a>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_barang/hapus_barang/<?=$l->brngId?>" >
+                            <i class="fa fa-trash" aria-hidden="true"></i> Hapus Data
+                          </a>
+                        </center>
+                    </td>
+                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>

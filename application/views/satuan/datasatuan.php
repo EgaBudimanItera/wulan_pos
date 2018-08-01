@@ -50,6 +50,26 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    $no = 1;
+                    foreach ($list as $l) {
+                  ?>
+                  <tr>
+                    <td><?=$no++?>.</td>
+                    <td><?=$l->stunNama?></td>
+                    <td><?=$l->stunSimbol?></td>
+                    <td>
+                      <center>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-xs btn-warning" href="<?=base_url()?>c_satuan/formubah/<?=$l->stunId?>">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Ubah Data                    
+                          </a>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_satuan/hapus_satuan/<?=$l->stunId?>" >
+                            <i class="fa fa-trash" aria-hidden="true"></i> Hapus Data
+                          </a>
+                        </center>
+                    </td>
+                  </tr>
+                  <?php } ?>
                  
                 </tbody>
               </table>
