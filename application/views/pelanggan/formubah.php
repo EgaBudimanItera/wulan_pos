@@ -44,54 +44,54 @@
                   </button>
                 </div>
                 <br>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_pelanggan/ubah_pelanggan/<?=$pelanggan->plgnId?>" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Pelanggan</label>
                     <div class="controls">
                        <input type="hidden" class="span6" id="plgnId" required name="plgnId" />
-                       <input type="text" class="span6" id="plgnKode" required name="plgnKode" />
+                       <input type="text" class="span6" id="plgnKode" required name="plgnKode" value="<?=@$pelanggan->plgnKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Nama Pelanggan</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="plgnNama" required name="plgnNama" />
+                       <input type="text" class="span6" id="plgnNama" required name="plgnNama" value="<?=@$pelanggan->plgnNama?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Nama Kontak</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="plgnNamaKontak" required name="plgnNamaKontak" />
+                       <input type="text" class="span6" id="plgnNamaKontak" required name="plgnNamaKontak" value="<?=@$pelanggan->plgnNamaKontak?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Telp 1</label>
                     <div class="controls">
-                       <input type="number" class="span6" id="plgnTelp1" required name="plgnTelp1" />
+                       <input type="number" class="span6" id="plgnTelp1" required name="plgnTelp1" value="<?=@$pelanggan->plgnTelp1?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Telp 2</label>
                     <div class="controls">
-                       <input type="number" class="span6" id="plgnTelp2" required name="plgnTelp2" />
+                       <input type="number" class="span6" id="plgnTelp2" required name="plgnTelp2" value="<?=@$pelanggan->plgnTelp2?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Alamat</label>
                     <div class="controls">
-                       <textarea class="span6" id="plgnAlamat" required name="plgnAlamat" ></textarea>
+                       <textarea class="span6" id="plgnAlamat" required name="plgnAlamat"><?=@$pelanggan->plgnAlamat?></textarea>
                        <span class="help-inline"></span>
                     </div>
                   </div>
                   
                   <div class="form-actions">
-                    <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Simpan Data</button>
-                    <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button>
+                    <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Ubah Data</button>
+                    <!-- <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button> -->
                   </div>
                 </form>
               </div>

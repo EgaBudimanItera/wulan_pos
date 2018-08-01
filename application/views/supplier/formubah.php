@@ -44,40 +44,40 @@
                   </button>
                 </div>
                 <br>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_supplier/ubah_supplier/<?=$supplier->splrId?>" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Supplier</label>
                     <div class="controls">
                        <input type="hidden" class="span6" id="splrId" required name="splrId" />
-                       <input type="text" class="span6" id="splrKode" required name="splrKode" />
+                       <input type="text" class="span6" id="splrKode" required name="splrKode" value="<?=@$supplier->splrKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Nama Supplier</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="splrNama" required name="splrNama" />
+                       <input type="text" class="span6" id="splrNama" required name="splrNama" value="<?=@$supplier->splrNama?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Alamat</label>
                     <div class="controls">
-                       <textarea class="span6" required="" name="splrAlamat"></textarea>
+                       <textarea class="span6" required="" name="splrAlamat"><?=@$supplier->splrAlamat?></textarea>
                        <span class="help-inline"></span>
                     </div>
                   </div>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Telp 1</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="splrTelp1" required name="splrTelp1" />
+                       <input type="number" class="span6" id="splrTelp1" required name="splrTelp1" value="<?=@$supplier->splrTelp1?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Telp 2</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="splrTelp2" required name="splrTelp2" />
+                       <input type="number" class="span6" id="splrTelp2" required name="splrTelp2" value="<?=@$supplier->splrTelp2?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
