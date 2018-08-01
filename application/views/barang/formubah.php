@@ -49,14 +49,14 @@
                     <label class="control-label" for="inputWarning">Kode Barang</label>
                     <div class="controls">
                        <input type="hidden" class="span6" id="brngId" required name="brngId" />
-                       <input type="text" class="span6" id="brngKode" required name="brngKode" value="<?=$barang->brngKode?>" />
+                       <input type="text" class="span6" id="brngKode" required name="brngKode" value="<?=@$barang->brngKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Nama Barang</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="brngNama" required name="brngNama" value="<?=$barang->brngNama?>"/>
+                       <input type="text" class="span6" id="brngNama" required name="brngNama" value="<?=@$barang->brngNama?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
@@ -77,14 +77,14 @@
                  <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Hpp</label>
                     <div class="controls">
-                       <input type="number" class="span6" id="brngHpp" required name="brngHpp" value="<?=$barang->brngHpp?>"/>
+                       <input type="number" class="span6" id="brngHpp" required name="brngHpp" value="<?=@$barang->brngHpp?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Harga Jual</label>
                     <div class="controls">
-                       <input type="number" class="span6" id="brngHargaJual" required name="brngHargaJual" value="<?=$barang->brngHargaJual?>" />
+                       <input type="number" class="span6" id="brngHargaJual" required name="brngHargaJual" value="<?=@$barang->brngHargaJual?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 

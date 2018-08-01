@@ -51,7 +51,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                 <?php
+                    $no = 1;
+                    foreach ($list as $l) {
+                  ?>
+                  <tr>
+                    <td><?=$no++?>.</td>
+                    <td><?=$l->plgnNama?></td>
+                    <td><?=$l->plgnAlamat?></td>
+                    <td><?=$l->plgnTelp1?></td>
+                    <td>
+                      <center>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-xs btn-warning" href="<?=base_url()?>c_pelanggan/formubah/<?=$l->plgnId?>">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Ubah Data                    
+                          </a>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pelanggan/hapus_pelanggan/<?=$l->plgnId?>" >
+                            <i class="fa fa-trash" aria-hidden="true"></i> Hapus Data
+                          </a>
+                        </center>
+                    </td>
+                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
