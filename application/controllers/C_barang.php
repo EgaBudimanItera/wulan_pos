@@ -22,6 +22,7 @@ class C_barang extends CI_Controller {
 			'page'=>'barang/formtambah',
 			'link'=>'barang',
 			'list_satuan' => $this->M_pos->list_data_all('satuan'),
+			'brngKode'=>$this->M_pos->kode_barang(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -37,8 +38,9 @@ class C_barang extends CI_Controller {
 	}
 
 	public function tambah_barang(){
+		$brngKode=$this->M_pos->kode_barang();
 		$data = array(
-			'brngKode' => $this->input->post('brngKode', true),
+			'brngKode' => $brngKode,
 			'brngNama' => $this->input->post('brngNama', true),
 			'brngStunId' => $this->input->post('brngStunId', true),
 			'brngHpp' => $this->input->post('brngHpp', true),

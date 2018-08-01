@@ -69,10 +69,10 @@
                     <td>
                       <center>
                           <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-xs btn-warning" href="<?=base_url()?>c_barang/formubah/<?=$l->brngId?>">
-                            <i class="fa fa-pencil" aria-hidden="true"></i> Ubah Data                    
+                            <i class="icon-pencil"></i>                
                           </a>
                           <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_barang/hapus_barang/<?=$l->brngId?>" >
-                            <i class="fa fa-trash" aria-hidden="true"></i> Hapus Data
+                            <i class="icon-trash"></i>  
                           </a>
                         </center>
                     </td>

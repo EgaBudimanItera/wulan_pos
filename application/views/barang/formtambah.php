@@ -47,9 +47,8 @@
                 <form action="<?=base_url()?>c_barang/tambah_barang" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Barang</label>
-
                     <div class="controls">
-                       <input type="text" class="span6" id="brngKode" required name="brngKode" />
+                       <input type="text" class="span6" id="brngKode" readonly="" name="brngKode" value="<?=$brngKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
