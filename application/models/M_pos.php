@@ -90,7 +90,29 @@ class M_pos extends CI_Model {
 
         }
         $kodemax = str_pad($kode,3,"0",STR_PAD_LEFT);
-        $kodejadi  = "B".$kodemax;
+        $kodejadi  = "P".$kodemax;
         return $kodejadi;
     }
+
+    function kode_supplier(){
+        //K002
+        $this->db->select('Right(splrKode,3) as kode',false);
+        
+        $this->db->order_by('splrKode','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('supplier');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,3,"0",STR_PAD_LEFT);
+        $kodejadi  = "S".$kodemax;
+        return $kodejadi;
+    }
+
+    
 }

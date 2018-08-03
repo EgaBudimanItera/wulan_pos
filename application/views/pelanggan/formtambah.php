@@ -48,7 +48,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Pelanggan</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="plgnKode" required name="plgnKode" />
+                       <input type="text" class="span6" id="plgnKode" readonly="" value="<?=$plgnKode?>" name="plgnKode" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 

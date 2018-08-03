@@ -49,7 +49,7 @@
                     <label class="control-label" for="inputWarning">Kode Supplier</label>
                     <div class="controls">
                        <input type="hidden" class="span6" id="splrId" required name="splrId" />
-                       <input type="text" class="span6" id="splrKode" required name="splrKode" value="<?=@$supplier->splrKode?>" />
+                       <input type="text" class="span6" id="splrKode" readonly="" name="splrKode" value="<?=@$supplier->splrKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 

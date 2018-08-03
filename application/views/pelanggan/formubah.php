@@ -49,7 +49,7 @@
                     <label class="control-label" for="inputWarning">Kode Pelanggan</label>
                     <div class="controls">
                        <input type="hidden" class="span6" id="plgnId" required name="plgnId" />
-                       <input type="text" class="span6" id="plgnKode" required name="plgnKode" value="<?=@$pelanggan->plgnKode?>" />
+                       <input type="text" class="span6" id="plgnKode" readonly="" name="plgnKode" value="<?=@$pelanggan->plgnKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 

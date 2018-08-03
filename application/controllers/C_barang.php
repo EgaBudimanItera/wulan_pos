@@ -50,10 +50,16 @@ class C_barang extends CI_Controller {
 
 		$simpan = $this->M_pos->simpan_data($data,'barang');
 		if($simpan){
-                $this->session->set_flashdata('msg', 'data berhasil disimpan !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+            );
                 redirect(c_barang);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal disimpan !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+            );
                 redirect(c_barang/formtambah);
             }
 	}
@@ -74,10 +80,16 @@ class C_barang extends CI_Controller {
 		// die();
 
 		if($ubah){
-                $this->session->set_flashdata('msg', 'data berhasil dirubah !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+            );
                 redirect(c_barang);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal dirubah !');
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+            );
                 redirect(c_barang/formubah/$brngId);
             }
 		
@@ -88,13 +100,24 @@ class C_barang extends CI_Controller {
 		$hapus = $this->M_pos->hapus('brngId',$brngId,'barang');
 
 		if($hapus){
-                $this->session->set_flashdata('msg', 'data berhasil dihapus !');
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+            );
                 redirect(c_barang);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal dihapus !');
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+            );
                 redirect(c_barang/databarang);
             }
 
+	}
+
+	public function getbarang($brngId){
+		$data=$this->M_pos->ambil('brngId',$brngId,'barang')->row_array();
+        echo json_encode($data);
 	}
 
 }

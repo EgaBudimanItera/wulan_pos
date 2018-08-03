@@ -63,11 +63,12 @@
                     <td>
                       <center>
                           <a data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-xs btn-warning" href="<?=base_url()?>c_pelanggan/formubah/<?=$l->plgnId?>">
-                            <i class="fa fa-pencil" aria-hidden="true"></i> Ubah Data                    
+                            <i class="icon-pencil" aria-hidden="true"></i>                   
                           </a>
                           <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pelanggan/hapus_pelanggan/<?=$l->plgnId?>" >
-                            <i class="fa fa-trash" aria-hidden="true"></i> Hapus Data
+                            <i class="icon-trash" aria-hidden="true"></i>
                           </a>
+                        
                         </center>
                     </td>
                   </tr>

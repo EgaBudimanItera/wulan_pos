@@ -20,7 +20,8 @@ class C_supplier extends CI_Controller {
 	public function formtambah(){
 		$data=array(
 			'page'=>'supplier/formtambah',
-			'link'=>'supplier'
+			'link'=>'supplier',
+			'splrKode'=>$this->M_pos->kode_supplier(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -36,7 +37,7 @@ class C_supplier extends CI_Controller {
 
 	public function tambah_supplier(){
 		$data = array(
-			'splrKode' => $this->input->post('splrKode', true),
+			'splrKode' => $this->M_pos->kode_supplier(),
 			'splrNama' => $this->input->post('splrNama', true),
 			
 			'splrTelp1' => $this->input->post('splrTelp1', true),
@@ -47,12 +48,18 @@ class C_supplier extends CI_Controller {
 
 		$simpan = $this->M_pos->simpan_data($data,'supplier');
 		if($simpan){
-                $this->session->set_flashdata('msg', 'data berhasil disimpan !');
-                redirect(c_supplier);
-            }else{
-                $this->session->set_flashdata('msg', 'data gagal disimpan !');
-                redirect(c_supplier/formtambah);
-            }
+           $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+            );
+            redirect(c_supplier);
+        }else{
+           $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+            );
+           redirect(c_supplier/formtambah);
+        }
 	}
 
 	public function ubah_supplier($splrId){
@@ -72,10 +79,16 @@ class C_supplier extends CI_Controller {
 		// die();
 
 		if($ubah){
-                $this->session->set_flashdata('msg', 'data berhasil dirubah !');
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+            );
                 redirect(c_supplier);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal dirubah !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+            );
                 redirect(c_supplier/formubah/$splrId);
             }
 		
@@ -86,10 +99,16 @@ class C_supplier extends CI_Controller {
 		$hapus = $this->M_pos->hapus('splrId',$splrId,'supplier');
 
 		if($hapus){
-                $this->session->set_flashdata('msg', 'data berhasil dihapus !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+            );
                 redirect(c_supplier);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal dihapus !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+            );
                 redirect(c_supplier/datasupplier);
             }
 

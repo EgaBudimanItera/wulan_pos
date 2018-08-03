@@ -20,7 +20,8 @@ class C_pelanggan extends CI_Controller {
 	public function formtambah(){
 		$data=array(
 			'page'=>'pelanggan/formtambah',
-			'link'=>'pelanggan'
+			'link'=>'pelanggan',
+			'plgnKode'=>$this->M_pos->kode_pelanggan(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -36,7 +37,7 @@ class C_pelanggan extends CI_Controller {
 
 	public function tambah_pelanggan(){
 		$data = array(
-			'plgnKode' => $this->input->post('plgnKode', true),
+			'plgnKode' => $this->M_pos->kode_pelanggan(),
 			'plgnNama' => $this->input->post('plgnNama', true),
 			'plgnNamaKontak' => $this->input->post('plgnNamaKontak', true),
 			'plgnTelp1' => $this->input->post('plgnTelp1', true),
@@ -47,10 +48,16 @@ class C_pelanggan extends CI_Controller {
 
 		$simpan = $this->M_pos->simpan_data($data,'pelanggan');
 		if($simpan){
-                $this->session->set_flashdata('msg', 'data berhasil disimpan !');
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+            );
                 redirect(c_pelanggan);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal disimpan !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+            );
                 redirect(c_pelanggan/formtambah);
             }
 	}
@@ -72,10 +79,16 @@ class C_pelanggan extends CI_Controller {
 		// die();
 
 		if($ubah){
-                $this->session->set_flashdata('msg', 'data berhasil dirubah !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+            );
                 redirect(c_pelanggan);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal dirubah !');
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+            );
                 redirect(c_pelanggan/formubah/$plgnId);
             }
 		
@@ -86,10 +99,16 @@ class C_pelanggan extends CI_Controller {
 		$hapus = $this->M_pos->hapus('plgnId',$plgnId,'pelanggan');
 
 		if($hapus){
-                $this->session->set_flashdata('msg', 'data berhasil dihapus !');
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+            );
                 redirect(c_pelanggan);
             }else{
-                $this->session->set_flashdata('msg', 'data gagal dihapus !');
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+            );
                 redirect(c_pelanggan/datapelanggan);
             }
 

@@ -44,7 +44,7 @@
                   </button>
                 </div>
                 <br>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_pembelian/simpanall" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
@@ -55,8 +55,9 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblNama" required name="pmblNama" />
-                       <span class="help-inline"></span>
+                      <div class="input-append" id="ui_date_picker_trigger">
+                        <input name="pmblTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                      </div>
                     </div>
                   </div> 
                   <div class="control-group">
@@ -65,7 +66,14 @@
                        <select class="span6 chosen" data-placeholder="Pilih Supplier" tabindex="1" name="pmblStunId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <?php
+                            foreach($supplier as $s){
+                          ?>
+                          <option value="<?=$s->splrId?>"><?=$s->splrNama?></option>
+                          <?php    
+                            }
+                          ?>
+                          
                        </select>
                     </div>
                   </div>
@@ -88,11 +96,24 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Uang Muka</label>
                     <div class="controls">
-                        <input type="number" class="span6" id="pmblNama" required name="pmblNama" />
+                        <input type="number" class="span6" id="pmblUangMuka" required name="pmblUangMuka" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
-              
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Diskon</label>
+                    <div class="controls">
+                        <input type="number" class="span6" id="pmblDiskon" required name="pmblDiskon" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Ongkos Kirim</label>
+                    <div class="controls">
+                        <input type="number" class="span6" id="pmblOngkir" required name="pmblOngkir" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Pembelian</button>
                     
@@ -127,7 +148,13 @@
                  <select class="span12 chosen" data-placeholder="Pilih Barang" tabindex="1" name="dtpbBrngId" id="dtpbBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
-                    <option value="Category 1">Barang 1</option>
+                    <?php
+                      foreach($barang as $b){
+                    ?>
+                    <option value="<?=$b->brngId?>"><?=$b->brngNama?></option>
+                    <?php    
+                      }
+                    ?>
                  </select>
               </div>
             </div>
