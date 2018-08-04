@@ -96,24 +96,51 @@ CREATE
     
 FOR EACH ROW BEGIN
     
-     if pnjlSisaBayar>0 then
-     begin  
-       declare piutangawal double;
+     if new.pnjlSisaBayar>0 then
+
+     begin
+  
+     declare piutangawal double;
+
        declare piutangakhir double;
+
        
-       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
+set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
+       
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
-       insert into piutang values
-       ('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,pnjlSisaBayar,0,piutangakhir);
+       
+       insert into piutang values('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
+       
+       update pelanggan set plgnPiutang=plgnPiutang+new.pnjlSisaBayar where plgnId=new.pnjlPlgnId;
      end;
-     end if;
-    
-END$$
+
+     end if; 
+END$
+$
 
 DELIMITER ;
 ========================================================================================================================
+==================================================delete_penjualan======================================================
+DELIMITER $$
 
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_penjualan` AFTER DELETE
+    ON `wulan_simpos`.`penjualan`
+    FOR EACH ROW BEGIN
+      declare piutangawal double;
+      declare piutangakhir double;
+       
+      set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.pnjlPlgnId);
+      set piutangakhir=piutangawal-old.pnjlSisaBayar;
+  
+      insert into piutang values('',old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
+      update pelanggan set plgnPiutang=plgnPiutang-old.pnjlSisaBayar where plgnId=old.pnjlPlgnId;
+    END$$
+
+DELIMITER ;
+========================================================================================================================
 
 ===================================================insert_detpenjualan==================================================
 DELIMITER $$
@@ -126,9 +153,39 @@ CREATE
     
 FOR EACH ROW BEGIN
     
- update barang set brngStokAkhir=brngStokAkhir+new.dtpjJumlah where brngId=new.dtpjBrngId;
-  
+ declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=new.dtpjBrngId);
+     set stokakhir=stokawal-new.dtpjJumlah;
+     set tanggal=(select pnjlTanggal from penjualan where pnjlId=new.dtpjPnjlId);
+     set nofaktur=(select pnjlNoFaktur from penjualan where pnjlId=new.dtpjPnjlId);
+     insert into stok values('',tanggal,new.dtpjBrngId,nofaktur,'Penjualan Barang',stokawal,0,new.dtpjJumlah,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir-new.dtpjJumlah where brngId=new.dtpjBrngId; 
 END$$
+
+DELIMITER ;
+========================================================================================================================
+================================================delete_detpenjualan=====================================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_detpenjualan` AFTER DELETE
+    ON `wulan_simpos`.`detpenjualan`
+    FOR EACH ROW BEGIN
+     declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=old.dtpjBrngId);
+     set stokakhir=stokawal+old.dtpjJumlah;
+     set tanggal=(select pnjlTanggal from penjualan where pnjlId=old.dtpjPnjlId);
+     set nofaktur=(select pnjlNoFaktur from penjualan where pnjlId=old.dtpjPnjlId);
+     insert into stok values('',tanggal,old.dtpjBrngId,nofaktur,'Hapus Penjualan Barang',stokawal,old.dtpjJumlah,0,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir-old.dtpjJumlah where brngId=old.dtpjBrngId;
+    END$$
 
 DELIMITER ;
 ========================================================================================================================

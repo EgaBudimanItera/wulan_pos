@@ -151,7 +151,7 @@
                     <?php
                       foreach($barang as $b){
                     ?>
-                    <option value="<?=$b->brngId?>" data-satuan="<?=$b->stunNama?>" data-hpp="<?=$b->brngHpp?>" data-hjual="<?=$b->brngHargaJual?>"><?=$b->brngNama?></option>
+                    <option value="<?=$b->brngId?>" data-satuan="<?=$b->stunNama?>" data-hpp="<?php echo number_format($b->brngHpp)?>"><?=$b->brngNama?></option>
                     <?php    
                       }
                     ?>

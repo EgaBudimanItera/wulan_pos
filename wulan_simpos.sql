@@ -30,11 +30,11 @@ CREATE TABLE `barang` (
   PRIMARY KEY (`brngId`),
   KEY `brngId` (`brngId`),
   KEY `FK_barang` (`brngStunId`)
-) ENGINE=MyISAM AUTO_INCREMENT=496 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (494,'B001','Tempe',14,100,140,10),(495,'B002','Tahu',14,90,120,100);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Obeng',2,10000,12000,100),(2,'B002','paku',1,9000,10000,0);
 
 /*Table structure for table `bayarpiutang` */
 
@@ -132,13 +132,13 @@ CREATE TABLE `detpembelian` (
   `dtpbBrngId` int(11) NOT NULL,
   `dtpbJumlah` int(11) NOT NULL,
   `dtpbHarga` double DEFAULT NULL,
-  `dtpbDiskon` double DEFAULT NULL,
+  `dtpbDiskon` double DEFAULT '0',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
 
-insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (65,5,1,100,10,NULL);
+insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (2,2,1,100,10000,0);
 
 /*Table structure for table `detpembelian_temp` */
 
@@ -149,13 +149,12 @@ CREATE TABLE `detpembelian_temp` (
   `dtpbBrngId` int(11) NOT NULL,
   `dtpbJumlah` int(11) NOT NULL,
   `dtpbHarga` double DEFAULT NULL,
+  `dtpbDiskon` double DEFAULT '0',
   `dtpbCreatedBy` varchar(50) DEFAULT 'admin',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `detpembelian_temp` */
-
-insert  into `detpembelian_temp`(`dtpbId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbCreatedBy`) values (4,494,190,100,NULL),(3,495,900,90,NULL),(5,495,100,90,NULL),(6,495,10,90,NULL);
 
 /*Table structure for table `detpenjualan` */
 
@@ -261,9 +260,11 @@ CREATE TABLE `hutang` (
   `htngKredit` double NOT NULL,
   `htngAkhir` double NOT NULL,
   PRIMARY KEY (`htngId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `hutang` */
+
+insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-04',1,'tes','Pembelian Barang',0,0,6000000,6000000),(2,'2018-08-04',1,'tes','Hapus Pembelian Barang',6000000,6000000,0,0),(3,'2018-08-04',1,'test','Pembelian Barang',0,0,200000,200000),(4,'2018-08-04',1,'test','Hapus Pembelian Barang',200000,200000,0,0);
 
 /*Table structure for table `pelanggan` */
 
@@ -279,11 +280,11 @@ CREATE TABLE `pelanggan` (
   `plgnAlamat` text,
   `plgnPiutang` double DEFAULT NULL,
   PRIMARY KEY (`plgnId`)
-) ENGINE=MyISAM AUTO_INCREMENT=114 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (113,'P001','toko C','ega','190','91090','asjdjasd',NULL);
+insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (1,'P001','Toko A','Bapak A','099','09','Jalan',0),(2,'P002','TOko b','Ibu B','99','999','uasdu',0);
 
 /*Table structure for table `pembelian` */
 
@@ -302,11 +303,11 @@ CREATE TABLE `pembelian` (
   `pmblDiskon` double DEFAULT NULL,
   `pmblOngkir` double DEFAULT NULL,
   PRIMARY KEY (`pmblId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
 
-insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (5,'B001','2018-07-28',0,'a',1000,1000,0,'2018-08-28',0,0);
+insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (2,'tes','2018-08-04',1,'test1',1000000,0,1000000,'2018-09-03',0,0);
 
 /*Table structure for table `penjualan` */
 
@@ -389,11 +390,11 @@ CREATE TABLE `satuan` (
   `stunNama` varchar(40) NOT NULL,
   `stunSimbol` varchar(20) NOT NULL,
   PRIMARY KEY (`stunId`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `satuan` */
 
-insert  into `satuan`(`stunId`,`stunNama`,`stunSimbol`) values (14,'Kilogram','Kg');
+insert  into `satuan`(`stunId`,`stunNama`,`stunSimbol`) values (1,'Kilogram','Kg'),(2,'Buah','Bh');
 
 /*Table structure for table `stok` */
 
@@ -410,9 +411,11 @@ CREATE TABLE `stok` (
   `stokKeluar` int(11) NOT NULL,
   `stokAkhir` int(11) NOT NULL,
   PRIMARY KEY (`stokId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `stok` */
+
+insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-04',1,'test','Pembelian Barang',0,100,0,100),(2,'2018-08-04',1,'test','Hapus Pembelian Barang',100,0,100,0),(3,'2018-08-04',1,'tes','Pembelian Barang',0,100,0,100);
 
 /*Table structure for table `supplier` */
 
@@ -427,11 +430,11 @@ CREATE TABLE `supplier` (
   `splrTelp2` varchar(12) DEFAULT NULL,
   `splrHutang` double DEFAULT NULL,
   PRIMARY KEY (`splrId`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (32,'S001','rahmad','asa','8989','90890',NULL);
+insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Z','jaja','88','88',0),(2,'S002','toko Y','yyy','66','6',0);
 
 /*Table structure for table `users` */
 
@@ -454,7 +457,38 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_detpembelian` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_detpembelian` AFTER INSERT ON `detpembelian` FOR EACH ROW BEGIN
-      update barang set brngStokAkhir=brngStokAkhir+new.dtpbJumlah where brngId=new.dtpbBrngId;
+     declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=new.dtpbBrngId);
+     set stokakhir=stokawal+new.dtpbJumlah;
+     set tanggal=(select pmblTanggal from pembelian where pmblId=new.dtpbPmblId );
+     set nofaktur=(select pmblNoFaktur from pembelian where pmblId=new.dtpbPmblId );
+     insert into stok values('',tanggal,new.dtpbBrngId,nofaktur,'Pembelian Barang',stokawal,new.dtpbJumlah,0,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir+new.dtpbJumlah where brngId=new.dtpbBrngId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detpembelian` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_detpembelian` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_detpembelian` AFTER DELETE ON `detpembelian` FOR EACH ROW BEGIN
+     declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=old.dtpbBrngId);
+     set stokakhir=stokawal-old.dtpbJumlah;
+     set tanggal=(select pmblTanggal from pembelian where pmblId=old.dtpbPmblId );
+     set nofaktur=(select pmblNoFaktur from pembelian where pmblId=old.dtpbPmblId );
+     insert into stok values('',tanggal,old.dtpbBrngId,nofaktur,'Hapus Pembelian Barang',stokawal,0,old.dtpbJumlah,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir-old.dtpbJumlah where brngId=old.dtpbBrngId;
     END */$$
 
 
@@ -467,7 +501,38 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_detpenjualan` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_detpenjualan` AFTER INSERT ON `detpenjualan` FOR EACH ROW BEGIN
-     update barang set brngStokAkhir=brngStokAkhir+new.dtpjJumlah where brngId=new.dtpjBrngId;
+     declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=new.dtpjBrngId);
+     set stokakhir=stokawal-new.dtpjJumlah;
+     set tanggal=(select pnjlTanggal from penjualan where pnjlId=new.dtpjPnjlId);
+     set nofaktur=(select pnjlNoFaktur from penjualan where pnjlId=new.dtpjPnjlId);
+     insert into stok values('',tanggal,new.dtpjBrngId,nofaktur,'Penjualan Barang',stokawal,0,new.dtpjJumlah,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir-new.dtpjJumlah where brngId=new.dtpjBrngId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detpenjualan` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_detpenjualan` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_detpenjualan` AFTER DELETE ON `detpenjualan` FOR EACH ROW BEGIN
+     declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=old.dtpjBrngId);
+     set stokakhir=stokawal+old.dtpjJumlah;
+     set tanggal=(select pnjlTanggal from penjualan where pnjlId=old.dtpjPnjlId);
+     set nofaktur=(select pnjlNoFaktur from penjualan where pnjlId=old.dtpjPnjlId);
+     insert into stok values('',tanggal,old.dtpjBrngId,nofaktur,'Hapus Penjualan Barang',stokawal,old.dtpjJumlah,0,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir-old.dtpjJumlah where brngId=old.dtpjBrngId;
     END */$$
 
 
@@ -480,17 +545,38 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_pembelian` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_pembelian` AFTER INSERT ON `pembelian` FOR EACH ROW BEGIN
-     if pmblSisaBayar>0 then
+     /* pmblSisaBayar*/
+     if new.pmblSisaBayar>0 then
      begin  
        declare hutangawal double;
        declare hutangakhir double;
        
-       set hutangawal=(select htngAkhir from hutang where htngSplrId=new.pmblSplrId);
+       set hutangawal=(select splrHutang from supplier where splrId=new.pmblSplrId);
        set hutangakhir=hutangawal+new.pmblSisaBayar;
   
-       insert into hutang values('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,new.pmblSisaBayar,0,hutangakhir);
+       insert into hutang values('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,0,new.pmblSisaBayar,hutangakhir);
+       update supplier set splrHutang=splrHutang+new.pmblSisaBayar where splrId=new.pmblSplrId;
      end;
      end if;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `pembelian` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_pembelian` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_pembelian` AFTER DELETE ON `pembelian` FOR EACH ROW BEGIN
+      declare hutangawal double;
+      declare hutangakhir double;
+       
+      set hutangawal=(select splrHutang from supplier where splrId=old.pmblSplrId);
+      set hutangakhir=hutangawal-old.pmblSisaBayar;
+      insert into hutang values('',old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
+      update supplier set splrHutang=splrHutang-old.pmblSisaBayar where splrId=old.pmblSplrId;
     END */$$
 
 
@@ -503,7 +589,7 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_penjualan` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_penjualan` AFTER INSERT ON `penjualan` FOR EACH ROW BEGIN
-     if pnjlSisaBayar>0 then
+     if new.pnjlSisaBayar>0 then
      begin  
        declare piutangawal double;
        declare piutangakhir double;
@@ -511,9 +597,30 @@ DELIMITER $$
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
-       insert into piutang values('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,pnjlSisaBayar,0,piutangakhir);
+       insert into piutang values('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
+       update pelanggan set plgnPiutang=plgnPiutang+new.pnjlSisaBayar where plgnId=new.pnjlPlgnId;
      end;
      end if;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `penjualan` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_penjualan` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_penjualan` AFTER DELETE ON `penjualan` FOR EACH ROW BEGIN
+      declare piutangawal double;
+      declare piutangakhir double;
+       
+      set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.pnjlPlgnId);
+      set piutangakhir=piutangawal-old.pnjlSisaBayar;
+  
+      insert into piutang values('',old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
+      update pelanggan set plgnPiutang=plgnPiutang-old.pnjlSisaBayar where plgnId=old.pnjlPlgnId;
     END */$$
 
 

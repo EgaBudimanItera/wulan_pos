@@ -17,10 +17,13 @@ class C_penjualan extends CI_Controller {
 	}
 
 	public function formtambah(){
+		$query="SELECT * FROM barang join satuan on(brngStunId=stunId)";
 		$data=array(
 			'page'=>'penjualan/formtambah',
 			'link'=>'penjualan',
 			'script'=>'script/penjualan',
+			'pelanggan'=>$this->M_pos->list_data_all('pelanggan'),
+			'barang'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

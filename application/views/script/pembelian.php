@@ -29,9 +29,8 @@
       var originalOption = item.element;
       var originalText = item.text;
       var s = '<span style="font-weight:bold">' + originalText+ '</span><br/>' +
-              '<span style="color:#888">' + $(originalOption).data('satuan') +'</span><br/>'+
-              '<span style="color:#888">' + 'Hpp = '+$(originalOption).data('hpp') +'</span><br/>' +
-              '<span style="color:#888">' + 'H.Jual = '+$(originalOption).data('hjual') +'</span><br/>';
+              '<span style="color:#888">' + 'Satuan = '+$(originalOption).data('satuan') +'</span><br/>'+
+              '<span style="color:#888">' + 'Hpp = '+$(originalOption).data('hpp') +'</span><br/>';
       return s;
      };
 

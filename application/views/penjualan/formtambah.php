@@ -88,11 +88,24 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Uang Muka</label>
                     <div class="controls">
-                        <input type="number" class="span6" id="pnjlUangMuka" required name="pnjlUangMuka" />
+                        <input type="number" class="span6" id="pnjlUangMuka" value="0" required name="pnjlUangMuka" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
-              
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Diskon</label>
+                    <div class="controls">
+                        <input type="number" class="span6" id="pmblDiskon" value="0" required name="pmblDiskon" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Ongkos Kirim</label>
+                    <div class="controls">
+                        <input type="number" class="span6" id="pmblOngkir" value="0" required name="pmblOngkir" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Penjualan</button>
                     
@@ -124,10 +137,16 @@
             <div class="control-group">
               <label class="control-label">Nama Barang</label>
               <div class="controls">
-                 <select class="span12 chosen" data-placeholder="Pilih Barang" tabindex="1" name="dtpjBrngId" id="dtpjBrngId">
+                 <select class="select2-containerpopulate" style="width: 300px" data-placeholder="Pilih Barang" tabindex="1" name="dtpjBrngId" id="dtpjBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
-                    <option value="Category 1">Barang 1</option>
+                    <?php
+                      foreach($barang as $b){
+                    ?>
+                    <option value="<?=$b->brngId?>" data-satuan="<?=$b->stunNama?>" data-harga="<?php echo number_format($b->brngHargaJual)?>"><?=$b->brngNama?></option>
+                    <?php    
+                      }
+                    ?>
                  </select>
               </div>
             </div>
