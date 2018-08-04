@@ -43,6 +43,7 @@ DROP TABLE IF EXISTS `bayarpiutang`;
 CREATE TABLE `bayarpiutang` (
   `byrpId` int(11) NOT NULL AUTO_INCREMENT,
   `byrpNoFaktur` varchar(20) DEFAULT NULL,
+  `byrpPlgnId` int(11) DEFAULT NULL,
   `byrpTanggal` date DEFAULT NULL,
   `byrpTotalBayar` double DEFAULT NULL,
   `byrpKet` text,
@@ -59,6 +60,7 @@ CREATE TABLE `bayarutang` (
   `byruId` int(11) NOT NULL AUTO_INCREMENT,
   `byruNoFaktur` varchar(20) DEFAULT NULL,
   `byruTanggal` date DEFAULT NULL,
+  `byruSplrId` int(11) DEFAULT NULL,
   `byruTotalBayar` double DEFAULT NULL,
   `byruKet` text,
   PRIMARY KEY (`byruId`)
@@ -449,6 +451,86 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
+
+/* Trigger structure for table `bayarpiutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_bayarpiutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_bayarpiutang` AFTER INSERT ON `bayarpiutang` FOR EACH ROW BEGIN
+       declare piutangawal double;
+       declare piutangakhir double;
+       
+       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.byrpPlgnId);
+       set piutangakhir=piutangawal-new.byrpTotalBayar;
+  
+       insert into piutang values('',new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
+       update pelanggan set plgnPiutang=plgnPiutang-new.byrpTotalBayar where plgnId=new.byrpPlgnId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `bayarpiutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_bayarpiutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_bayarpiutang` AFTER DELETE ON `bayarpiutang` FOR EACH ROW BEGIN
+       declare piutangawal double;
+       declare piutangakhir double;
+       
+       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.byrpPlgnId);
+       set piutangakhir=piutangawal+old.byrpTotalBayar;
+  
+       insert into piutang values('',old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
+       update pelanggan set plgnPiutang=plgnPiutang+old.byrpTotalBayar where plgnId=old.byrpPlgnId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `bayarutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_bayarutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_bayarutang` AFTER INSERT ON `bayarutang` FOR EACH ROW BEGIN
+      declare hutangawal double;
+      declare hutangakhir double;
+       
+      set hutangawal=(select splrHutang from supplier where splrId=new.byruSplrId);
+      set hutangakhir=hutangawal-new.byruTotalBayar;
+  
+      insert into hutang values('',new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembahayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
+      update supplier set splrHutang=splrHutang-new.byruTotalBayar where splrId=new.byruSplrId;  
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `bayarutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_bayarutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_bayarutang` AFTER DELETE ON `bayarutang` FOR EACH ROW BEGIN
+      declare hutangawal double;
+      declare hutangakhir double;
+       
+      set hutangawal=(select splrHutang from supplier where splrId=old.byruSplrId);
+      set hutangakhir=hutangawal+old.byruTotalBayar;
+  
+      insert into hutang values('',old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
+      update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
+    END */$$
+
+
+DELIMITER ;
 
 /* Trigger structure for table `detpembelian` */
 
