@@ -16,7 +16,7 @@
 	<link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/css/style_responsive.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/css/style_default.css" rel="stylesheet" id="style_color" />
-
+    <link rel="stylesheet" href="<?=base_url()?>assets/assets/select2/select2.css">
 	<link href="<?php echo base_url(); ?>assets/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/assets/uniform/css/uniform.default.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/assets/chosen-bootstrap/chosen/chosen.css" />

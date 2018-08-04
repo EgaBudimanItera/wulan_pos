@@ -48,12 +48,34 @@
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">Supplier</th>
                     <th class="hidden-phone">Total</th>
-                    
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                 
+                <?php
+                  $no=1;
+                  foreach($list as $l){
+                ?>
+                  <tr>
+                    <td><?=$no++;?></td>
+                    <td><?=$l->pmblNoFaktur?></td>
+                    <td><?=$l->pmblTanggal?></td>
+                    <td><?=$l->splrNama?></td>
+                    <td><?php echo number_format($l->pmblTotalBeli)?></td>
+                    <td>
+                      <center>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_pembelian/formdetail/<?=$l->pmblId?>">
+                            <i class="icon-eye-open"></i>                
+                          </a>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusall/<?=$l->pmblId?>" onclick="return confirm('yakin akan menghapus data ini?')">
+                            <i class="icon-trash"></i>  
+                          </a>
+                        </center>
+                    </td>
+                  </tr>
+                <?php
+                  }
+                ?> 
                 </tbody>
               </table>
             </div>

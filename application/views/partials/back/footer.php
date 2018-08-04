@@ -31,7 +31,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/uniform/jquery.uniform.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/jquery.dataTables.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/data-tables/DT_bootstrap.js"></script>
-
+        <script src="<?=base_url()?>assets/assets/select2/select2.js"></script>
         <script src="<?php echo base_url() ?>assets/js/scripts.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/assets/uniform/jquery.uniform.min.js"></script>

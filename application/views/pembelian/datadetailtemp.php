@@ -17,13 +17,14 @@
       $no=1;
       $total=0;
       foreach($list as $l){
+        $sub=$l->dtpbHarga*$l->dtpbJumlah;
     ?>
     <tr>
       <td><?=$no++;?></td>
       <td><?=$l->brngNama;?></td>
       <td><?=$l->dtpbJumlah;?></td>
       <td><?=$l->dtpbHarga;?></td>
-      <td><?=$l->dtpbHarga*$l->dtpbJumlah;?></td>
+      <td><?php echo number_format($sub)?></td>
       <td>
          <center>
           <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dtpbId?>" >

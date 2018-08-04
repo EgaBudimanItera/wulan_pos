@@ -48,7 +48,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblKode" required name="pmblKode" />
+                       <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
@@ -63,7 +63,7 @@
                   <div class="control-group">
                     <label class="control-label">Supplier</label>
                     <div class="controls">
-                       <select class="span6 chosen" data-placeholder="Pilih Supplier" tabindex="1" name="pmblStunId">
+                       <select class="span6 chosen" data-placeholder="Pilih Supplier" tabindex="1" name="pmblSplrId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
                           <?php
@@ -96,21 +96,21 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Uang Muka</label>
                     <div class="controls">
-                        <input type="number" class="span6" id="pmblUangMuka" required name="pmblUangMuka" />
+                        <input type="number" class="span6" id="pmblUangMuka" value="0" required name="pmblUangMuka" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Diskon</label>
                     <div class="controls">
-                        <input type="number" class="span6" id="pmblDiskon" required name="pmblDiskon" />
+                        <input type="number" class="span6" id="pmblDiskon" value="0" required name="pmblDiskon" />
                        <span class="help-inline"></span>
                     </div>
                   </div>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Ongkos Kirim</label>
                     <div class="controls">
-                        <input type="number" class="span6" id="pmblOngkir" required name="pmblOngkir" />
+                        <input type="number" class="span6" id="pmblOngkir" value="0" required name="pmblOngkir" />
                        <span class="help-inline"></span>
                     </div>
                   </div>
@@ -145,13 +145,13 @@
             <div class="control-group">
               <label class="control-label">Nama Barang</label>
               <div class="controls">
-                 <select class="span12 chosen" data-placeholder="Pilih Barang" tabindex="1" name="dtpbBrngId" id="dtpbBrngId">
+                 <select class="select2-containerpopulate" style="width: 300px" required placeholder="--Pilih Barang--" name="dtpbBrngId" id="dtpbBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
                     <?php
                       foreach($barang as $b){
                     ?>
-                    <option value="<?=$b->brngId?>"><?=$b->brngNama?></option>
+                    <option value="<?=$b->brngId?>" data-satuan="<?=$b->stunNama?>" data-hpp="<?=$b->brngHpp?>" data-hjual="<?=$b->brngHargaJual?>"><?=$b->brngNama?></option>
                     <?php    
                       }
                     ?>
@@ -161,7 +161,7 @@
             <div class="control-group">
               <label class="control-label" for="inputWarning">HPP Satuan Barang</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpbHarga" readonly="" name="dtpbHarga" />
+                 <input type="text" class="span12" id="dtpbHarga" readonly="" required="" name="dtpbHarga" />
                  
               </div>
             </div> 

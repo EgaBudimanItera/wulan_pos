@@ -1,6 +1,16 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		//untuk event onclick barang
+		//select 2 untuk combox pelanggan
+    $("#dtpbBrngId").select2();
+
+    //untuk mengubah format select2
+    $('#dtpbBrngId').select2({
+      formatResult: format,
+      formatSelection: format,
+      escapeMarkup: function(m) { return m; }
+    }); 
+
+    //untuk event onclick barang
 	  	$("#dtpbBrngId").change(function () {     
 	        var kode = $(this).val()
 	      $.ajax({
@@ -14,6 +24,16 @@
 	  	});
 		loadTable();
 	});
+
+  function format(item) {
+      var originalOption = item.element;
+      var originalText = item.text;
+      var s = '<span style="font-weight:bold">' + originalText+ '</span><br/>' +
+              '<span style="color:#888">' + $(originalOption).data('satuan') +'</span><br/>'+
+              '<span style="color:#888">' + 'Hpp = '+$(originalOption).data('hpp') +'</span><br/>' +
+              '<span style="color:#888">' + 'H.Jual = '+$(originalOption).data('hjual') +'</span><br/>';
+      return s;
+     };
 
 	function loadTable() {
           $('#tampilpembelian').load('<?=base_url()?>c_pembelian/tabeldetailtemp',function(){})
@@ -36,7 +56,7 @@
                     loadTable();
                     $('#detailbarangModal').modal('hide');
                     $('#formTambahBarang')[0].reset();
-                   $('#dtpbBrngId').val(null).trigger('change');
+                    $('#dtpbBrngId').val(null).trigger('change');
                     
                 }else if(msg.status == 'fail'){
                    loadTable();

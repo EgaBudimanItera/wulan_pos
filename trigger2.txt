@@ -11,19 +11,26 @@ CREATE
     
 FOR EACH ROW BEGIN
      
-     if pmblSisaBayar>0 then
+     if new.pmblSisaBayar>0 then
+ 
      begin  
-       declare hutangawal double;
-       declare hutangakhir double;
        
-       set hutangawal=(select htngAkhir from hutang where htngSplrId=new.pmblSplrId);
+       declare hutangawal double;
+
+       declare hutangakhir double;
+
+       
+set hutangawal=(select splrHutang from supplier where splrId=new.pmblSplrId);
+
        set hutangakhir=hutangawal+new.pmblSisaBayar;
+
   
-       insert into hutang values
-       ('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,new.pmblSisaBayar,0,hutangakhir);
+     insert into hutang values('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,new.pmblSisaBayar,0,hutangakhir);
+
+       update supplier set splrHutang=splrHutang+new.pmblSisaBayar where splrId=new.pmblSplrId;
      end;
+
      end if;
-    
 END$$
 
 DELIMITER ;
@@ -40,13 +47,44 @@ CREATE
     
 FOR EACH ROW BEGIN
       
-    update barang set brngStokAkhir=brngStokAkhir+new.dtpbJumlah where brngId=new.dtpbBrngId;
-    
+    declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=new.dtpbBrngId);
+     set stokakhir=stokawal+new.dtpbJumlah;
+     set tanggal=(select pmblTanggal from pembelian where pmblId=new.dtpbPmblId );
+     set nofaktur=(select pmblNoFaktur from pembelian where pmblId=new.dtpbPmblId );
+     insert into stok values('',tanggal,new.dtpbBrngId,nofaktur,'Pembelian Barang',stokawal,new.dtpbJumlah,0,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir+new.dtpbJumlah where brngId=new.dtpbBrngId;   
 END$$
 
 DELIMITER ;
 ========================================================================================================================
+============================================Delete_detpembelian=========================================================
+DELIMITER $$
 
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_detpembelian` AFTER DELETE
+    ON `wulan_simpos`.`detpembelian`
+    FOR EACH ROW BEGIN
+     declare stokawal int;
+     declare stokakhir int;
+     declare tanggal date;
+     declare nofaktur varchar(100);
+     set stokawal=(select brngStokAkhir from barang where brngId=old.dtpbBrngId);
+     set stokakhir=stokawal-old.dtpbJumlah;
+     set tanggal=(select pmblTanggal from pembelian where pmblId=old.dtpbPmblId );
+     set nofaktur=(select pmblNoFaktur from pembelian where pmblId=old.dtpbPmblId );
+     insert into stok values('',tanggal,old.dtpbBrngId,nofaktur,'Hapus Pembelian Barang',stokawal,0,old.dtpbJumlah,stokakhir);
+     update barang set brngStokAkhir=brngStokAkhir-old.dtpbJumlah where brngId=old.dtpbBrngId;
+  
+END$
+$
+
+DELIMITER ;
+========================================================================================================================
 ============================================insert_penjualan============================================================
 DELIMITER $$
 

@@ -11,6 +11,11 @@ class M_pos extends CI_Model {
         return $this->db->query($query);
     }
     
+    function insertbatch($table,$insert) {
+         $this->db->insert_batch($table,$insert);
+         return true;
+    }
+
     function list_data_all($table){
          return $query = $this->db->get($table)->result();  
     }
@@ -42,13 +47,16 @@ class M_pos extends CI_Model {
         return true;
     }
 
-    function list_join_where($table1, $table2, $param1, $mode='', $key='', $db=''){
+    function usercreated(){
+         // $createdby=$this->session->userdata('userNama');
+        $createdby='admin';
+        return $createdby;
+    }
+
+    function list_join($table1, $table2, $param1){
         $this->db->select('*');
         $this->db->from($table1);
-        $this->db->join($table2, $param1, $mode);
-        if($key!=''){            
-            $this->db->where($key);
-        }
+        $this->db->join($table2, $param1);
         return $query = $this->db->get()->result();
     }
     
