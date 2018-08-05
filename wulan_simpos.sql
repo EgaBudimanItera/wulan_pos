@@ -30,11 +30,11 @@ CREATE TABLE `barang` (
   PRIMARY KEY (`brngId`),
   KEY `brngId` (`brngId`),
   KEY `FK_barang` (`brngStunId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Obeng',2,10000,12000,100),(2,'B002','paku',1,9000,10000,0);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,230),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
 
 /*Table structure for table `bayarpiutang` */
 
@@ -136,11 +136,11 @@ CREATE TABLE `detpembelian` (
   `dtpbHarga` double DEFAULT NULL,
   `dtpbDiskon` double DEFAULT '0',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
 
-insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (2,2,1,100,10000,0);
+insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (1,1,1,200,20000,0),(2,1,2,100,30000,0),(3,1,3,20,35000,0),(4,1,4,200,2000,0);
 
 /*Table structure for table `detpembelian_temp` */
 
@@ -262,11 +262,11 @@ CREATE TABLE `hutang` (
   `htngKredit` double NOT NULL,
   `htngAkhir` double NOT NULL,
   PRIMARY KEY (`htngId`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `hutang` */
 
-insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-04',1,'tes','Pembelian Barang',0,0,6000000,6000000),(2,'2018-08-04',1,'tes','Hapus Pembelian Barang',6000000,6000000,0,0),(3,'2018-08-04',1,'test','Pembelian Barang',0,0,200000,200000),(4,'2018-08-04',1,'test','Hapus Pembelian Barang',200000,200000,0,0);
+insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-05',2,'T001-02-099','Pembelian Barang',0,0,4000000,4000000);
 
 /*Table structure for table `pelanggan` */
 
@@ -282,11 +282,11 @@ CREATE TABLE `pelanggan` (
   `plgnAlamat` text,
   `plgnPiutang` double DEFAULT NULL,
   PRIMARY KEY (`plgnId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (1,'P001','Toko A','Bapak A','099','09','Jalan',0),(2,'P002','TOko b','Ibu B','99','999','uasdu',0);
+insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (1,'P001','Non Tetap','-','000','000','-',0),(2,'P002','CV Aqila','ibu Aqila','08570000','000000','Jalan Malabar',0),(3,'P003','PT Buruh','Bapak Diki','08550000','000000','Jalan Alam Elok',0);
 
 /*Table structure for table `pembelian` */
 
@@ -305,11 +305,11 @@ CREATE TABLE `pembelian` (
   `pmblDiskon` double DEFAULT NULL,
   `pmblOngkir` double DEFAULT NULL,
   PRIMARY KEY (`pmblId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
 
-insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (2,'tes','2018-08-04',1,'test1',1000000,0,1000000,'2018-09-03',0,0);
+insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (1,'T001-02-099','2018-08-05',2,'Beli untuk Modal',8100000,4000000,4000000,'2018-09-04',100000,0);
 
 /*Table structure for table `penjualan` */
 
@@ -347,7 +347,7 @@ CREATE TABLE `piutang` (
   `ptngKredit` double NOT NULL,
   `ptngAkhir` double NOT NULL,
   PRIMARY KEY (`ptngId`)
-) ENGINE=MyISAM AUTO_INCREMENT=166 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `piutang` */
 
@@ -392,11 +392,11 @@ CREATE TABLE `satuan` (
   `stunNama` varchar(40) NOT NULL,
   `stunSimbol` varchar(20) NOT NULL,
   PRIMARY KEY (`stunId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `satuan` */
 
-insert  into `satuan`(`stunId`,`stunNama`,`stunSimbol`) values (1,'Kilogram','Kg'),(2,'Buah','Bh');
+insert  into `satuan`(`stunId`,`stunNama`,`stunSimbol`) values (1,'Buah','Bh'),(2,'Unit','Unit'),(3,'Kilogram','Kg'),(4,'Meter','m'),(5,'Paket','Pak');
 
 /*Table structure for table `stok` */
 
@@ -413,11 +413,11 @@ CREATE TABLE `stok` (
   `stokKeluar` int(11) NOT NULL,
   `stokAkhir` int(11) NOT NULL,
   PRIMARY KEY (`stokId`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `stok` */
 
-insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-04',1,'test','Pembelian Barang',0,100,0,100),(2,'2018-08-04',1,'test','Hapus Pembelian Barang',100,0,100,0),(3,'2018-08-04',1,'tes','Pembelian Barang',0,100,0,100);
+insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200);
 
 /*Table structure for table `supplier` */
 
@@ -436,7 +436,7 @@ CREATE TABLE `supplier` (
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Z','jaja','88','88',0),(2,'S002','toko Y','yyy','66','6',0);
+insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',0),(2,'S002','PT Abadi','Jalan Damar','00999','0990',4000000);
 
 /*Table structure for table `users` */
 

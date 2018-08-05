@@ -80,6 +80,7 @@
                     <td colspan="5">Total</td><!--  penjumlahan dari subtotal-->
                     <td><?php echo number_format($total)?></td>
                   </tr> 
+                  
                 </tbody>
               </table>
             </div>

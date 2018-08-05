@@ -9,10 +9,11 @@ class C_barang extends CI_Controller {
 	}
 
 	public function index(){
+		$query="SELECT * FROM barang join satuan on(brngStunId=stunId)";
 		$data=array(
 			'page'=>'barang/databarang',
 			'link'=>'barang',
-			'list' => $this->M_pos->list_join_where('satuan','barang','satuan.stunId=barang.brngStunId','','',''),
+			'list' => $this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

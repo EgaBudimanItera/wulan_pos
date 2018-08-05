@@ -59,8 +59,8 @@
 
       //untuk mengubah format select2
       $('#brngId').select2({
-        formatResult: format,
-        formatSelection: format,
+        formatResult: formatall,
+        formatSelection: formatall,
         escapeMarkup: function(m) { return m; }
       }); 
 
@@ -70,7 +70,7 @@
       });
     })  
 
-    function format(item) {
+    function formatall(item) {
       var originalOption = item.element;
       var originalText = item.text;
       var s = '<span style="font-weight:bold">' + originalText+ '</span><br/>' +
