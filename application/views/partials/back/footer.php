@@ -54,9 +54,27 @@
 ?>
 <script type="text/javascript">
   $(document).ready(function(){
-      
+      //select 2 untuk combox pelanggan
+      $("#brngId").select2();
+
+      //untuk mengubah format select2
+      $('#brngId').select2({
+        formatResult: format,
+        formatSelection: format,
+        escapeMarkup: function(m) { return m; }
+      }); 
+
+
       $("#info-alert").fadeTo(2000,50).slideUp(50,function(){
           $("#info-alert").slideUp(50);
       });
-    })    
+    })  
+
+    function format(item) {
+      var originalOption = item.element;
+      var originalText = item.text;
+      var s = '<span style="font-weight:bold">' + originalText+ '</span><br/>' +
+              '<span style="color:#888">' +'Satuan = '+ $(originalOption).data('satuan') +'</span><br/>';
+      return s;
+     };  
 </script>

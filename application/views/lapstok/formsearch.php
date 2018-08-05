@@ -15,7 +15,7 @@
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Laporan Stok</a><span class="divider-last">&nbsp;</span></li>
+          <li><a href="#">Pencarian Data</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
       </div>
@@ -37,14 +37,20 @@
               </div>
               <div class="widget-body">
                 <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_lapstok/lihat" role="form" method="post" class="form-horizontal">
                   <div class="control-group">
                     <label class="control-label">Barang</label>
                     <div class="controls">
-                       <select class="span6 chosen" data-placeholder="Pilih Barang" tabindex="1" name="pmblStunId">
+                       <select class="select2-containerpopulate" style="width: 300px" required placeholder="--Pilih Barang--"  tabindex="1" name="brngId" id="brngId">
                           <option value=""></option>
+                          <?php
+                            foreach($barang as $b){
+                          ?>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <option value="<?=$b->brngId?>" data-satuan="<?=$b->stunNama?>"><?=$b->brngNama?></option>
+                          <?php
+                            }
+                          ?>
                        </select>
                     </div>
                   </div>
@@ -60,7 +66,7 @@
                     <label class="control-label" for="inputWarning"> Hingga Tanggal</label>
                     <div class="controls">
                       <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="daritanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="hinggatanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div>
