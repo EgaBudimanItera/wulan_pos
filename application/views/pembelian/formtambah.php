@@ -46,7 +46,7 @@
                 <br>
                 <form action="<?=base_url()?>c_pembelian/simpanall" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
-                    <label class="control-label" for="inputWarning">No Faktur</label>
+                    <label class="control-label" for="inputWarning">No Faktur Retur</label>
                     <div class="controls">
                        <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" />
                        <span class="help-inline"></span>

@@ -48,31 +48,66 @@
                 </button>
               </div>
               <br>
-              <table class="table table-striped table-bordered" id="sample_1">
-                <thead>
-                  <tr>
-                    <th class="hidden-phone">No</th>
-                    <th class="hidden-phone">Nama Barang</th>
-                    <th class="hidden-phone">HPP</th>
-                    <th class="hidden-phone">J.Beli</th>
-                    <th class="hidden-phone">J.Retur</th>
-                    <th class="hidden-phone">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 <!-- ambil dari kamus sql retur pembelian -->
-                 <tr>
-                    <td>1</td>
-                    <td>a</td>
-                    <td>1000</td>
-                    <td>10</td>
-                    <td>0</td>
-                    <td>
-                      <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <form action="#" role="form" method="post" class="form-horizontal">
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">No Faktur Retur</label>
+                  <div class="controls">
+                     <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" />
+                     <span class="help-inline"></span>
+                  </div>
+                </div>
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
+                  <div class="controls">
+                     <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" />
+                     <span class="help-inline"></span>
+                  </div>
+                </div>
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">Tanggal</label>
+                  <div class="controls">
+                    <div class="input-append" id="ui_date_picker_trigger">
+                      <input name="pmblTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                  </div>
+                </div> 
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">Alasan Retur</label>
+                  <div class="controls">
+                     <textarea name="" class="span6"></textarea>
+                  </div>
+                </div>
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="hidden-phone">No</th>
+                      <th class="hidden-phone">Nama Barang</th>
+                      <th class="hidden-phone">HPP</th>
+                      <th class="hidden-phone">J.Beli</th>
+                      <th class="hidden-phone">J.Retur Real</th>
+                      <th class="hidden-phone">J.Retur Temp</th>
+                      <th class="hidden-phone">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <!-- ambil dari kamus sql retur pembelian -->
+                   <tr>
+                      <td>1</td>
+                      <td>a</td>
+                      <td>1000</td>
+                      <td>10</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>
+                        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-warning"><i class="icon-ok"></i> Simpan Retur</button>
+                </div>
+              </form>
             </div>
           </div>
           <!-- END EXAMPLE TABLE widget-->
