@@ -40,10 +40,11 @@ class C_pembelian extends CI_Controller {
 	}
 
 	public function formdetail($nofaktur){
-		$data=array(
+		$query="SELECT * FROM detpembelian join barang on(dtpbBrngId=brngId) WHERE dtpbPmblId='$nofaktur'";
+        $data=array(
 			'page'=>'pembelian/detailpembelian',
 			'link'=>'pembelian',
-            'list'=>$this->M_pos->list_join('detpembelian','barang','dtpbBrngId=brngId'),
+            'list'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

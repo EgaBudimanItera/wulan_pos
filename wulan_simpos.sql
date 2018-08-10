@@ -34,7 +34,7 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,230),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,330),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
 
 /*Table structure for table `bayarpiutang` */
 
@@ -136,11 +136,11 @@ CREATE TABLE `detpembelian` (
   `dtpbHarga` double DEFAULT NULL,
   `dtpbDiskon` double DEFAULT '0',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
 
-insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (1,1,1,200,20000,0),(2,1,2,100,30000,0),(3,1,3,20,35000,0),(4,1,4,200,2000,0);
+insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (1,1,1,200,20000,0),(2,1,2,100,30000,0),(3,1,3,20,35000,0),(4,1,4,200,2000,0),(5,2,1,100,20000,0);
 
 /*Table structure for table `detpembelian_temp` */
 
@@ -154,7 +154,7 @@ CREATE TABLE `detpembelian_temp` (
   `dtpbDiskon` double DEFAULT '0',
   `dtpbCreatedBy` varchar(50) DEFAULT 'admin',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `detpembelian_temp` */
 
@@ -262,11 +262,11 @@ CREATE TABLE `hutang` (
   `htngKredit` double NOT NULL,
   `htngAkhir` double NOT NULL,
   PRIMARY KEY (`htngId`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `hutang` */
 
-insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-05',2,'T001-02-099','Pembelian Barang',0,0,4000000,4000000);
+insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-05',2,'T001-02-099','Pembelian Barang',0,0,4000000,4000000),(2,'2018-08-24',2,'a','Pembelian Barang',4000000,0,2000000,6000000);
 
 /*Table structure for table `pelanggan` */
 
@@ -305,11 +305,11 @@ CREATE TABLE `pembelian` (
   `pmblDiskon` double DEFAULT NULL,
   `pmblOngkir` double DEFAULT NULL,
   PRIMARY KEY (`pmblId`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
 
-insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (1,'T001-02-099','2018-08-05',2,'Beli untuk Modal',8100000,4000000,4000000,'2018-09-04',100000,0);
+insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (1,'T001-02-099','2018-08-05',2,'Beli untuk Modal',8100000,4000000,4000000,'2018-09-04',100000,0),(2,'a','2018-08-24',2,'aa',2000000,2000000,0,'2018-09-23',0,0);
 
 /*Table structure for table `penjualan` */
 
@@ -417,7 +417,7 @@ CREATE TABLE `stok` (
 
 /*Data for the table `stok` */
 
-insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200);
+insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200),(0,'2018-08-24',1,'a','Pembelian Barang',230,100,0,330);
 
 /*Table structure for table `supplier` */
 
@@ -436,7 +436,7 @@ CREATE TABLE `supplier` (
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',0),(2,'S002','PT Abadi','Jalan Damar','00999','0990',4000000);
+insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',0),(2,'S002','PT Abadi','Jalan Damar','00999','0990',6000000);
 
 /*Table structure for table `users` */
 
@@ -465,7 +465,7 @@ DELIMITER $$
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.byrpPlgnId);
        set piutangakhir=piutangawal-new.byrpTotalBayar;
   
-       insert into piutang values('',new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang-new.byrpTotalBayar where plgnId=new.byrpPlgnId;
     END */$$
 
@@ -485,7 +485,7 @@ DELIMITER $$
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.byrpPlgnId);
        set piutangakhir=piutangawal+old.byrpTotalBayar;
   
-       insert into piutang values('',old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+old.byrpTotalBayar where plgnId=old.byrpPlgnId;
     END */$$
 
@@ -505,7 +505,7 @@ DELIMITER $$
       set hutangawal=(select splrHutang from supplier where splrId=new.byruSplrId);
       set hutangakhir=hutangawal-new.byruTotalBayar;
   
-      insert into hutang values('',new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembahayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
+      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) values(new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembahayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
       update supplier set splrHutang=splrHutang-new.byruTotalBayar where splrId=new.byruSplrId;  
     END */$$
 
@@ -525,7 +525,8 @@ DELIMITER $$
       set hutangawal=(select splrHutang from supplier where splrId=old.byruSplrId);
       set hutangakhir=hutangawal+old.byruTotalBayar;
   
-      insert into hutang values('',old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
+      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
+      values(old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
       update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
     END */$$
 
@@ -547,7 +548,7 @@ DELIMITER $$
      set stokakhir=stokawal+new.dtpbJumlah;
      set tanggal=(select pmblTanggal from pembelian where pmblId=new.dtpbPmblId );
      set nofaktur=(select pmblNoFaktur from pembelian where pmblId=new.dtpbPmblId );
-     insert into stok values('',tanggal,new.dtpbBrngId,nofaktur,'Pembelian Barang',stokawal,new.dtpbJumlah,0,stokakhir);
+     insert into stok(stokTanggal,stokBrngId,stokNoFaktur,stokKet,stokAwal,stokMasuk,stokKeluar,stokAkhir) values(tanggal,new.dtpbBrngId,nofaktur,'Pembelian Barang',stokawal,new.dtpbJumlah,0,stokakhir);
      update barang set brngStokAkhir=brngStokAkhir+new.dtpbJumlah where brngId=new.dtpbBrngId;
     END */$$
 
@@ -569,7 +570,7 @@ DELIMITER $$
      set stokakhir=stokawal-old.dtpbJumlah;
      set tanggal=(select pmblTanggal from pembelian where pmblId=old.dtpbPmblId );
      set nofaktur=(select pmblNoFaktur from pembelian where pmblId=old.dtpbPmblId );
-     insert into stok values('',tanggal,old.dtpbBrngId,nofaktur,'Hapus Pembelian Barang',stokawal,0,old.dtpbJumlah,stokakhir);
+     insert into stok(stokTanggal,stokBrngId,stokNoFaktur,stokKet,stokAwal,stokMasuk,stokKeluar,stokAkhir) values(tanggal,old.dtpbBrngId,nofaktur,'Hapus Pembelian Barang',stokawal,0,old.dtpbJumlah,stokakhir);
      update barang set brngStokAkhir=brngStokAkhir-old.dtpbJumlah where brngId=old.dtpbBrngId;
     END */$$
 
@@ -591,7 +592,7 @@ DELIMITER $$
      set stokakhir=stokawal-new.dtpjJumlah;
      set tanggal=(select pnjlTanggal from penjualan where pnjlId=new.dtpjPnjlId);
      set nofaktur=(select pnjlNoFaktur from penjualan where pnjlId=new.dtpjPnjlId);
-     insert into stok values('',tanggal,new.dtpjBrngId,nofaktur,'Penjualan Barang',stokawal,0,new.dtpjJumlah,stokakhir);
+     insert into stok(stokTanggal,stokBrngId,stokNoFaktur,stokKet,stokAwal,stokMasuk,stokKeluar,stokAkhir) values(tanggal,new.dtpjBrngId,nofaktur,'Penjualan Barang',stokawal,0,new.dtpjJumlah,stokakhir);
      update barang set brngStokAkhir=brngStokAkhir-new.dtpjJumlah where brngId=new.dtpjBrngId;
     END */$$
 
@@ -613,7 +614,7 @@ DELIMITER $$
      set stokakhir=stokawal+old.dtpjJumlah;
      set tanggal=(select pnjlTanggal from penjualan where pnjlId=old.dtpjPnjlId);
      set nofaktur=(select pnjlNoFaktur from penjualan where pnjlId=old.dtpjPnjlId);
-     insert into stok values('',tanggal,old.dtpjBrngId,nofaktur,'Hapus Penjualan Barang',stokawal,old.dtpjJumlah,0,stokakhir);
+     insert into stok(stokTanggal,stokBrngId,stokNoFaktur,stokKet,stokAwal,stokMasuk,stokKeluar,stokAkhir) values(tanggal,old.dtpjBrngId,nofaktur,'Hapus Penjualan Barang',stokawal,old.dtpjJumlah,0,stokakhir);
      update barang set brngStokAkhir=brngStokAkhir-old.dtpjJumlah where brngId=old.dtpjBrngId;
     END */$$
 
@@ -636,7 +637,8 @@ DELIMITER $$
        set hutangawal=(select splrHutang from supplier where splrId=new.pmblSplrId);
        set hutangakhir=hutangawal+new.pmblSisaBayar;
   
-       insert into hutang values('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,0,new.pmblSisaBayar,hutangakhir);
+       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+	values(new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,0,new.pmblSisaBayar,hutangakhir);
        update supplier set splrHutang=splrHutang+new.pmblSisaBayar where splrId=new.pmblSplrId;
      end;
      end if;
@@ -657,7 +659,8 @@ DELIMITER $$
        
       set hutangawal=(select splrHutang from supplier where splrId=old.pmblSplrId);
       set hutangakhir=hutangawal-old.pmblSisaBayar;
-      insert into hutang values('',old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
+      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+      values(old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
       update supplier set splrHutang=splrHutang-old.pmblSisaBayar where splrId=old.pmblSplrId;
     END */$$
 
@@ -679,7 +682,7 @@ DELIMITER $$
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
-       insert into piutang values('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+new.pnjlSisaBayar where plgnId=new.pnjlPlgnId;
      end;
      end if;
@@ -701,7 +704,7 @@ DELIMITER $$
       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.pnjlPlgnId);
       set piutangakhir=piutangawal-old.pnjlSisaBayar;
   
-      insert into piutang values('',old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
+      insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
       update pelanggan set plgnPiutang=plgnPiutang-old.pnjlSisaBayar where plgnId=old.pnjlPlgnId;
     END */$$
 
