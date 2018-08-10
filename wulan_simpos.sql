@@ -34,7 +34,7 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,330),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,340),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
 
 /*Table structure for table `bayarpiutang` */
 
@@ -67,6 +67,24 @@ CREATE TABLE `bayarutang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `bayarutang` */
+
+/*Table structure for table `cash` */
+
+DROP TABLE IF EXISTS `cash`;
+
+CREATE TABLE `cash` (
+  `cashId` int(11) NOT NULL AUTO_INCREMENT,
+  `cashTanggal` date DEFAULT NULL,
+  `cashNoFaktur` varchar(15) NOT NULL,
+  `cashKet` text,
+  `cashAwal` double DEFAULT NULL,
+  `cashDebet` double NOT NULL,
+  `cashKredit` double NOT NULL,
+  `cashAkhir` double NOT NULL,
+  PRIMARY KEY (`cashId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `cash` */
 
 /*Table structure for table `detbayarpiutang` */
 
@@ -136,11 +154,11 @@ CREATE TABLE `detpembelian` (
   `dtpbHarga` double DEFAULT NULL,
   `dtpbDiskon` double DEFAULT '0',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
 
-insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (1,1,1,200,20000,0),(2,1,2,100,30000,0),(3,1,3,20,35000,0),(4,1,4,200,2000,0),(5,2,1,100,20000,0);
+insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (1,1,1,200,20000,0),(2,1,2,100,30000,0),(3,1,3,20,35000,0),(4,1,4,200,2000,0),(5,2,1,100,20000,0),(6,3,1,10,20000,0);
 
 /*Table structure for table `detpembelian_temp` */
 
@@ -154,7 +172,7 @@ CREATE TABLE `detpembelian_temp` (
   `dtpbDiskon` double DEFAULT '0',
   `dtpbCreatedBy` varchar(50) DEFAULT 'admin',
   PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `detpembelian_temp` */
 
@@ -305,11 +323,11 @@ CREATE TABLE `pembelian` (
   `pmblDiskon` double DEFAULT NULL,
   `pmblOngkir` double DEFAULT NULL,
   PRIMARY KEY (`pmblId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
 
-insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (1,'T001-02-099','2018-08-05',2,'Beli untuk Modal',8100000,4000000,4000000,'2018-09-04',100000,0),(2,'a','2018-08-24',2,'aa',2000000,2000000,0,'2018-09-23',0,0);
+insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (1,'T001-02-099','2018-08-05',2,'Beli untuk Modal',8100000,4000000,4000000,'2018-09-04',100000,0),(2,'a','2018-08-24',2,'aa',2000000,2000000,0,'2018-09-23',0,0),(3,'rrr','2018-08-11',1,'aaa',200000,0,200000,'2018-09-10',0,0);
 
 /*Table structure for table `penjualan` */
 
@@ -360,8 +378,10 @@ CREATE TABLE `returpembelian` (
   `rtpbNoFaktur` varchar(40) NOT NULL,
   `rtpbTanggal` datetime DEFAULT NULL,
   `rtpbPmblId` int(11) NOT NULL,
+  `rtpbSplrId` int(11) DEFAULT NULL,
   `rtpbKet` text NOT NULL,
   `rtpbNilai` double DEFAULT NULL,
+  `rtpbStatus` enum('T','K') DEFAULT NULL,
   PRIMARY KEY (`rtpbId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -376,8 +396,10 @@ CREATE TABLE `returpenjualan` (
   `rtpjNoFaktur` varchar(40) NOT NULL,
   `rtpjTanggal` datetime DEFAULT NULL,
   `rtpjPnjlId` int(11) NOT NULL,
+  `rtpjPlgnId` int(11) DEFAULT NULL,
   `rtpjKet` text NOT NULL,
   `rtpjNilai` double DEFAULT NULL,
+  `rtpjStatus` enum('T','K') DEFAULT NULL,
   PRIMARY KEY (`rtpjId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -413,11 +435,11 @@ CREATE TABLE `stok` (
   `stokKeluar` int(11) NOT NULL,
   `stokAkhir` int(11) NOT NULL,
   PRIMARY KEY (`stokId`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `stok` */
 
-insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200),(0,'2018-08-24',1,'a','Pembelian Barang',230,100,0,330);
+insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200),(0,'2018-08-24',1,'a','Pembelian Barang',230,100,0,330),(5,'2018-08-11',1,'rrr','Pembelian Barang',330,10,0,340);
 
 /*Table structure for table `supplier` */
 
@@ -461,11 +483,22 @@ DELIMITER $$
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_bayarpiutang` AFTER INSERT ON `bayarpiutang` FOR EACH ROW BEGIN
        declare piutangawal double;
        declare piutangakhir double;
-       
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+        set cashawal=0;
+       else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+new.byrpTotalBayar;
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.byrpPlgnId);
        set piutangakhir=piutangawal-new.byrpTotalBayar;
-  
-       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.byrpTanggal,new.byrpNoFaktur,'Pembayaran Piutang',cashawal,new.byrpTotalBayar,0,cashakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        values(new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang-new.byrpTotalBayar where plgnId=new.byrpPlgnId;
     END */$$
 
@@ -481,10 +514,20 @@ DELIMITER $$
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_bayarpiutang` AFTER DELETE ON `bayarpiutang` FOR EACH ROW BEGIN
        declare piutangawal double;
        declare piutangakhir double;
-       
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+        set cashawal=0;
+       else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal-old.byrpTotalBayar;
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.byrpPlgnId);
        set piutangakhir=piutangawal+old.byrpTotalBayar;
-  
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.byrpTanggal,old.byrpNoFaktur,'Hapus Pembayaran Piutang',cashawal,0,old.byrpTotalBayar,cashakhir);
        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+old.byrpTotalBayar where plgnId=old.byrpPlgnId;
     END */$$
@@ -501,12 +544,25 @@ DELIMITER $$
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_bayarutang` AFTER INSERT ON `bayarutang` FOR EACH ROW BEGIN
       declare hutangawal double;
       declare hutangakhir double;
-       
+      declare cashawal double;
+      declare cashakhir double;
+      declare jdata int;
+      set jdata=(select count(*) from cash);
+      if jdata=0 then
+        set cashawal=0;
+      else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+      end if;
+      set cashakhir=cashawal-new.byruTotalBayar;
       set hutangawal=(select splrHutang from supplier where splrId=new.byruSplrId);
       set hutangakhir=hutangawal-new.byruTotalBayar;
   
-      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) values(new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembahayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
+      insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.byruTanggal,new.byruNoFaktur,'Bayar Utang',cashawal,0,new.byruTotalBayar,cashakhir);
+      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
+        values(new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
       update supplier set splrHutang=splrHutang-new.byruTotalBayar where splrId=new.byruSplrId;  
+	
     END */$$
 
 
@@ -521,10 +577,21 @@ DELIMITER $$
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_bayarutang` AFTER DELETE ON `bayarutang` FOR EACH ROW BEGIN
       declare hutangawal double;
       declare hutangakhir double;
-       
+      declare cashawal double;
+      declare cashakhir double;
+      declare jdata int;
+      set jdata=(select count(*) from cash);
+      if jdata=0 then
+        set cashawal=0;
+      else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+      end if;
+      set cashakhir=cashawal+old.byruTotalBayar;
       set hutangawal=(select splrHutang from supplier where splrId=old.byruSplrId);
       set hutangakhir=hutangawal+old.byruTotalBayar;
   
+      insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.byruTanggal,old.byruNoFaktur,'Hapus Bayar Utang',cashawal,old.byruTotalBayar,0,cashakhir);
       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
       values(old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
       update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
@@ -621,6 +688,62 @@ DELIMITER $$
 
 DELIMITER ;
 
+/* Trigger structure for table `detreturpembelian` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_detreturpembelian` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_detreturpembelian` AFTER INSERT ON `detreturpembelian` FOR EACH ROW BEGIN
+      update barang set brngStokAkhir=brngStokAkhir-new.drpbJumlah
+        where brngId=new.drpbBrngId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detreturpembelian` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_detreturpembelian` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_detreturpembelian` AFTER DELETE ON `detreturpembelian` FOR EACH ROW BEGIN
+      update barang set brngStokAkhir=brngStokAkhir+old.drpbJumlah
+        where brngId=old.drpbBrngId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detreturpenjualan` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_detreturpenjualan` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_detreturpenjualan` AFTER INSERT ON `detreturpenjualan` FOR EACH ROW BEGIN
+     update barang set brngStokAkhir=brngStokAkhir+new.drpjJumlah
+        where brngId=new.drpjBrngId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detreturpenjualan` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_detreturpenjualan` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_detreturpenjualan` AFTER DELETE ON `detreturpenjualan` FOR EACH ROW BEGIN
+      update barang set brngStokAkhir=brngStokAkhir-old.drpjJumlah
+        where brngId=old.drpjBrngId;
+    END */$$
+
+
+DELIMITER ;
+
 /* Trigger structure for table `pembelian` */
 
 DELIMITER $$
@@ -641,6 +764,22 @@ DELIMITER $$
 	values(new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,0,new.pmblSisaBayar,hutangakhir);
        update supplier set splrHutang=splrHutang+new.pmblSisaBayar where splrId=new.pmblSplrId;
      end;
+     elseif new.pmblSisaBayar=0 then
+     begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal-new.pmblUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.pmblTanggal,new.pmblNoFaktur,'Pembelian Barang dengan Tunai',cashawal,0,new.pmblUangMuka,cashakhir);
+       
+     end;
      end if;
     END */$$
 
@@ -654,14 +793,35 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_pembelian` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_pembelian` AFTER DELETE ON `pembelian` FOR EACH ROW BEGIN
-      declare hutangawal double;
-      declare hutangakhir double;
+      if old.pmblSisaBayar>0 then
+      begin
+        declare hutangawal double;
+        declare hutangakhir double;
        
-      set hutangawal=(select splrHutang from supplier where splrId=old.pmblSplrId);
-      set hutangakhir=hutangawal-old.pmblSisaBayar;
-      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
-      values(old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
-      update supplier set splrHutang=splrHutang-old.pmblSisaBayar where splrId=old.pmblSplrId;
+        set hutangawal=(select splrHutang from supplier where splrId=old.pmblSplrId);
+        set hutangakhir=hutangawal-old.pmblSisaBayar;
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+         values(old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
+        update supplier set splrHutang=splrHutang-old.pmblSisaBayar where splrId=old.pmblSplrId;
+      end;
+      elseif old.pmblSisaBayar=0 then
+      begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+old.pmblUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.pmblTanggal,old.pmblNoFaktur,'Hapus Pembelian Barang dengan Tunai',cashawal,old.pmblUangMuka,0,cashakhir);
+       
+      end;
+      end if;
+	
     END */$$
 
 
@@ -682,8 +842,25 @@ DELIMITER $$
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
-       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+       values(new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+new.pnjlSisaBayar where plgnId=new.pnjlPlgnId;
+     end;
+     elseif new.pnjlSisaBayar=0 then
+     begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+new.pnjlUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.pnjlTanggal,new.pnjlNoFaktur,'Penjualan Barang dengan Tunai',cashawal,new.pnjlUangMuka,0,cashakhir);
+       
      end;
      end if;
     END */$$
@@ -698,6 +875,8 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_penjualan` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_penjualan` AFTER DELETE ON `penjualan` FOR EACH ROW BEGIN
+     if old.pnjlSisaBayar>0 then
+     begin  
       declare piutangawal double;
       declare piutangakhir double;
        
@@ -706,6 +885,217 @@ DELIMITER $$
   
       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
       update pelanggan set plgnPiutang=plgnPiutang-old.pnjlSisaBayar where plgnId=old.pnjlPlgnId;
+     end;
+     elseif old.pnjlSisaBayar=0 then
+     begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal-old.pnjlUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.pnjlTanggal,old.pnjlNoFaktur,'Hapus Penjualan Barang dengan Tunai',cashawal,0,old.pnjlUangMuka,cashakhir);
+     end;
+     end if;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `returpembelian` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_returpembelian` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_returpembelian` AFTER INSERT ON `returpembelian` FOR EACH ROW BEGIN
+      if new.rtpbStatus='T' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal+new.rtpbNilai;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=new.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal-new.rtpbNilai;
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(new.rtpbTanggal,new.rtpbNoFaktur,'Retur Pembelian Kas',cashawal,new.rtpbNilai,0,cashakhir);
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=new.rtpbPmblId;
+      end;
+      elseif new.rtpbStatus='K' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare hutangawal double;
+        declare hutangakhir double;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=new.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal-new.rtpbNilai;
+	
+       
+        set hutangawal=(select splrHutang from supplier where splrId=new.rtpbSplrId);
+        set hutangakhir=hutangawal-new.rtpbNilai;
+  
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+	 values(new.rtpbTanggal,new.rtpbSplrId,new.rtpbNoFaktur,'Retur Pembelian Barang',hutangawal,new.rtpbNilai,0,hutangakhir);
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=new.rtpbPmblId;
+      end;
+      end if;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `returpembelian` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_returpembelian` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_returpembelian` AFTER DELETE ON `returpembelian` FOR EACH ROW BEGIN
+     if old.rtpbStatus='T' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal-old.rtpbNilai;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=old.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal+old.rtpbNilai;
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(old.rtpbTanggal,old.rtpbNoFaktur,'Hapus Retur Pembelian Kas',cashawal,0,old.rtpbNilai,cashakhir);
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=old.rtpbPmblId;
+      end;
+      elseif old.rtpbStatus='K' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare hutangawal double;
+        declare hutangakhir double;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=old.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal+old.rtpbNilai;
+	
+       
+        set hutangawal=(select splrHutang from supplier where splrId=old.rtpbSplrId);
+        set hutangakhir=hutangawal+old.rtpbNilai;
+  
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+	 values(old.rtpbTanggal,old.rtpbSplrId,old.rtpbNoFaktur,'Hapus Retur Pembelian Barang',hutangawal,0,old.rtpbNilai,hutangakhir);
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=old.rtpbPmblId;
+      end;
+      end if;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `returpenjualan` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_returpenjualan` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_returpenjualan` AFTER INSERT ON `returpenjualan` FOR EACH ROW BEGIN
+      if new.rtpjStatus='T' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal-new.rtpjNilai;
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
+        set totaljualakhir=totaljualawal-new.rtpjNilai;
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(new.rtpjTanggal,new.rtpjNoFaktur,'Retur Penjualan Kas',cashawal,0,new.rtpjNilai,cashakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=new.rtpjPnjlId;
+      end;
+      elseif new.rtpjStatus='K' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare piutangawal double;
+        declare piutangakhir double;
+        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.rtpjPlgnId);
+        set piutangakhir=piutangawal-new.rtpjNilai;
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
+        set totaljualakhir=totaljualawal-new.rtpjNilai;
+        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        values(new.rtpjTanggal,new.rtpjPlgnId,new.rtpjNoFaktur,'Retur Penjualan Kredit',piutangawal,0,new.rtpjNilai,piutangakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=new.rtpjPnjlId;
+      end;
+      end if;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `returpenjualan` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_returpenjualan` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_returpenjualan` AFTER DELETE ON `returpenjualan` FOR EACH ROW BEGIN
+     if old.rtpjStatus='T' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal+old.rtpjNilai;
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
+        set totaljualakhir=totaljualawal+old.rtpjNilai;
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(old.rtpjTanggal,old.rtpjNoFaktur,'Retur Penjualan Kas',cashawal,old.rtpjNilai,0,cashakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=old.rtpjPnjlId;
+      end;
+      elseif old.rtpjStatus='K' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare piutangawal double;
+        declare piutangakhir double;
+        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.rtpjPlgnId);
+        set piutangakhir=piutangawal+old.rtpjNilai;
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
+        set totaljualakhir=totaljualawal+old.rtpjNilai;
+        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        values(old.rtpjTanggal,old.rtpjPlgnId,old.rtpjNoFaktur,'Retur Penjualan Kredit',piutangawal,old.rtpjNilai,0,piutangakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=old.rtpjPnjlId;
+      end;
+      end if;
     END */$$
 
 
