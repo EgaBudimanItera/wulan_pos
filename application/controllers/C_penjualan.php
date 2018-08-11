@@ -128,12 +128,13 @@ class C_penjualan extends CI_Controller {
         'pnjlSisaBayar'=>(string) $pnjlSisaBayar ,
         'pnjlJatuhTempo'=>$pnjlJatuhTempo,
      );
+     
 
       //simpan ke penjualan
      $simpanpenjualan=$this->M_pos->simpan_data($datapenjualan,'penjualan');
 
      $pnjlId = $this->db->insert_id();
-
+     
       $querytemp="SELECT * FROM detpenjualan_temp where dtpjCreatedBy='$createdby'";
      //data untuk simpan ke tabel det penjualan
       $penjualan_temp=$this->M_pos->kueri($querytemp)->result();
