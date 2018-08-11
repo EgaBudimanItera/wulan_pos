@@ -55,8 +55,9 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pnjlTanggal" required name="pnjlTanggal" />
-                       <span class="help-inline"></span>
+                       <div class="input-append" id="ui_date_picker_trigger">
+                        <input name="pnjlTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                      </div>
                     </div>
                   </div> 
                   <div class="control-group">
@@ -65,7 +66,13 @@
                        <select class="span6 chosen" data-placeholder="Pilih Pelanggan" tabindex="1" name="pnjlPlgnId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <?php
+                            foreach($pelanggan as $s){
+                          ?>
+                          <option value="<?=$s->plgnId?>"><?=$s->plgnNama?></option>
+                          <?php    
+                            }
+                          ?>
                        </select>
                     </div>
                   </div>

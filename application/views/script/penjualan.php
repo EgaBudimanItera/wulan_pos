@@ -37,4 +37,50 @@
               '<span style="color:#888">' + 'H.Jual = '+$(originalOption).data('harga') +'</span><br/>';
       return s;
      };
+
+     //function simpan data
+	function simpan(){
+        var dtpjBrngId=$('#dtpjBrngId').val();
+        var dtpjJumlah=$('#dtpjJumlah').val();
+        var dtpjHarga=$('#dtpjHarga').val();
+        $modal = $('#detailbarangModal');
+        $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>c_penjualan/tambahpenjualandet',
+            data: 'dtpjBrngId='+dtpjBrngId+'&dtpjJumlah='+dtpjJumlah+'&dtpjHarga='+dtpjHarga,
+            dataType: 'JSON',
+            success: function(msg){
+                if(msg.status == 'success'){
+                    
+                    loadTable();
+                    $('#detailbarangModal').modal('hide');
+                    $('#formTambahBarang')[0].reset();
+                    $('#dtpjBrngId').val(null).trigger('change');
+                    
+                }else if(msg.status == 'fail'){
+                   loadTable();
+                   alert('gagal tambah data');
+                    $('#detailbarangModal').modal('hide');
+                    $('#formTambahBarang')[0].reset();
+                    $('#dtpjBrngId').val(null).trigger('change');
+                }
+            }
+          });
+      };
+      //function untuk hapus temporary
+    function hapustemp(id) {
+        $.ajax({
+            url: "<?=base_url()?>c_penjualan/hapusdetail/"+id,
+            type: "GET",
+            dataType: 'JSON',
+            success: function(msg) {
+                if(msg.status == 'success'){
+                    loadTable();                    
+                }else if(msg.status == 'fail'){
+                   loadTable();
+                   alert('gagal hapus data');
+                }
+            }
+        })
+    } ; 
 </script>

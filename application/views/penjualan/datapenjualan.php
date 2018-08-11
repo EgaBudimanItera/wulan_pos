@@ -46,15 +46,38 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">No Faktur</th>
                     <th class="hidden-phone">Tanggal</th>
-                    <th class="hidden-phone">Supplier</th>
+                    <th class="hidden-phone">Pelanggan</th>
                     <th class="hidden-phone">Total</th>
                     
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
+                
                 <tbody>
-                 
+                <?php
+                  $no=1;
+                  foreach($list as $l){
+                ?>
+                  <tr>
+                    <td><?=$no++;?></td>
+                    <td><?=$l->pnjlNoFaktur?></td>
+                    <td><?=$l->pnjlTanggal?></td>
+                    <td><?=$l->plgnNama?></td>
+                    <td><?php echo number_format($l->pnjlTotalJual)?></td>
+                    <td>
+                      <center>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_penjualan/formdetail/<?=$l->pnjlId?>">
+                            <i class="icon-eye-open"></i>                
+                          </a>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_penjualan/hapusall/<?=$l->pnjlId?>" onclick="return confirm('yakin akan menghapus data ini?')">
+                            <i class="icon-trash"></i>  
+                          </a>
+                        </center>
+                    </td>
+                  </tr>
+                <?php } ?>
                 </tbody>
+                
               </table>
             </div>
           </div>

@@ -11,7 +11,8 @@ class C_penjualan extends CI_Controller {
 	public function index(){
 		$data=array(
 			'page'=>'penjualan/datapenjualan',
-			'link'=>'penjualan'
+			'link'=>'penjualan',
+			'list'=>$this->M_pos->list_join('penjualan','pelanggan','pnjlPlgnId=plgnId'),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -41,5 +42,34 @@ class C_penjualan extends CI_Controller {
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
+
+	public function tambahpenjualandet(){
+        $dtpjBrngId=$this->input->post('dtpjBrngId',true);
+        $dtpjJumlah=$this->input->post('dtpjJumlah',true);  
+        $dtpjHarga=$this->input->post('dtpjHarga',true); 
+        // $createdby=$this->session->userdata('userNama');
+        $createdby=$this->M_pos->usercreated();
+        
+        $data=array(
+            'dtpbBrngId'=>$dtpbBrngId,
+            'dtpbJumlah'=>$dtpbJumlah,
+            'dtpbHarga'=>$dtpbHarga,
+            'dtpbCreatedBy'=>$createdby,
+        );
+        $simpandetailtemp=$this->M_pos->simpan_data($data,'detpenjualan_temp');
+        if($simpandetailtemp){
+            $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
+            );
+            echo json_encode(array('status'=>'success'));
+         }else{
+           $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
+            );
+           echo json_encode(array('status'=>'fail'));
+         }
+   }
 
 }
