@@ -3,39 +3,98 @@ trigger2
 ===============================insert_pembelian==========================================================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`insert_pembelian`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`insert_pembelian` AFTER INSERT
-   
- ON `wulan_simpos`.`pembelian`
-    
-FOR EACH ROW BEGIN
-     
-     if new.pmblSisaBayar>0 then
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `insert_pembelian` AFTER INSERT ON `pembelian`
  
-     begin  
-       
-       declare hutangawal double;
+    FOR EACH ROW BEGIN
+     /* pmblSisaBayar*/
+  
+   if new.pmblSisaBayar>0 then
+    
+ begin  
+     
+  declare hutangawal double;
 
        declare hutangakhir double;
-
-       
-set hutangawal=(select splrHutang from supplier where splrId=new.pmblSplrId);
+ 
+      
+       set hutangawal=(select splrHutang from supplier where splrId=new.pmblSplrId);
 
        set hutangakhir=hutangawal+new.pmblSisaBayar;
-
-  
-     insert into hutang values('',new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,new.pmblSisaBayar,0,hutangakhir);
-
+ 
+ 
+       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+	values(new.pmblTanggal,new.pmblSplrId,new.pmblNoFaktur,'Pembelian Barang',hutangawal,0,new.pmblSisaBayar,hutangakhir);
        update supplier set splrHutang=splrHutang+new.pmblSisaBayar where splrId=new.pmblSplrId;
      end;
-
+     elseif new.pmblSisaBayar=0 then
+     begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal-new.pmblUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.pmblTanggal,new.pmblNoFaktur,'Pembelian Barang dengan Tunai',cashawal,0,new.pmblUangMuka,cashakhir);
+       
+     end;
      end if;
-END$$
+    END;
+$$
 
 DELIMITER ;
 ========================================================================================================================
+=================================================delete_pembelian=======================================================
+DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`delete_pembelian`$$
+
+CREATE
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `delete_pembelian` AFTER DELETE ON `pembelian` 
+    FOR EACH ROW BEGIN
+      if old.pmblSisaBayar>0 then
+      begin
+        declare hutangawal double;
+        declare hutangakhir double;
+       
+        set hutangawal=(select splrHutang from supplier where splrId=old.pmblSplrId);
+        set hutangakhir=hutangawal-old.pmblSisaBayar;
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+         values(old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
+        update supplier set splrHutang=splrHutang-old.pmblSisaBayar where splrId=old.pmblSplrId;
+      end;
+      elseif old.pmblSisaBayar=0 then
+      begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+old.pmblUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.pmblTanggal,old.pmblNoFaktur,'Hapus Pembelian Barang dengan Tunai',cashawal,old.pmblUangMuka,0,cashakhir);
+       
+      end;
+      end if;
+	
+    END;
+$$
+
+DELIMITER ;
+========================================================================================================================
 =================================================insert_detpembelian====================================================
 DELIMITER $$
 
@@ -64,80 +123,127 @@ DELIMITER ;
 ============================================Delete_detpembelian=========================================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`delete_pembelian`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`delete_detpembelian` AFTER DELETE
-    ON `wulan_simpos`.`detpembelian`
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `delete_pembelian` AFTER DELETE ON `pembelian` 
     FOR EACH ROW BEGIN
-     declare stokawal int;
-     declare stokakhir int;
-     declare tanggal date;
-     declare nofaktur varchar(100);
-     set stokawal=(select brngStokAkhir from barang where brngId=old.dtpbBrngId);
-     set stokakhir=stokawal-old.dtpbJumlah;
-     set tanggal=(select pmblTanggal from pembelian where pmblId=old.dtpbPmblId );
-     set nofaktur=(select pmblNoFaktur from pembelian where pmblId=old.dtpbPmblId );
-     insert into stok values('',tanggal,old.dtpbBrngId,nofaktur,'Hapus Pembelian Barang',stokawal,0,old.dtpbJumlah,stokakhir);
-     update barang set brngStokAkhir=brngStokAkhir-old.dtpbJumlah where brngId=old.dtpbBrngId;
-  
-END$
-$
+      if old.pmblSisaBayar>0 then
+      begin
+        declare hutangawal double;
+        declare hutangakhir double;
+       
+        set hutangawal=(select splrHutang from supplier where splrId=old.pmblSplrId);
+        set hutangakhir=hutangawal-old.pmblSisaBayar;
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+         values(old.pmblTanggal,old.pmblSplrId,old.pmblNoFaktur,'Hapus Pembelian Barang',hutangawal,old.pmblSisaBayar,0,hutangakhir);
+        update supplier set splrHutang=splrHutang-old.pmblSisaBayar where splrId=old.pmblSplrId;
+      end;
+      elseif old.pmblSisaBayar=0 then
+      begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+old.pmblUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.pmblTanggal,old.pmblNoFaktur,'Hapus Pembelian Barang dengan Tunai',cashawal,0,old.pmblUangMuka,cashakhir);
+       
+      end;
+      end if;
+	
+    END;
+$$
 
 DELIMITER ;
 ========================================================================================================================
 ============================================insert_penjualan============================================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`insert_penjualan`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`insert_penjualan` AFTER INSERT
- 
-   ON `wulan_simpos`.`penjualan`
-    
-FOR EACH ROW BEGIN
-    
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `insert_penjualan` AFTER INSERT ON `penjualan` 
+    FOR EACH ROW BEGIN
      if new.pnjlSisaBayar>0 then
-
-     begin
-  
-     declare piutangawal double;
-
+     begin  
+       declare piutangawal double;
        declare piutangakhir double;
-
        
-set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
-       
+       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
-       
-       insert into piutang values('',new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
-       
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+       values(new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+new.pnjlSisaBayar where plgnId=new.pnjlPlgnId;
      end;
-
-     end if; 
-END$
-$
+     elseif new.pnjlSisaBayar=0 then
+     begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+new.pnjlUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.pnjlTanggal,new.pnjlNoFaktur,'Penjualan Barang dengan Tunai',cashawal,new.pnjlUangMuka,0,cashakhir);
+       
+     end;
+     end if;
+    END;
+$$
 
 DELIMITER ;
 ========================================================================================================================
 ==================================================delete_penjualan======================================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`delete_penjualan`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`delete_penjualan` AFTER DELETE
-    ON `wulan_simpos`.`penjualan`
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `delete_penjualan` AFTER DELETE ON `penjualan` 
     FOR EACH ROW BEGIN
+     if old.pnjlSisaBayar>0 then
+     begin  
       declare piutangawal double;
       declare piutangakhir double;
        
       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.pnjlPlgnId);
       set piutangakhir=piutangawal-old.pnjlSisaBayar;
   
-      insert into piutang values('',old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
+      insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
       update pelanggan set plgnPiutang=plgnPiutang-old.pnjlSisaBayar where plgnId=old.pnjlPlgnId;
-    END$$
+     end;
+     elseif old.pnjlSisaBayar=0 then
+     begin
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+         set cashawal=0;
+       else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal-old.pnjlUangMuka;
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.pnjlTanggal,old.pnjlNoFaktur,'Hapus Penjualan Barang dengan Tunai',cashawal,0,old.pnjlUangMuka,cashakhir);
+     end;
+     end if;
+    END;
+$$
 
 DELIMITER ;
 ========================================================================================================================
@@ -192,20 +298,39 @@ DELIMITER ;
 =================================================insert_bayarutang======================================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`insert_bayarutang`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`insert_bayarutang` AFTER INSERT
-    ON `wulan_simpos`.`bayarutang`
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `insert_bayarutang` AFTER INSERT ON `bayarutang` 
     FOR EACH ROW BEGIN
       declare hutangawal double;
       declare hutangakhir double;
-       
+      declare cashawal double;
+      declare cashakhir double;
+      declare jdata int;
+      set jdata=(select count(*) from cash);
+      if jdata=0 then
+        set cashawal=0;
+      else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+      end if;
+      set cashakhir=cashawal-new.byruTotalBayar;
+
       set hutangawal=(select splrHutang from supplier where splrId=new.byruSplrId);
+
       set hutangakhir=hutangawal-new.byruTotalBayar;
   
-      insert into hutang values('',new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembahayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
+      insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.byruTanggal,new.byruNoFaktur,'Bayar Utang',cashawal,0,new.byruTotalBayar,cashakhir);
+
+      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
+        values(new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
+
       update supplier set splrHutang=splrHutang-new.byruTotalBayar where splrId=new.byruSplrId;  
-    END$$
+END;
+
+$$
 
 DELIMITER ;
 ========================================================================================================================
@@ -213,20 +338,39 @@ DELIMITER ;
 ========================================================delete_bayarutang===============================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`delete_bayarutang`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`delete_bayarutang` AFTER DELETE
-    ON `wulan_simpos`.`bayarutang`
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `delete_bayarutang` AFTER DELETE ON `bayarutang` 
     FOR EACH ROW BEGIN
       declare hutangawal double;
       declare hutangakhir double;
-       
+      declare cashawal double;
+      declare cashakhir double;
+      declare jdata int;
+      set jdata=(select count(*) from cash);
+      if jdata=0 then
+        set cashawal=0;
+      else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+      end if;
+      set cashakhir=cashawal+old.byruTotalBayar;
+
       set hutangawal=(select splrHutang from supplier where splrId=old.byruSplrId);
+
       set hutangakhir=hutangawal+old.byruTotalBayar;
   
-      insert into hutang values('',old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
-      update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
-    END$$
+      insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.byruTanggal,old.byruNoFaktur,'Hapus Bayar Utang',cashawal,old.byruTotalBayar,0,cashakhir);
+
+      insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
+
+       values(old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
+
+      update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId;
+ END;
+$$
 
 DELIMITER ;
 =======================================================================================================================
@@ -234,20 +378,33 @@ DELIMITER ;
 ======================================================insert_bayarpiutang==============================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`insert_bayarpiutang`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`insert_bayarpiutang` AFTER INSERT
-    ON `wulan_simpos`.`bayarpiutang`
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `insert_bayarpiutang` AFTER INSERT ON `bayarpiutang` 
     FOR EACH ROW BEGIN
        declare piutangawal double;
        declare piutangakhir double;
-       
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+        set cashawal=0;
+       else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal+new.byrpTotalBayar;
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.byrpPlgnId);
        set piutangakhir=piutangawal-new.byrpTotalBayar;
-  
-       insert into piutang values('',new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(new.byrpTanggal,new.byrpNoFaktur,'Pembayaran Piutang',cashawal,new.byrpTotalBayar,0,cashakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        values(new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang-new.byrpTotalBayar where plgnId=new.byrpPlgnId;
-    END$$
+    END;
+$$
 
 DELIMITER ;
 =======================================================================================================================
@@ -255,19 +412,294 @@ DELIMITER ;
 ============================================================delete_bayarpiutang========================================
 DELIMITER $$
 
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`delete_bayarpiutang`$$
+
 CREATE
-    /*[DEFINER = { user | CURRENT_USER }]*/
-    TRIGGER `wulan_simpos`.`delete_bayarpiutang` AFTER DELETE
-    ON `wulan_simpos`.`bayarpiutang`
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `delete_bayarpiutang` AFTER DELETE ON `bayarpiutang` 
     FOR EACH ROW BEGIN
        declare piutangawal double;
        declare piutangakhir double;
-       
+       declare cashawal double;
+       declare cashakhir double;
+       declare jdata int;
+       set jdata=(select count(*) from cash);
+       if jdata=0 then
+        set cashawal=0;
+       else
+        set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+       end if;
+       set cashakhir=cashawal-old.byrpTotalBayar;
        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.byrpPlgnId);
        set piutangakhir=piutangawal+old.byrpTotalBayar;
-  
-       insert into piutang values('',old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
+       insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	values(old.byrpTanggal,old.byrpNoFaktur,'Hapus Pembayaran Piutang',cashawal,0,old.byrpTotalBayar,cashakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+old.byrpTotalBayar where plgnId=old.byrpPlgnId;
+    END;
+$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================insert_returpeembelian======================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_returpembelian` AFTER INSERT
+    ON `wulan_simpos`.`returpembelian`
+    FOR EACH ROW BEGIN
+      if new.rtpbStatus='T' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal+new.rtpbNilai;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=new.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal-new.rtpbNilai;
+
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(new.rtpbTanggal,new.rtpbNoFaktur,'Retur Pembelian Kas',cashawal,new.rtpbNilai,0,cashakhir);
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=new.rtpbPmblId;
+      end;
+      elseif new.rtpbStatus='K' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare hutangawal double;
+        declare hutangakhir double;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=new.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal-new.rtpbNilai;
+
+	
+       
+        set hutangawal=(select splrHutang from supplier where splrId=new.rtpbSplrId);
+        set hutangakhir=hutangawal-new.rtpbNilai;
+  
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+	 values(new.rtpbTanggal,new.rtpbSplrId,new.rtpbNoFaktur,'Retur Pembelian Barang',hutangawal,new.rtpbNilai,0,hutangakhir);
+
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=new.rtpbPmblId;
+      end;
+      end if;
+    END$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================delete_returpembelian=======================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_returpembelian` AFTER DELETE
+    ON `wulan_simpos`.`returpembelian`
+    FOR EACH ROW BEGIN
+     if old.rtpbStatus='T' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal-old.rtpbNilai;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=old.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal+old.rtpbNilai;
+
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(old.rtpbTanggal,old.rtpbNoFaktur,'Hapus Retur Pembelian Kas',cashawal,0,old.rtpbNilai,cashakhir);
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=old.rtpbPmblId;
+      end;
+      elseif old.rtpbStatus='K' then
+      begin
+        declare totalbeliawal double;
+        declare totalbeliakhir double;
+        declare hutangawal double;
+        declare hutangakhir double;
+        set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=old.rtpbPmblId);
+        set totalbeliakhir=totalbeliawal+old.rtpbNilai;
+
+	
+       
+        set hutangawal=(select splrHutang from supplier where splrId=old.rtpbSplrId);
+        set hutangakhir=hutangawal+old.rtpbNilai;
+  
+        insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir) 
+	 values(old.rtpbTanggal,old.rtpbSplrId,old.rtpbNoFaktur,'Hapus Retur Pembelian Barang',hutangawal,0,old.rtpbNilai,hutangakhir);
+
+        update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=old.rtpbPmblId;
+      end;
+      end if;
+    END$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================insert_detreturpembelian====================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_detreturpembelian` AFTER INSERT
+    ON `wulan_simpos`.`detreturpembelian`
+    FOR EACH ROW BEGIN
+      update barang set brngStokAkhir=brngStokAkhir-new.drpbJumlah
+        where brngId=new.drpbBrngId;
+    END$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================delete_detreturpembelian====================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_detreturpembelian` AFTER DELETE
+    ON `wulan_simpos`.`detreturpembelian`
+    FOR EACH ROW BEGIN
+      update barang set brngStokAkhir=brngStokAkhir+old.drpbJumlah
+        where brngId=old.drpbBrngId;
+    END$$
+
+DELIMITER ;
+======================================================================================================================
+
+==========================================================insert_returpenjualan======================================
+DELIMITER $$
+
+DROP TRIGGER /*!50032 IF EXISTS */ `wulan_simpos`.`insert_returpenjualan`$$
+
+CREATE
+    /*!50017 DEFINER = 'root'@'localhost' */
+    TRIGGER `insert_returpenjualan` AFTER INSERT ON `returpenjualan` 
+    FOR EACH ROW BEGIN
+      if new.rtpjStatus='T' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal-new.rtpjNilai;
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
+        set totaljualakhir=totaljualawal-new.rtpjNilai;
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(new.rtpjTanggal,new.rtpjNoFaktur,'Retur Penjualan Kas',cashawal,0,new.rtpjNilai,cashakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=new.rtpjPnjlId;
+      end;
+      elseif new.rtpjStatus='K' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare piutangawal double;
+        declare piutangakhir double;
+
+        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.rtpjPlgnId);
+        set piutangakhir=piutangawal-new.rtpjNilai;
+
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
+        set totaljualakhir=totaljualawal-new.rtpjNilai;
+        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        values(new.rtpjTanggal,new.rtpjPlgnId,new.rtpjNoFaktur,'Retur Penjualan Kredit',piutangawal,0,new.rtpjNilai,piutangakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=new.rtpjPnjlId;
+      end;
+      end if;
+    END;
+$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================delete_returpenjualan=======================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_returpenjualan` AFTER DELETE
+    ON `wulan_simpos`.`returpenjualan`
+    FOR EACH ROW BEGIN
+     if old.rtpjStatus='T' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare cashawal double;
+        declare cashakhir double;
+        declare jdata int;
+        set jdata=(select count(*) from cash);
+        if jdata=0 then
+         set cashawal=0;
+        else
+         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
+        end if;
+        set cashakhir=cashawal+old.rtpjNilai;
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
+        set totaljualakhir=totaljualawal+old.rtpjNilai;
+        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
+	 values(old.rtpjTanggal,old.rtpjNoFaktur,'Retur Penjualan Kas',cashawal,old.rtpjNilai,0,cashakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=old.rtpjPnjlId;
+      end;
+      elseif old.rtpjStatus='K' then
+      begin
+        declare totaljualawal double;
+        declare totaljualakhir double;
+        declare piutangawal double;
+        declare piutangakhir double;
+
+        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.rtpjPlgnId);
+        set piutangakhir=piutangawal+old.rtpjNilai;
+
+        set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
+        set totaljualakhir=totaljualawal+old.rtpjNilai;
+        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        values(old.rtpjTanggal,old.rtpjPlgnId,old.rtpjNoFaktur,'Retur Penjualan Kredit',piutangawal,old.rtpjNilai,0,piutangakhir);
+        update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=old.rtpjPnjlId;
+      end;
+      end if;
+    END$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================insert_detreturpenjualan====================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`insert_detreturpenjualan` AFTER INSERT
+    ON `wulan_simpos`.`detreturpenjualan`
+    FOR EACH ROW BEGIN
+     update barang set brngStokAkhir=brngStokAkhir+new.drpjJumlah
+        where brngId=new.drpjBrngId;
+    END$$
+
+DELIMITER ;
+======================================================================================================================
+==========================================================delete_detreturpenjualan====================================
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    TRIGGER `wulan_simpos`.`delete_detreturpenjualan` AFTER DELETE
+    ON `wulan_simpos`.`detreturpenjualan`
+    FOR EACH ROW BEGIN
+      update barang set brngStokAkhir=brngStokAkhir-old.drpjJumlah
+        where brngId=old.drpjBrngId;
     END$$
 
 DELIMITER ;

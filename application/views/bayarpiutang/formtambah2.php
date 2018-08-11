@@ -78,13 +78,15 @@
                   <div class="form-actions">
                       <a href="#" class="btn btn-success" data-toggle="modal" data-target="#detailbayarpiutangModal"><i class="icon-plus-sign"></i> Tambahkan Pembayaran
                       </a>
-                      <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Pembayaran Piutang</button>
+                     
                   </div>
                 
                   <!-- tempat menampilkan table detailpembelian temp -->
                   <div id="tampilbayarpiutang">
                   </div>
-                  
+                  <div class="form-actions">
+                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Pembayaran Piutang</button>
+                  </div>
               
                   
                 </form>
