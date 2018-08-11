@@ -60,7 +60,15 @@ class M_pos extends CI_Model {
         return $query = $this->db->get()->result();
     }
     
-    
+    function list_join_where($table1, $table2, $param1, $mode='', $key='', $db=''){
+        $this->db->select('*');
+        $this->db->from($table1);
+        $this->db->join($table2, $param1, $mode);
+        if($key!=''){            
+            $this->db->where($key);
+        }
+        return $query = $this->db->get();
+    }
 
     function kode_barang(){
         //K002

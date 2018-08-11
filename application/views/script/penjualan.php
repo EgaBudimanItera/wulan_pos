@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		//loadTable();
+		loadTable();
 		//select 2 untuk combox pelanggan
     	$("#dtpjBrngId").select2();
 

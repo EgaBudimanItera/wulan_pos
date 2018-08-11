@@ -59,7 +59,7 @@
                 <div class="control-group primary">
                   <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
                   <div class="controls">
-                     <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" />
+                     <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" value="<?=$list->pmblNoFaktur?>" />
                      <span class="help-inline"></span>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                   <label class="control-label" for="inputWarning">Tanggal</label>
                   <div class="controls">
                     <div class="input-append" id="ui_date_picker_trigger">
-                      <input name="pmblTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                      <input name="pmblTanggal" type="text"  class="m-wrap medium" value="<?=$list->pmblTanggal?>" /><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>
                 </div> 
@@ -91,17 +91,24 @@
                   </thead>
                   <tbody>
                    <!-- ambil dari kamus sql retur pembelian -->
+                   <?php
+                      $no=1;
+                      foreach($list_retur as $l){
+                    ?>
                    <tr>
-                      <td>1</td>
-                      <td>a</td>
-                      <td>1000</td>
-                      <td>10</td>
-                      <td>0</td>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->brngNama?></td>
+                      <td><?=$l->brngHpp?></td>
+                      <td><?=$l->dtpbJumlah?></td>
+                      <td><?=$l->jumlahretur?></td>
                       <td>0</td>
                       <td>
-                        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
+                        <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
                       </td>
                     </tr>
+                    <?php
+                      }
+                    ?>
                   </tbody>
                 </table>
                 <div class="form-actions">

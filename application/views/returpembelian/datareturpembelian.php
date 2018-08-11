@@ -52,16 +52,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    $no=1;
+                    foreach($list as $l){
+                  ?>
                   <tr>
-                    <td>1</td>
-                    <td>F01</td>
-                    <td>2018-07-30</td>
-                    <td>budiman</td>
-                    <td>1000</td>
+                    <td><?=$no++;?></td>
+                    <td><?=$l->pmblNoFaktur?></td>
+                    <td><?=$l->pmblTanggal?></td>
+                    <td><?=$l->splrNama?></td>
+                    <td><?php echo number_format($l->pmblTotalBeli)?></td>
                     <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formdetail/1" title="Detail"><i class="icon-eye-open"></i></a>
+                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formdetail/<?=$l->pmblNoFaktur?>" title="Detail"><i class="icon-eye-open"></i></a>
                     </td>
-                  </tr> 
+                  </tr>
+                  <?php
+                    }
+                  ?>  
                 </tbody>
               </table>
             </div>
