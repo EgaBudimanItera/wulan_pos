@@ -29,8 +29,9 @@ CREATE TABLE `barang` (
   `brngStokAkhir` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`brngId`),
   KEY `brngId` (`brngId`),
-  KEY `FK_barang` (`brngStunId`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+  KEY `FK_barang` (`brngStunId`),
+  CONSTRAINT `FK_barang` FOREIGN KEY (`brngStunId`) REFERENCES `satuan` (`stunId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `barang` */
 
@@ -47,7 +48,9 @@ CREATE TABLE `bayarpiutang` (
   `byrpTanggal` date DEFAULT NULL,
   `byrpTotalBayar` double DEFAULT NULL,
   `byrpKet` text,
-  PRIMARY KEY (`byrpId`)
+  PRIMARY KEY (`byrpId`),
+  KEY `FK_bayarpiutang` (`byrpPlgnId`),
+  CONSTRAINT `FK_bayarpiutang` FOREIGN KEY (`byrpPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `bayarpiutang` */
@@ -63,8 +66,10 @@ CREATE TABLE `bayarutang` (
   `byruSplrId` int(11) DEFAULT NULL,
   `byruTotalBayar` double DEFAULT NULL,
   `byruKet` text,
-  PRIMARY KEY (`byruId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`byruId`),
+  KEY `FK_bayarutang` (`byruSplrId`),
+  CONSTRAINT `FK_bayarutang` FOREIGN KEY (`byruSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `bayarutang` */
 
@@ -95,8 +100,10 @@ CREATE TABLE `detbayarpiutang` (
   `dbypByrpId` int(11) NOT NULL,
   `dbypPnjlId` int(11) NOT NULL,
   `dbypBayar` double NOT NULL,
-  PRIMARY KEY (`dbypId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dbypId`),
+  KEY `FK_detbayarpiutang` (`dbypByrpId`),
+  CONSTRAINT `FK_detbayarpiutang` FOREIGN KEY (`dbypByrpId`) REFERENCES `bayarpiutang` (`byrpId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarpiutang` */
 
@@ -109,8 +116,10 @@ CREATE TABLE `detbayarpiutang_temp` (
   `dbypPnjlId` int(11) NOT NULL,
   `dbypBayar` double NOT NULL,
   `dbypCreatedBy` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`dbypId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dbypId`),
+  KEY `FK_detbayarpiutang_temp` (`dbypPnjlId`),
+  CONSTRAINT `FK_detbayarpiutang_temp` FOREIGN KEY (`dbypPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarpiutang_temp` */
 
@@ -123,8 +132,10 @@ CREATE TABLE `detbayarutang` (
   `dbyuByruId` int(11) NOT NULL,
   `dbyuPmblId` int(11) NOT NULL,
   `dbyuBayar` double NOT NULL,
-  PRIMARY KEY (`dbyuId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dbyuId`),
+  KEY `FK_detbayarutang` (`dbyuByruId`),
+  CONSTRAINT `FK_detbayarutang` FOREIGN KEY (`dbyuByruId`) REFERENCES `bayarutang` (`byruId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarutang` */
 
@@ -137,8 +148,10 @@ CREATE TABLE `detbayarutang_temp` (
   `dbyuPmblId` int(11) NOT NULL,
   `dbyuBayar` double NOT NULL,
   `dbyuCreatedBy` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`dbyuId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dbyuId`),
+  KEY `FK_detbayarutang_temp` (`dbyuPmblId`),
+  CONSTRAINT `FK_detbayarutang_temp` FOREIGN KEY (`dbyuPmblId`) REFERENCES `pembelian` (`pmblId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarutang_temp` */
 
@@ -153,8 +166,12 @@ CREATE TABLE `detpembelian` (
   `dtpbJumlah` int(11) NOT NULL,
   `dtpbHarga` double DEFAULT NULL,
   `dtpbDiskon` double DEFAULT '0',
-  PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`dtpbId`),
+  KEY `FK_detpembelian` (`dtpbBrngId`),
+  KEY `FK_detpembelian1` (`dtpbPmblId`),
+  CONSTRAINT `FK_detpembelian` FOREIGN KEY (`dtpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_detpembelian1` FOREIGN KEY (`dtpbPmblId`) REFERENCES `pembelian` (`pmblId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
 
@@ -171,8 +188,10 @@ CREATE TABLE `detpembelian_temp` (
   `dtpbHarga` double DEFAULT NULL,
   `dtpbDiskon` double DEFAULT '0',
   `dtpbCreatedBy` varchar(50) DEFAULT 'admin',
-  PRIMARY KEY (`dtpbId`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dtpbId`),
+  KEY `FK_detpembelian_temp` (`dtpbBrngId`),
+  CONSTRAINT `FK_detpembelian_temp` FOREIGN KEY (`dtpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian_temp` */
 
@@ -187,8 +206,12 @@ CREATE TABLE `detpenjualan` (
   `dtpjJumlah` int(11) NOT NULL,
   `dtpjHarga` double DEFAULT NULL,
   `dtpjDiskon` double DEFAULT NULL,
-  PRIMARY KEY (`dtpjId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dtpjId`),
+  KEY `FK_detpenjualan` (`dtpjBrngId`),
+  KEY `FK_detpenjualan1` (`dtpjPnjlId`),
+  CONSTRAINT `FK_detpenjualan` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_detpenjualan1` FOREIGN KEY (`dtpjPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan` */
 
@@ -202,8 +225,10 @@ CREATE TABLE `detpenjualan_temp` (
   `dtpjJumlah` int(11) NOT NULL,
   `dtpjHarga` double DEFAULT NULL,
   `dtpjCreatedBy` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`dtpjId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dtpjId`),
+  KEY `FK_detpenjualan_temp` (`dtpjBrngId`),
+  CONSTRAINT `FK_detpenjualan_temp` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan_temp` */
 
@@ -216,8 +241,12 @@ CREATE TABLE `detreturpembelian` (
   `drpbRtpbId` int(11) NOT NULL,
   `drpbBrngId` int(11) NOT NULL,
   `drpbJumlah` int(11) NOT NULL,
-  PRIMARY KEY (`drpbId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`drpbId`),
+  KEY `FK_detreturpembelian` (`drpbBrngId`),
+  KEY `FK_detreturpembelian1` (`drpbRtpbId`),
+  CONSTRAINT `FK_detreturpembelian` FOREIGN KEY (`drpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_detreturpembelian1` FOREIGN KEY (`drpbRtpbId`) REFERENCES `returpembelian` (`rtpbId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detreturpembelian` */
 
@@ -231,8 +260,10 @@ CREATE TABLE `detreturpembelian_temp` (
   `drpbJumlah` int(11) NOT NULL,
   `drpbPmblId` int(11) DEFAULT NULL,
   `drpbCreatedby` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`drpbId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`drpbId`),
+  KEY `FK_detreturpembelian_temp` (`drpbBrngId`),
+  CONSTRAINT `FK_detreturpembelian_temp` FOREIGN KEY (`drpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detreturpembelian_temp` */
 
@@ -245,8 +276,12 @@ CREATE TABLE `detreturpenjualan` (
   `drpjRtpjId` int(11) NOT NULL,
   `drpjBrngId` int(11) NOT NULL,
   `drpjJumlah` int(11) NOT NULL,
-  PRIMARY KEY (`drpjId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`drpjId`),
+  KEY `FK_detreturpenjualan` (`drpjBrngId`),
+  KEY `FK_detreturpenjualan1` (`drpjRtpjId`),
+  CONSTRAINT `FK_detreturpenjualan` FOREIGN KEY (`drpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_detreturpenjualan1` FOREIGN KEY (`drpjRtpjId`) REFERENCES `returpenjualan` (`rtpjId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detreturpenjualan` */
 
@@ -260,8 +295,10 @@ CREATE TABLE `detreturpenjualan_temp` (
   `drpjJumlah` int(11) NOT NULL,
   `drpjPnjlId` int(11) DEFAULT NULL,
   `drpjCreatedby` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`drpjId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`drpjId`),
+  KEY `FK_detreturpenjualan_temp` (`drpjBrngId`),
+  CONSTRAINT `FK_detreturpenjualan_temp` FOREIGN KEY (`drpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detreturpenjualan_temp` */
 
@@ -279,8 +316,10 @@ CREATE TABLE `hutang` (
   `htngDebet` double NOT NULL,
   `htngKredit` double NOT NULL,
   `htngAkhir` double NOT NULL,
-  PRIMARY KEY (`htngId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`htngId`),
+  KEY `FK_hutang` (`htngSplrId`),
+  CONSTRAINT `FK_hutang` FOREIGN KEY (`htngSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `hutang` */
 
@@ -300,7 +339,7 @@ CREATE TABLE `pelanggan` (
   `plgnAlamat` text,
   `plgnPiutang` double DEFAULT NULL,
   PRIMARY KEY (`plgnId`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pelanggan` */
 
@@ -322,8 +361,10 @@ CREATE TABLE `pembelian` (
   `pmblJatuhTempo` date DEFAULT NULL,
   `pmblDiskon` double DEFAULT NULL,
   `pmblOngkir` double DEFAULT NULL,
-  PRIMARY KEY (`pmblId`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`pmblId`),
+  KEY `FK_pembelian` (`pmblSplrId`),
+  CONSTRAINT `FK_pembelian` FOREIGN KEY (`pmblSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
 
@@ -345,8 +386,10 @@ CREATE TABLE `penjualan` (
   `pnjlJatuhTempo` date DEFAULT NULL,
   `pnjlDiskon` double DEFAULT NULL,
   `pnjlOngkir` double DEFAULT NULL,
-  PRIMARY KEY (`pnjlId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`pnjlId`),
+  KEY `FK_penjualan` (`pnjlPlgnId`),
+  CONSTRAINT `FK_penjualan` FOREIGN KEY (`pnjlPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `penjualan` */
 
@@ -364,8 +407,10 @@ CREATE TABLE `piutang` (
   `ptngDebet` double NOT NULL,
   `ptngKredit` double NOT NULL,
   `ptngAkhir` double NOT NULL,
-  PRIMARY KEY (`ptngId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+  PRIMARY KEY (`ptngId`),
+  KEY `FK_piutang` (`ptngPlgnId`),
+  CONSTRAINT `FK_piutang` FOREIGN KEY (`ptngPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `piutang` */
 
@@ -382,8 +427,10 @@ CREATE TABLE `returpembelian` (
   `rtpbKet` text NOT NULL,
   `rtpbNilai` double DEFAULT NULL,
   `rtpbStatus` enum('T','K') DEFAULT NULL,
-  PRIMARY KEY (`rtpbId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`rtpbId`),
+  KEY `FK_returpembelian1` (`rtpbPmblId`),
+  CONSTRAINT `FK_returpembelian1` FOREIGN KEY (`rtpbPmblId`) REFERENCES `pembelian` (`pmblId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `returpembelian` */
 
@@ -400,8 +447,10 @@ CREATE TABLE `returpenjualan` (
   `rtpjKet` text NOT NULL,
   `rtpjNilai` double DEFAULT NULL,
   `rtpjStatus` enum('T','K') DEFAULT NULL,
-  PRIMARY KEY (`rtpjId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`rtpjId`),
+  KEY `FK_returpenjualan1` (`rtpjPnjlId`),
+  CONSTRAINT `FK_returpenjualan1` FOREIGN KEY (`rtpjPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `returpenjualan` */
 
@@ -414,7 +463,7 @@ CREATE TABLE `satuan` (
   `stunNama` varchar(40) NOT NULL,
   `stunSimbol` varchar(20) NOT NULL,
   PRIMARY KEY (`stunId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `satuan` */
 
@@ -434,12 +483,14 @@ CREATE TABLE `stok` (
   `stokMasuk` int(11) NOT NULL,
   `stokKeluar` int(11) NOT NULL,
   `stokAkhir` int(11) NOT NULL,
-  PRIMARY KEY (`stokId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`stokId`),
+  KEY `FK_stok` (`stokBrngId`),
+  CONSTRAINT `FK_stok` FOREIGN KEY (`stokBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `stok` */
 
-insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200),(0,'2018-08-24',1,'a','Pembelian Barang',230,100,0,330),(5,'2018-08-11',1,'rrr','Pembelian Barang',330,10,0,340);
+insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (0,'2018-08-24',1,'a','Pembelian Barang',230,100,0,330),(1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200),(5,'2018-08-11',1,'rrr','Pembelian Barang',330,10,0,340);
 
 /*Table structure for table `supplier` */
 
@@ -454,7 +505,7 @@ CREATE TABLE `supplier` (
   `splrTelp2` varchar(12) DEFAULT NULL,
   `splrHutang` double DEFAULT NULL,
   PRIMARY KEY (`splrId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `supplier` */
 
@@ -595,6 +646,58 @@ DELIMITER $$
       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
       values(old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
       update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detbayarpiutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_detbayarpiutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_detbayarpiutang` AFTER INSERT ON `detbayarpiutang` FOR EACH ROW BEGIN
+     update penjualan set pnjlSisaBayar=pnjlSisaBayar-new.dbypBayar where pnjlId=new.dbypPnjlId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detbayarpiutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_detbayarpiutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_detbayarpiutang` AFTER DELETE ON `detbayarpiutang` FOR EACH ROW BEGIN
+	update penjualan set pnjlSisaBayar=pnjlSisaBayar+old.dbypBayar where pnjlId=old.dbypPnjlId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detbayarutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `insert_detbayarutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `insert_detbayarutang` AFTER INSERT ON `detbayarutang` FOR EACH ROW BEGIN
+	update pembelian set pmblSisaBayar=pmblSisaBayar-new.dbyuBayar where pmblId=new.dbyuPmblId;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `detbayarutang` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_detbayarutang` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `delete_detbayarutang` AFTER DELETE ON `detbayarutang` FOR EACH ROW BEGIN
+      update pembelian set pmblSisaBayar=pmblSisaBayar+old.dbyuBayar where pmblId=old.dbyuPmblId;
     END */$$
 
 
