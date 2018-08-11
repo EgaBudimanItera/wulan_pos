@@ -13,6 +13,40 @@
     </tr>
   </thead>
   <tbody>
+    <?php
+      $no=1;
+      $total=0;
+      foreach($list as $l){
+        $sub=$l->dtpjHarga*$l->dtpjJumlah;
+    ?>
+    <tr>
+      <td><?=$no++;?></td>
+      <td><?=$l->brngNama;?></td>
+      <td><?=$l->dtpjJumlah;?></td>
+      <td><?=$l->dtpjHarga;?></td>
+      <td><?php echo number_format($sub)?></td>
+      <td>
+         <center>
+          <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dtpjId?>" >
+            <i class="icon-trash"></i>  
+          </a> -->
+          <a href="#" style="color:#DAA520; text-decoration:none;" onclick="if(confirm('Apakah anda yakin?')) hapustemp('<?=$l->dtpjId?>');">
+            <button type="button" class="btn btn-danger btn-xs">
+              <i class="icon-trash"></i>                      
+            </button>
+          </a> 
+        </center>
+      </td>
+    </tr>
+    
+    <?php
+      $total=$total+($l->dtpjJumlah*$l->dtpjHarga);
+      }
+    ?>
+    <tr>
+      <td colspan="4" align="Left">Total Pembelian</td>
+      <td colspan="2" align="Right"><?php echo number_format($total)?></td>
+    </tr>
     
 
   </tbody>

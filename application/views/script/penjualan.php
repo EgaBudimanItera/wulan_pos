@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		loadTable();
+		//loadTable();
 		//select 2 untuk combox pelanggan
     	$("#dtpjBrngId").select2();
 
@@ -25,18 +25,19 @@
 	  	});
 	});
 
-	function loadTable() {
-          $('#tampilpenjualan').load('<?=base_url()?>c_penjualan/tabeldetailtemp',function(){})
-    };
+	
     function format(item) {
       var originalOption = item.element;
       var originalText = item.text;
       var s = '<span style="font-weight:bold">' + originalText+ '</span><br/>' +
               '<span style="color:#888">' +'Satuan = '+ $(originalOption).data('satuan') +'</span><br/>'+
-              
               '<span style="color:#888">' + 'H.Jual = '+$(originalOption).data('harga') +'</span><br/>';
       return s;
      };
+
+    function loadTable() {
+          $('#tampilpenjualan').load('<?=base_url()?>c_penjualan/tabeldetailtemp',function(){})
+    };
 
      //function simpan data
 	function simpan(){

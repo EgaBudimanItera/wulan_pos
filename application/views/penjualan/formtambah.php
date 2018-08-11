@@ -44,7 +44,7 @@
                   </button>
                 </div>
                 <br>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_penjualan/simpanall" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
