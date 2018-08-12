@@ -2,7 +2,8 @@
 SQLyog Enterprise - MySQL GUI v7.14 
 MySQL - 5.6.25 : Database - wulan_simpos
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -544,7 +545,7 @@ DELIMITER $$
         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
        end if;
        set cashakhir=cashawal+new.byrpTotalBayar;
-       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.byrpPlgnId);
+       set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
        set piutangakhir=piutangawal-new.byrpTotalBayar;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(new.byrpTanggal,new.byrpNoFaktur,'Pembayaran Piutang',cashawal,new.byrpTotalBayar,0,cashakhir);
@@ -575,7 +576,7 @@ DELIMITER $$
         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
        end if;
        set cashakhir=cashawal-old.byrpTotalBayar;
-       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.byrpPlgnId);
+       set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
        set piutangakhir=piutangawal+old.byrpTotalBayar;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(old.byrpTanggal,old.byrpNoFaktur,'Hapus Pembayaran Piutang',cashawal,0,old.byrpTotalBayar,cashakhir);
@@ -942,7 +943,7 @@ DELIMITER $$
        declare piutangawal double;
        declare piutangakhir double;
        
-       set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.pnjlPlgnId);
+       set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
@@ -983,7 +984,7 @@ DELIMITER $$
       declare piutangawal double;
       declare piutangakhir double;
        
-      set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.pnjlPlgnId);
+      set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
       set piutangakhir=piutangawal-old.pnjlSisaBayar;
   
       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
@@ -1143,7 +1144,7 @@ DELIMITER $$
         declare totaljualakhir double;
         declare piutangawal double;
         declare piutangakhir double;
-        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=new.rtpjPlgnId);
+        set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
         set piutangakhir=piutangawal-new.rtpjNilai;
         set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
         set totaljualakhir=totaljualawal-new.rtpjNilai;
@@ -1190,7 +1191,7 @@ DELIMITER $$
         declare totaljualakhir double;
         declare piutangawal double;
         declare piutangakhir double;
-        set piutangawal=(select ptngAkhir from piutang where ptngPlgnId=old.rtpjPlgnId);
+        set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
         set piutangakhir=piutangawal+old.rtpjNilai;
         set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
         set totaljualakhir=totaljualawal+old.rtpjNilai;
