@@ -130,5 +130,58 @@ class M_pos extends CI_Model {
         return $kodejadi;
     }
 
+    public function terbilang ($angka) {
+        $angka = (float)$angka;
+        $bilangan = array('','Satu','Dua','Tiga','Empat','Lima','Enam','Tujuh','Delapan','Sembilan','Sepuluh','Sebelas');
+        if ($angka < 12) {
+            return $bilangan[$angka];
+        } else if ($angka < 20) {
+            return $bilangan[$angka - 10] . ' Belas';
+        } else if ($angka < 100) {
+            $hasil_bagi = (int)($angka / 10);
+            $hasil_mod = $angka % 10;
+            return trim(sprintf('%s Puluh %s', $bilangan[$hasil_bagi], $bilangan[$hasil_mod]));
+        } else if ($angka < 200) { return sprintf('Seratus %s', $this->terbilang($angka - 100));
+        } else if ($angka < 1000) { $hasil_bagi = (int)($angka / 100); $hasil_mod = $angka % 100; return trim(sprintf('%s Ratus %s', $bilangan[$hasil_bagi], $this->terbilang($hasil_mod)));
+        } else if ($angka < 2000) { return trim(sprintf('Seribu %s', $this->terbilang($angka - 1000)));
+        } else if ($angka < 1000000) { $hasil_bagi = (int)($angka / 1000); $hasil_mod = $angka % 1000; return sprintf('%s Ribu %s', $this->terbilang($hasil_bagi), $this->terbilang($hasil_mod));
+        } else if ($angka < 1000000000) { $hasil_bagi = (int)($angka / 1000000); $hasil_mod = $angka % 1000000; return trim(sprintf('%s Juta %s', $this->terbilang($hasil_bagi), $this->terbilang($hasil_mod)));
+        } else if ($angka < 1000000000000) { $hasil_bagi = (int)($angka / 1000000000); $hasil_mod = fmod($angka, 1000000000); return trim(sprintf('%s Milyar %s', $this->terbilang($hasil_bagi), $this->terbilang($hasil_mod)));
+        } else if ($angka < 1000000000000000) { $hasil_bagi = $angka / 1000000000000; $hasil_mod = fmod($angka, 1000000000000); return trim(sprintf('%s Triliun %s', $this->terbilang($hasil_bagi), $this->terbilang($hasil_mod)));
+        } else {
+            return 'Data Salah';
+        }
+    }
+
+    function autonumber($id_terakhir, $panjang_kode, $panjang_angka) {
+ 
+    // mengambil nilai kode ex: KNS0015 hasil KNS
+    $kode = substr($id_terakhir, 0, $panjang_kode);
+ 
+    // mengambil nilai angka
+    // ex: KNS0015 hasilnya 0015
+    $angka = substr($id_terakhir, $panjang_kode, $panjang_angka);
+ 
+    // menambahkan nilai angka dengan 1
+    // kemudian memberikan string 0 agar panjang string angka menjadi 4
+    // ex: angka baru = 6 maka ditambahkan strig 0 tiga kali
+    // sehingga menjadi 0006
+    $angka_baru = str_repeat("0", $panjang_angka - strlen($angka+1)).($angka+1);
+ 
+    // menggabungkan kode dengan nilang angka baru
+    $id_baru = $kode.$angka_baru;
+ 
+    return $id_baru;
+    }
+
+    function max_id($table,$field,$field2,$param){
+        $this->db->select($field);
+        $this->db->from($table);
+        $this->db->order_by($field2,$param);
+        $this->db->limit(1);
+        return $query = $this->db->get()->row();
+
+    }
+
     
 }

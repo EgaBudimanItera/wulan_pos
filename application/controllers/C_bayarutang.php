@@ -11,16 +11,33 @@ class C_bayarutang extends CI_Controller {
 	public function index(){
 		$data=array(
 			'page'=>'bayarutang/databayarutang',
-			'link'=>'bayarutang'
+			'link'=>'bayarutang',
+			'list'=>$this->M_pos->list_join('bayarutang','supplier','byruSplrId=splrId'),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
 	public function formtambah1(){
+		$max_id_awal = $this->M_pos->max_id('bayarutang','byruNoFaktur','byruId','DESC');
+		if (empty($max_id_awal)) {
+			$max_id_awal = "BRT-0000";
+		}else{
+			$max_id_awal = $max_id_awal->byruNoFaktur;
+		}
+        
+        $cek_id = explode("-", $max_id_awal);
+        // var_dump($cek_id);
+        // die();
+        if ($cek_id[0] != 'BRT') {
+            $nofaktur = "BRT-0001";
+        }else{
+            $nofaktur = $this->M_pos->autonumber($max_id_awal,4,4);
+        }
 		$data=array(
 			'page'=>'bayarutang/formtambah1',
 			'link'=>'bayarutang',
 			// 'script'=>'script/bayarutang',
+			'nofaktur'=>$nofaktur,
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -39,7 +56,7 @@ class C_bayarutang extends CI_Controller {
 		$this->load->view('bayarutang/datadetailtemp',$data);
 	}
 
-	public function formdetail($nofaktur){
+	public function formdetail($byruId){
 		$data=array(
 			'page'=>'bayarutang/detailbayarutang',
 			'link'=>'bayarutang',

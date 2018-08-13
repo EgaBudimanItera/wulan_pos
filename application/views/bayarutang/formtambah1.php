@@ -48,7 +48,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblKode" readonly="" name="pmblKode" />
+                       <input type="text" class="span6" id="pmblKode" readonly="" name="pmblKode" value="<?=$nofaktur?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 

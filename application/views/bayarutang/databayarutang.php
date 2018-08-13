@@ -52,7 +52,29 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                 <?php
+                    $no = 1;
+                    foreach ($list as $l) {
+                  ?>
+
+                  <tr>
+                    <td><?=$no++?>.</td>
+                    <td><?=$l->byruNoFaktur?></td>
+                    <td><?=$l->byruTanggal?></td>
+                    <td><?=$l->splrNama?></td>
+                    <td>Rp. <?=number_format($l->byruTotalBayar)?></td>
+                    <td>
+                      <center>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_bayarutang/formdetail/<?=$l->byruId?>">
+                            <i class="icon-eye"></i>                
+                          </a>
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_bayarutang/hapus_barang/<?=$l->byruId?>" >
+                            <i class="icon-trash"></i>  
+                          </a>
+                        </center>
+                    </td>
+
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
