@@ -2,8 +2,7 @@
 SQLyog Enterprise - MySQL GUI v7.14 
 MySQL - 5.6.25 : Database - wulan_simpos
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -229,9 +228,11 @@ CREATE TABLE `detpenjualan_temp` (
   PRIMARY KEY (`dtpjId`),
   KEY `FK_detpenjualan_temp` (`dtpjBrngId`),
   CONSTRAINT `FK_detpenjualan_temp` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan_temp` */
+
+insert  into `detpenjualan_temp`(`dtpjId`,`dtpjBrngId`,`dtpjJumlah`,`dtpjHarga`,`dtpjCreatedBy`) values (1,1,10,30000,'admin');
 
 /*Table structure for table `detreturpembelian` */
 
@@ -390,7 +391,7 @@ CREATE TABLE `penjualan` (
   PRIMARY KEY (`pnjlId`),
   KEY `FK_penjualan` (`pnjlPlgnId`),
   CONSTRAINT `FK_penjualan` FOREIGN KEY (`pnjlPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `penjualan` */
 
@@ -943,12 +944,12 @@ DELIMITER $$
        declare piutangawal double;
        declare piutangakhir double;
        
-       set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
+       set piutangawal=(select plgnPiutang from pelanggan where plgnId=new.pnjlPlgnId);
        set piutangakhir=piutangawal+new.pnjlSisaBayar;
   
-       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngAkhir)
        values(new.pnjlTanggal,new.pnjlPlgnId,new.pnjlNoFaktur,'Penjualan Barang',piutangawal,new.pnjlSisaBayar,0,piutangakhir);
-       update pelanggan set plgnPiutang=plgnPiutang+new.pnjlSisaBayar where plgnId=new.pnjlPlgnId;
+       update pelanggan set plgnPiutang=piutangakhir where plgnId=new.pnjlPlgnId;
      end;
      elseif new.pnjlSisaBayar=0 then
      begin
@@ -984,10 +985,11 @@ DELIMITER $$
       declare piutangawal double;
       declare piutangakhir double;
        
-      set piutangawal=(select plgnPiutang from pelanggan where plgnId=pnjlPlgnId);
+      set piutangawal=(select plgnPiutang from pelanggan where plgnId=old.pnjlPlgnId);
       set piutangakhir=piutangawal-old.pnjlSisaBayar;
   
-      insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
+      insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngAkhir) 
+      values(old.pnjlTanggal,old.pnjlPlgnId,old.pnjlNoFaktur,'Hapus Penjualan Barang',piutangawal,0,old.pnjlSisaBayar,piutangakhir);
       update pelanggan set plgnPiutang=plgnPiutang-old.pnjlSisaBayar where plgnId=old.pnjlPlgnId;
      end;
      elseif old.pnjlSisaBayar=0 then
