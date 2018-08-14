@@ -37,14 +37,21 @@
               </div>
               <div class="widget-body">
                 <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_lappiutang/lihat" role="form" method="post" class="form-horizontal">
                   <div class="control-group">
                     <label class="control-label">Pelanggan</label>
                     <div class="controls">
-                       <select class="span6 chosen" data-placeholder="Pilih Pelanggan" tabindex="1" name="pmblStunId">
+                       <select class="span6 chosen" data-placeholder="--Pilih Pelanggan--" tabindex="1" name="plgnId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <?php
+                            foreach($pelanggan as $b){
+                          ?>
+                          <!-- ambil nilai satuan dari tabel satuan -->
+                          <option value="<?=$b->plgnId?>" ><?=$b->plgnNama?></option>
+                          <?php
+                            }
+                          ?>
                        </select>
                     </div>
                   </div>
@@ -60,7 +67,7 @@
                     <label class="control-label" for="inputWarning"> Hingga Tanggal</label>
                     <div class="controls">
                       <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="daritanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="hinggatanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div>

@@ -37,7 +37,7 @@
               </div>
               <div class="widget-body">
                 <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_lappembelian/lihat" role="form" method="post" class="form-horizontal">
                  
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Dari Tanggal</label>
@@ -51,7 +51,7 @@
                     <label class="control-label" for="inputWarning"> Hingga Tanggal</label>
                     <div class="controls">
                       <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="daritanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="hinggatanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div>
