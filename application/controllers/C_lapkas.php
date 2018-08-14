@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_lapkaskeluar extends CI_Controller {
+class C_lapkas extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -10,8 +10,8 @@ class C_lapkaskeluar extends CI_Controller {
 
 	public function index(){
 		$data=array(
-			'page'=>'lapkaskeluar/formsearch',
-			'link'=>'lapkaskeluar'
+			'page'=>'lapkas/formsearch',
+			'link'=>'lapkas'
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
