@@ -54,7 +54,9 @@ class C_bayarutang extends CI_Controller {
 	}
 
 	public function tabeldetailtemp(){
-		$data=array();
+		$data=array(
+			'list'=>$this->M_pos->list_data_all('detbayarutang_temp'),
+		);
 		$this->load->view('bayarutang/datadetailtemp',$data);
 	}
 

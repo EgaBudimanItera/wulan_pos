@@ -12,8 +12,15 @@
     </tr>
   </thead>
   <tbody>
-    
-
+    <?php
+      $no=1;
+      foreach($list as $l){
+    ?>
+    <tr>
+      <th><?=$no++?></th>
+      <th><?=$l->?></th>
+    </tr>
+    <?php }?>
   </tbody>
 </table>
 
