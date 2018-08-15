@@ -67,7 +67,13 @@
                        <select class="span6 chosen" data-placeholder="Pilih Supplier" tabindex="1" name="pmblStunId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <?php
+                            foreach($supplier as $s){
+                          ?>
+                          <option value="<?=$s->splrId?>"><?=$s->splrNama?></option>
+                          <?php    
+                            }
+                          ?>
                        </select>
                     </div>
                   </div>

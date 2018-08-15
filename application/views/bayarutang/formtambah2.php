@@ -49,22 +49,23 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblKode" readonly="" name="pmblKode" />
+                       <input type="text" class="span6" id="pmblKode" readonly="" name="pmblKode" value="<?=@$_POST['pmblKode']?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" />
+                       <input type="text" class="span6" id="daritanggal" readonly="" name="daritanggal" value="<?=@$_POST['daritanggal']?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group">
                     <label class="control-label">Supplier</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" />
-                       <input type="hidden" class="span6" id="pmblNama" readonly="" name="pmblNama" />
+                      <?php $pmblNama = $this->M_pos->ambil('splrId',$_POST['pmblStunId'],'supplier')->row(); ?>
+                       <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" value="<?=@$pmblNama->splrNama?>"/>
+                       <input type="hidden" class="span6" id="dbyuPmblId" readonly="" name="dbyuPmblId" value="<?=@$_POST['pmblStunId']?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div>
@@ -119,7 +120,13 @@
                  <select class="span12 chosen" data-placeholder="Pilih Faktur" tabindex="1" name="dtpbBrngId" id="dtpbBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
-                    <option value="Category 1">Barang 1</option>
+                    <?php
+                            foreach($pembelian as $p){
+                          ?>
+                          <option value="<?=$p->pmblId?>"><?=$p->pmblNoFaktur?></option>
+                          <?php    
+                            }
+                          ?>
                  </select>
               </div>
             </div>

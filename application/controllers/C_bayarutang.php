@@ -38,6 +38,7 @@ class C_bayarutang extends CI_Controller {
 			'link'=>'bayarutang',
 			// 'script'=>'script/bayarutang',
 			'nofaktur'=>$nofaktur,
+			'supplier'=>$this->M_pos->list_data_all('supplier'),	
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -47,6 +48,7 @@ class C_bayarutang extends CI_Controller {
 			'page'=>'bayarutang/formtambah2',
 			'link'=>'bayarutang',
 			'script'=>'script/bayarutang',
+			'pembelian'=>$this->M_pos->list_data_where('pmblSplrId',$_POST['pmblStunId'],'pembelian')->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -62,6 +64,11 @@ class C_bayarutang extends CI_Controller {
 			'link'=>'bayarutang',
 		);
 		$this->load->view('partials/back/wrapper',$data);
+	}
+
+	public function get_pembelian($pmblId){
+		$data=$this->M_pos->ambil('pmblId',$pmblId,'pembelian')->row_array();
+        echo json_encode($data);
 	}
 
 }
