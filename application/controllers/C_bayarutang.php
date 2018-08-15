@@ -117,8 +117,88 @@ class C_bayarutang extends CI_Controller {
 
 	public function simpanall(){
 
-		
+		$createdby=$this->M_pos->usercreated();
+	    $query="SELECT COALESCE((sum(dbyuBayar)),0) as total from detbayarutang_temp where dbyuCreatedBy='$createdby'";
+	    //cek apakah data kosong? jika ada isi lanjutkan
+	    $pmblTotalBayarUtang=$this->M_pos->kueri($query)->row()->total;
+
+	    if($pmblTotalBayarUtang==0){
+	        $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Gagal Karena Data Kosong </div>'
+	        );
+	        redirect(base_url().'c_bayarutang/formtambah2'); //location
+	    }
+	    else{
+	     $byruNoFaktur=$this->input->post('pmblKode',true);
+	     $byruTanggal=$this->input->post('daritanggal',true);
+	     $byruSplrId=$this->input->post('dbyuPmblId',true);
+	     $byruTotalBayar=$pmblTotalBayarUtang;
+	     $byruKet=$this->input->post('pmblKet',true);
+	   
+	     //data untk simpan ke tabel pembelian
+	     $databayarutang=array(
+	        'byruNoFaktur'=>$byruNoFaktur,
+	        'byruTanggal'=>$byruTanggal,
+	        'byruSplrId'=>$byruSplrId,
+	        'byruTotalBayar'=>$byruTotalBayar,
+	        'byruKet'=>$byruKet,
+	     );
+	      //simpan ke pembelian
+	     $simpanbayaruutang=$this->M_pos->simpan_data($databayarutang,'bayarutang');
+	     $dbyuId = $this->db->insert_id();
+
+	      $querytemp="SELECT * FROM detbayarutang_temp where dbyuCreatedBy='$createdby'";
+	     //data untuk simpan ke tabel det pembelian
+	      $bayarutang_temp=$this->M_pos->kueri($querytemp)->result();
+	      $i=0;
+	      foreach ($bayarutang_temp as $row) {
+	         $ins[$i]['dbyuId']          	= $dbyuId;
+	         $ins[$i]['dbyuPmblId']         = $row->dbyuPmblId;
+	         $ins[$i]['dbyuBayar']          = $row->dbyuBayar;
+	         $i++;  
+	      } 
+
+	     //simpan ke det pembelian
+	     $simpandet=$this->M_pos->insertbatch('detbayarutang',$ins);
+	     //hapus det pembelian temp
+	     $hapustem=$this->M_pos->hapus('dbyuCreatedBy',$createdby,'detbayarutang_temp');
+
+	     if($simpanbayaruutang && $simpandet && $hapustem){
+	        $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Succes</strong> Simpan Data Penjualan Berhasil </div>'
+	        );
+	        redirect(base_url().'c_pembelian'); //location
+	     }
+	     else{
+	        $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Penjualan Gagal </div>'
+	        );
+	        redirect(base_url().'c_pembelian'); //location
+	     }
+	    }
 	}
+
+	public function hapusall($nofaktur){
+    $hapusdet=$this->M_pos->hapus('dbyuId',$nofaktur,'detbayarutang');
+    $hapusbayarutang=$this->M_pos->hapus('byruId',$nofaktur,'bayarutang');
+    
+    if($hapusbayarutang && $hapusdet){
+        $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+        );
+        redirect(base_url().'c_bayarutang'); //location
+     }else{
+       $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+        );
+       redirect(base_url().'c_bayarutang'); //location
+     }      
+   }
 
 	public function get_pembelian($pmblId){
 		$data=$this->M_pos->ambil('pmblId',$pmblId,'pembelian')->row_array();

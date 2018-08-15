@@ -66,9 +66,9 @@
                     <td>
                       <center>
                           <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_bayarutang/formdetail/<?=$l->byruId?>">
-                            <i class="icon-eye"></i>                
+                            <i class="icon-eye-open"></i>                
                           </a>
-                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_bayarutang/hapus_barang/<?=$l->byruId?>" >
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_bayarutang/hapusall/<?=$l->byruId?>" >
                             <i class="icon-trash"></i>  
                           </a>
                         </center>
