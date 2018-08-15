@@ -27,6 +27,7 @@ class C_lapstok extends CI_Controller {
 			'page'=>'lapstok/lihatdata',
 			'link'=>'lapstok',
 			'list'=>$this->M_pos->kueri($query)->result(),
+			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),
 			'brngId'=>$brngId,
 			'daritanggal'=>$daritanggal,
 			'hinggatanggal'=>$hinggatanggal,
@@ -37,4 +38,5 @@ class C_lapstok extends CI_Controller {
 	public function cetak($brngId,$dari,$hingga){
 
 	}
+
 }

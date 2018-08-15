@@ -45,7 +45,7 @@
                   <a href="<?=base_url()?>c_lapstok/cetak/<?=$brngId?>/<?=$daritanggal?>/<?=$hinggatanggal?>" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
                 </div>
               </div>
-              
+
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
@@ -80,7 +80,16 @@
                   </tr>
                   <?php
                     $hpp=$l->brngHpp;
-                    $stokAkhir=$l->stokAkhir;
+                      $stokAkhir=$l->stokAkhir;
+                    
+                    }
+                    if($jumlah==0){
+                      $hpp=0;
+                      $stokAkhir=0;
+                    }
+                    else{
+                     $hpp=$hpp;
+                     $stokAkhir=$stokAkhir;   
                     }
                   ?>
                   <tr>

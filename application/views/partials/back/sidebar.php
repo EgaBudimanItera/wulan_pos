@@ -45,12 +45,13 @@
                         <li class="<?php if($link=='bayarpiutang'){echo'active';}?>" ><a href="<?=base_url()?>c_bayarpiutang">Pembayaran Piutang</a></li>
                     </ul>
                 </li>
-                <li class="has-sub <?php if($link=="lapstok"||$link=="laputang"||$link=="lappiutang"||$link=="lappembelian"||$link=="lappenjualan"||$link=="lapreturbeli"||$link=="lapreturjual"||$link=="lapkaskeluar"||$link=="lapkasmasuk"){echo'active';}?>">
+                <li class="has-sub <?php if($link=="lapstok"||$link=="laputang"||$link=="lappiutang"||$link=="lappembelian"||$link=="lappenjualan"||$link=="lapreturbeli"||$link=="lapreturjual"||$link=="lapkas"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"><i class="icon-tasks"></i></span> Laporan
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
+                        <li class="<?php if($link=="lapkas"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapkas">Kas</a></li>
                         <li class="<?php if($link=="lapstok"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapstok">Stok</a></li>
                         <li class="<?php if($link=="laputang"){echo'active';}?>"><a class="" href="<?=base_url()?>c_laputang">Hutang</a></li>
                         <li class="<?php if($link=="lappiutang"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lappiutang">Piutang</a></li>
@@ -58,8 +59,8 @@
                         <li class="<?php if($link=="lappenjualan"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lappenjualan">Penjualan</a></li>
                         <li class="<?php if($link=="lapreturbeli"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapreturbeli">Retur Pembelian</a></li>
                         <li class="<?php if($link=="lapreturjual"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapreturjual">Retur Penjualan</a></li>
-                        <li class="<?php if($link=="lapkaskeluar"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapkaskeluar">Pengeluaran Kas</a></li>
-                        <li class="<?php if($link=="lapkasmasuk"){echo'active';}?>"><a class="" href="<?=base_url()?>c_lapkasmasuk">Penerimaan Kas</a></li>
+                        
+                       
                     </ul>
                 </li>
             </ul>
