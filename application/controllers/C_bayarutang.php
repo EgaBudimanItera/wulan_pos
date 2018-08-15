@@ -48,14 +48,14 @@ class C_bayarutang extends CI_Controller {
 			'page'=>'bayarutang/formtambah2',
 			'link'=>'bayarutang',
 			'script'=>'script/bayarutang',
-			'pembelian'=>$this->M_pos->list_data_where('pmblSplrId',$_POST['pmblStunId'],'pembelian')->result(),
+			'pembelian'=>$this->M_pos->list_data_where('pmblSplrId',@$_POST['pmblStunId'],'pembelian')->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
 	public function tabeldetailtemp(){
 		$data=array(
-			'list'=>$this->M_pos->list_data_all('detbayarutang_temp'),
+			'list'=>$this->M_pos->list_join('detbayarutang_temp','pembelian','dbyuPmblId=pmblId'),
 		);
 		$this->load->view('bayarutang/datadetailtemp',$data);
 	}
@@ -66,6 +66,58 @@ class C_bayarutang extends CI_Controller {
 			'link'=>'bayarutang',
 		);
 		$this->load->view('partials/back/wrapper',$data);
+	}
+
+	public function tambahdetbayarutang(){
+
+			$dbyuPmblId=$this->input->post('dtpbBrngId',true);
+	        $dbyuBayar=$this->input->post('dtpbJumlah',true);  
+	        //$dtpbJumlah=$this->input->post('dtpbJumlah',true); 
+	        // $createdby=$this->session->userdata('userNama');
+	        $createdby=$this->M_pos->usercreated();
+	        
+	        $data=array(
+	            'dbyuPmblId'=>$dbyuPmblId,
+	            'dbyuBayar'=>$dbyuBayar,
+	            //'dtpbJumlah'=>$dtpbJumlah,
+	            'dbyuCreatedBy'=>$createdby,
+	        );
+	        $simpandetailtemp=$this->M_pos->simpan_data($data,'detbayarutang_temp');
+	        if($simpandetailtemp){
+	            $this->session->set_flashdata(
+	                'msg', 
+	                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
+	            );
+	            echo json_encode(array('status'=>'success'));
+	         }else{
+	           $this->session->set_flashdata(
+	                'msg', 
+	                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
+	            );
+	           echo json_encode(array('status'=>'fail'));
+	         }
+	}
+
+	public function hapusdetail($dbyuId){
+		$hapusdetailtemp=$this->M_pos->hapus('dbyuId',$dbyuId,'detbayarutang_temp');
+	    if($hapusdetailtemp){
+	        $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+	        );
+	        echo json_encode(array('status'=>'success'));
+	     }else{
+	       $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+	        );
+	       echo json_encode(array('status'=>'fail'));
+	     }		
+	}
+
+	public function simpanall(){
+
+		
 	}
 
 	public function get_pembelian($pmblId){

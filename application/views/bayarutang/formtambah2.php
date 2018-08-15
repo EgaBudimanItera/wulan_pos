@@ -63,7 +63,7 @@
                   <div class="control-group">
                     <label class="control-label">Supplier</label>
                     <div class="controls">
-                      <?php $pmblNama = $this->M_pos->ambil('splrId',$_POST['pmblStunId'],'supplier')->row(); ?>
+                      <?php $pmblNama = $this->M_pos->ambil('splrId',@$_POST['pmblStunId'],'supplier')->row(); ?>
                        <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" value="<?=@$pmblNama->splrNama?>"/>
                        <input type="hidden" class="span6" id="dbyuPmblId" readonly="" name="dbyuPmblId" value="<?=@$_POST['pmblStunId']?>"/>
                        <span class="help-inline"></span>
@@ -113,7 +113,7 @@
         </div>
         <div class="modal-body">
           <!--id="formTambahBarang"-->
-          <form class="form-horizontal" id="formTambahBarang" role="form" method="post">
+          <form class="form-horizontal" id="formBayarUtang" role="form" method="post">
             <div class="control-group">
               <label class="control-label">No Faktur Pembelian</label>
               <div class="controls">

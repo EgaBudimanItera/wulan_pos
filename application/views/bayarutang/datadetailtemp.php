@@ -18,7 +18,20 @@
     ?>
     <tr>
       <th><?=$no++?></th>
-      <th><?=$l->?></th>
+      <th><?=$l->pmblNoFaktur?></th>
+      <th><?=$l->pmblSisaBayar?></th>
+      <th><?=$l->dbyuBayar?></th>
+      <td>
+         <center>
+          <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dbyuId?>" >
+            <i class="icon-trash"></i>  
+          </a> -->
+          <a href="#" style="color:#DAA520; text-decoration:none;" onclick="if(confirm('Apakah anda yakin?')) hapustemp('<?=$l->dbyuId?>');">
+            <button type="button" class="btn btn-danger btn-xs">
+              <i class="icon-trash"></i>                      
+            </button>
+          </a> 
+        </center>
     </tr>
     <?php }?>
   </tbody>
