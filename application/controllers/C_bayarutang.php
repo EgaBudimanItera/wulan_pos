@@ -146,14 +146,14 @@ class C_bayarutang extends CI_Controller {
 	     );
 	      //simpan ke pembelian
 	     $simpanbayaruutang=$this->M_pos->simpan_data($databayarutang,'bayarutang');
-	     $dbyuId = $this->db->insert_id();
+	     $byru = $this->db->insert_id();
 
 	      $querytemp="SELECT * FROM detbayarutang_temp where dbyuCreatedBy='$createdby'";
 	     //data untuk simpan ke tabel det pembelian
 	      $bayarutang_temp=$this->M_pos->kueri($querytemp)->result();
 	      $i=0;
 	      foreach ($bayarutang_temp as $row) {
-	         $ins[$i]['dbyuId']          	= $dbyuId;
+	         $ins[$i]['dbyuByruId']         = $byru;
 	         $ins[$i]['dbyuPmblId']         = $row->dbyuPmblId;
 	         $ins[$i]['dbyuBayar']          = $row->dbyuBayar;
 	         $i++;  
@@ -176,7 +176,7 @@ class C_bayarutang extends CI_Controller {
 	            'msg', 
 	            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Penjualan Gagal </div>'
 	        );
-	        redirect(base_url().'c_pembelian'); //location
+	        redirect(base_url().'c_bayarutang'); //location
 	     }
 	    }
 	}
