@@ -70,32 +70,32 @@ class C_bayarutang extends CI_Controller {
 
 	public function tambahdetbayarutang(){
 
-			$dbyuPmblId=$this->input->post('dtpbBrngId',true);
-	        $dbyuBayar=$this->input->post('dtpbJumlah',true);  
-	        //$dtpbJumlah=$this->input->post('dtpbJumlah',true); 
-	        // $createdby=$this->session->userdata('userNama');
-	        $createdby=$this->M_pos->usercreated();
-	        
-	        $data=array(
-	            'dbyuPmblId'=>$dbyuPmblId,
-	            'dbyuBayar'=>$dbyuBayar,
-	            //'dtpbJumlah'=>$dtpbJumlah,
-	            'dbyuCreatedBy'=>$createdby,
+		$dbyuPmblId=$this->input->post('dtpbBrngId',true);
+	    $dbyuBayar=$this->input->post('dtpbJumlah',true);  
+	    //$dtpbJumlah=$this->input->post('dtpbJumlah',true); 
+	    // $createdby=$this->session->userdata('userNama');
+	    $createdby=$this->M_pos->usercreated();
+	    
+	    $data=array(
+	        'dbyuPmblId'=>$dbyuPmblId,
+	        'dbyuBayar'=>$dbyuBayar,
+	        //'dtpbJumlah'=>$dtpbJumlah,
+	        'dbyuCreatedBy'=>$createdby,
+	    );
+	    $simpandetailtemp=$this->M_pos->simpan_data($data,'detbayarutang_temp');
+	    if($simpandetailtemp){
+	        $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
 	        );
-	        $simpandetailtemp=$this->M_pos->simpan_data($data,'detbayarutang_temp');
-	        if($simpandetailtemp){
-	            $this->session->set_flashdata(
-	                'msg', 
-	                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
-	            );
-	            echo json_encode(array('status'=>'success'));
-	         }else{
-	           $this->session->set_flashdata(
-	                'msg', 
-	                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
-	            );
-	           echo json_encode(array('status'=>'fail'));
-	         }
+	        echo json_encode(array('status'=>'success'));
+	     }else{
+	       $this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
+	        );
+	       echo json_encode(array('status'=>'fail'));
+	     }
 	}
 
 	public function hapusdetail($dbyuId){
