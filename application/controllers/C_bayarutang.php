@@ -65,7 +65,7 @@ class C_bayarutang extends CI_Controller {
 		$data=array(
 			'page'=>'bayarutang/detailbayarutang',
 			'link'=>'bayarutang',
-			'list'=>$this->M_pos->list_join2('detbayarutang','supplier','dbyuPmblId=splrId','bayarutang','dbyuByruId=byruId')
+			'list'=>$this->M_pos->list_join2('detbayarutang','supplier','dbyuByruId=splrId','bayarutang','dbyuByruId=byruId')
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
