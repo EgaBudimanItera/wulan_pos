@@ -141,11 +141,13 @@ class C_bayarutang extends CI_Controller {
 	     //data untk simpan ke tabel pembelian
 	     $databayarutang=array(
 	        'byruNoFaktur'=>$nofaktur,
-	        'byruTanggal'=>$byruTanggal,
+	        'byruTanggal'=>date("Y-m-m", strtotime($byruTanggal)),
 	        'byruSplrId'=>$byruSplrId,
 	        'byruTotalBayar'=>$byruTotalBayar,
 	        'byruKet'=>$byruKet,
 	     );
+	     // var_dump($databayarutang);
+	     // die();
 	      //simpan ke pembelian
 	     $simpanbayaruutang=$this->M_pos->simpan_data($databayarutang,'bayarutang');
 	     $byru = $this->db->insert_id();
