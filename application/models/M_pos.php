@@ -59,6 +59,14 @@ class M_pos extends CI_Model {
         $this->db->join($table2, $param1);
         return $query = $this->db->get()->result();
     }
+
+    function list_join2($table1, $table2, $param1,$table3, $param2){
+        $this->db->select('*');
+        $this->db->from($table1);
+        $this->db->join($table2, $param1);
+        $this->db->join($table3, $param2);
+        return $query = $this->db->get()->result();
+    }
     
     function list_join_where($table1, $table2, $param1, $mode='', $key='', $db=''){
         $this->db->select('*');

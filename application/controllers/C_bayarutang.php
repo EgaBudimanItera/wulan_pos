@@ -65,6 +65,7 @@ class C_bayarutang extends CI_Controller {
 		$data=array(
 			'page'=>'bayarutang/detailbayarutang',
 			'link'=>'bayarutang',
+			'list'=>$this->M_pos->list_join2('detbayarutang','supplier','dbyuPmblId=splrId','bayarutang','dbyuByruId=byruId')
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -170,7 +171,7 @@ class C_bayarutang extends CI_Controller {
 	            'msg', 
 	            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Succes</strong> Simpan Data Penjualan Berhasil </div>'
 	        );
-	        redirect(base_url().'c_pembelian'); //location
+	        redirect(base_url().'c_bayarutang'); //location
 	     }
 	     else{
 	        $this->session->set_flashdata(
