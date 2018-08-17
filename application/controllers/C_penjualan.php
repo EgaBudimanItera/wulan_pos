@@ -22,18 +22,18 @@ class C_penjualan extends CI_Controller {
 	}
 
 	public function formtambah(){
-        $max_id_awal = $this->M_pos->max_id('penjualan','pnjlNoFaktur','pnjlId','DESC');
-        $max_id_awal = $max_id_awal->pnjlNoFaktur;
+        // $max_id_awal = $this->M_pos->max_id('penjualan','pnjlNoFaktur','pnjlId','DESC');
+        // $max_id_awal = $max_id_awal->pnjlNoFaktur;
         
-        $cek_id = explode("-", $max_id_awal);
-        // var_dump($cek_id);
-        // die();
-        if ($cek_id[0] != 'PENJ') {
-            $nofaktur = "PENJ-0001";
-        }else{
-            $nofaktur = $this->M_pos->autonumber($max_id_awal,5,4);
-        }
-
+        // $cek_id = explode("-", $max_id_awal);
+        // // var_dump($cek_id);
+        // // die();
+        // if ($cek_id[0] != 'PENJ') {
+        //     $nofaktur = "PENJ-0001";
+        // }else{
+        //     $nofaktur = $this->M_pos->autonumber($max_id_awal,5,4);
+        // }
+        $nofaktur=$this->M_pos->kode_penjualan();
 		$query="SELECT * FROM barang join satuan on(brngStunId=stunId)";
 		$data=array(
 			'page'=>'penjualan/formtambah',
@@ -133,8 +133,9 @@ class C_penjualan extends CI_Controller {
      $pnjlJatuhTempo=strtotime('30 days',strtotime($pnjlTanggal));
      $pnjlJatuhTempo=date('Y-m-d',$pnjlJatuhTempo);
      //data untk simpan ke tabel penjualan
+     $pnjlNoFaktur=$this->M_pos->kode_penjualan();
      $datapenjualan=array(
-        'pnjlNoFaktur'=>$this->input->post('pnjlNoFaktur',true),
+        'pnjlNoFaktur'=>$pnjlNoFaktur,
         'pnjlTanggal'=>$pnjlTanggal,
         'pnjlPlgnId'=>$this->input->post('pnjlPlgnId',true),
         'pnjlKet'=>$this->input->post('pnjlKet',true),

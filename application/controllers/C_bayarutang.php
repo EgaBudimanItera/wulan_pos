@@ -18,21 +18,22 @@ class C_bayarutang extends CI_Controller {
 	}
 
 	public function formtambah1(){
-		$max_id_awal = $this->M_pos->max_id('bayarutang','byruNoFaktur','byruId','DESC');
-		if (empty($max_id_awal)) {
-			$max_id_awal = "BRT-0000";
-		}else{
-			$max_id_awal = $max_id_awal->byruNoFaktur;
-		}
+		// $max_id_awal = $this->M_pos->max_id('bayarutang','byruNoFaktur','byruId','DESC');
+		// if (empty($max_id_awal)) {
+		// 	$max_id_awal = "BRT-0000";
+		// }else{
+		// 	$max_id_awal = $max_id_awal->byruNoFaktur;
+		// }
         
-        $cek_id = explode("-", $max_id_awal);
-        // var_dump($cek_id);
-        // die();
-        if ($cek_id[0] != 'BRT') {
-            $nofaktur = "BRT-0001";
-        }else{
-            $nofaktur = $this->M_pos->autonumber($max_id_awal,4,4);
-        }
+  //       $cek_id = explode("-", $max_id_awal);
+  //       // var_dump($cek_id);
+  //       // die();
+  //       if ($cek_id[0] != 'BRT') {
+  //           $nofaktur = "BRT-0001";
+  //       }else{
+  //           $nofaktur = $this->M_pos->autonumber($max_id_awal,4,4);
+  //       }
+		$nofaktur=$this->M_pos->kode_bayarutang();
 		$data=array(
 			'page'=>'bayarutang/formtambah1',
 			'link'=>'bayarutang',
@@ -130,15 +131,15 @@ class C_bayarutang extends CI_Controller {
 	        redirect(base_url().'c_bayarutang/formtambah2'); //location
 	    }
 	    else{
-	     $byruNoFaktur=$this->input->post('pmblKode',true);
+	     // $byruNoFaktur=$this->input->post('pmblKode',true);
 	     $byruTanggal=$this->input->post('daritanggal',true);
 	     $byruSplrId=$this->input->post('dbyuPmblId',true);
 	     $byruTotalBayar=$pmblTotalBayarUtang;
 	     $byruKet=$this->input->post('pmblKet',true);
-	   
+	   	 $nofaktur=$this->M_pos->kode_bayarutang();
 	     //data untk simpan ke tabel pembelian
 	     $databayarutang=array(
-	        'byruNoFaktur'=>$byruNoFaktur,
+	        'byruNoFaktur'=>$nofaktur,
 	        'byruTanggal'=>$byruTanggal,
 	        'byruSplrId'=>$byruSplrId,
 	        'byruTotalBayar'=>$byruTotalBayar,

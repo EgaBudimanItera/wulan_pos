@@ -130,6 +130,106 @@ class M_pos extends CI_Model {
         return $kodejadi;
     }
 
+    function kode_penjualan(){
+        //K002
+        $this->db->select('Right(pnjlNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('pnjlId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('penjualan');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "PJ".date("my").$kodemax;
+        return $kodejadi;
+    }
+
+    function kode_bayarutang(){
+        //K002
+        $this->db->select('Right(byruNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('byruId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('bayarutang');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "BU".date("my").$kodemax;
+        return $kodejadi;
+    }
+
+    function kode_bayarpiutang(){
+        //K002
+        $this->db->select('Right(byrpNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('byrpId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('bayarpiutang');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "BP".date("my").$kodemax;
+        return $kodejadi;
+    }
+
+    function kode_returbeli(){
+        //K002
+        $this->db->select('Right(rtpbNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('rtpbId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('returpembelian');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "RB".date("my").$kodemax;
+        return $kodejadi;
+    }
+
+    function kode_returjual(){
+        //K002
+        $this->db->select('Right(rtpjNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('rtpjId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('returpenjualan');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "RJ".date("my").$kodemax;
+        return $kodejadi;
+    }
+
     public function terbilang ($angka) {
         $angka = (float)$angka;
         $bilangan = array('','Satu','Dua','Tiga','Empat','Lima','Enam','Tujuh','Delapan','Sembilan','Sepuluh','Sebelas');

@@ -57,20 +57,28 @@
                   </div>
                 </div>
                 <div class="control-group primary">
-                  <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
+                  <label class="control-label" for="inputWarning">Tanggal Retur</label>
                   <div class="controls">
-                     <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" value="<?=$list->pmblNoFaktur?>" />
-                     <span class="help-inline"></span>
+                    <div class="input-append" id="ui_date_picker_trigger">
+                      <input name="rtpbTanggal" type="text"  class="m-wrap medium" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
                   </div>
                 </div>
                 <div class="control-group primary">
-                  <label class="control-label" for="inputWarning">Tanggal</label>
+                  <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
+                  <div class="controls">
+                     <input type="text" class="span6" id="pmblNoFaktur" readonly name="pmblNoFaktur" value="<?=$list->pmblNoFaktur?>" />
+                     <span class="help-inline"></span>
+                  </div>
+                </div>
+                <!-- <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">Tanggal Pembelian</label>
                   <div class="controls">
                     <div class="input-append" id="ui_date_picker_trigger">
                       <input name="pmblTanggal" type="text"  class="m-wrap medium" value="<?=$list->pmblTanggal?>" /><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>
-                </div> 
+                </div>  -->
                 <div class="control-group primary">
                   <label class="control-label" for="inputWarning">Alasan Retur</label>
                   <div class="controls">

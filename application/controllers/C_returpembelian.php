@@ -27,12 +27,13 @@ class C_returpembelian extends CI_Controller {
 	}
 
 	public function formtambah($nofaktur){
+		$query="SELECT *,COALESCE((select drpbJumlah from detreturpembelian_temp where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahretur from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on (dtpbBrngId=brngId) where pmblNoFaktur='$nofaktur' ";
 		$data=array(
 			'page'=>'returpembelian/formtambah',
 			'link'=>'returpembelian',
 			'script'=>'script/returpembelian',
 			'list'=>$this->M_pos->ambil('pmblNoFaktur',$nofaktur,'pembelian')->row(),
-			'list_retur'=> $this->M_pos->kueri("select *,COALESCE((select drpbJumlah from detreturpembelian_temp where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahretur from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on (dtpbBrngId=brngId) where pmblNoFaktur='$nofaktur' ")->result(),
+			'list_retur'=> $this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

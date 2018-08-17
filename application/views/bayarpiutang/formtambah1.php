@@ -48,7 +48,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblKode" readonly="" name="pmblKode" />
+                       <input type="text" class="span6" id="byrpNoFaktur" value="<?=$nofaktur?>" readonly="" name="byrpNoFaktur" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
@@ -56,17 +56,23 @@
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
                       <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="daritanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="byrpTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div>
                   <div class="control-group">
                     <label class="control-label">Pelanggan</label>
                     <div class="controls">
-                       <select class="span6 chosen" data-placeholder="Pilih Pelanggan" tabindex="1" name="pmblStunId">
+                       <select class="span6 chosen" data-placeholder="Pilih Pelanggan" tabindex="1" name="byrpPlgnId">
                           <option value=""></option>
                           <!-- ambil nilai satuan dari tabel satuan -->
-                          <option value="Category 1">Category 1</option>
+                          <?php
+                            foreach($pelanggan as $s){
+                          ?>
+                          <option value="<?=$s->plgnId?>"><?=$s->plgnNama?></option>
+                          <?php    
+                            }
+                          ?>
                        </select>
                     </div>
                   </div>

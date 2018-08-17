@@ -17,21 +17,22 @@ class C_bayarpiutang extends CI_Controller {
 	}
 
 	public function formtambah1(){
-		$max_id_awal = $this->M_pos->max_id('bayarpiutang','byrpNoFaktur','byrpId','DESC');
-		if (empty($max_id_awal)) {
-			$max_id_awal = "BRT-0000";
-		}else{
-			$max_id_awal = $max_id_awal->byrpNoFaktur;
-		}
+		// $max_id_awal = $this->M_pos->max_id('bayarpiutang','byrpNoFaktur','byrpId','DESC');
+		// if (empty($max_id_awal)) {
+		// 	$max_id_awal = "BRT-0000";
+		// }else{
+		// 	$max_id_awal = $max_id_awal->byrpNoFaktur;
+		// }
         
-        $cek_id = explode("-", $max_id_awal);
-        // var_dump($cek_id);
-        // die();
-        if ($cek_id[0] != 'BRP') {
-            $nofaktur = "BRP-0001";
-        }else{
-            $nofaktur = $this->M_pos->autonumber($max_id_awal,4,4);
-        }
+  //       $cek_id = explode("-", $max_id_awal);
+  //       // var_dump($cek_id);
+  //       // die();
+  //       if ($cek_id[0] != 'BRP') {
+  //           $nofaktur = "BRP-0001";
+  //       }else{
+  //           $nofaktur = $this->M_pos->autonumber($max_id_awal,4,4);
+  //       }
+		$nofaktur=$this->M_pos->kode_bayarpiutang();
 		$data=array(
 			'page'=>'bayarpiutang/formtambah1',
 			'link'=>'bayarpiutang',
