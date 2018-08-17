@@ -15,6 +15,21 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`wulan_simpos` /*!40100 DEFAULT CHARACTE
 
 USE `wulan_simpos`;
 
+/*Table structure for table `akun` */
+
+DROP TABLE IF EXISTS `akun`;
+
+CREATE TABLE `akun` (
+  `noakun` varchar(10) NOT NULL,
+  `namaakun` varchar(20) DEFAULT NULL,
+  `saldo` double DEFAULT NULL,
+  PRIMARY KEY (`noakun`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `akun` */
+
+insert  into `akun`(`noakun`,`namaakun`,`saldo`) values ('1110','kas',0);
+
 /*Table structure for table `barang` */
 
 DROP TABLE IF EXISTS `barang`;
@@ -35,7 +50,7 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,340),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,330),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
 
 /*Table structure for table `bayarpiutang` */
 
@@ -87,7 +102,7 @@ CREATE TABLE `cash` (
   `cashKredit` double NOT NULL,
   `cashAkhir` double NOT NULL,
   PRIMARY KEY (`cashId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cash` */
 
@@ -175,8 +190,6 @@ CREATE TABLE `detpembelian` (
 
 /*Data for the table `detpembelian` */
 
-insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (1,1,1,200,20000,0),(2,1,2,100,30000,0),(3,1,3,20,35000,0),(4,1,4,200,2000,0),(5,2,1,100,20000,0),(6,3,1,10,20000,0);
-
 /*Table structure for table `detpembelian_temp` */
 
 DROP TABLE IF EXISTS `detpembelian_temp`;
@@ -191,9 +204,11 @@ CREATE TABLE `detpembelian_temp` (
   PRIMARY KEY (`dtpbId`),
   KEY `FK_detpembelian_temp` (`dtpbBrngId`),
   CONSTRAINT `FK_detpembelian_temp` FOREIGN KEY (`dtpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian_temp` */
+
+insert  into `detpembelian_temp`(`dtpbId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`,`dtpbCreatedBy`) values (7,1,10,20000,0,'admin');
 
 /*Table structure for table `detpenjualan` */
 
@@ -211,7 +226,7 @@ CREATE TABLE `detpenjualan` (
   KEY `FK_detpenjualan1` (`dtpjPnjlId`),
   CONSTRAINT `FK_detpenjualan` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_detpenjualan1` FOREIGN KEY (`dtpjPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan` */
 
@@ -231,8 +246,6 @@ CREATE TABLE `detpenjualan_temp` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan_temp` */
-
-insert  into `detpenjualan_temp`(`dtpjId`,`dtpjBrngId`,`dtpjJumlah`,`dtpjHarga`,`dtpjCreatedBy`) values (1,1,10,30000,'admin');
 
 /*Table structure for table `detreturpembelian` */
 
@@ -321,11 +334,9 @@ CREATE TABLE `hutang` (
   PRIMARY KEY (`htngId`),
   KEY `FK_hutang` (`htngSplrId`),
   CONSTRAINT `FK_hutang` FOREIGN KEY (`htngSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `hutang` */
-
-insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-05',2,'T001-02-099','Pembelian Barang',0,0,4000000,4000000),(2,'2018-08-24',2,'a','Pembelian Barang',4000000,0,2000000,6000000);
 
 /*Table structure for table `pelanggan` */
 
@@ -366,11 +377,9 @@ CREATE TABLE `pembelian` (
   PRIMARY KEY (`pmblId`),
   KEY `FK_pembelian` (`pmblSplrId`),
   CONSTRAINT `FK_pembelian` FOREIGN KEY (`pmblSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
-
-insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (1,'T001-02-099','2018-08-05',2,'Beli untuk Modal',8100000,4000000,4000000,'2018-09-04',100000,0),(2,'a','2018-08-24',2,'aa',2000000,2000000,0,'2018-09-23',0,0),(3,'rrr','2018-08-11',1,'aaa',200000,0,200000,'2018-09-10',0,0);
 
 /*Table structure for table `penjualan` */
 
@@ -391,7 +400,7 @@ CREATE TABLE `penjualan` (
   PRIMARY KEY (`pnjlId`),
   KEY `FK_penjualan` (`pnjlPlgnId`),
   CONSTRAINT `FK_penjualan` FOREIGN KEY (`pnjlPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `penjualan` */
 
@@ -488,11 +497,9 @@ CREATE TABLE `stok` (
   PRIMARY KEY (`stokId`),
   KEY `FK_stok` (`stokBrngId`),
   CONSTRAINT `FK_stok` FOREIGN KEY (`stokBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `stok` */
-
-insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (0,'2018-08-24',1,'a','Pembelian Barang',230,100,0,330),(1,'2018-08-05',1,'T001-02-099','Pembelian Barang',30,200,0,230),(2,'2018-08-05',2,'T001-02-099','Pembelian Barang',40,100,0,140),(3,'2018-08-05',3,'T001-02-099','Pembelian Barang',30,20,0,50),(4,'2018-08-05',4,'T001-02-099','Pembelian Barang',1000,200,0,1200),(5,'2018-08-11',1,'rrr','Pembelian Barang',330,10,0,340);
 
 /*Table structure for table `supplier` */
 
@@ -511,7 +518,7 @@ CREATE TABLE `supplier` (
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',0),(2,'S002','PT Abadi','Jalan Damar','00999','0990',6000000);
+insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',0),(2,'S002','PT Abadi','Jalan Damar','00999','0990',0);
 
 /*Table structure for table `users` */
 
@@ -539,12 +546,13 @@ DELIMITER $$
        declare cashawal double;
        declare cashakhir double;
        declare jdata int;
-       set jdata=(select count(*) from cash);
+       /*set jdata=(select count(*) from cash);
        if jdata=0 then
         set cashawal=0;
        else
         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-       end if;
+       end if;*/
+       set cashAwal=(select saldo from akun where noakun='1110');
        set cashakhir=cashawal+new.byrpTotalBayar;
        set piutangawal=(select plgnPiutang from pelanggan where plgnId=new.byrpPlgnId);
        set piutangakhir=piutangawal-new.byrpTotalBayar;
@@ -553,6 +561,7 @@ DELIMITER $$
        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
         values(new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang-new.byrpTotalBayar where plgnId=new.byrpPlgnId;
+       update akun set saldo=cashakhir where noakun='1110';
     END */$$
 
 
@@ -571,11 +580,12 @@ DELIMITER $$
        declare cashakhir double;
        declare jdata int;
        set jdata=(select count(*) from cash);
-       if jdata=0 then
+       /*if jdata=0 then
         set cashawal=0;
        else
         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-       end if;
+       end if;*/
+       set cashAwal=(select saldo from akun where noakun='1110');
        set cashakhir=cashawal-old.byrpTotalBayar;
        set piutangawal=(select plgnPiutang from pelanggan where plgnId=old.byrpPlgnId);
        set piutangakhir=piutangawal+old.byrpTotalBayar;
@@ -583,6 +593,7 @@ DELIMITER $$
 	values(old.byrpTanggal,old.byrpNoFaktur,'Hapus Pembayaran Piutang',cashawal,0,old.byrpTotalBayar,cashakhir);
        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+old.byrpTotalBayar where plgnId=old.byrpPlgnId;
+       update akun set saldo=cashakhir where noakun='1110';
     END */$$
 
 
@@ -601,11 +612,12 @@ DELIMITER $$
       declare cashakhir double;
       declare jdata int;
       set jdata=(select count(*) from cash);
-      if jdata=0 then
+      /*if jdata=0 then
         set cashawal=0;
       else
         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-      end if;
+      end if;*/
+      set cashAwal=(select saldo from akun where noakun='1110');
       set cashakhir=cashawal-new.byruTotalBayar;
       set hutangawal=(select splrHutang from supplier where splrId=new.byruSplrId);
       set hutangakhir=hutangawal-new.byruTotalBayar;
@@ -615,7 +627,7 @@ DELIMITER $$
       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
         values(new.byruTanggal,new.byruSplrId,new.byruNoFaktur,'Pembayaran Hutang',hutangawal,new.byruTotalBayar,0,hutangakhir);
       update supplier set splrHutang=splrHutang-new.byruTotalBayar where splrId=new.byruSplrId;  
-	
+      update akun set saldo=cashakhir where noakun='1110';
     END */$$
 
 
@@ -634,11 +646,12 @@ DELIMITER $$
       declare cashakhir double;
       declare jdata int;
       set jdata=(select count(*) from cash);
-      if jdata=0 then
+      /*if jdata=0 then
         set cashawal=0;
       else
         set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-      end if;
+      end if;*/
+      set cashAwal=(select saldo from akun where noakun='1110');
       set cashakhir=cashawal+old.byruTotalBayar;
       set hutangawal=(select splrHutang from supplier where splrId=old.byruSplrId);
       set hutangakhir=hutangawal+old.byruTotalBayar;
@@ -648,6 +661,7 @@ DELIMITER $$
       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
       values(old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
       update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
+      update akun set saldo=cashakhir where noakun='1110';
     END */$$
 
 
@@ -874,16 +888,19 @@ DELIMITER $$
        declare cashawal double;
        declare cashakhir double;
        declare jdata int;
-       set jdata=(select count(*) from cash);
+       
+       set cashAwal=(select saldo from akun where noakun='1110');
+       /*set jdata=(select count(*) from cash);
        if jdata=0 then
          set cashawal=0;
        else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-       end if;
+       end if;*/
        set cashakhir=cashawal-new.pmblUangMuka;
+       
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(new.pmblTanggal,new.pmblNoFaktur,'Pembelian Barang dengan Tunai',cashawal,0,new.pmblUangMuka,cashakhir);
-       
+       update akun set saldo=cashakhir where noakun='1110';
      end;
      end if;
     END */$$
@@ -914,16 +931,17 @@ DELIMITER $$
        declare cashawal double;
        declare cashakhir double;
        declare jdata int;
-       set jdata=(select count(*) from cash);
+       set cashAwal=(select saldo from akun where noakun='1110');
+       /*set jdata=(select count(*) from cash);
        if jdata=0 then
          set cashawal=0;
        else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-       end if;
+       end if;*/
        set cashakhir=cashawal+old.pmblUangMuka;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(old.pmblTanggal,old.pmblNoFaktur,'Hapus Pembelian Barang dengan Tunai',cashawal,old.pmblUangMuka,0,cashakhir);
-       
+       update akun set saldo=cashakhir where noakun='1110';
       end;
       end if;
 	
@@ -956,16 +974,17 @@ DELIMITER $$
        declare cashawal double;
        declare cashakhir double;
        declare jdata int;
-       set jdata=(select count(*) from cash);
+       /*set jdata=(select count(*) from cash);
        if jdata=0 then
          set cashawal=0;
        else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-       end if;
+       end if;*/
+       set cashAwal=(select saldo from akun where noakun='1110');
        set cashakhir=cashawal+new.pnjlUangMuka;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(new.pnjlTanggal,new.pnjlNoFaktur,'Penjualan Barang dengan Tunai',cashawal,new.pnjlUangMuka,0,cashakhir);
-       
+       update akun set saldo=cashakhir where noakun='1110';
      end;
      end if;
     END */$$
@@ -998,14 +1017,16 @@ DELIMITER $$
        declare cashakhir double;
        declare jdata int;
        set jdata=(select count(*) from cash);
-       if jdata=0 then
+       /*if jdata=0 then
          set cashawal=0;
        else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-       end if;
+       end if;*/
+       set cashAwal=(select saldo from akun where noakun='1110');
        set cashakhir=cashawal-old.pnjlUangMuka;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(old.pnjlTanggal,old.pnjlNoFaktur,'Hapus Penjualan Barang dengan Tunai',cashawal,0,old.pnjlUangMuka,cashakhir);
+       update akun set saldo=cashakhir where noakun='1110';
      end;
      end if;
     END */$$
@@ -1028,17 +1049,19 @@ DELIMITER $$
         declare cashakhir double;
         declare jdata int;
         set jdata=(select count(*) from cash);
-        if jdata=0 then
+        /*if jdata=0 then
          set cashawal=0;
         else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-        end if;
+        end if;*/
+        set cashAwal=(select saldo from akun where noakun='1110');
         set cashakhir=cashawal+new.rtpbNilai;
         set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=new.rtpbPmblId);
         set totalbeliakhir=totalbeliawal-new.rtpbNilai;
         insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	 values(new.rtpbTanggal,new.rtpbNoFaktur,'Retur Pembelian Kas',cashawal,new.rtpbNilai,0,cashakhir);
         update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=new.rtpbPmblId;
+        update akun set saldo=cashakhir where noakun='1110';
       end;
       elseif new.rtpbStatus='K' then
       begin
@@ -1078,17 +1101,19 @@ DELIMITER $$
         declare cashakhir double;
         declare jdata int;
         set jdata=(select count(*) from cash);
-        if jdata=0 then
+        /*if jdata=0 then
          set cashawal=0;
         else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-        end if;
+        end if;*/
+        set cashAwal=(select saldo from akun where noakun='1110');
         set cashakhir=cashawal-old.rtpbNilai;
         set totalbeliawal =(select pmblTotalBeli from pembelian where pmblId=old.rtpbPmblId);
         set totalbeliakhir=totalbeliawal+old.rtpbNilai;
         insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	 values(old.rtpbTanggal,old.rtpbNoFaktur,'Hapus Retur Pembelian Kas',cashawal,0,old.rtpbNilai,cashakhir);
         update pembelian set pmblTotalBeli=totalbeliakhir,pmblUangMuka=totalbeliakhir where pmblId=old.rtpbPmblId;
+        update akun set saldo=cashakhir where noakun='1110';
       end;
       elseif old.rtpbStatus='K' then
       begin
@@ -1128,17 +1153,19 @@ DELIMITER $$
         declare cashakhir double;
         declare jdata int;
         set jdata=(select count(*) from cash);
-        if jdata=0 then
+        /*if jdata=0 then
          set cashawal=0;
         else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-        end if;
+        end if;*/
+        set cashAwal=(select saldo from akun where noakun='1110');
         set cashakhir=cashawal-new.rtpjNilai;
         set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
         set totaljualakhir=totaljualawal-new.rtpjNilai;
         insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	 values(new.rtpjTanggal,new.rtpjNoFaktur,'Retur Penjualan Kas',cashawal,0,new.rtpjNilai,cashakhir);
         update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=new.rtpjPnjlId;
+        update akun set saldo=cashakhir where noakun='1110';
       end;
       elseif new.rtpjStatus='K' then
       begin
@@ -1175,17 +1202,19 @@ DELIMITER $$
         declare cashakhir double;
         declare jdata int;
         set jdata=(select count(*) from cash);
-        if jdata=0 then
+        /*if jdata=0 then
          set cashawal=0;
         else
          set cashawal=(select cashAkhir from cash order by cashId desc limit 1);
-        end if;
+        end if;*/
+        set cashAwal=(select saldo from akun where noakun='1110');
         set cashakhir=cashawal+old.rtpjNilai;
         set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
         set totaljualakhir=totaljualawal+old.rtpjNilai;
         insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	 values(old.rtpjTanggal,old.rtpjNoFaktur,'Retur Penjualan Kas',cashawal,old.rtpjNilai,0,cashakhir);
         update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=old.rtpjPnjlId;
+        update akun set saldo=cashakhir where noakun='1110';
       end;
       elseif old.rtpjStatus='K' then
       begin
