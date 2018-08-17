@@ -65,14 +65,14 @@ class C_bayarutang extends CI_Controller {
 		$data=array(
 			'page'=>'bayarutang/detailbayarutang',
 			'link'=>'bayarutang',
-			'list'=>$this->M_pos->list_join2('detbayarutang','supplier','dbyuByruId=splrId','bayarutang','dbyuByruId=byruId')
+			'list'=>$this->M_pos->list_join2('detbayarutang','supplier','dbyuByruId=splrId','bayarutang','dbyuByruId='.$byruId)
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
 	public function tambahdetbayarutang(){
 
-		$dbyuPmblId=$this->input->post('dtpbBrngId',true);
+		$dbyuPmblId=$this->input->post('dbypPnjlId',true);
 	    $dbyuBayar=$this->input->post('dtpbJumlah',true);  
 	    //$dtpbJumlah=$this->input->post('dtpbJumlah',true); 
 	    // $createdby=$this->session->userdata('userNama');

@@ -45,26 +45,27 @@
                   </button>
                 </div>
                 <br>
-                <form action="#" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_bayarpiutang/simpanall" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblKode" readonly="" name="pmblKode" />
+                       <input type="text" class="span6" id="byrpNoFaktur" readonly="" name="byrpNoFaktur" value="<?=@$_POST['byrpNoFaktur']?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" />
+                       <input type="text" class="span6" id="byrpTanggal" readonly="" name="byrpTanggal" value="<?=@$_POST['byrpTanggal']?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div> 
                   <div class="control-group">
                     <label class="control-label">Pelanggan</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" />
-                       <input type="hidden" class="span6" id="pmblNama" readonly="" name="pmblNama" />
+                      <?php $plgnNama = $this->M_pos->ambil('plgnId',@$_POST['byrpPlgnId'],'pelanggan')->row(); ?>
+                       <input type="text" class="span6" id="pmblNama" readonly="" name="pmblNama" value="<?=@$plgnNama->plgnNama?>"/>
+                       <input type="hidden" class="span6" id="byrpPlgnId" readonly="" name="byrpPlgnId" value="<?=@$_POST['byrpPlgnId']?>"/>
                        <span class="help-inline"></span>
                     </div>
                   </div>
@@ -117,9 +118,14 @@
               <label class="control-label">No Faktur Penjualan</label>
               <div class="controls">
                  <select class="span12 chosen" data-placeholder="Pilih Faktur" tabindex="1" name="dtpbBrngId" id="dtpbBrngId">
-                    <option value=""></option>
-                    <!-- ambil nilai satuan dari tabel satuan -->
-                    <option value="Category 1">Barang 1</option>
+                    <?php
+                            foreach($penjualan as $p){
+                          ?>
+                          <option value=""></option>
+                          <option value="<?=$p->pnjlId?>"><?=$p->pnjlNoFaktur?></option>
+                          <?php    
+                            }
+                          ?>
                  </select>
               </div>
             </div>

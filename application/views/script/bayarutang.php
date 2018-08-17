@@ -3,7 +3,7 @@
 		loadTable();
 	});
 
-	$("#dtpbBrngId").change(function () {     
+	$("#dbypPnjlId").change(function () {     
 	        var kode = $(this).val()
 	      $.ajax({
 	          url: "<?=base_url()?>c_bayarutang/get_pembelian/"+kode,
@@ -22,14 +22,14 @@
 
      //function simpan data
 	function simpan(){
-        var dtpbBrngId=$('#dtpbBrngId').val();
+        var dbypPnjlId=$('#dbypPnjlId').val();
         var dtpbHarga=$('#dtpbHarga').val();
         var dtpbJumlah=$('#dtpbJumlah').val();
         $modal = $('#detailbayarutangModal');
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_bayarutang/tambahdetbayarutang',
-            data: 'dtpbBrngId='+dtpbBrngId+'&dtpbHarga='+dtpbHarga+'&dtpbJumlah='+dtpbJumlah,
+            data: 'dbypPnjlId='+dbypPnjlId+'&dtpbHarga='+dtpbHarga+'&dtpbJumlah='+dtpbJumlah,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){

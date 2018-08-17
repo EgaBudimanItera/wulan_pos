@@ -19,8 +19,8 @@
     <tr>
       <th><?=$no++?></th>
       <th><?=$l->pmblNoFaktur?></th>
-      <th><?=$l->pmblSisaBayar?></th>
-      <th><?=$l->dbyuBayar?></th>
+      <th><?=number_format($l->pmblSisaBayar)?></th>
+      <th><?=number_format($l->dbyuBayar)?></th>
       <td>
          <center>
           <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dbyuId?>" >

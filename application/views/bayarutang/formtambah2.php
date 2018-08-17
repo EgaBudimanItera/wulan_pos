@@ -117,12 +117,13 @@
             <div class="control-group">
               <label class="control-label">No Faktur Pembelian</label>
               <div class="controls">
-                 <select class="span12 chosen" data-placeholder="Pilih Faktur" tabindex="1" name="dtpbBrngId" id="dtpbBrngId">
+                 <select class="span12 chosen" data-placeholder="Pilih Faktur" tabindex="1" name="dbypPnjlId" id="dbypPnjlId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
                     <?php
                             foreach($pembelian as $p){
                           ?>
+                          <option value=""></option>
                           <option value="<?=$p->pmblId?>"><?=$p->pmblNoFaktur?></option>
                           <?php    
                             }
