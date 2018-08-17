@@ -20,13 +20,13 @@ class C_lapkas extends CI_Controller {
 	  
 	  $daritanggal=date_format(date_create($this->input->post('daritanggal',true)),"Y-m-d");
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
-	  $query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $query="SELECT * from cash where  cashTanggal BETWEEN '$daritanggal' and '$hinggatanggal' ORDER BY cashId asc";
+	  $query2="SELECT * FROM akun where noakun='1110'";
 	  $data=array(
-			'page'=>'lapreturbeli/lihatdata',
-			'link'=>'lapreturbeli',
+			'page'=>'lapkas/lihatdata',
+			'link'=>'lapkas',
 			'list'=>$this->M_pos->kueri($query)->result(),
-			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),
-			
+			'kas'=>$this->M_pos->kueri($query2)->row()->saldo,
 			'daritanggal'=>$daritanggal,
 			'hinggatanggal'=>$hinggatanggal,
 		);
