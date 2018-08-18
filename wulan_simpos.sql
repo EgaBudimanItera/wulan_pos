@@ -28,7 +28,7 @@ CREATE TABLE `akun` (
 
 /*Data for the table `akun` */
 
-insert  into `akun`(`noakun`,`namaakun`,`saldo`) values ('1110','kas',0);
+insert  into `akun`(`noakun`,`namaakun`,`saldo`) values ('1110','kas',400000);
 
 /*Table structure for table `barang` */
 
@@ -50,7 +50,7 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,330),(2,'B002','Oli',1,30000,40000,140),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,330),(2,'B002','Oli',1,30000,40000,100),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
 
 /*Table structure for table `bayarpiutang` */
 
@@ -66,7 +66,7 @@ CREATE TABLE `bayarpiutang` (
   PRIMARY KEY (`byrpId`),
   KEY `FK_bayarpiutang` (`byrpPlgnId`),
   CONSTRAINT `FK_bayarpiutang` FOREIGN KEY (`byrpPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `bayarpiutang` */
 
@@ -84,7 +84,7 @@ CREATE TABLE `bayarutang` (
   PRIMARY KEY (`byruId`),
   KEY `FK_bayarutang` (`byruSplrId`),
   CONSTRAINT `FK_bayarutang` FOREIGN KEY (`byruSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `bayarutang` */
 
@@ -102,9 +102,11 @@ CREATE TABLE `cash` (
   `cashKredit` double NOT NULL,
   `cashAkhir` double NOT NULL,
   PRIMARY KEY (`cashId`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 /*Data for the table `cash` */
+
+insert  into `cash`(`cashId`,`cashTanggal`,`cashNoFaktur`,`cashKet`,`cashAwal`,`cashDebet`,`cashKredit`,`cashAkhir`) values (16,'2018-08-08','BP08180001','Pembayaran Piutang',400000,1600000,0,2000000),(15,'2018-08-08','BU08180001','Hapus Bayar Utang',200000,200000,0,400000),(14,'2018-08-08','BU08180001','Hapus Bayar Utang',200000,200000,0,400000),(13,'2018-08-08','BU08180001','Bayar Utang',400000,0,200000,200000),(12,'2018-08-25','yuyy','Pembelian Barang dengan Tunai',600000,0,200000,400000),(11,'2018-08-17','PJ08180001','Penjualan Barang dengan Tunai',0,600000,0,600000);
 
 /*Table structure for table `detbayarpiutang` */
 
@@ -134,9 +136,11 @@ CREATE TABLE `detbayarpiutang_temp` (
   PRIMARY KEY (`dbypId`),
   KEY `FK_detbayarpiutang_temp` (`dbypPnjlId`),
   CONSTRAINT `FK_detbayarpiutang_temp` FOREIGN KEY (`dbypPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarpiutang_temp` */
+
+insert  into `detbayarpiutang_temp`(`dbypId`,`dbypPnjlId`,`dbypBayar`,`dbypCreatedBy`) values (1,8,1600000,'admin');
 
 /*Table structure for table `detbayarutang` */
 
@@ -150,7 +154,7 @@ CREATE TABLE `detbayarutang` (
   PRIMARY KEY (`dbyuId`),
   KEY `FK_detbayarutang` (`dbyuByruId`),
   CONSTRAINT `FK_detbayarutang` FOREIGN KEY (`dbyuByruId`) REFERENCES `bayarutang` (`byruId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarutang` */
 
@@ -166,7 +170,7 @@ CREATE TABLE `detbayarutang_temp` (
   PRIMARY KEY (`dbyuId`),
   KEY `FK_detbayarutang_temp` (`dbyuPmblId`),
   CONSTRAINT `FK_detbayarutang_temp` FOREIGN KEY (`dbyuPmblId`) REFERENCES `pembelian` (`pmblId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarutang_temp` */
 
@@ -186,9 +190,11 @@ CREATE TABLE `detpembelian` (
   KEY `FK_detpembelian1` (`dtpbPmblId`),
   CONSTRAINT `FK_detpembelian` FOREIGN KEY (`dtpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_detpembelian1` FOREIGN KEY (`dtpbPmblId`) REFERENCES `pembelian` (`pmblId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian` */
+
+insert  into `detpembelian`(`dtpbId`,`dtpbPmblId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`) values (7,14,1,10,20000,0),(8,15,1,10,20000,0);
 
 /*Table structure for table `detpembelian_temp` */
 
@@ -204,11 +210,9 @@ CREATE TABLE `detpembelian_temp` (
   PRIMARY KEY (`dtpbId`),
   KEY `FK_detpembelian_temp` (`dtpbBrngId`),
   CONSTRAINT `FK_detpembelian_temp` FOREIGN KEY (`dtpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian_temp` */
-
-insert  into `detpembelian_temp`(`dtpbId`,`dtpbBrngId`,`dtpbJumlah`,`dtpbHarga`,`dtpbDiskon`,`dtpbCreatedBy`) values (7,1,10,20000,0,'admin');
 
 /*Table structure for table `detpenjualan` */
 
@@ -226,9 +230,11 @@ CREATE TABLE `detpenjualan` (
   KEY `FK_detpenjualan1` (`dtpjPnjlId`),
   CONSTRAINT `FK_detpenjualan` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_detpenjualan1` FOREIGN KEY (`dtpjPnjlId`) REFERENCES `penjualan` (`pnjlId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan` */
+
+insert  into `detpenjualan`(`dtpjId`,`dtpjPnjlId`,`dtpjBrngId`,`dtpjJumlah`,`dtpjHarga`,`dtpjDiskon`) values (2,7,1,20,30000,NULL),(3,8,2,40,40000,NULL);
 
 /*Table structure for table `detpenjualan_temp` */
 
@@ -338,6 +344,8 @@ CREATE TABLE `hutang` (
 
 /*Data for the table `hutang` */
 
+insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-18',1,'hhh','Pembelian Barang',0,0,200000,200000),(2,'2018-08-08',1,'BU08180001','Pembayaran Hutang',200000,200000,0,0),(4,'2018-08-08',1,'BU08180001','Hapus Pembahayaran Hutang',0,0,200000,200000);
+
 /*Table structure for table `pelanggan` */
 
 DROP TABLE IF EXISTS `pelanggan`;
@@ -356,7 +364,7 @@ CREATE TABLE `pelanggan` (
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (1,'P001','Non Tetap','-','000','000','-',0),(2,'P002','CV Aqila','ibu Aqila','08570000','000000','Jalan Malabar',0),(3,'P003','PT Buruh','Bapak Diki','08550000','000000','Jalan Alam Elok',0);
+insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (1,'P001','Non Tetap','-','000','000','-',0),(2,'P002','CV Aqila','ibu Aqila','08570000','000000','Jalan Malabar',1600000),(3,'P003','PT Buruh','Bapak Diki','08550000','000000','Jalan Alam Elok',0);
 
 /*Table structure for table `pembelian` */
 
@@ -377,9 +385,11 @@ CREATE TABLE `pembelian` (
   PRIMARY KEY (`pmblId`),
   KEY `FK_pembelian` (`pmblSplrId`),
   CONSTRAINT `FK_pembelian` FOREIGN KEY (`pmblSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pembelian` */
+
+insert  into `pembelian`(`pmblId`,`pmblNoFaktur`,`pmblTanggal`,`pmblSplrId`,`pmblKet`,`pmblTotalBeli`,`pmblSisaBayar`,`pmblUangMuka`,`pmblJatuhTempo`,`pmblDiskon`,`pmblOngkir`) values (14,'yuyy','2018-08-25',2,'aa',200000,0,200000,'2018-09-24',0,0),(15,'hhh','2018-08-18',1,'aa',200000,200000,0,'2018-09-17',0,0);
 
 /*Table structure for table `penjualan` */
 
@@ -400,9 +410,11 @@ CREATE TABLE `penjualan` (
   PRIMARY KEY (`pnjlId`),
   KEY `FK_penjualan` (`pnjlPlgnId`),
   CONSTRAINT `FK_penjualan` FOREIGN KEY (`pnjlPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `penjualan` */
+
+insert  into `penjualan`(`pnjlId`,`pnjlNoFaktur`,`pnjlTanggal`,`pnjlPlgnId`,`pnjlKet`,`pnjlTotalJual`,`pnjlSisaBayar`,`pnjlUangMuka`,`pnjlJatuhTempo`,`pnjlDiskon`,`pnjlOngkir`) values (7,'PJ08180001','2018-08-17 00:00:00',2,'aa',600000,0,600000,'2018-09-16',NULL,NULL),(8,'PJ08180002','2018-08-18 00:00:00',2,'aa',1600000,1600000,0,'2018-09-17',NULL,NULL);
 
 /*Table structure for table `piutang` */
 
@@ -421,9 +433,11 @@ CREATE TABLE `piutang` (
   PRIMARY KEY (`ptngId`),
   KEY `FK_piutang` (`ptngPlgnId`),
   CONSTRAINT `FK_piutang` FOREIGN KEY (`ptngPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `piutang` */
+
+insert  into `piutang`(`ptngId`,`ptngTanggal`,`ptngPlgnId`,`ptngNoFaktur`,`ptngKet`,`ptngAwal`,`ptngDebet`,`ptngKredit`,`ptngAkhir`) values (1,'2018-08-18',2,'PJ08180002','Penjualan Barang',0,1600000,0,1600000);
 
 /*Table structure for table `returpembelian` */
 
@@ -497,9 +511,11 @@ CREATE TABLE `stok` (
   PRIMARY KEY (`stokId`),
   KEY `FK_stok` (`stokBrngId`),
   CONSTRAINT `FK_stok` FOREIGN KEY (`stokBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `stok` */
+
+insert  into `stok`(`stokId`,`stokTanggal`,`stokBrngId`,`stokNoFaktur`,`stokKet`,`stokAwal`,`stokMasuk`,`stokKeluar`,`stokAkhir`) values (7,'2018-08-17',1,'PJ08180001','Penjualan Barang',330,0,20,310),(8,'2018-08-25',1,'yuyy','Pembelian Barang',310,10,0,320),(9,'2018-08-18',1,'hhh','Pembelian Barang',320,10,0,330),(10,'2018-08-18',2,'PJ08180002','Penjualan Barang',140,0,40,100);
 
 /*Table structure for table `supplier` */
 
@@ -518,7 +534,7 @@ CREATE TABLE `supplier` (
 
 /*Data for the table `supplier` */
 
-insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',0),(2,'S002','PT Abadi','Jalan Damar','00999','0990',0);
+insert  into `supplier`(`splrId`,`splrKode`,`splrNama`,`splrAlamat`,`splrTelp1`,`splrTelp2`,`splrHutang`) values (1,'S001','Toko Ahmad','Jalan Tikur','09888','000',200000),(2,'S002','PT Abadi','Jalan Damar','00999','0990',0);
 
 /*Table structure for table `users` */
 
@@ -558,7 +574,7 @@ DELIMITER $$
        set piutangakhir=piutangawal-new.byrpTotalBayar;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(new.byrpTanggal,new.byrpNoFaktur,'Pembayaran Piutang',cashawal,new.byrpTotalBayar,0,cashakhir);
-       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngAkhir)
         values(new.byrpTanggal,new.byrpPlgnId,new.byrpNoFaktur,'Pembayaran Piutang',piutangawal,0,new.byrpTotalBayar,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang-new.byrpTotalBayar where plgnId=new.byrpPlgnId;
        update akun set saldo=cashakhir where noakun='1110';
@@ -591,7 +607,8 @@ DELIMITER $$
        set piutangakhir=piutangawal+old.byrpTotalBayar;
        insert into cash(cashTanggal,cashNoFaktur,cashKet,cashAwal,cashDebet,cashKredit,cashAkhir) 
 	values(old.byrpTanggal,old.byrpNoFaktur,'Hapus Pembayaran Piutang',cashawal,0,old.byrpTotalBayar,cashakhir);
-       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit) values(old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
+       insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngAkhir)
+ values(old.byrpTanggal,old.byrpPlgnId,old.byrpNoFaktur,'Hapus Pembayaran Piutang',piutangawal,old.byrpTotalBayar,0,piutangakhir);
        update pelanggan set plgnPiutang=plgnPiutang+old.byrpTotalBayar where plgnId=old.byrpPlgnId;
        update akun set saldo=cashakhir where noakun='1110';
     END */$$
@@ -660,7 +677,7 @@ DELIMITER $$
 	values(old.byruTanggal,old.byruNoFaktur,'Hapus Bayar Utang',cashawal,old.byruTotalBayar,0,cashakhir);
       insert into hutang(htngTanggal,htngSplrId,htngNoFaktur,htngKet,htngAwal,htngDebet,htngKredit,htngAkhir)
       values(old.byruTanggal,old.byruSplrId,old.byruNoFaktur,'Hapus Pembahayaran Hutang',hutangawal,0,old.byruTotalBayar,hutangakhir);
-      update supplier set splrHutang=splrHutang+oldbyruTotalBayar where splrId=old.byruSplrId; 
+      update supplier set splrHutang=splrHutang+old.byruTotalBayar where splrId=old.byruSplrId; 
       update akun set saldo=cashakhir where noakun='1110';
     END */$$
 
@@ -1177,7 +1194,7 @@ DELIMITER $$
         set piutangakhir=piutangawal-new.rtpjNilai;
         set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=new.rtpjPnjlId);
         set totaljualakhir=totaljualawal-new.rtpjNilai;
-        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngAkhir)
         values(new.rtpjTanggal,new.rtpjPlgnId,new.rtpjNoFaktur,'Retur Penjualan Kredit',piutangawal,0,new.rtpjNilai,piutangakhir);
         update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=new.rtpjPnjlId;
       end;
@@ -1226,7 +1243,7 @@ DELIMITER $$
         set piutangakhir=piutangawal+old.rtpjNilai;
         set totaljualawal =(select pnjlTotalJual from penjualan where pnjlId=old.rtpjPnjlId);
         set totaljualakhir=totaljualawal+old.rtpjNilai;
-        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngKredit)
+        insert into piutang(ptngTanggal,ptngPlgnId,ptngNoFaktur,ptngKet,ptngAwal,ptngDebet,ptngKredit,ptngAkhir)
         values(old.rtpjTanggal,old.rtpjPlgnId,old.rtpjNoFaktur,'Retur Penjualan Kredit',piutangawal,old.rtpjNilai,0,piutangakhir);
         update penjualan set pnjlTotalJual=totaljualakhir,pnjlUangMuka=totaljualakhir where pnjlId=old.rtpjPnjlId;
       end;
