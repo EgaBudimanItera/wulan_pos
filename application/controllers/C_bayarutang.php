@@ -65,8 +65,12 @@ class C_bayarutang extends CI_Controller {
 		$data=array(
 			'page'=>'bayarutang/detailbayarutang',
 			'link'=>'bayarutang',
-			'list'=>$this->M_pos->list_join2('detbayarutang','supplier','dbyuByruId=splrId','bayarutang','dbyuByruId='.$byruId)
+			'script'=>'script/bayarutang',
+			'list'=>$this->M_pos->list_join2_where('bayarutang','detbayarutang','byruId=dbyuByruId','supplier','byruSplrId=splrId','',array('byruId'=>$byruId),'')
 		);
+		//$this->M_pos->list_join2_where('detbayarutang','supplier','dbyuByruId=splrId','bayarutang','dbyuByruId=byruId','',array('byruId'=>$byruId),'');
+		// print_r($this->M_pos->kueri_terakhir());
+		// die();
 		$this->load->view('partials/back/wrapper',$data);
 	}
 

@@ -67,6 +67,17 @@ class M_pos extends CI_Model {
         $this->db->join($table3, $param2);
         return $query = $this->db->get()->result();
     }
+
+    function list_join2_where($table1, $table2, $param1,$table3, $param2, $mode='', $key='', $db=''){
+        $this->db->select('*');
+        $this->db->from($table1);
+        $this->db->join($table2, $param1);
+        $this->db->join($table3, $param2);
+        if($key!=''){            
+            $this->db->where($key);
+        }
+        return $query = $this->db->get()->result();
+    }
     
     function list_join_where($table1, $table2, $param1, $mode='', $key='', $db=''){
         $this->db->select('*');
@@ -289,6 +300,10 @@ class M_pos extends CI_Model {
         $this->db->limit(1);
         return $query = $this->db->get()->row();
 
+    }
+
+    function kueri_terakhir(){
+        return $this->db->last_query();
     }
 
     

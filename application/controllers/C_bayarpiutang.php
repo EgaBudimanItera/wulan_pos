@@ -61,11 +61,11 @@ class C_bayarpiutang extends CI_Controller {
 		$this->load->view('bayarpiutang/datadetailtemp',$data);
 	}
 
-	public function formdetail($nofaktur){
+	public function formdetail($byrpId){
 		$data=array(
 			'page'=>'bayarpiutang/detailbayarpiutang',
 			'link'=>'bayarpiutang',
-			'list'=>$this->M_pos->list_join2('detbayarpiutang','pelanggan','dbypPnjlId=plgnId','bayarpiutang','dbypByrpId=byrpId')
+			'list'=>$this->M_pos->list_join2_where('bayarpiutang','detbayarpiutang','byrpId=dbypByrpId','pelanggan','byrpPlgnId=plgnId','',array('byrpId'=>$byrpId),'')
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
