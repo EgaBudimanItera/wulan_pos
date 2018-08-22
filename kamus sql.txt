@@ -4,6 +4,9 @@ select *,COALESCE((select drpbJumlah from detreturpembelian_temp where drpbBrngI
 from detpembelian
 join pembelian on(dtpbPmblId=pmblId)
 
+NEW
+SELECT *,COALESCE((select drpbJumlah from detreturpembelian_temp,detpembelian where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahreturtemp ,COALESCE((select drpbJumlah from detreturpembelian,detpembelian where drpbBrngId=dtpbBrngId and drpbRtpbId=dtpbPmblId),0) as jumlahretur from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on (dtpbBrngId=brngId) where pmblNoFaktur='$nofaktur' 
+
 
 jumlah retur penjualan
 select *,COALESCE((select drpjJumlah from detreturpenjualan_temp where drpjBrngId=dtpjBrngId and drpjPnjlId=drpjPnjlId),0) as jumlahretur 

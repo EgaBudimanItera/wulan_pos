@@ -48,11 +48,11 @@
                 </button>
               </div>
               <br>
-              <form action="#" role="form" method="post" class="form-horizontal">
+              <form action="<?=base_url()?>c_returpembelian/simpanall" role="form" method="post" class="form-horizontal">
                 <div class="control-group primary">
                   <label class="control-label" for="inputWarning">No Faktur Retur</label>
                   <div class="controls">
-                     <input type="text" class="span6" id="pmblNoFaktur" required name="pmblNoFaktur" />
+                     <input type="text" class="span6" id="rtpbNoFaktur" required name="rtpbNoFaktur" />
                      <span class="help-inline"></span>
                   </div>
                 </div>
@@ -68,6 +68,9 @@
                   <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
                   <div class="controls">
                      <input type="text" class="span6" id="pmblNoFaktur" readonly name="pmblNoFaktur" value="<?=$list->pmblNoFaktur?>" />
+                     <input type="hidden" class="span6" id="pmblId" readonly name="pmblId" value="<?=$list->pmblId?>" />
+                     <input type="hidden" class="span6" id="pmblSplrId" readonly name="pmblSplrId" value="<?=$list->pmblSplrId?>" />
+                     <input type="hidden" class="span6" id="pmblSisaBayar" readonly name="pmblSisaBayar" value="<?=$list->pmblSisaBayar?>" />
                      <span class="help-inline"></span>
                   </div>
                 </div>
@@ -82,7 +85,7 @@
                 <div class="control-group primary">
                   <label class="control-label" for="inputWarning">Alasan Retur</label>
                   <div class="controls">
-                     <textarea name="" class="span6"></textarea>
+                     <textarea name="rtpbKet" class="span6"></textarea>
                   </div>
                 </div>
                 <table class="table table-striped table-bordered">

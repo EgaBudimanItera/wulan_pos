@@ -1,6 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
-		//loadTable();
+		loadTable();
 
 		//untuk event onclick barang
 	  	$(".edit_retur").click(function () {     
