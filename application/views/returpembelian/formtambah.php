@@ -101,15 +101,16 @@
                    <!-- ambil dari kamus sql retur pembelian -->
                    <?php
                       $no=1;
+                      //var_dump($list_retur);
                       foreach($list_retur as $l){
                     ?>
                    <tr>
                       <td><?=$no++;?></td>
                       <td><?=$l->brngNama?></td>
-                      <td><?=$l->brngHpp?></td>
-                      <td><?=$l->dtpbJumlah?></td>
-                      <td><?=$l->jumlahretur?></td>
-                      <td>0</td>
+                      <td><?=number_format($l->brngHpp)?></td>
+                      <td><?=number_format($l->dtpbJumlah)?></td>
+                      <td><?=number_format($l->jumlahretur)?></td>
+                      <td><?=number_format($l->jumlahreturtemp)?></td>
                       <td>
                         <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
                       </td>
@@ -120,7 +121,7 @@
                   </tbody>
                 </table>
                 <div class="form-actions">
-                  <button type="submit" class="btn btn-warning"><i class="icon-ok"></i> Simpan Retur</button>
+                  <button type="submit" class="btn btn-warning" onclick="simpan()"><i class="icon-ok"></i> Simpan Retur</button>
                 </div>
               </form>
             </div>

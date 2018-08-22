@@ -58,12 +58,12 @@
                   ?>
                   <tr>
                     <td><?=$no++;?></td>
-                    <td><?=$l->pmblNoFaktur?></td>
-                    <td><?=$l->pmblTanggal?></td>
+                    <td><?=$l->rtpbNoFaktur?></td>
+                    <td><?=$l->rtpbTanggal?></td>
                     <td><?=$l->splrNama?></td>
-                    <td><?php echo number_format($l->pmblTotalBeli)?></td>
+                    <td><?php echo number_format($l->rtpbNilai)?></td>
                     <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formdetail/<?=$l->pmblNoFaktur?>" title="Detail"><i class="icon-eye-open"></i></a>
+                      <a class="btn btn-primary" href="<?=base_url()?>c_returpembelian/formdetail/<?=$l->rtpbId?>" title="Detail"><i class="icon-eye-open"></i></a>
                     </td>
                   </tr>
                   <?php
