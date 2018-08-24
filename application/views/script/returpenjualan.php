@@ -11,6 +11,7 @@
 	          type: 'GET',
 	          success: function(res) {
 	              var res_ = JSON.parse(res);
+                  console_log(res_);
 	              $('#brngNama').val(res_.brngNama);
 	              $('#dtpjBrngId').val(res_.dtpjBrngId);
 	              $('#dtpjPnjlId').val(res_.dtpjPnjlId);
