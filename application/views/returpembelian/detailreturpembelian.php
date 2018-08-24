@@ -66,7 +66,7 @@
                   ?>
                   <tr>
                     <th><?=$no++?></th>
-                    <th><?=$l->rtpbNoFaktur?></th>
+                    <th><?=$l->brngKode?></th>
                     <th><?=$l->brngNama?></th>
                     <th><?=number_format($l->brngHpp)?></th>
                     <th><?=number_format($l->drpbJumlah)?></th>

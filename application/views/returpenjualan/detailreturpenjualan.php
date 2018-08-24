@@ -57,13 +57,33 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    $no=1;
+                    $total = 0;
+                    foreach($list as $l){
+
+                    //$total+= $l->drpbJumlah*$l->brngHpp;
+                  ?>
                   <tr>
-                    <!-- isi tabel det penjualan dengan no faktur terpilih -->
+                    <th><?=$no++?></th>
+                    <th><?=$l->brngKode?></th>
+                    <th><?=$l->brngNama?></th>
+                    <th><?=number_format($l->brngHpp)?></th>
+                    <th><?=number_format($l->drpjJumlah)?></th>
+                    <th><?=number_format($l->drpjJumlah*$l->brngHpp)?></th>
+                    <td>
+                       <center>
+                        <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dbypId?>" >
+                          <i class="icon-trash"></i>  
+                        </a> -->
+                        <a href="#" style="color:#DAA520; text-decoration:none;" onclick="if(confirm('Apakah anda yakin?')) hapustemp('<?=$l->drpjId?>');">
+                          <button type="button" class="btn btn-danger btn-xs">
+                            <i class="icon-trash"></i>                      
+                          </button>
+                        </a> 
+                      </center>
                   </tr>
-                  
-                  <tr>
-                      <!--  penjumlahan dari subtotal-->
-                  </tr> 
+                  <?php }?>
                 </tbody>
               </table>
             </div>

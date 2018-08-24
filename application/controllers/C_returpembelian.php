@@ -98,7 +98,7 @@ class C_returpembelian extends CI_Controller {
 	            'msg', 
 	            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Gagal Karena Data Kosong </div>'
 	        );
-	        redirect(base_url().'c_bayarpiutang/formtambah2'); //location
+	        redirect(base_url().'C_returpembelian/formtambah/'.$this->input->post('rtpbNoFaktur',true)); //location
 	    }
 	    else{
 	     // $byruNoFaktur=$this->input->post('pmblKode',true);

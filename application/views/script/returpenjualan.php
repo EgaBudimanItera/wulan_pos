@@ -6,14 +6,14 @@
 	  	$(".edit_retur").click(function () {     
 	        var kode = $(this).attr('id');
 	      $.ajax({
-	          url: "<?=base_url()?>c_returpembelian/get_detpembelian/"+kode,
+	          url: "<?=base_url()?>c_returpenjualan/get_detpenjualan/"+kode,
 	          type: 'GET',
 	          success: function(res) {
 	              var res_ = JSON.parse(res);
 	              $('#brngNama').val(res_.brngNama);
-	              $('#dtpbBrngId').val(res_.dtpbBrngId);
-	              $('#dtpbPmblId').val(res_.dtpbPmblId);
-	              $('#dtpbJumlah').val(res_.dtpbJumlah);
+	              $('#dtpjBrngId').val(res_.dtpjBrngId);
+	              $('#dtpjPnjlId').val(res_.dtpjPnjlId);
+	              $('#dtpjJumlahJual').val(res_.dtpjJumlah);
 	          }
 	      })
 	  	});
@@ -21,29 +21,29 @@
 
 	//function simpan data
 	function simpan(){
-        var drpbBrngId=$('#dtpbBrngId').val();
-        var drpbJumlah=$('#drpbJumlah').val();
-        var drpbPmblId=$('#dtpbPmblId').val();
-        $modal = $('#returbeliModal');
+        var drpjBrngId=$('#dtpjBrngId').val();
+        var drpjJumlah=$('#drpjJumlah').val();
+        var drpjPnjlId=$('#dtpjPnjlId').val();
+        $modal = $('#returjualModal');
         $.ajax({
             type: 'POST',
-            url: '<?=base_url()?>c_returpembelian/tambahdetreturpembelian',
-            data: 'drpbBrngId='+drpbBrngId+'&drpbJumlah='+drpbJumlah+'&drpbPmblId='+drpbPmblId,
+            url: '<?=base_url()?>c_returpenjualan/tambahdetreturpenjualan',
+            data: 'drpjBrngId='+drpjBrngId+'&drpjJumlah='+drpjJumlah+'&drpjPnjlId='+drpjPnjlId,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){
                     
                     location.reload();
-                    $('#returbeliModal').modal('hide');
+                    $('#returjualModal').modal('hide');
                     $('#formTambahBarang')[0].reset();
-                    $('#dtpbBrngId').val(null).trigger('change');
+                    $('#drpjBrngId').val(null).trigger('change');
                     
                 }else if(msg.status == 'fail'){
                    location.reload();
                    alert('gagal tambah data');
-                    $('#returbeliModal').modal('hide');
+                    $('#returjualModal').modal('hide');
                     $('#formTambahBarang')[0].reset();
-                    $('#dtpbBrngId').val(null).trigger('change');
+                    $('#drpjBrngId').val(null).trigger('change');
                 }
             }
           });

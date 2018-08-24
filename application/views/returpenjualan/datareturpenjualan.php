@@ -52,16 +52,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                   <?php
+                    $no=1;
+                    foreach($list as $l){
+                  ?>
                   <tr>
-                    <td>1</td>
-                    <td>F01</td>
-                    <td>2018-07-30</td>
-                    <td>budiman</td>
-                    <td>1000</td>
+                    <td><?=$no++;?></td>
+                    <td><?=$l->rtpjNoFaktur?></td>
+                    <td><?=$l->rtpjTanggal?></td>
+                    <td><?=$l->plgnNama?></td>
+                    <td><?php echo number_format($l->rtpjNilai)?></td>
                     <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>c_returpenjualan/formdetail/1" title="Detail"><i class="icon-eye-open"></i></a>
+                      <a class="btn btn-primary" href="<?=base_url()?>c_returpenjualan/formdetail/<?=$l->rtpjId?>" title="Detail"><i class="icon-eye-open"></i></a>
                     </td>
-                  </tr> 
+                  </tr>
+                  <?php
+                    }
+                  ?>  
                 </tbody>
               </table>
             </div>

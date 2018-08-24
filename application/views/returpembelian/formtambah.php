@@ -88,7 +88,8 @@
                      <textarea name="rtpbKet" class="span6"></textarea>
                   </div>
                 </div>
-                <table class="table table-striped table-bordered">
+                
+                <table class="table table-striped table-bordered" id="sample_1">
                   <thead>
                     <tr>
                       <th class="hidden-phone">No</th>
@@ -124,7 +125,7 @@
                   </tbody>
                 </table>
                 <div class="form-actions">
-                  <button type="submit" class="btn btn-warning" onclick="simpan()"><i class="icon-ok"></i> Simpan Retur</button>
+                  <button type="submit" class="btn btn-warning" ><i class="icon-ok"></i> Simpan Retur</button>
                 </div>
               </form>
             </div>

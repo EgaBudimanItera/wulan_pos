@@ -48,6 +48,47 @@
                 </button>
               </div>
               <br>
+              <form action="<?=base_url()?>c_returpenjualan/simpanall" role="form" method="post" class="form-horizontal">
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">No Faktur Retur</label>
+                  <div class="controls">
+                     <input type="text" class="span6" id="rtpjNoFaktur" required name="rtpjNoFaktur" />
+                     <span class="help-inline"></span>
+                  </div>
+                </div>
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">Tanggal Retur</label>
+                  <div class="controls">
+                    <div class="input-append" id="ui_date_picker_trigger">
+                      <input name="rtpjTanggal" type="text"  class="m-wrap medium" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
+                  <div class="controls">
+                     <input type="text" class="span6" id="pnjlNoFaktur" readonly name="pnjlNoFaktur" value="<?=$list->pnjlNoFaktur?>" />
+                     <input type="hidden" class="span6" id="pnjlId" readonly name="pnjlId" value="<?=$list->pnjlId?>" />
+                     <input type="hidden" class="span6" id="pnjlPlgnId" readonly name="pnjlPlgnId" value="<?=$list->pnjlPlgnId?>" />
+                     <input type="hidden" class="span6" id="pnjlSisaBayar" readonly name="pnjlSisaBayar" value="<?=$list->pnjlSisaBayar?>" />
+                     <span class="help-inline"></span>
+                  </div>
+                </div>
+                <!-- <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">Tanggal Pembelian</label>
+                  <div class="controls">
+                    <div class="input-append" id="ui_date_picker_trigger">
+                      <input name="pnjlTanggal" type="text"  class="m-wrap medium" value="<?=$list->pnjlTanggal?>" /><span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                  </div>
+                </div>  -->
+                <div class="control-group primary">
+                  <label class="control-label" for="inputWarning">Alasan Retur</label>
+                  <div class="controls">
+                     <textarea name="rtpjKet" class="span6"></textarea>
+                  </div>
+                </div>
+               
               <table class="table table-striped table-bordered" id="sample_1">
                 <thead>
                   <tr>
@@ -55,24 +96,38 @@
                     <th class="hidden-phone">Nama Barang</th>
                     <th class="hidden-phone">HPP</th>
                     <th class="hidden-phone">J.Beli</th>
-                    <th class="hidden-phone">J.Retur</th>
+                    <th class="hidden-phone">J.Retur Real</th>
+                    <th class="hidden-phone">J.Retur Temp</th>
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                  <!-- ambil dari kamus sql retur penjualan -->
-                 <tr>
-                    <td>1</td>
-                    <td>a</td>
-                    <td>1000</td>
-                    <td>10</td>
-                    <td>0</td>
-                    <td>
-                      <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
-                    </td>
-                  </tr>
+                 <?php
+                      $no=1;
+                      //var_dump($list_retur);
+                      foreach($list_retur as $l){
+                    ?>
+                   <tr>
+                      <td><?=$no++;?></td>
+                      <td><?=$l->brngNama?></td>
+                      <td><?=number_format($l->brngHpp)?></td>
+                      <td><?=number_format($l->dtpjJumlah)?></td>
+                      <td><?=number_format($l->jumlahretur)?></td>
+                      <td><?=number_format($l->jumlahreturtemp)?></td>
+                      <td>
+                        <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
+                      </td>
+                    </tr>
+                    <?php
+                      }
+                    ?>
                 </tbody>
               </table>
+              <div class="form-actions">
+                  <button type="submit" class="btn btn-warning" ><i class="icon-ok"></i> Simpan Retur</button>
+                </div>
+                 </form>
             </div>
           </div>
           <!-- END EXAMPLE TABLE widget-->
