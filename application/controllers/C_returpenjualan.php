@@ -27,14 +27,16 @@ class C_returpenjualan extends CI_Controller {
 	}
 
 	public function formtambah($nofaktur){
-		$query="SELECT *,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp ,COALESCE((select drpjJumlah from detreturpenjualan,detpenjualan where drpjBrngId=dtpjBrngId and drpjRtpjId=dtpjPnjlId),0) as jumlahretur from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on (dtpjBrngId=brngId) where pnjlNoFaktur='$nofaktur' ";
+		// $query="SELECT *,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp ,COALESCE((select drpjJumlah from detreturpenjualan,detpenjualan where drpjBrngId=dtpjBrngId and drpjRtpjId=dtpjPnjlId),0) as jumlahretur from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on (dtpjBrngId=brngId) where pnjlNoFaktur='$nofaktur' ";
+		$query="SELECT *,drpjJumlah as jumlahretur,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp from detreturpenjualan,returpenjualan,barang,penjualan,detpenjualan where drpjRtpjId=rtpjId and drpjBrngId=brngId and rtpjPnjlId=pnjlId and dtpjPnjlId=pnjlId and pnjlNoFaktur='$nofaktur'";
 		$data=array(
 			'page'=>'returpenjualan/formtambah',
 			'link'=>'returpenjualan',
 			'script'=>'script/returpenjualan',
 			'list'=>$this->M_pos->ambil('pnjlNoFaktur',$nofaktur,'penjualan')->row(),
 			'list_retur'=> $this->M_pos->kueri($query)->result(),
-			
+			'nofakturretur'=>$this->M_pos->kode_returjual(),
+			'nofakturjual'=>$nofaktur,
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -54,8 +56,7 @@ class C_returpenjualan extends CI_Controller {
 	        'drpjCreatedby'=>$createdby,
 	    );
 
-	    //var_dump($data);
-	    // die();
+	   
 	    $simpandetailtemp=$this->M_pos->simpan_data($data,'detreturpenjualan_temp');
 	    if($simpandetailtemp){
 	        $this->session->set_flashdata(
@@ -163,8 +164,9 @@ class C_returpenjualan extends CI_Controller {
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
-	public function get_detpenjualan($brngId){
-		$data=$this->M_pos->list_join_where('detpenjualan','barang','dtpjBrngId=brngId','',array('dtpjBrngId'=>$brngId),'')->row_array();
+	public function get_detpenjualan($brngId,$nofakturjual){
+		$query="SELECT *,drpjJumlah as jumlahretur,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp from detreturpenjualan,returpenjualan,barang,penjualan,detpenjualan where drpjRtpjId=rtpjId and drpjBrngId=brngId and rtpjPnjlId=pnjlId and dtpjPnjlId=pnjlId and pnjlNoFaktur='$nofaktur' and drpjBrngId='brngId'";
+		$data=$this->M_pos->kueri($query)->row_array();
         echo json_encode($data);
 	}
 

@@ -52,7 +52,7 @@
                 <div class="control-group primary">
                   <label class="control-label" for="inputWarning">No Faktur Retur</label>
                   <div class="controls">
-                     <input type="text" class="span6" id="rtpjNoFaktur" required name="rtpjNoFaktur" />
+                     <input type="text" class="span6" id="rtpjNoFaktur" value="<?=$nofakturretur?>" required name="rtpjNoFaktur" />
                      <span class="help-inline"></span>
                   </div>
                 </div>
@@ -95,7 +95,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Nama Barang</th>
                     <th class="hidden-phone">HPP</th>
-                    <th class="hidden-phone">J.Beli</th>
+                    <th class="hidden-phone">J.Jual</th>
                     <th class="hidden-phone">J.Retur Real</th>
                     <th class="hidden-phone">J.Retur Temp</th>
                     <th class="hidden-phone">Aksi</th>
@@ -116,7 +116,7 @@
                       <td><?=number_format($l->jumlahretur)?></td>
                       <td><?=number_format($l->jumlahreturtemp)?></td>
                       <td>
-                        <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
+                        <a id="<?=$l->brngId?>" nofaktur="<?=$nofakturjual?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
                       </td>
                     </tr>
                     <?php
@@ -165,6 +165,12 @@
               <div class="controls">
                  <input type="number" class="span12" id="dtpjJumlahJual" readonly="" name="dtpjJumlahJual" />
                  
+              </div>
+            </div> 
+            <div class="control-group">
+              <label class="control-label" for="inputWarning">Jumlah Retur Dahulu</label>
+              <div class="controls">
+                 <input type="number" class="span12" id="returlalu" readonly="" name="returlalu" />
               </div>
             </div> 
             <div class="control-group">
