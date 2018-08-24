@@ -66,7 +66,7 @@ CREATE TABLE `bayarpiutang` (
   PRIMARY KEY (`byrpId`),
   KEY `FK_bayarpiutang` (`byrpPlgnId`),
   CONSTRAINT `FK_bayarpiutang` FOREIGN KEY (`byrpPlgnId`) REFERENCES `pelanggan` (`plgnId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `bayarpiutang` */
 
@@ -84,7 +84,7 @@ CREATE TABLE `bayarutang` (
   PRIMARY KEY (`byruId`),
   KEY `FK_bayarutang` (`byruSplrId`),
   CONSTRAINT `FK_bayarutang` FOREIGN KEY (`byruSplrId`) REFERENCES `supplier` (`splrId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `bayarutang` */
 
@@ -154,7 +154,7 @@ CREATE TABLE `detbayarutang` (
   PRIMARY KEY (`dbyuId`),
   KEY `FK_detbayarutang` (`dbyuByruId`),
   CONSTRAINT `FK_detbayarutang` FOREIGN KEY (`dbyuByruId`) REFERENCES `bayarutang` (`byruId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarutang` */
 
@@ -170,9 +170,44 @@ CREATE TABLE `detbayarutang_temp` (
   PRIMARY KEY (`dbyuId`),
   KEY `FK_detbayarutang_temp` (`dbyuPmblId`),
   CONSTRAINT `FK_detbayarutang_temp` FOREIGN KEY (`dbyuPmblId`) REFERENCES `pembelian` (`pmblId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detbayarutang_temp` */
+
+/*Table structure for table `detorderpenjualan` */
+
+DROP TABLE IF EXISTS `detorderpenjualan`;
+
+CREATE TABLE `detorderpenjualan` (
+  `dopjId` int(11) NOT NULL AUTO_INCREMENT,
+  `dopjOpnjId` int(11) NOT NULL,
+  `dopjBrngId` int(11) NOT NULL,
+  `dopjJumlah` int(11) NOT NULL,
+  `dopjHarga` double DEFAULT NULL,
+  `dopjDiskon` double DEFAULT NULL,
+  PRIMARY KEY (`dopjId`),
+  KEY `FK_detpenjualan` (`dopjBrngId`),
+  KEY `FK_detpenjualan1` (`dopjOpnjId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `detorderpenjualan` */
+
+/*Table structure for table `detorderpenjualan_temp` */
+
+DROP TABLE IF EXISTS `detorderpenjualan_temp`;
+
+CREATE TABLE `detorderpenjualan_temp` (
+  `dopjId` int(11) NOT NULL AUTO_INCREMENT,
+  `dopjBrngId` int(11) NOT NULL,
+  `dopjJumlah` int(11) NOT NULL,
+  `dopjHarga` double DEFAULT NULL,
+  `dopjDiskon` double DEFAULT NULL,
+  `dopjCreatedBy` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`dopjId`),
+  KEY `FK_detpenjualan` (`dopjBrngId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `detorderpenjualan_temp` */
 
 /*Table structure for table `detpembelian` */
 
@@ -210,7 +245,7 @@ CREATE TABLE `detpembelian_temp` (
   PRIMARY KEY (`dtpbId`),
   KEY `FK_detpembelian_temp` (`dtpbBrngId`),
   CONSTRAINT `FK_detpembelian_temp` FOREIGN KEY (`dtpbBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpembelian_temp` */
 
@@ -249,7 +284,7 @@ CREATE TABLE `detpenjualan_temp` (
   PRIMARY KEY (`dtpjId`),
   KEY `FK_detpenjualan_temp` (`dtpjBrngId`),
   CONSTRAINT `FK_detpenjualan_temp` FOREIGN KEY (`dtpjBrngId`) REFERENCES `barang` (`brngId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `detpenjualan_temp` */
 
@@ -346,6 +381,25 @@ CREATE TABLE `hutang` (
 
 insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-08-18',1,'hhh','Pembelian Barang',0,0,200000,200000),(2,'2018-08-08',1,'BU08180001','Pembayaran Hutang',200000,200000,0,0),(4,'2018-08-08',1,'BU08180001','Hapus Pembahayaran Hutang',0,0,200000,200000);
 
+/*Table structure for table `orderpenjualan` */
+
+DROP TABLE IF EXISTS `orderpenjualan`;
+
+CREATE TABLE `orderpenjualan` (
+  `opnjId` int(11) NOT NULL AUTO_INCREMENT,
+  `opnjNoFaktur` varchar(40) NOT NULL,
+  `opnjTanggal` datetime DEFAULT NULL,
+  `opnjPlgnId` int(11) NOT NULL,
+  `opnjKet` text NOT NULL,
+  `opnjTotalOrder` double DEFAULT NULL,
+  `opnjStatusOrder` enum('Order','Sales') DEFAULT 'Order',
+  `opnjPnjlId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`opnjId`),
+  KEY `FK_penjualan` (`opnjPlgnId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `orderpenjualan` */
+
 /*Table structure for table `pelanggan` */
 
 DROP TABLE IF EXISTS `pelanggan`;
@@ -359,12 +413,16 @@ CREATE TABLE `pelanggan` (
   `plgnTelp2` varchar(12) DEFAULT NULL,
   `plgnAlamat` text,
   `plgnPiutang` double DEFAULT NULL,
+  `plgnNik` varchar(30) DEFAULT NULL,
+  `plgnNamaUser` varchar(40) DEFAULT NULL,
+  `plgnPassword` varchar(30) DEFAULT NULL,
+  `plgnEmail` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`plgnId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`) values (1,'P001','Non Tetap','-','000','000','-',0),(2,'P002','CV Aqila','ibu Aqila','08570000','000000','Jalan Malabar',1600000),(3,'P003','PT Buruh','Bapak Diki','08550000','000000','Jalan Alam Elok',0);
+insert  into `pelanggan`(`plgnId`,`plgnKode`,`plgnNama`,`plgnNamaKontak`,`plgnTelp1`,`plgnTelp2`,`plgnAlamat`,`plgnPiutang`,`plgnNik`,`plgnNamaUser`,`plgnPassword`,`plgnEmail`) values (1,'P001','Non Tetap','-','000','000','-',0,NULL,NULL,NULL,NULL),(2,'P002','CV Aqila','ibu Aqila','08570000','000000','Jalan Malabar',1600000,NULL,NULL,NULL,NULL),(3,'P003','PT Buruh','Bapak Diki','08550000','000000','Jalan Alam Elok',0,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `pembelian` */
 
