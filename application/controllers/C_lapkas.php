@@ -32,4 +32,19 @@ class C_lapkas extends CI_Controller {
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
+
+	public function cetak($daritanggal,$hinggatanggal){
+
+		$query="SELECT * from cash where  cashTanggal BETWEEN '$daritanggal' and '$hinggatanggal' ORDER BY cashId asc";
+	  	$query2="SELECT * FROM akun where noakun='1110'";
+	  	$data=array(
+			'list'=>$this->M_pos->kueri($query)->result(),
+			'kas'=>$this->M_pos->kueri($query2)->row()->saldo,
+			'daritanggal'=>$daritanggal,
+			'hinggatanggal'=>$hinggatanggal,
+		);
+
+		$this->load->view('lapkas/cetak',$data);
+
+	}
 }

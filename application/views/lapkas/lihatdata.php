@@ -42,7 +42,7 @@
                   <button type="button" class="btn btn-primary" onclick="self.history.back()">
                     <i class="icon-arrow-left"></i> Kembali
                   </button>
-                  <a href="<?=base_url()?>c_lapkas/cetak" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
+                  <a href="<?=base_url()?>c_lapkas/cetak/<?=$daritanggal?>/<?=$hinggatanggal?>" target="_blank" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
                 </div>
               </div>
 
