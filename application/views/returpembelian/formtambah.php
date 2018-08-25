@@ -163,8 +163,14 @@
             <div class="control-group">
               <label class="control-label" for="inputWarning">Jumlah Beli</label>
               <div class="controls">
-                 <input type="number" class="span12" id="dtpbJumlah" required name="dtpbJumlah" />
+                 <input type="number" class="span12" id="dtpbJumlah" readonly name="dtpbJumlah" />
                  
+              </div>
+            </div> 
+            <div class="control-group">
+              <label class="control-label" for="inputWarning">Jumlah Retur Dahulu</label>
+              <div class="controls">
+                 <input type="number" class="span12" id="returlalu" readonly="" name="returlalu" />
               </div>
             </div> 
             <div class="control-group">

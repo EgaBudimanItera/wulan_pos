@@ -28,7 +28,7 @@ class C_returpenjualan extends CI_Controller {
 
 	public function formtambah($nofaktur){
 		// $query="SELECT *,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp ,COALESCE((select drpjJumlah from detreturpenjualan,detpenjualan where drpjBrngId=dtpjBrngId and drpjRtpjId=dtpjPnjlId),0) as jumlahretur from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on (dtpjBrngId=brngId) where pnjlNoFaktur='$nofaktur' ";
-		$query="SELECT *,drpjJumlah as jumlahretur,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp from detreturpenjualan,returpenjualan,barang,penjualan,detpenjualan where drpjRtpjId=rtpjId and drpjBrngId=brngId and rtpjPnjlId=pnjlId and dtpjPnjlId=pnjlId and pnjlNoFaktur='$nofaktur'";
+		$query="SELECT *,brngNama,dtpjJumlah,dtpjPnjlId,coalesce((select drpjJumlah from detreturpenjualan,returpenjualan where drpjRtpjId=rtpjId and drpjBrngId=dtpjBrngId),0) as jumlahretur,coalesce((select drpjJumlah from detreturpenjualan_temp where drpjPnjlId=dtpjPnjlId and drpjBrngId=dtpjBrngId),0) as jumlahreturtemp from detpenjualan join barang on(dtpjBrngId=brngId) join penjualan on (dtpjPnjlId=pnjlId) where pnjlNoFaktur='$nofaktur' ";
 		$data=array(
 			'page'=>'returpenjualan/formtambah',
 			'link'=>'returpenjualan',
@@ -46,31 +46,45 @@ class C_returpenjualan extends CI_Controller {
 		$drpjPnjlId=$this->input->post('drpjPnjlId',true);
 	    $drpjBrngId=$this->input->post('drpjBrngId',true);  
 	    $drpjJumlah=$this->input->post('drpjJumlah',true); 
-	    // $createdby=$this->session->userdata('userNama');
+	    $returlalu=$this->input->post('returlalu',true);
+	    $dtpjJumlahJual=$this->input->post('dtpjJumlahJual',true);
+	    $sisa=$dtpjJumlahJual-$returlalu-$drpjJumlah;
 	    $createdby=$this->M_pos->usercreated();
-	    
-	    $data=array(
+	    // $createdby=$this->session->userdata('userNama');
+	    if($sisa<=0){
+	    	$this->session->set_flashdata(
+	            'msg', 
+	            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah Karena Retur Terlalu banyak!</div>'
+	        );
+	       echo json_encode(array('status'=>'fail'));	
+	    }else{
+	      $data=array(
 	        'drpjPnjlId'=>$drpjPnjlId,
 	        'drpjBrngId'=>$drpjBrngId,
 	        'drpjJumlah'=>$drpjJumlah,
 	        'drpjCreatedby'=>$createdby,
-	    );
+	      );
 
 	   
-	    $simpandetailtemp=$this->M_pos->simpan_data($data,'detreturpenjualan_temp');
-	    if($simpandetailtemp){
-	        $this->session->set_flashdata(
-	            'msg', 
-	            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
-	        );
-	        echo json_encode(array('status'=>'success'));
-	     }else{
-	       $this->session->set_flashdata(
-	            'msg', 
-	            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
-	        );
-	       echo json_encode(array('status'=>'fail'));
-	     }
+		    $simpandetailtemp=$this->M_pos->simpan_data($data,'detreturpenjualan_temp');
+		    if($simpandetailtemp){
+		        $this->session->set_flashdata(
+		            'msg', 
+		            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
+		        );
+		        echo json_encode(array('status'=>'success'));
+		     }else{
+		       $this->session->set_flashdata(
+		            'msg', 
+		            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
+		        );
+		       echo json_encode(array('status'=>'fail'));
+		     }	
+	    }
+	    
+	   
+	    
+	    
 	}
 
 	public function simpanall(){
@@ -165,9 +179,8 @@ class C_returpenjualan extends CI_Controller {
 	}
 
 	public function get_detpenjualan($brngId,$nofakturjual){
-		$query="SELECT *,drpjJumlah as jumlahretur,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp from detreturpenjualan,returpenjualan,barang,penjualan,detpenjualan where drpjRtpjId=rtpjId and drpjBrngId=brngId and rtpjPnjlId=pnjlId and dtpjPnjlId=pnjlId and pnjlNoFaktur='$nofaktur' and drpjBrngId='brngId'";
+		$query="SELECT *,brngNama,dtpjJumlah,dtpjPnjlId,coalesce((select drpjJumlah from detreturpenjualan,returpenjualan where drpjRtpjId=rtpjId and drpjBrngId=dtpjBrngId),0) as jumlahretur,coalesce((select drpjJumlah from detreturpenjualan_temp where drpjPnjlId=dtpjPnjlId and drpjBrngId=dtpjBrngId),0) as jumlahreturtemp from detpenjualan join barang on(dtpjBrngId=brngId) join penjualan on (dtpjPnjlId=pnjlId) where pnjlNoFaktur='$nofakturjual' and dtpjBrngId='$brngId'";
 		$data=$this->M_pos->kueri($query)->row_array();
-		
         echo json_encode($data);
 	}
 

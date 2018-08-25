@@ -65,7 +65,7 @@
                   </div>
                 </div>
                 <div class="control-group primary">
-                  <label class="control-label" for="inputWarning">No Faktur Pembelian</label>
+                  <label class="control-label" for="inputWarning">No Faktur Penjualan</label>
                   <div class="controls">
                      <input type="text" class="span6" id="pnjlNoFaktur" readonly name="pnjlNoFaktur" value="<?=$list->pnjlNoFaktur?>" />
                      <input type="hidden" class="span6" id="pnjlId" readonly name="pnjlId" value="<?=$list->pnjlId?>" />
@@ -116,7 +116,7 @@
                       <td><?=number_format($l->jumlahretur)?></td>
                       <td><?=number_format($l->jumlahreturtemp)?></td>
                       <td>
-                        <a id="<?=$l->brngId?>" nofaktur="<?=$nofakturjual?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
+                        <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returjualModal"><i class="icon-pencil"></i></a>
                       </td>
                     </tr>
                     <?php

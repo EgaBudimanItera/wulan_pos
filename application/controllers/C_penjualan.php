@@ -1,4 +1,4 @@
-<?php
+s<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_penjualan extends CI_Controller {
@@ -55,10 +55,11 @@ class C_penjualan extends CI_Controller {
 	}
 
 	public function formdetail($nofaktur){
-		$data=array(
+		$query="SELECT * FROM detpenjualan join barang on(dtpjBrngId=brngId) WHERE dtpjPnjlId='$nofaktur'";
+        $data=array(
 			'page'=>'penjualan/detailpenjualan',
 			'link'=>'penjualan',
-			
+			'list'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

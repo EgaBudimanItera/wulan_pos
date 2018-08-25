@@ -53,16 +53,32 @@
                     <th class="hidden-phone">Harga</th>
                     <th class="hidden-phone">Jumlah</th>
                     <th class="hidden-phone">Subtotal</th>
-                    <th class="hidden-phone">Aksi</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    $no=1;
+                    $total=0;
+                    foreach($list as $l){
+                      $subtotal=$l->dtpjJumlah*$l->dtpjHarga;
+                      $total=$total+$subtotal;
+                  ?>
                   <tr>
-                    <!-- isi tabel det Penjualan dengan no faktur terpilih -->
+                    <!-- isi tabel det pembelian dengan no faktur terpilih -->
+                    <td><?=$no++;?></td>
+                    <td><?=$l->brngKode?></td>
+                    <td><?=$l->brngNama?></td>
+                    <td><?php echo number_format($l->dtpjHarga)?></td>
+                    <td><?=$l->dtpjJumlah?></td>
+                    <td><?php echo number_format($subtotal)?></td>
                   </tr>
-                  
+                  <?php
+                    }
+                  ?>
                   <tr>
-                      <!--  penjumlahan dari subtotal-->
+                    <td colspan="5">Total</td><!--  penjumlahan dari subtotal-->
+                    <td><?php echo number_format($total)?></td>
                   </tr> 
                 </tbody>
               </table>

@@ -5,8 +5,9 @@
 		//untuk event onclick barang
 	  	$(".edit_retur").click(function () {     
 	        var kode = $(this).attr('id');
+            var nofakturbeli = document.getElementById("pmblNoFaktur").value;
 	      $.ajax({
-	          url: "<?=base_url()?>c_returpembelian/get_detpembelian/"+kode,
+	          url: "<?=base_url()?>c_returpembelian/get_detpembelian/"+kode+"/"+nofakturbeli,
 	          type: 'GET',
 	          success: function(res) {
 	              var res_ = JSON.parse(res);
@@ -14,6 +15,8 @@
 	              $('#dtpbBrngId').val(res_.dtpbBrngId);
 	              $('#dtpbPmblId').val(res_.dtpbPmblId);
 	              $('#dtpbJumlah').val(res_.dtpbJumlah);
+                  $('#returlalu').val(res_.jumlahretur);
+                  
 	          }
 	      })
 	  	});

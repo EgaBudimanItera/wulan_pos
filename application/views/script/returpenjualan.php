@@ -5,16 +5,18 @@
 		//untuk event onclick barang
 	  	$(".edit_retur").click(function () {     
 	        var kode = $(this).attr('id');
-            var nofakturjual = $(this).attr('nofakturjual');
+            var nofakturjual = document.getElementById("pnjlNoFaktur").value;
+
 	      $.ajax({
 	          url: "<?=base_url()?>c_returpenjualan/get_detpenjualan/"+kode+"/"+nofakturjual,
 	          type: 'GET',
 	          success: function(res) {
 	              var res_ = JSON.parse(res);
-                  console_log(res_);
+                  
 	              $('#brngNama').val(res_.brngNama);
 	              $('#dtpjBrngId').val(res_.dtpjBrngId);
 	              $('#dtpjPnjlId').val(res_.dtpjPnjlId);
+                  $('#returlalu').val(res_.jumlahretur);
 	              $('#dtpjJumlahJual').val(res_.dtpjJumlah);
 
 	          }
