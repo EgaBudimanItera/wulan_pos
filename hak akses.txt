@@ -1,0 +1,24 @@
+pelanggan
+orderbarang/orderpenjualab
+
+gudang
+satuan
+barang
+supplier
+pembelian
+returpembelian
+laporan -> stok,pembelian,retur pembelian
+
+penjualan
+pelanggan
+penjualan
+returpenjualan
+laporan->penjualan, retur penjualan
+
+keuangan
+pembayaran hutang
+pembayaran piutang
+laporan->kas,hutang,piutang
+
+Bos 
+semua laporan
