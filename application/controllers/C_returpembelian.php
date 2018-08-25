@@ -27,13 +27,15 @@ class C_returpembelian extends CI_Controller {
 	}
 
 	public function formtambah($nofaktur){
-		$query="SELECT *,COALESCE((select drpbJumlah from detreturpembelian_temp,detpembelian where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahreturtemp ,COALESCE((select drpbJumlah from detreturpembelian,detpembelian where drpbBrngId=dtpbBrngId and drpbRtpbId=dtpbPmblId),0) as jumlahretur from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on (dtpbBrngId=brngId) where pmblNoFaktur='$nofaktur' ";
+		// $query="SELECT *,COALESCE((select drpbJumlah from detreturpembelian_temp,detpembelian where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahreturtemp ,COALESCE((select drpbJumlah from detreturpembelian,detpembelian where drpbBrngId=dtpbBrngId and drpbRtpbId=dtpbPmblId),0) as jumlahretur from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on (dtpbBrngId=brngId) where pmblNoFaktur='$nofaktur' ";
+		$query="SELECT *,drpbJumlah as jumlahretur,COALESCE((select drpbJumlah from detreturpembelian_temp,detpembelian where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahreturtemp from detreturpembelian,returpembelian,barang,pembelian,detpembelian where drpbBrngId=brngId and drpbRtpbId=rtpbId and rtpbPmblId=pmblId and dtpbPmblId=pmblId and pmblNoFaktur='$nofaktur'";
 		$data=array(
 			'page'=>'returpembelian/formtambah',
 			'link'=>'returpembelian',
 			'script'=>'script/returpembelian',
 			'list'=>$this->M_pos->ambil('pmblNoFaktur',$nofaktur,'pembelian')->row(),
 			'list_retur'=> $this->M_pos->kueri($query)->result(),
+			'noreturbeli'=>$this->M_pos->kode_returbeli(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

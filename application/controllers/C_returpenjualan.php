@@ -167,6 +167,7 @@ class C_returpenjualan extends CI_Controller {
 	public function get_detpenjualan($brngId,$nofakturjual){
 		$query="SELECT *,drpjJumlah as jumlahretur,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp from detreturpenjualan,returpenjualan,barang,penjualan,detpenjualan where drpjRtpjId=rtpjId and drpjBrngId=brngId and rtpjPnjlId=pnjlId and dtpjPnjlId=pnjlId and pnjlNoFaktur='$nofaktur' and drpjBrngId='brngId'";
 		$data=$this->M_pos->kueri($query)->row_array();
+		
         echo json_encode($data);
 	}
 

@@ -52,7 +52,7 @@
                 <div class="control-group primary">
                   <label class="control-label" for="inputWarning">No Faktur Retur</label>
                   <div class="controls">
-                     <input type="text" class="span6" id="rtpbNoFaktur" required name="rtpbNoFaktur" />
+                     <input type="text" class="span6" id="rtpbNoFaktur" value="<?=$noreturbeli?>" required name="rtpbNoFaktur" />
                      <span class="help-inline"></span>
                   </div>
                 </div>
