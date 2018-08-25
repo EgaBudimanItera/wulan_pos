@@ -168,6 +168,13 @@
               </div>
             </div> 
             <div class="control-group">
+              <label class="control-label" for="inputWarning">Harga Jual</label>
+              <div class="controls">
+                 <input type="number" class="span12" id="hargajual" readonly="" name="hargajual" />
+                 
+              </div>
+            </div> 
+            <div class="control-group">
               <label class="control-label" for="inputWarning">Jumlah Retur Dahulu</label>
               <div class="controls">
                  <input type="number" class="span12" id="returlalu" readonly="" name="returlalu" />

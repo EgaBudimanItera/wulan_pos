@@ -51,6 +51,7 @@ class C_returpenjualan extends CI_Controller {
 	    $sisa=$dtpjJumlahJual-$returlalu-$drpjJumlah;
 	    $createdby=$this->M_pos->usercreated();
 	    // $createdby=$this->session->userdata('userNama');
+	    $hargajual=$this->input->post('hargajual',true);
 	    if($sisa<=0){
 	    	$this->session->set_flashdata(
 	            'msg', 
@@ -63,6 +64,7 @@ class C_returpenjualan extends CI_Controller {
 	        'drpjBrngId'=>$drpjBrngId,
 	        'drpjJumlah'=>$drpjJumlah,
 	        'drpjCreatedby'=>$createdby,
+	        'drpjHarga'=>$hargajual,
 	      );
 
 	   
@@ -138,6 +140,7 @@ class C_returpenjualan extends CI_Controller {
 	         $ins[$i]['drpjRtpjId']         = $drpjId;
 	         $ins[$i]['drpjBrngId']         = $row->drpjBrngId;
 	         $ins[$i]['drpjJumlah']          = $row->drpjJumlah;
+	         $ins[$i]['drpjHarga']          = $row->drpjHarga;
 	         $i++;  
 	      } 
 

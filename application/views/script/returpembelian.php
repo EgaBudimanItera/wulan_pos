@@ -16,7 +16,7 @@
 	              $('#dtpbPmblId').val(res_.dtpbPmblId);
 	              $('#dtpbJumlah').val(res_.dtpbJumlah);
                   $('#returlalu').val(res_.jumlahretur);
-                  
+                  $('#hargabeli').val(res_.dtpbHarga);
 	          }
 	      })
 	  	});

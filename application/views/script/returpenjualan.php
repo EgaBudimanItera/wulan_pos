@@ -18,6 +18,7 @@
 	              $('#dtpjPnjlId').val(res_.dtpjPnjlId);
                   $('#returlalu').val(res_.jumlahretur);
 	              $('#dtpjJumlahJual').val(res_.dtpjJumlah);
+                  $('#hargajual').val(res_.dtpjHarga);
 
 	          }
 	      })
