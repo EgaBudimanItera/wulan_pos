@@ -31,4 +31,20 @@ class C_lapreturjual extends CI_Controller {
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
+
+	public function cetak($dari,$hingga){
+	  $daritanggal=$dari;
+	  $hinggatanggal=$hingga;
+	  $query="SELECT * from detreturpenjualan join returpenjualan on(drpjRtpjId=rtpjId) join penjualan on(rtpjPnjlId=pnjlId) join barang on(drpjBrngId=brngId) join pelanggan on(rtpjPlgnId=plgnId)  where  rtpjTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $data=array(
+			
+			'list'=>$this->M_pos->kueri($query)->result(),
+			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),
+			
+			'daritanggal'=>$daritanggal,
+			'hinggatanggal'=>$hinggatanggal,
+		);
+
+	  $this->load->view('lapreturjual/cetak',$data);
+	}
 }

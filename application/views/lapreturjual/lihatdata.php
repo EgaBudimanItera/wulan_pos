@@ -9,7 +9,7 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Laporan Piutang
+          Laporan Retur Penjualan
         </h3>
         <ul class="breadcrumb">
           <li>
