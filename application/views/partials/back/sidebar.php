@@ -29,6 +29,7 @@
                         <li class="<?php if($link=='barang'){echo'active';}?>"><a href="<?=base_url()?>c_barang">Barang</a></li>
                         <li class="<?php if($link=='pelanggan'){echo'active';}?>"><a href="<?=base_url()?>c_pelanggan">Pelanggan</a></li>
                         <li class="<?php if($link=='supplier'){echo'active';}?>"><a href="<?=base_url()?>c_supplier">Supplier</a></li>
+                        <li class="<?php if($link=='users'){echo'active';}?>"><a href="<?=base_url()?>c_users">Users</a></li>
                     </ul>
                 </li>
                 <li class="has-sub <?php if($link=='pembelian' ||$link=="penjualan"||$link=="returpembelian"||$link=="returpenjualan"||$link=="bayarutang"||$link=="bayarpiutang"){echo'active';}?>">
