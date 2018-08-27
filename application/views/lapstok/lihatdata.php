@@ -42,7 +42,7 @@
                   <button type="button" class="btn btn-primary" onclick="self.history.back()">
                     <i class="icon-arrow-left"></i> Kembali
                   </button>
-                  <a href="<?=base_url()?>c_lapstok/cetak/<?=$brngId?>/<?=$daritanggal?>/<?=$hinggatanggal?>" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
+                  <a href="<?=base_url()?>c_lapstok/cetak/<?=$brngId?>/<?=$daritanggal?>/<?=$hinggatanggal?>" target="_blank" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
                 </div>
               </div>
 
@@ -73,10 +73,10 @@
                     <td><?=$l->brngKode;?></td>
                     <td><?=$l->brngNama;?></td>
                     <td><?=$l->stokKet;?></td>
-                    <td><?=$l->stokAwal;?></td>
-                    <td><?=$l->stokMasuk;?></td>
-                    <td><?=$l->stokKeluar;?></td>
-                    <td><?=$l->stokAkhir;?></td>
+                    <td><?=number_format($l->stokAwal);?></td>
+                    <td><?=number_format($l->stokMasuk);?></td>
+                    <td><?=number_format($l->stokKeluar);?></td>
+                    <td><?=number_format($l->stokAkhir);?></td>
                   </tr>
                   <?php
                     $hpp=$l->brngHpp;

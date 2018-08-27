@@ -30,18 +30,18 @@
     <tr>
       <td class="col-md-3">Logo</td>
       <td class="col-md-9">
-        <h2>Laporan Stok</h2>
+        <h2>Laporan Hutang</h2>
         <h4>Perusahaan<br>
           Periode : <?=date("d-m-Y",strtotime($daritanggal))?> s/d <?=date("d-m-Y",strtotime($hinggatanggal))?></h4>
       </td>
     </tr>
     <tr>
-      <td>Kode Barang</td>
-      <td><?=$barang->brngKode?></td>
+      <td>Kode Supplier</td>
+      <td><?=$supplier->splrKode?></td>
     </tr>
     <tr>
-      <td>Nama Barang</td>
-      <td><?=$barang->brngNama?></td>
+      <td>Nama Supplier</td>
+      <td><?=$supplier->splrNama?></td>
     </tr>
   </table>
     <hr>
@@ -51,13 +51,13 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">No Transaksi</th>
-                    <th class="hidden-phone">Kode Barang</th>
-                    <th class="hidden-phone">Nama Barang</th>
+                    <th class="hidden-phone">Kode Supplier</th>
+                    <th class="hidden-phone">Nama Supplier</th>
                     <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Stok Awal</th>
-                    <th class="hidden-phone">Stok Masuk</th>
-                    <th class="hidden-phone">Stok Keluar</th>
-                    <th class="hidden-phone">Stok Akhir</th>
+                    <th class="hidden-phone">Hutang Awal</th>
+                    <th class="hidden-phone">Hutang Masuk</th>
+                    <th class="hidden-phone">Hutang Keluar</th>
+                    <th class="hidden-phone">Hutang Akhir</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -67,34 +67,23 @@
                   ?>
                   <tr>
                     <td><?=$no++;?></td>
-                    <td><?=$l->stokTanggal;?></td>
-                    <td><?=$l->stokNoFaktur;?></td>
-                    <td><?=$l->brngKode;?></td>
-                    <td><?=$l->brngNama;?></td>
-                    <td><?=$l->stokKet;?></td>
-                    <td><?=number_format($l->stokAwal);?></td>
-                    <td><?=number_format($l->stokMasuk);?></td>
-                    <td><?=number_format($l->stokKeluar);?></td>
-                    <td><?=number_format($l->stokAkhir);?></td>
+                    <td><?=$l->htngTanggal;?></td>
+                    <td><?=$l->htngNoFaktur;?></td>
+                    <td><?=$l->splrKode;?></td>
+                    <td><?=$l->splrNama;?></td>
+                    <td><?=$l->htngKet;?></td>
+                    <td><?=number_format($l->htngAwal);?></td>
+                    <td><?=@number_format($l->htngDebet);?></td>
+                    <td><?=@number_format($l->htngKredit);?></td>
+                    <td><?=number_format($l->htngAkhir);?></td>
                   </tr>
                   <?php
-                    $hpp=$l->brngHpp;
-                      $stokAkhir=$l->stokAkhir;
+                    
                     
                     }
-                    if($jumlah==0){
-                      $hpp=0;
-                      $stokAkhir=0;
-                    }
-                    else{
-                     $hpp=$hpp;
-                     $stokAkhir=$stokAkhir;   
-                    }
+                   
                   ?>
-                  <tr>
-                    <td colspan="3">Hpp Barang</td>
-                    <td colspan="7"><?php echo 'Rp '. number_format($hpp)?> * <?=$stokAkhir?> = <?php echo 'Rp '.number_format($hpp*$stokAkhir)?></td>
-                  </tr>
+                  
                 </tbody>
               </table>
               <table class="table">

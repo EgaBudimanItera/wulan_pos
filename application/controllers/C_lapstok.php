@@ -36,7 +36,21 @@ class C_lapstok extends CI_Controller {
 	}
 
 	public function cetak($brngId,$dari,$hingga){
+		$brngId=$brngId;
+	 	$daritanggal=$dari;
+	 	$hinggatanggal=$hingga;
+	 	$query="SELECT * FROM stok join barang on(stokBrngId=brngId) where stokBrngId='$brngId' and stokTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 
+	 	$data=array(
+			'list'=>$this->M_pos->kueri($query)->result(),
+			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),
+			'brngId'=>$brngId,
+			'daritanggal'=>$daritanggal,
+			'hinggatanggal'=>$hinggatanggal,
+			'barang'=>$this->M_pos->kueri("SELECT * FROM barang where brngId='$brngId'")->row(),
+		);
+
+	 	$this->load->view('lapstok/cetak',$data);
 	}
 
 }
