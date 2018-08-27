@@ -75,9 +75,9 @@
                     <td><?=$l->plgnNama;?></td>
                     <td><?=$l->brngKode;?></td>
                     <td><?=$l->brngNama;?></td>
-                    <td><?=$l->dtpjJumlah;?></td>
-                    <td><?=$l->dtpjHarga;?></td>
-                    <td><?=$l->dtpjHarga*$l->dtpjJumlah;?></td>
+                    <td><?=number_format($l->dtpjJumlah);?></td>
+                    <td><?=number_format($l->dtpjHarga);?></td>
+                    <td><?=number_format($l->dtpjHarga*$l->dtpjJumlah);?></td>
                   </tr>
                   <?php
                     $total=$total+$l->dtpjHarga*$l->dtpjJumlah;
