@@ -42,7 +42,7 @@
                   <button type="button" class="btn btn-primary" onclick="self.history.back()">
                     <i class="icon-arrow-left"></i> Kembali
                   </button>
-                  <a href="<?=base_url()?>c_lappiutang/cetak/<?=$plgnId?>/<?=$daritanggal?>/<?=$hinggatanggal?>" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
+                  <a href="<?=base_url()?>c_lappiutang/cetak/<?=$plgnId?>/<?=$daritanggal?>/<?=$hinggatanggal?>" target="_blank" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
                 </div>
               </div>
 
@@ -73,10 +73,10 @@
                     <td><?=$l->plgnKode;?></td>
                     <td><?=$l->plgnNama;?></td>
                     <td><?=$l->ptngKet;?></td>
-                    <td><?=$l->ptngAwal;?></td>
-                    <td><?=$l->ptngMasuk;?></td>
-                    <td><?=$l->ptngKeluar;?></td>
-                    <td><?=$l->ptngAkhir;?></td>
+                    <td><?=number_format($l->ptngAwal);?></td>
+                    <td><?=number_format($l->ptngDebet);?></td>
+                    <td><?=number_format($l->ptngKredit);?></td>
+                    <td><?=number_format($l->ptngAkhir);?></td>
                   </tr>
                   <?php
                     

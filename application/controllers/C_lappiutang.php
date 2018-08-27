@@ -22,7 +22,7 @@ class C_lappiutang extends CI_Controller {
 	  $plgnId=$this->input->post('plgnId',true);
 	  $daritanggal=date_format(date_create($this->input->post('daritanggal',true)),"Y-m-d");
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
-	  $query="SELECT * FROM piutang where ptngPlgnId='$plgnId' and ptngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $query="SELECT * FROM piutang,pelanggan where ptngPlgnId='$plgnId' and ptngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  $data=array(
 			'page'=>'lappiutang/lihatdata',
 			'link'=>'lappiutang',
@@ -33,5 +33,24 @@ class C_lappiutang extends CI_Controller {
 			'hinggatanggal'=>$hinggatanggal,
 		);
 		$this->load->view('partials/back/wrapper',$data);
+	}
+
+	public function cetak($plgnId,$dari,$hingga){
+	  $plgnId=$plgnId;
+	  $daritanggal=$dari;
+	  $hinggatanggal=$hingga;
+	  $query="SELECT * FROM piutang,pelanggan where ptngPlgnId='$plgnId' and ptngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $data=array(
+			'page'=>'lappiutang/lihatdata',
+			'link'=>'lappiutang',
+			'list'=>$this->M_pos->kueri($query)->result(),
+			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),
+			'plgnId'=>$plgnId,
+			'daritanggal'=>$daritanggal,
+			'hinggatanggal'=>$hinggatanggal,
+			'pelanggan'=>$this->M_pos->kueri("SELECT * FROM pelanggan WHERE plgnId='$plgnId'")->row(),
+		);
+
+	  $this->load->view('lappiutang/cetak',$data);
 	}
 }
