@@ -34,6 +34,15 @@ class C_users extends CI_Controller {
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
+	public function formreset($userId){
+		$data=array(
+			'page'=>'users/formreset',
+			'link'=>'users',
+			'users' => $this->M_pos->ambil('userId',$userId,'users')->row(),
+		);
+		$this->load->view('partials/back/wrapper',$data);
+	}
+
 	public function tambah_users(){
 		$data = array(
 			'userNama' => $this->input->post('userNama', true),
@@ -73,8 +82,6 @@ class C_users extends CI_Controller {
 		);
 		}
 
-		
-
 		$ubah = $this->M_pos->update('userId',$userId,'users',$data);
 		// var_dump($ubah);
 		// die();
@@ -91,6 +98,42 @@ class C_users extends CI_Controller {
                 '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
             );
                 redirect(c_users/formubah/$userId);
+            }
+		
+	}
+
+	public function reset_users($userId){
+
+		if (empty($this->input->post('userPassword', true))) {
+			$data = array(
+			'userNama' => $this->input->post('userNama', true),
+			'userHakAkses' => $this->input->post('userHakAkses', true),
+		);
+		}else{
+
+			$data = array(
+			'userNama' => $this->input->post('userNama', true),
+			'userPassword' => md5($this->input->post('userPassword', true)),
+			'userHakAkses' => $this->input->post('userHakAkses', true),
+		);
+		}
+
+		$ubah = $this->M_pos->update('userId',$userId,'users',$data);
+		// var_dump($ubah);
+		// die();
+
+		if($ubah){
+                $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+            );
+                redirect(base_url());
+            }else{
+                 $this->session->set_flashdata(
+                'msg', 
+                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+            );
+                redirect(base_url());
             }
 		
 	}
