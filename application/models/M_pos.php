@@ -20,6 +20,10 @@ class M_pos extends CI_Model {
          return $query = $this->db->get($table)->result();  
     }
 
+     function cek_login($where){      
+        return $this->db->get_where('users',$where);
+    }
+
     function list_data_where($param_id, $id, $table){
        return $this->db->get_where($table, array($param_id => $id));
     }

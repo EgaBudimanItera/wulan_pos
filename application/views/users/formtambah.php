@@ -57,7 +57,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Password</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="userPassword" required name="userPassword" />
+                       <input type="password" class="span6" id="userPassword" required name="userPassword" />
                        <span class="help-inline"></span>
                     </div>
                   </div>
@@ -71,7 +71,7 @@
                          <option value="Penjualan">Penjualan</option>
                          <option value="Keuangan">Keuangan</option>
                          <option value="Pimpinan">Pimpinan</option>
-                         <option value="Administrator">Administrator</option>
+                         
                        </select>
                        <span class="help-inline"></span>
                     </div>
