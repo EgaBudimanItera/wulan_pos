@@ -601,12 +601,14 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `userId` int(11) NOT NULL AUTO_INCREMENT,
   `userNama` varchar(20) DEFAULT NULL,
-  `userPassword` varchar(30) DEFAULT NULL,
+  `userPassword` varchar(50) DEFAULT NULL,
   `userHakAkses` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
+
+insert  into `users`(`userId`,`userNama`,`userPassword`,`userHakAkses`) values (20,'pimpinan','202cb962ac59075b964b07152d234b70','Pimpinan'),(21,'gudang','202cb962ac59075b964b07152d234b70','Gudang'),(22,'penjualan','202cb962ac59075b964b07152d234b70','Penjualan'),(23,'keuangan','202cb962ac59075b964b07152d234b70','Keuangan');
 
 /* Trigger structure for table `bayarpiutang` */
 
