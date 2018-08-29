@@ -167,7 +167,7 @@
                 <?php
                 }
                 ?>
-                <li class="has-sub <?php if($link=='satuan'||$link=="barang"||$link=="pelanggan"||$link=="supplier"){echo'active';}?>">
+                <!-- <li class="has-sub <?php if($link=='satuan'||$link=="barang"||$link=="pelanggan"||$link=="supplier"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-book"></i></span> Master
                         <span class="arrow"></span>
@@ -213,7 +213,7 @@
                         
                        
                     </ul>
-                </li>
+                </li> -->
                
                 
             </ul>

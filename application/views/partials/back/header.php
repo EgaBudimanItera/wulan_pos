@@ -55,8 +55,8 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url() ?>c_users/formreset/"><i class="icon-user"></i> Ganti Password</a></li>
-                                <li><a href="<?=base_url()?>secure/logoutadmin"><i class="icon-key"></i> Log Out</a></li>
+                                <li><a href="<?php echo base_url() ?>c_users/formreset/<?php echo $this->session->userdata('userId')?>"><i class="icon-user"></i> Ganti Password</a></li>
+                                <li><a href="<?=base_url()?>c_admin/logout"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->

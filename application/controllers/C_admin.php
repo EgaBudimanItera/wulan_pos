@@ -19,15 +19,17 @@ class C_admin extends CI_Controller {
           'userNama'=>$namauser,
           'userPassword'=>$password,
     );
-    $cek=$this->M_pos->cek_login($where)->num_rows(); 
+    $cek=$this->M_pos->cek_login($where)->num_rows();
+    
     if($cek!=0){
       $data_session = array(
           'userNama' => $namauser,
-          'userHakakses'=>$this->M_pos->cek_login($where)->row()->userHakakses,
+          'userHakakses'=>$this->M_pos->cek_login($where)->row()->userHakAkses,
           'userId'=>$this->M_pos->cek_login($where)->row()->userId,
           'status' => "login",  
       );
-
+      // var_dump($data_session);
+      // die(); 
       $this->session->set_userdata($data_session);
       echo '<script>alert("Selamat Datang "'.$namauser.')</script>';
       echo'<script>window.location.href="'.base_url().'c_dashboard";</script>';
@@ -37,4 +39,11 @@ class C_admin extends CI_Controller {
       echo'<script>window.location.href="'.base_url().'c_admin";</script>';
     }
   }
+
+  public function logout(){
+        session_destroy();
+        echo 'please wait..';
+        echo'<script>window.location.href="'.base_url().'";</script>';
+  }
+  
 }
