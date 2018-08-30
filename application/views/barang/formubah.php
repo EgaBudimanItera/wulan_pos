@@ -44,7 +44,7 @@
                   </button>
                 </div>
                 <br>
-                <form action="<?=base_url()?>c_barang/ubah_barang/<?=$barang->brngId?>" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_barang/ubah_barang/<?=$barang->brngId?>" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Barang</label>
                     <div class="controls">
@@ -88,7 +88,13 @@
                        <span class="help-inline"></span>
                     </div>
                   </div> 
-                  
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Gambar Barang</label>
+                    <div class="controls">
+                       <input type="file" class="span6" id="brngGambar" required name="brngGambar" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div> 
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Ubah Data</button>
                     <!-- <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button> -->

@@ -119,33 +119,81 @@ class C_barang extends CI_Controller {
 	}
 
 	public function ubah_barang($brngId){
-
-		$data = array(
+		if (!is_uploaded_file($_FILES['brngGambar']['tmp_name'])) {
+			$data = array(
 			'brngKode' => $this->input->post('brngKode', true),
 			'brngNama' => $this->input->post('brngNama', true),
 			'brngStunId' => $this->input->post('brngStunId', true),
 			'brngHpp' => $this->input->post('brngHpp', true),
 			'brngHargaJual' => $this->input->post('brngHargaJual', true),
 			'brngStokAkhir' => $this->input->post('brngStokAkhir', true),
-		);
+			);
 
-		$ubah = $this->M_pos->update('brngId',$brngId,'barang',$data);
-		// var_dump($ubah);
-		// die();
+			$ubah = $this->M_pos->update('brngId',$brngId,'barang',$data);
+			// var_dump($ubah);
+			// die();
 
-		if($ubah){
-                $this->session->set_flashdata(
-                'msg', 
-                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
-            );
-                redirect(c_barang);
+			if($ubah){
+	                $this->session->set_flashdata(
+	                'msg', 
+	                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+	            );
+	                redirect(c_barang);
+	            }else{
+	                 $this->session->set_flashdata(
+	                'msg', 
+	                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+	            );
+	                redirect(c_barang/formubah/$brngId);
+	            }
+		}else{
+
+			$config ['upload_path'] = './assets/file_upload';
+            $config ['allowed_types'] = 'jpg|jpeg|png|PNG|JPG|JPEG';
+            $config ['max_size'] = '1024';
+
+            $this->upload->initialize($config);
+            if ( ! $this->upload->do_upload('brngGambar')){
+                $error = $this->upload->display_errors();
+                // var_dump($error);
+                // die();
+
+                $this->session->set_flashdata('msg', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a> '.$error.' </div>' );
             }else{
-                 $this->session->set_flashdata(
-                'msg', 
-                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
-            );
-                redirect(c_barang/formubah/$brngId);
+            	$upload_data = $this->upload->data();
+            	$data = array(
+				'brngKode' => $this->input->post('brngKode', true),
+				'brngNama' => $this->input->post('brngNama', true),
+				'brngStunId' => $this->input->post('brngStunId', true),
+				'brngHpp' => $this->input->post('brngHpp', true),
+				'brngHargaJual' => $this->input->post('brngHargaJual', true),
+				'brngStokAkhir' => $this->input->post('brngStokAkhir', true),
+				'brngGambar'=>$upload_data['file_name']
+				);
+
+				$ubah = $this->M_pos->update('brngId',$brngId,'barang',$data);
+				// var_dump($ubah);
+				// die();
+
+				if($ubah){
+		                $this->session->set_flashdata(
+		                'msg', 
+		                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil diubah !</div>'
+		            );
+		                redirect(c_barang);
+		            }else{
+		                 $this->session->set_flashdata(
+		                'msg', 
+		                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal diubah !</div>'
+		            );
+		                redirect(c_barang/formubah/$brngId);
+		            }
+
+
             }
+
+		}
+		
 		
 	}
 
