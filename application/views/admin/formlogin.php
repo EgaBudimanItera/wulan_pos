@@ -38,7 +38,7 @@ Website: http://thevectorlab.net/
   <!-- BEGIN LOGIN -->
   <div id="login">
     <!-- BEGIN LOGIN FORM -->
-    <form id="loginform" class="form-vertical no-padding no-margin" action="<?=base_url()?>c_admin/loginadmin" method="POST">
+    <form id="loginform" class="form-vertical no-padding no-margin" action="<?=base_url()?>admin/loginadmin" method="POST">
       <div class="lock">
           <i class="icon-lock"></i>
       </div>

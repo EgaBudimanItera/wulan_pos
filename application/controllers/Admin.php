@@ -36,7 +36,7 @@ class Admin extends CI_Controller {
     }
     else{
       echo '<script>alert("Maaf, Nama User / Password Anda Salah")</script>';
-      echo'<script>window.location.href="'.base_url().'c_admin";</script>';
+      echo'<script>window.location.href="'.base_url().'admin";</script>';
     }
   }
 
