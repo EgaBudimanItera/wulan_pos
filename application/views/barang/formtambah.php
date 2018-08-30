@@ -94,7 +94,13 @@
                        <span class="help-inline"></span>
                     </div>
                   </div> 
-                
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Gambar Barang</label>
+                    <div class="controls">
+                       <input type="file" class="span6" id="brngGambar" required name="brngGambar" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div> 
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Simpan Data</button>
                     <!-- <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button> -->
