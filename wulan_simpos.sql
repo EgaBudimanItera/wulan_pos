@@ -42,6 +42,7 @@ CREATE TABLE `barang` (
   `brngHpp` double NOT NULL DEFAULT '0',
   `brngHargaJual` double NOT NULL DEFAULT '0',
   `brngStokAkhir` int(11) NOT NULL DEFAULT '0',
+  `brngGambar` text,
   PRIMARY KEY (`brngId`),
   KEY `brngId` (`brngId`),
   KEY `FK_barang` (`brngStunId`),
@@ -50,7 +51,7 @@ CREATE TABLE `barang` (
 
 /*Data for the table `barang` */
 
-insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`) values (1,'B001','Rantai Motor',1,20000,30000,330),(2,'B002','Oli',1,30000,40000,100),(3,'B003','Roda',2,35000,50000,50),(4,'B004','Baut',2,2000,3500,1200);
+insert  into `barang`(`brngId`,`brngKode`,`brngNama`,`brngStunId`,`brngHpp`,`brngHargaJual`,`brngStokAkhir`,`brngGambar`) values (1,'B001','Rantai Motor',1,20000,30000,330,NULL),(2,'B002','Oli',1,30000,40000,100,NULL),(3,'B003','Roda',2,35000,50000,50,NULL),(4,'B004','Baut',2,2000,3500,1200,NULL);
 
 /*Table structure for table `bayarpiutang` */
 
