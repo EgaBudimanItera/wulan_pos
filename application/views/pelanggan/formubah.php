@@ -68,6 +68,20 @@
                     </div>
                   </div>
                   <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">NIK</label>
+                    <div class="controls">
+                        <input type="text" class="span6" id="plgnNik" required name="plgnNik" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
+                  <div class="control-group primary">
+                    <label class="control-label" for="inputWarning">Email</label>
+                    <div class="controls">
+                        <input type="text" class="span6" id="plgnEmail"  name="plgnEmail" />
+                       <span class="help-inline"></span>
+                    </div>
+                  </div>
+                  <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Telp 1</label>
                     <div class="controls">
                        <input type="number" class="span6" id="plgnTelp1" required name="plgnTelp1" value="<?=@$pelanggan->plgnTelp1?>" />
