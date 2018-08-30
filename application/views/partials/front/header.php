@@ -101,12 +101,10 @@
           </li>
           <li class="dropdown "> <a href="#">Tentang Kami</a>
           </li>
-          <li class="dropdown "> <a href="#">Bantuan</a>
+          <li class="dropdown "> <a href="#">Produk</a>
           </li>
           
-          <li class="dropdown <?php if($link=='pendaftaran'){echo'active';}?>"> <a href="<?=base_url()?>nasabah_control/pendaftaran">Pendaftaran Nasabah Baru</a>
-          </li>
-          <li class="dropdown <?php if($link=='loginnasabah'){echo'active';}?>"> <a href="<?=base_url()?>nasabah_control/loginnasabah">Login Nasabah</a>
+          <li class="dropdown <?php if($link=='loginpelanggan'){echo'active';}?>"> <a href="<?=base_url()?>nasabah_control/loginnasabah">Login Pelanggan</a>
           
           </li>
           

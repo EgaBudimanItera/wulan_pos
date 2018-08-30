@@ -3,7 +3,7 @@
 <div class="footer-bottom">
 <div class="container">
 <div class="row">
-<div class="col-xs-6"> &copy; 2018</div>
+<div class="col-xs-6" align="left"> &copy; 2018</div>
 
 </div>
 </div>
