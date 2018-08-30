@@ -44,7 +44,7 @@
                   </button>
                 </div>
                 <br>
-                <form action="<?=base_url()?>c_barang/tambah_barang" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_barang/tambah_barang" role="form" method="post" class="form-horizontal" enctype="multipart/form-data">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Barang</label>
                     <div class="controls">

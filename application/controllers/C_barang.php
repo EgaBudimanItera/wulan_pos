@@ -6,6 +6,8 @@ class C_barang extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('M_pos');
+		$this->load->library('upload');
+		$this->load->library('image_lib');
 	}
 
 	public function index(){
@@ -39,30 +41,81 @@ class C_barang extends CI_Controller {
 	}
 
 	public function tambah_barang(){
-		$brngKode=$this->M_pos->kode_barang();
-		$data = array(
-			'brngKode' => $brngKode,
-			'brngNama' => $this->input->post('brngNama', true),
-			'brngStunId' => $this->input->post('brngStunId', true),
-			'brngHpp' => $this->input->post('brngHpp', true),
-			'brngHargaJual' => $this->input->post('brngHargaJual', true),
-			'brngStokAkhir' => $this->input->post('brngStokAkhir', true),
-		);
 
-		$simpan = $this->M_pos->simpan_data($data,'barang');
-		if($simpan){
-                $this->session->set_flashdata(
-                'msg', 
-                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
-            );
-                redirect(c_barang);
-            }else{
-                $this->session->set_flashdata(
-                'msg', 
-                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
-            );
-                redirect(c_barang/formtambah);
-            }
+		
+		if (!is_uploaded_file($_FILES['brngGambar']['tmp_name'])) {
+
+			$brngKode=$this->M_pos->kode_barang();
+			$data = array(
+				'brngKode' => $brngKode,
+				'brngNama' => $this->input->post('brngNama', true),
+				'brngStunId' => $this->input->post('brngStunId', true),
+				'brngHpp' => $this->input->post('brngHpp', true),
+				'brngHargaJual' => $this->input->post('brngHargaJual', true),
+				'brngStokAkhir' => $this->input->post('brngStokAkhir', true),
+			);
+			$simpan = $this->M_pos->simpan_data($data,'barang');
+			if($simpan){
+	                $this->session->set_flashdata(
+	                'msg', 
+	                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+	            );
+	                redirect(c_barang);
+	            }else{
+	                $this->session->set_flashdata(
+	                'msg', 
+	                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+	            );
+	                redirect(c_barang/formtambah);
+	            }
+
+		}else{
+
+			$config ['upload_path'] = './assets/file_upload';
+            $config ['allowed_types'] = 'jpg|jpeg|png|PNG|JPG|JPEG';
+            $config ['max_size'] = '1024';
+
+            $this->upload->initialize($config);
+            if ( ! $this->upload->do_upload('brngGambar')){
+                $error = $this->upload->display_errors();
+                // var_dump($error);
+                // die();
+
+                $this->session->set_flashdata('msg', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a> '.$error.' </div>' );
+               
+                }else{
+                	$upload_data = $this->upload->data();
+
+					$brngKode=$this->M_pos->kode_barang();
+					$data = array(
+						'brngKode' => $brngKode,
+						'brngNama' => $this->input->post('brngNama', true),
+						'brngStunId' => $this->input->post('brngStunId', true),
+						'brngHpp' => $this->input->post('brngHpp', true),
+						'brngHargaJual' => $this->input->post('brngHargaJual', true),
+						'brngStokAkhir' => $this->input->post('brngStokAkhir', true),
+						'brngGambar'=>$upload_data['file_name']
+					);
+
+					$simpan = $this->M_pos->simpan_data($data,'barang');
+					if($simpan){
+			                $this->session->set_flashdata(
+			                'msg', 
+			                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil disimpan !</div>'
+			            );
+			                redirect(c_barang);
+			            }else{
+			                $this->session->set_flashdata(
+			                'msg', 
+			                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal disimpan !</div>'
+			            );
+			                redirect(c_barang/formtambah);
+			            }
+	        	}
+
+		}
+
+		
 	}
 
 	public function ubah_barang($brngId){
