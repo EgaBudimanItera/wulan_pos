@@ -34,15 +34,28 @@
               <div class="col-md-3">
                 <div class="form-group">
                  <img src="<?=base_url()?>assets/file_upload/<?=$l->brngGambar?>" width ="250px" height="150px"> 
-                 <center><?=$l->brngNama?></center>
+
+                 <center><strong><?=$l->brngNama?></strong></center>
+                 <br>
                  <?php
                   if(!empty($userHakakses)){
                  ?>
-                 <center><button class="btn btn-primary">Beli</button></center> 
+                 
                  <?php
                   }
                  ?>
-                 
+                 <!-- <center><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#detailbarangModal"><i class="icon-plus-sign"> Beli Produk</i></a></center>  -->
+
+                 <center>
+                  <div class="col-md-6">
+                    <input name="password" type="text" value="" class="form-control" style="color:black" /> 
+                  </div>
+                  <div class="col-md-6">
+                    <a href="#" class="btn btn-danger"><i class="icon-plus-sign"> Beli</i></a>
+                  </div>
+
+                 </center> 
+                <br>
                 </div>
               </div>
             <?php    
@@ -54,3 +67,23 @@
     </div>
   </div>
 </section>
+
+<div class="modal fade" id="detailbarangModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-wrapper">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header panel-heading">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel1">Tambahkan Barang</h4>
+        </div>
+        <div class="modal-body">
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  
+</script>
