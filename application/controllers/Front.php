@@ -68,10 +68,21 @@ class Front extends CI_Controller {
 
 	public function orderproduk(){
 		$Id=$this->M_pos->cekidpelanggan();
-		$query="SELECT * FROM orderpenjualan where opnjPlgnId='$Id' ORDER BY opnjId DESC";
+		$query="SELECT * FROM orderpenjualan WHERE opnjPlgnId='$Id' ORDER BY opnjId DESC";
 		$data=array(
 		   'page'=>'front/orderproduk',
 		   'link'=>'orderproduk',
+		   'list' => $this->M_pos->kueri($query)->result(),
+		);
+		$this->load->view('partials/front/wrapper',$data);
+	}
+
+	public function cart(){
+		$Id=$this->M_pos->cekidpelanggan();
+		$query="SELECT * FROM detorderpenjualan_temp JOIN barang on dopjBrngId=brngId WHERE dopjCreatedBy='$Id' ORDER BY dopjBrngId DESC";
+		$data=array(
+		   'page'=>'front/cart',
+		   'link'=>'cart',
 		   'list' => $this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/front/wrapper',$data);

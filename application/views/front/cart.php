@@ -10,7 +10,7 @@
               <li>&nbsp;</li>
               <li>&nbsp;</li>
             </ol>
-            <h1><i class="fa fa-user"></i> Form List Order Produk</h1>
+            <h1><i class="fa fa-user"></i> Keranjang Belanja</h1>
           </div>
         </div>
       </div>
@@ -26,10 +26,11 @@
           <thead>
             <tr>
               <th class="col-md-1">No</th>
-              <th class="col-md-3">No Faktur</th>
-              <th class="col-md-4">Keterangan</th> 
-              <th class="col-md-2">Total Harga</th>
-              <th class="col-md-1">Status</th>
+              <th class="col-md-1">Kode Barang</th>
+              <th class="col-md-3">Nama Barang</th> 
+              <th class="col-md-2">Harga Satuan</th>
+              <th class="col-md-2">Jumlah</th>
+              <th class="col-md-2">Subtotal</th>
               <th class="col-md-1">Aksi</th>
             </tr>    
           </thead>
@@ -37,34 +38,28 @@
             
             <?php
               $no=1;
+              $total=0;
               foreach ($list as $l){
             ?>
               <tr>
                  <td><?=$no++?></td>
-                 <td><?=$l->opnjNoFaktur?></td>
-                 <td><?=$l->opnjKet?></td>
-                 <td><?php echo number_format($l->opnjTotalOrder)?></td>
-                 <td><?=$l->opnjStatusOrder?></td>
-                
+                 <td><?=$l->brngKode?></td>
+                 <td><?=$l->brngNama?></td>
+                 <td><?php echo number_format($l->dopjHarga)?></td>
+                 <td><?=$l->dopjJumlah?></td>
+                 <td><?php echo number_format($l->dopjJumlah*$l->dopjHarga)?></td>
                  <td>
-                  <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="#" >Detail
-                     
-                  </a>
-                  <?php 
-                    if($l->opnjStatusOrder=='Order'){
-                  ?>
-                    <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="#" >Hapus
-                    
-                    </a> 
-                  <?php
-                    }
-
-                  ?>
+                  <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="#" >Hapus</a> 
                  </td>
                </tr>  
             <?php
+             $total=$total+($l->dopjJumlah*$l->dopjHarga);
               }
             ?>
+            <tr>
+              <td colspan="5">Total Harga </td>
+              <td colspan="2"><?php echo number_format($total)?></td>
+            </tr>
           </tbody>
         </table>
       </div>
