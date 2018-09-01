@@ -74,13 +74,13 @@
                         <li class="<?php if($link=='pelanggan'){echo'active';}?>"><a href="<?=base_url()?>c_pelanggan">Pelanggan</a></li>
                     </ul>
                 </li>
-                <li class="has-sub <?php if($link=='pembelian' ||$link=="penjualan"||$link=="returpembelian"||$link=="returpenjualan"||$link=="bayarutang"||$link=="bayarpiutang"){echo'active';}?>">
+                <li class="has-sub <?php if($link=='pembelian' ||$link=="penjualan"||$link=="returpembelian"||$link=="returpenjualan"||$link=="bayarutang"||$link=="bayarpiutang"||$link=="orderpenjualan"){echo'active';}?>">
                     <a href="javascript:;" class="">
                         <span class="icon-box"><i class="icon-cogs"></i></span> Transaksi
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                       
+                        <li class="<?php if($link=='orderpenjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_orderpenjualan">Order Penjualan</a></li>
                         <li class="<?php if($link=='penjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_penjualan">Penjualan</a></li>
                        
                         <li class="<?php if($link=='returpenjualan'){echo'active';}?>" ><a href="<?=base_url()?>c_returpenjualan">Retur Penjualan</a></li>

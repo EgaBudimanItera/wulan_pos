@@ -141,26 +141,6 @@ class M_pos extends CI_Model {
         return $kodejadi;
     }
 
-    function kode_pembelian(){
-        //K002
-        $this->db->select('Right(pmblNoFaktur,4) as kode',false);
-        
-        $this->db->order_by('pmblId','desc');
-        $this->db->limit(1);
-        $query = $this->db->get('pembelian');
-
-        if($query->num_rows()<>0){
-            $data = $query->row();
-            $kode = intval($data->kode)+1;
-        }else{
-            $kode = 1;
-
-        }
-        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
-        $kodejadi  = "PB".$kodemax;
-        return $kodejadi;
-    }
-
     function kode_supplier(){
         //K002
         $this->db->select('Right(splrKode,3) as kode',false);

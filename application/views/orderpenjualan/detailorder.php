@@ -9,14 +9,14 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Detail Penjualan
+          Detail Order Penjualan
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Penjualan</a><span class="divider">&nbsp;</span></li>
-          <li><a href="#">Detail Penjualan</a><span class="divider-last">&nbsp;</span></li>
+          <li><a href="#">Order Penjualan</a><span class="divider">&nbsp;</span></li>
+          <li><a href="#">Order Detail Penjualan</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
       </div>
@@ -37,13 +37,6 @@
                 </span>
             </div>
             <div class="widget-body">
-             
-              <div>
-                <button type="button" class="btn btn-primary" onclick="self.history.back()">
-                  <i class="icon-arrow-left"></i> Kembali
-                </button>
-              </div>
-              <br>
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
@@ -61,7 +54,7 @@
                     $no=1;
                     $total=0;
                     foreach($list as $l){
-                      $subtotal=$l->dtpjJumlah*$l->dtpjHarga;
+                      $subtotal=$l->dopjJumlah*$l->dopjHarga;
                       $total=$total+$subtotal;
                   ?>
                   <tr>
@@ -69,8 +62,8 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->brngKode?></td>
                     <td><?=$l->brngNama?></td>
-                    <td><?php echo number_format($l->dtpjHarga)?></td>
-                    <td><?=$l->dtpjJumlah?></td>
+                    <td><?php echo number_format($l->dopjHarga)?></td>
+                    <td><?=$l->dopjJumlah?></td>
                     <td><?php echo number_format($subtotal)?></td>
                   </tr>
                   <?php
@@ -81,6 +74,15 @@
                     <td><?php echo number_format($total)?></td>
                   </tr> 
                 </tbody>
+              </table>
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <a data-toggle="tooltip" data-placement="bottom" title="Terima Order" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/terimaorder/<?=$l->opnjId?>">
+                      <i class="icon-money"></i> Terima Order Produk                
+                    </a>
+                  </td>
+                </tr>
               </table>
             </div>
           </div>

@@ -9,13 +9,13 @@
                     
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-          Data Penjualan
+          Data Order Penjualan
         </h3>
         <ul class="breadcrumb">
           <li>
               <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
           </li>
-          <li><a href="#">Penjualan</a><span class="divider-last">&nbsp;</span></li>
+          <li><a href="#">Order Penjualan</a><span class="divider-last">&nbsp;</span></li>
         </ul>
         <!-- END PAGE TITLE & BREADCRUMB-->
       </div>
@@ -36,8 +36,6 @@
                 </span>
             </div>
             <div class="widget-body">
-             <div><a href="<?=base_url()?>c_penjualan/formtambah" class="btn btn-primary">Tambah Data</a></div>
-             <br>
              <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
 
               <table class="table table-striped table-bordered" id="sample_1">
@@ -48,7 +46,7 @@
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">Pelanggan</th>
                     <th class="hidden-phone">Total</th>
-                    
+                    <th class="hidden-phone">Status Order</th>
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
@@ -60,16 +58,17 @@
                 ?>
                   <tr>
                     <td><?=$no++;?></td>
-                    <td><?=$l->pnjlNoFaktur?></td>
-                    <td><?=$l->pnjlTanggal?></td>
+                    <td><?=$l->opnjNoFaktur?></td>
+                    <td><?=$l->opnjTanggal?></td>
                     <td><?=$l->plgnNama?></td>
-                    <td><?php echo number_format($l->pnjlTotalJual)?></td>
+                    <td><?php echo number_format($l->opnjTotalJual)?></td>
+                    <td><?=$l->opnjStatusOrder?></td>
                     <td>
                       <center>
-                          <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_penjualan/formdetail/<?=$l->pnjlId?>">
+                          <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/formdetail/<?=$l->opnjId?>">
                             <i class="icon-eye-open"></i>                
                           </a>
-                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_penjualan/hapusall/<?=$l->pnjlId?>" onclick="return confirm('yakin akan menghapus data ini?')">
+                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_orderpenjualan/hapusall/<?=$l->opnjId?>" onclick="return confirm('yakin akan menghapus data ini?')">
                             <i class="icon-trash"></i>  
                           </a>
                         </center>
@@ -90,6 +89,8 @@
   <!-- END PAGE CONTAINER-->
 </div>
 <!-- END PAGE -->
+
+
   
 
 
