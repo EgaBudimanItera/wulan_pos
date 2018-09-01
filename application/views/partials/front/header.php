@@ -4,7 +4,7 @@
 <!-- Mirrored from www.slashdown.nl/starhotel/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2014 17:40:50 GMT -->
 <head>
 <meta charset="utf-8">
-<title>Aplikasi Permohonan Kredit</title>
+<title>Aplikasi Point Of Sale</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" href="#">
 

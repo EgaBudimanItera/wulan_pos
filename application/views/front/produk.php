@@ -37,10 +37,21 @@
             <?php
               foreach ($listbarang as $l){
             ?>
-              <div class="col-md-<?php echo $bootstrapColWidth; ?>">
+              <div class="col-md-<?php echo $bootstrapColWidth; ?> col-sm-6">
                 <div class="thumbnail">
-                  <img src="<?=base_url()?>assets/file_upload/<?=$l->brngGambar?>" width ="250px" height="150px"> 
-                  <center><h3><?=$l->brngNama?></h3></center>
+                  <img src="<?=base_url()?>assets/file_upload/<?=$l->brngGambar?>" class="image-responsive" width ="250px" height="150px"> 
+                  <center><h4><?=$l->brngNama?></h4></center>
+                  <center><h4><?php echo 'Rp '.number_format($l->brngHargaJual);?></h4></center>
+                 <!--  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <input name="password" type="password" value="" class="form-control" style="color:black" /> 
+                    </div>
+                    <div class="col-md-6">
+                      <a href="#" class="btn btn-danger " data-toggle="modal" data-target="#detailbarangModal"><i class="icon-plus-sign"> Beli Produk</i></a>
+                    </div>
+                  </div> -->
+                  
+                  
                 </div>
                  
                 <!-- <div class="form-group">
