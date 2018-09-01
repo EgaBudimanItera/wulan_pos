@@ -1,3 +1,7 @@
+<?php
+  $hakakses=$this->session->userdata('Hakakses');
+?> 
+
 <!DOCTYPE HTML>
 <html>
 
@@ -101,10 +105,24 @@
           </li>
           <li class="dropdown <?php if($link=='produk'){echo'active';}?>"> <a href="<?=base_url()?>front/produk">Produk</a>
           </li>
-          
+          <?php
+            if(empty($hakakses)){
+          ?>
           <li class="dropdown <?php if($link=='loginpelanggan'){echo'active';}?>"> <a href="<?=base_url()?>front/loginpelanggan">Login Pelanggan</a>
-          
           </li>
+          <?php
+            }else if(!empty($hakakses)){
+          ?>
+          <li class="dropdown <?php if($link=='orderproduk'){echo'active';}?>"> <a href="<?=base_url()?>front/orderproduk">Order Produk</a>
+          </li>
+          <li class="dropdown <?php if($link=='cart'){echo'active';}?>"> <a href="<?=base_url()?>front/cart">Keranjang Belanja</a>
+          </li>
+          <li class="dropdown <?php if($link=='logout'){echo'active';}?>"> <a href="<?=base_url()?>front/logout">Logout</a>
+          </li>
+          <?php    
+            }
+          ?>
+          
           
         </ul>
       </div>

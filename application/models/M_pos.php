@@ -20,8 +20,12 @@ class M_pos extends CI_Model {
          return $query = $this->db->get($table)->result();  
     }
 
-     function cek_login($where){      
+    function cek_login($where){      
         return $this->db->get_where('users',$where);
+    }
+
+    function cek_login_pelanggan($where){      
+        return $this->db->get_where('pelanggan',$where);
     }
 
     function list_data_where($param_id, $id, $table){
@@ -52,9 +56,13 @@ class M_pos extends CI_Model {
     }
 
     function usercreated(){
-         // $createdby=$this->session->userdata('userNama');
-        $createdby='admin';
+        $createdby=$this->session->userdata('userNama');
         return $createdby;
+    }
+
+    function cekidpelanggan(){
+        $Id=$this->session->userdata('Id');
+        return $Id;
     }
 
     function list_join($table1, $table2, $param1){

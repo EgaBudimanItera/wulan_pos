@@ -1,5 +1,5 @@
 <?php
-  $hakakses=$this->session->userdata('userHakakses');
+  $hakakses=$this->session->userdata('Hakakses');
 ?> 
 
 <!-- Rooms -->
