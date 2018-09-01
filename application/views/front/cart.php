@@ -62,6 +62,15 @@
             </tr>
           </tbody>
         </table>
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td><a data-toggle="tooltip" data-placement="bottom" title="Belanja Produk Lain" class="btn btn-warning" href="<?=base_url()?>front/produk" >Belanja Produk Lain</a> </td>
+             <td>&nbsp</td>
+             <td>&nbsp</td>
+             <td>&nbsp</td>
+             <td><a data-toggle="tooltip" data-placement="bottom" title="Simpan Belanja" class="btn  btn-success" href="<?=base_url()?>front/simpanallorder" >Simpan Belanja</a> </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

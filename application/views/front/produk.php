@@ -21,6 +21,7 @@
     </div>
   </div>
 </section>
+<div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
 <br>
 <section class="rooms mt100">
   <div class="container">
@@ -96,5 +97,9 @@
 </div>
 
 <script type="text/javascript">
-  
+  $(document).ready(function(){
+    $("#info-alert").fadeTo(2000,50).slideUp(50,function(){
+          $("#info-alert").slideUp(50);
+    });    
+  });
 </script>

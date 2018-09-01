@@ -141,6 +141,26 @@ class M_pos extends CI_Model {
         return $kodejadi;
     }
 
+    function kode_pembelian(){
+        //K002
+        $this->db->select('Right(pmblNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('pmblId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('pembelian');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "PB".$kodemax;
+        return $kodejadi;
+    }
+
     function kode_supplier(){
         //K002
         $this->db->select('Right(splrKode,3) as kode',false);
@@ -238,6 +258,26 @@ class M_pos extends CI_Model {
         }
         $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
         $kodejadi  = "RB".date("my").$kodemax;
+        return $kodejadi;
+    }
+
+    function kode_order(){
+        //K002
+        $this->db->select('Right(opnjNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('opnjId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('orderpenjualan');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "OP".date("my").$kodemax;
         return $kodejadi;
     }
 
