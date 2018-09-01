@@ -27,13 +27,24 @@
     <div class="row room-list fadeIn appear"> 
       <div class="col-md-12">
         <form class="clearfix" role="form" method="post" action="<?=base_url()?>front/authpelanggan">
+          <?php
+//Columns must be a factor of 12 (1,2,3,4,6,12)
+          $numOfCols = 4;
+          $rowCount = 0;
+          $bootstrapColWidth = 12 / $numOfCols;
+          ?>
           <div class="row">
             <?php
               foreach ($listbarang as $l){
             ?>
-              <div class="col-md-3">
-                <div class="form-group">
-                 <img src="<?=base_url()?>assets/file_upload/<?=$l->brngGambar?>" width ="250px" height="150px"> 
+              <div class="col-md-<?php echo $bootstrapColWidth; ?>">
+                <div class="thumbnail">
+                  <img src="<?=base_url()?>assets/file_upload/<?=$l->brngGambar?>" width ="250px" height="150px"> 
+                  <center><h3><?=$l->brngNama?></h3></center>
+                </div>
+                 
+                <!-- <div class="form-group">
+                
 
                  <center><strong><?=$l->brngNama?></strong></center>
                  <br>
@@ -44,19 +55,8 @@
                  <?php
                   }
                  ?>
-                 <!-- <center><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#detailbarangModal"><i class="icon-plus-sign"> Beli Produk</i></a></center>  -->
-
-                 <center>
-                  <div class="col-md-6">
-                    <input name="password" type="text" value="" class="form-control" style="color:black" /> 
-                  </div>
-                  <div class="col-md-6">
-                    <a href="#" class="btn btn-danger"><i class="icon-plus-sign"> Beli</i></a>
-                  </div>
-
-                 </center> 
-                <br>
-                </div>
+                    <a href="#" class="btn btn-danger " data-toggle="modal" data-target="#detailbarangModal"><i class="icon-plus-sign"> Beli Produk</i></a>
+                </div> -->
               </div>
             <?php    
               }
