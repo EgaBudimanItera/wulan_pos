@@ -95,16 +95,14 @@
       </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          
-        
           <li class="dropdown <?php if($link=='beranda' ||$link==""){echo'active';}?>"> <a href="<?=base_url()?>">Beranda</a>
           </li>
           <li class="dropdown "> <a href="#">Tentang Kami</a>
           </li>
-          <li class="dropdown "> <a href="#">Produk</a>
+          <li class="dropdown <?php if($link=='produk'){echo'active';}?>"> <a href="<?=base_url()?>front/produk">Produk</a>
           </li>
           
-          <li class="dropdown <?php if($link=='loginpelanggan'){echo'active';}?>"> <a href="<?=base_url()?>nasabah_control/loginnasabah">Login Pelanggan</a>
+          <li class="dropdown <?php if($link=='loginpelanggan'){echo'active';}?>"> <a href="<?=base_url()?>front/loginpelanggan">Login Pelanggan</a>
           
           </li>
           
