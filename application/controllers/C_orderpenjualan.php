@@ -141,24 +141,24 @@ class C_orderpenjualan extends CI_Controller {
      $pnjlJatuhTempo=date('Y-m-d',$pnjlJatuhTempo);
      //data untk simpan ke tabel penjualan
      $pnjlNoFaktur=$this->M_pos->kode_penjualan();
-     $datapenjualan=array(
-        'pnjlNoFaktur'=>$pnjlNoFaktur,
-        'pnjlTanggal'=>$pnjlTanggal,
-        'pnjlPlgnId'=>$this->input->post('pnjlPlgnId',true),
-        'pnjlKet'=>$this->input->post('pnjlKet',true),
-        'pnjlTotalJual'=>$pnjlTotalJual,
-        'pnjlUangMuka'=>$pnjlUangMuka,
-        'pnjlDiskon'=>$pnjlDiskon,
-        'pnjlOngkir'=>$pnjlOngkir,
-        'pnjlSisaBayar'=>(string) $pnjlSisaBayar ,
-        'pnjlJatuhTempo'=>$pnjlJatuhTempo,
-     );
+     // $datapenjualan=array(
+     //    'pnjlNoFaktur'=>$pnjlNoFaktur,
+     //    'pnjlTanggal'=>$pnjlTanggal,
+     //    'pnjlPlgnId'=>$this->input->post('pnjlPlgnId',true),
+     //    'pnjlKet'=>$this->input->post('pnjlKet',true),
+     //    'pnjlTotalJual'=>$pnjlTotalJual,
+     //    'pnjlUangMuka'=>$pnjlUangMuka,
+     //    'pnjlDiskon'=>$pnjlDiskon,
+     //    'pnjlOngkir'=>$pnjlOngkir,
+     //    'pnjlSisaBayar'=>(string) $pnjlSisaBayar ,
+     //    'pnjlJatuhTempo'=>$pnjlJatuhTempo,
+     // );
 
      
-      //simpan ke penjualan
-     $simpanpenjualan=$this->M_pos->simpan_data($datapenjualan,'penjualan');
+     //  //simpan ke penjualan
+     // $simpanpenjualan=$this->M_pos->simpan_data($datapenjualan,'penjualan');
 
-     $pnjlId = $this->db->insert_id();
+     //$pnjlId = $this->db->insert_id();
      
      $dataorderpenjualan=array(
         'opnjNoFaktur'=>$pnjlNoFaktur,
@@ -167,12 +167,12 @@ class C_orderpenjualan extends CI_Controller {
         'opnjKet'=>$this->input->post('pnjlKet',true),
         'opnjTotalOrder'=>$pnjlTotalJual,
         'opnjStatusOrder'=>'Order',
-        'opnjPnjlId'=>$pnjlId,
+        'opnjPnjlId'=>'',
      );
-     
+
      $simpanorderpenjualan=$this->M_pos->simpan_data($dataorderpenjualan,'orderpenjualan');
 
-     //$pnjlId = $this->db->insert_id();
+     $pnjlId = $this->db->insert_id();
 
       $querytemp="SELECT * FROM detorderpenjualan_temp where dopjCreatedBy='$createdby'";
      //data untuk simpan ke tabel det penjualan
@@ -187,23 +187,23 @@ class C_orderpenjualan extends CI_Controller {
          $i++;  
       }
 
-      foreach ($orderpenjualan_temp as $row) {
-         $ins2[$i]['dtpjPnjlId']          = $pnjlId;
-         $ins2[$i]['dtpjBrngId']          = $row->dopjBrngId;
-         $ins2[$i]['dtpjJumlah']          = $row->dopjJumlah;
-         $ins2[$i]['dtpjHarga']           = $row->dopjHarga;
-         $ins2[$i]['dtpjDiskon']          = $row->dopjDiskon;
-         $i++;  
-      } 
+      // foreach ($orderpenjualan_temp as $row) {
+      //    $ins2[$i]['dtpjPnjlId']          = $pnjlId;
+      //    $ins2[$i]['dtpjBrngId']          = $row->dopjBrngId;
+      //    $ins2[$i]['dtpjJumlah']          = $row->dopjJumlah;
+      //    $ins2[$i]['dtpjHarga']           = $row->dopjHarga;
+      //    $ins2[$i]['dtpjDiskon']          = $row->dopjDiskon;
+      //    $i++;  
+      // } 
 
      //simpan ke det penjualan
-     $simpandet=$this->M_pos->insertbatch('detpenjualan',$ins2);
+     //$simpandet=$this->M_pos->insertbatch('detpenjualan',$ins2);
 
      $simpandet=$this->M_pos->insertbatch('detorderpenjualan',$ins);
      //hapus det penjualan temp
      $hapustem=$this->M_pos->hapus('dopjCreatedBy',$createdby,'detorderpenjualan_temp');
 
-     if($simpanpenjualan && $simpandet && $hapustem){
+     if($simpanorderpenjualan && $simpandet && $hapustem){
         $this->session->set_flashdata(
             'msg', 
             '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Succes</strong> Simpan Data Penjualan Berhasil </div>'
