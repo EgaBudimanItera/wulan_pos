@@ -78,7 +78,7 @@
               <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td>
-                    <a data-toggle="tooltip" data-placement="bottom" title="Terima Order" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/terimaorder/<?=$l->opnjId?>">
+                    <a data-toggle="tooltip" data-placement="bottom" title="Terima Order" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/terimaorder/<?=$l->dopjOpnjId?>">
                       <i class="icon-money"></i> Terima Order Produk                
                     </a>
                   </td>
