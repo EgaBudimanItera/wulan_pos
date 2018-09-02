@@ -63,7 +63,7 @@
                     <td><?=$l->opnjNoFaktur?></td>
                     <td><?=$l->opnjTanggal?></td>
                     <td><?=$l->plgnNama?></td>
-                    <td><?php echo number_format($l->opnjTotalJual)?></td>
+                    <td><?php echo number_format($l->opnjTotalOrder)?></td>
                     <td><?=$l->opnjStatusOrder?></td>
                     <td>
                       <center>
