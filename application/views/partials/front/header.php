@@ -1,10 +1,14 @@
+<?php
+  $hakakses=$this->session->userdata('Hakakses');
+?> 
+
 <!DOCTYPE HTML>
 <html>
 
 <!-- Mirrored from www.slashdown.nl/starhotel/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2014 17:40:50 GMT -->
 <head>
 <meta charset="utf-8">
-<title>Aplikasi Permohonan Kredit</title>
+<title>Aplikasi Point Of Sale</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="shortcut icon" href="#">
 
@@ -95,18 +99,30 @@
       </div>
       <div id="navbar-collapse-grid" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          
-        
           <li class="dropdown <?php if($link=='beranda' ||$link==""){echo'active';}?>"> <a href="<?=base_url()?>">Beranda</a>
           </li>
           <li class="dropdown "> <a href="#">Tentang Kami</a>
           </li>
-          <li class="dropdown "> <a href="#">Produk</a>
+          <li class="dropdown <?php if($link=='produk'){echo'active';}?>"> <a href="<?=base_url()?>front/produk">Produk</a>
           </li>
-          
-          <li class="dropdown <?php if($link=='loginpelanggan'){echo'active';}?>"> <a href="<?=base_url()?>nasabah_control/loginnasabah">Login Pelanggan</a>
-          
+          <?php
+            if(empty($hakakses)){
+          ?>
+          <li class="dropdown <?php if($link=='loginpelanggan'){echo'active';}?>"> <a href="<?=base_url()?>front/loginpelanggan">Login Pelanggan</a>
           </li>
+          <?php
+            }else if(!empty($hakakses)){
+          ?>
+          <li class="dropdown <?php if($link=='orderproduk'){echo'active';}?>"> <a href="<?=base_url()?>front/orderproduk">Order Produk</a>
+          </li>
+          <li class="dropdown <?php if($link=='cart'){echo'active';}?>"> <a href="<?=base_url()?>front/cart">Keranjang Belanja</a>
+          </li>
+          <li class="dropdown <?php if($link=='logout'){echo'active';}?>"> <a href="<?=base_url()?>front/logout">Logout</a>
+          </li>
+          <?php    
+            }
+          ?>
+          
           
         </ul>
       </div>

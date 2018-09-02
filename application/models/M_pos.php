@@ -20,8 +20,12 @@ class M_pos extends CI_Model {
          return $query = $this->db->get($table)->result();  
     }
 
-     function cek_login($where){      
+    function cek_login($where){      
         return $this->db->get_where('users',$where);
+    }
+
+    function cek_login_pelanggan($where){      
+        return $this->db->get_where('pelanggan',$where);
     }
 
     function list_data_where($param_id, $id, $table){
@@ -52,9 +56,13 @@ class M_pos extends CI_Model {
     }
 
     function usercreated(){
-         // $createdby=$this->session->userdata('userNama');
-        $createdby='admin';
+        $createdby=$this->session->userdata('userNama');
         return $createdby;
+    }
+
+    function cekidpelanggan(){
+        $Id=$this->session->userdata('Id');
+        return $Id;
     }
 
     function list_join($table1, $table2, $param1){
@@ -230,6 +238,26 @@ class M_pos extends CI_Model {
         }
         $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
         $kodejadi  = "RB".date("my").$kodemax;
+        return $kodejadi;
+    }
+
+    function kode_order(){
+        //K002
+        $this->db->select('Right(opnjNoFaktur,4) as kode',false);
+        
+        $this->db->order_by('opnjId','desc');
+        $this->db->limit(1);
+        $query = $this->db->get('orderpenjualan');
+
+        if($query->num_rows()<>0){
+            $data = $query->row();
+            $kode = intval($data->kode)+1;
+        }else{
+            $kode = 1;
+
+        }
+        $kodemax = str_pad($kode,4,"0",STR_PAD_LEFT);
+        $kodejadi  = "OP".date("my").$kodemax;
         return $kodejadi;
     }
 

@@ -44,7 +44,7 @@
                   </button>
                 </div>
                 <br>
-                <form action="<?=base_url()?>c_penjualan/simpanall" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_orderpenjualan/simpanall" role="form" method="post" class="form-horizontal">
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">No Faktur</label>
                     <div class="controls">
@@ -144,7 +144,7 @@
             <div class="control-group">
               <label class="control-label">Nama Barang</label>
               <div class="controls">
-                 <select class="select2-containerpopulate" style="width: 300px" data-placeholder="Pilih Barang" tabindex="1" name="dtpjBrngId" id="dtpjBrngId">
+                 <select class="select2-containerpopulate" style="width: 300px" data-placeholder="Pilih Barang" tabindex="1" name="dopjBrngId" id="dopjBrngId">
                     <option value=""></option>
                     <!-- ambil nilai satuan dari tabel satuan -->
                     <?php
@@ -160,14 +160,21 @@
             <div class="control-group">
               <label class="control-label" for="inputWarning">Harga Jual Satuan</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpjHarga" readonly="" name="dtpjHarga" />
+                 <input type="text" class="span12" id="dopjHarga" readonly="" name="dopjHarga" />
                  
               </div>
             </div> 
             <div class="control-group">
               <label class="control-label" for="inputWarning">Jumlah Jual</label>
               <div class="controls">
-                 <input type="number" class="span12" id="dtpjJumlah" required name="dtpjJumlah" />
+                 <input type="number" class="span12" id="dopjJumlah" required name="dopjJumlah" />
+                 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputWarning">Diskon</label>
+              <div class="controls">
+                 <input type="number" class="span12" id="dopjDiskon" required name="dopjDiskon" />
                  
               </div>
             </div> 

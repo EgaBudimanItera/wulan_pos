@@ -44,6 +44,10 @@ class C_pelanggan extends CI_Controller {
 			'plgnTelp2' => $this->input->post('plgnTelp2', true),
 			'plgnAlamat' => $this->input->post('plgnAlamat', true),
 			'plgnPiutang' => $this->input->post('plgnPiutang', true),
+			'plgnNik' => $this->input->post('plgnNik', true),
+			'plgnNamaUser' => $this->input->post('plgnNamaUser', true),
+			'plgnEmail' => $this->input->post('plgnEmail', true),
+			'plgnPassword'=>md5('123'),
 		);
 
 		$simpan = $this->M_pos->simpan_data($data,'pelanggan');
@@ -72,6 +76,8 @@ class C_pelanggan extends CI_Controller {
 			'plgnTelp2' => $this->input->post('plgnTelp2', true),
 			'plgnAlamat' => $this->input->post('plgnAlamat', true),
 			'plgnPiutang' => $this->input->post('plgnPiutang', true),
+			'plgnNik' => $this->input->post('plgnNik', true),
+			'plgnEmail' => $this->input->post('plgnEmail', true),
 		);
 
 		$ubah = $this->M_pos->update('plgnId',$plgnId,'pelanggan',$data);
