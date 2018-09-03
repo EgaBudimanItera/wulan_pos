@@ -92,7 +92,7 @@
                   <div id="tampilpenjualan">
                   </div>
                   <br>
-                  <div class="control-group primary">
+                  <!-- <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Uang Muka</label>
                     <div class="controls">
                         <input type="number" class="span6" id="pnjlUangMuka" value="0" required name="pnjlUangMuka" />
@@ -112,7 +112,7 @@
                         <input type="number" class="span6" id="pmblOngkir" value="0" required name="pmblOngkir" />
                        <span class="help-inline"></span>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i> Simpan Penjualan</button>
                     

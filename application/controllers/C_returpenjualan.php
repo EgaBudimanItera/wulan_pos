@@ -119,7 +119,7 @@ class C_returpenjualan extends CI_Controller {
 	     //data untk simpan ke tabel penjualan
 	     $datareturpenjualan=array(
 	        'rtpjNoFaktur'=>$rtpjNoFaktur,
-	        'rtpjTanggal'=>date("Y-m-m", strtotime($rtpjTanggal)),
+	        'rtpjTanggal'=>date("Y-m-d", strtotime($rtpjTanggal)),
 	        'rtpjPnjlId'=>$rtpjPnjlId,
 	        'rtpjPlgnId'=>$rtpjPlgnId,
 	        'rtpjNilai'=>$rtpjNilai,

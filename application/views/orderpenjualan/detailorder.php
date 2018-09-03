@@ -78,9 +78,15 @@
               <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td>
+                    <?php if($o->opnjStatusOrder == 'Order'){?>
                     <a data-toggle="tooltip" data-placement="bottom" title="Terima Order" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/terimaorder/<?=$l->dopjOpnjId?>">
                       <i class="icon-money"></i> Terima Order Produk                
                     </a>
+                    <?php }else{?>
+                      <a data-toggle="tooltip" data-placement="bottom" title="Terima Order" class="btn btn-xs btn-success" href="#">
+                      <i class="icon-check"></i> Order Produk Diterima             
+                    </a>
+                    <?php }?>
                   </td>
                 </tr>
               </table>

@@ -24,16 +24,73 @@ class C_orderpenjualan extends CI_Controller {
             'link'=>'orderpenjualan',
             'list'=>$this->M_pos->kueri($query)->result(),
             'opnjId'=>$nofaktur,
+            'o'=>$this->M_pos->kueri("SELECT * FROM orderpenjualan WHERE opnjId='$nofaktur'")->row(),
         );
         $this->load->view('partials/back/wrapper',$data);
     }
 
     public function terimaorder($nofaktur){
        //simpan ke penjualan
+        $orderpenjualan=$this->M_pos->kueri("SELECT * FROM orderpenjualan WHERE opnjId='$nofaktur'")->row();
+        $pnjlTanggal=date("Y-m-d", strtotime($orderpenjualan->opnjTanggal));
+        $pnjlJatuhTempo=strtotime('30 days',strtotime($pnjlTanggal));
+        $pnjlJatuhTempo=date("Y-m-d",$pnjlJatuhTempo);
+        $datapenjualan=array(
+            'pnjlNoFaktur'=>$orderpenjualan->opnjNoFaktur,
+            'pnjlTanggal'=>date("Y-m-d", strtotime($orderpenjualan->opnjTanggal)),
+            'pnjlPlgnId'=>$orderpenjualan->opnjPlgnId,
+            'pnjlKet'=>$orderpenjualan->opnjKet,
+            'pnjlTotalJual'=>$orderpenjualan->opnjTotalOrder,
+            'pnjlUangMuka'=>'',
+            'pnjlDiskon'=>'',
+            'pnjlOngkir'=>'',
+            'pnjlSisaBayar'=>'' ,
+            'pnjlJatuhTempo'=>$pnjlJatuhTempo,
+         );
+        //var_dump($datapenjualan);
+        //die();
+        $simpanpenjualan=$this->M_pos->simpan_data($datapenjualan,'penjualan');
+
+
        //simpan ke detpenjualan
+        $pnjlId = $this->db->insert_id();
+        $detorderpenjualan=$this->M_pos->kueri("SELECT * FROM detorderpenjualan WHERE dopjOpnjId='$nofaktur'")->result();
+        
+        $i=0;
+        foreach ($detorderpenjualan as $row) {
+         $ins2[$i]['dtpjPnjlId']          = $pnjlId;
+         $ins2[$i]['dtpjBrngId']          = $row->dopjBrngId;
+         $ins2[$i]['dtpjJumlah']          = $row->dopjJumlah;
+         $ins2[$i]['dtpjHarga']           = $row->dopjHarga;
+         $ins2[$i]['dtpjDiskon']          = $row->dopjDiskon;
+         $i++;  
+      } 
+      $simpandet=$this->M_pos->insertbatch('detpenjualan',$ins2);
        //update order penjuala
-        //1.ubah status dari Order -> Sales
+      //1.ubah status dari Order -> Sales
         //2.ubah opnjPnjlId dari '' -> pnjlId
+      $data=array(
+        'opnjStatusOrder'=>'Sales',
+        'opnjPnjlId'=>$pnjlId);
+      $ubah = $this->M_pos->update('opnjId',$nofaktur,'orderpenjualan',$data);
+
+      if($simpanpenjualan && $detorderpenjualan && $simpandet && $ubah){
+        $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Succes</strong> Simpan Data Penjualan Berhasil </div>'
+        );
+        redirect(base_url().'c_orderpenjualan'); //location
+     }
+     else{
+        $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Penjualan Gagal </div>'
+        );
+        redirect(base_url().'c_orderpenjualan'); //location
+     }
+
+
+        
     }
 
     public function formtambah(){
