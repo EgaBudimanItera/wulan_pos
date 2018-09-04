@@ -18,7 +18,9 @@
   </div>
 </section>
 <br>
+<div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
 <section class="rooms mt100">
+
   <div class="container">
     <div class="row room-list fadeIn appear"> 
       <div class="col-md-12">
@@ -49,7 +51,7 @@
                  <td><?=$l->dopjJumlah?></td>
                  <td><?php echo number_format($l->dopjJumlah*$l->dopjHarga)?></td>
                  <td>
-                  <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="#" >Hapus</a> 
+                  <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>front/hapusdetail/<?=$l->dopjId?>" >Hapus</a> 
                  </td>
                </tr>  
             <?php

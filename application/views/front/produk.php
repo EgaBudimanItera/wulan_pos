@@ -21,7 +21,7 @@
     </div>
   </div>
 </section>
-<div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
+
 <br>
 <!-- <section class="rooms mt100">
   <div class="container">
@@ -59,7 +59,7 @@
     </div>
   </div>
 </section> -->
-
+<div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
 <section class="rooms mt100">
   <div class="container">
     <div class="row room-list">
@@ -80,7 +80,7 @@
             </div>
             <div class="content">
               <div class="row">
-                <a href="#" class="btn btn-primary btn-block">
+                <a href="#" id="<?=$l->brngId?>" class="btn btn-primary btn-block barang" data-toggle="modal" data-target="#detailbarangModal">
                   Beli Produk  
                 </a>  
               </div>  
@@ -96,6 +96,50 @@
   </div>
 </section>
 
+<div class="modal fade" id="detailbarangModal"  role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-wrapper">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header panel-heading">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel1">Tambahkan Barang</h4>
+        </div>
+        <div class="modal-body">
+          <!--id="formTambahBarang"-->
+          <form class="form-horizontal" id="formTambahBarang" role="form" method="post">
+            <div class="control-group">
+              <label class="control-label">Nama Barang</label>
+              <div class="controls">
+                 <input type="text" class="span12" name="brngNama" id="brngNama" readonly />
+                 <input type="hidden" class="span12" name="brngId" id="brngId" readonly />
+                 <input type="hidden" class="span12" name="dopjDiskon" id="dopjDiskon" value="0" readonly>
+                 
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="inputWarning">Harga</label>
+              <div class="controls">
+                 <input type="text" class="span12" id="brngHargaJual" name="brngHargaJual" readonly/>
+                 
+              </div>
+            </div> 
+            <div class="control-group">
+              <label class="control-label" for="inputWarning">Jumlah</label>
+              <div class="controls">
+                 <input type="number" class="span12" id="dtpjJumlah" required name="dtpjJumlah" />
+                 
+              </div>
+            </div> 
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" onclick="simpan()"><i class="icon-ok"></i> Tambahkan keKeranjang</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <script type="text/javascript">
@@ -104,4 +148,65 @@
           $("#info-alert").slideUp(50);
     });    
   });
+
+  $(".barang").click(function () {     
+        var kode = $(this).attr('id');
+        $modal = $('#detailbarangModal');
+        $.ajax({
+            url: "<?=base_url()?>c_barang/getbarang/"+kode,
+            type: 'GET',
+            success: function(res) {
+                var res_ = JSON.parse(res);
+                $('#brngId').val(res_.brngId);
+                $('#brngHargaJual').val(res_.brngHargaJual);
+                $('#brngNama').val(res_.brngNama);
+                
+            }
+        })
+      });
+  function simpan(){
+        var brngId=$('#brngId').val();
+        var dtpjJumlah=$('#dtpjJumlah').val();
+        var brngHargaJual=$('#brngHargaJual').val();
+        var dopjDiskon=$('#dopjDiskon').val();
+        $modal = $('#detailbarangModal');
+        $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>front/simpanorder_temp',
+            data: 'dopjBrngId='+brngId+'&dopjJumlah='+dtpjJumlah+'&dopjHarga='+brngHargaJual+'&dopjDiskon='+dopjDiskon,
+            dataType: 'JSON',
+            success: function(msg){
+                if(msg.status == 'success'){
+                    
+                    loadTable();
+                    $('#detailbarangModal').modal('hide');
+                    $('#formTambahBarang')[0].reset();
+                    $('#dopjBrngId').val(null).trigger('change');
+                    
+                }else if(msg.status == 'fail'){
+                   loadTable();
+                   alert('gagal tambah data');
+                    $('#detailbarangModal').modal('hide');
+                    $('#formTambahBarang')[0].reset();
+                    $('#dopjBrngId').val(null).trigger('change');
+                }
+            }
+          });
+      };
+      //function untuk hapus temporary
+    function hapustemp(id) {
+        $.ajax({
+            url: "<?=base_url()?>c_orderpenjualan/hapusdetail/"+id,
+            type: "GET",
+            dataType: 'JSON',
+            success: function(msg) {
+                if(msg.status == 'success'){
+                    loadTable();                    
+                }else if(msg.status == 'fail'){
+                   loadTable();
+                   alert('gagal hapus data');
+                }
+            }
+        })
+    } ; 
 </script>

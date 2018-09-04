@@ -101,20 +101,22 @@ class Front extends CI_Controller {
             'dopjJumlah'=>$dopjJumlah,
             'dopjHarga'=>$dopjHarga,
             'dopjDiskon'=>$dopjDiskon,
-            'dopjCreatedBy'=>$createdby,
+            'dopjCreatedBy'=>$dopjCreatedBy,
         );
         $simpandetailtemp=$this->M_pos->simpan_data($data,'detorderpenjualan_temp');
         if($simpandetailtemp){
-            $this->session->set_flashdata(
-                'msg', 
-                '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
-            );
+            // $this->session->set_flashdata(
+            //     'msg', 
+            //     '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil ditambah !</div>'
+            // );
+          echo'<script>location.reload();</script>';
             redirect(base_url().'front/produk'); //location
          }else{
-           $this->session->set_flashdata(
-                'msg', 
-                '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
-            );
+           // $this->session->set_flashdata(
+           //      'msg', 
+           //      '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah !</div>'
+           //  );
+          
            redirect(base_url().'front/produk'); //location
          }  
 
@@ -145,8 +147,8 @@ class Front extends CI_Controller {
     	   	   'opnjKet'=>$opnjKet,
     	   	   'opnjTanggal'=>$opnjTanggal,
     	   	   'opnjPlgnId'=>$opnjPlgnId,
-    	   	   'onpjStatusOrder'=>$onpjStatusOrder,
-    	   	   'onpjPnjlId'=>$onpjPnjlId,
+    	   	   'opnjStatusOrder'=>$onpjStatusOrder,
+    	   	   'opnjPnjlId'=>$onpjPnjlId,
     	   	   'opnjTotalOrder'=>$opnjTotalOrder,
     	   	);
     	   	  //simpan ke orderpenjualan
@@ -186,4 +188,23 @@ class Front extends CI_Controller {
     	
     	}
 	}
+  public function hapusdetail($dopjId){
+
+    $hapusdetailtemp=$this->M_pos->hapus('dopjId',$dopjId,'detorderpenjualan_temp');
+    if($hapusdetailtemp){
+        $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+        );
+        redirect(base_url().'front/cart');
+        //echo json_encode(array('status'=>'success'));
+     }else{
+       $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+        );
+       redirect(base_url().'front/cart');
+       //echo json_encode(array('status'=>'fail'));
+     }      
+   }
 }
