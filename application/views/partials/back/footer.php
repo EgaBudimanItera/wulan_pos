@@ -50,7 +50,9 @@
 
 </html>
 <?php
-  if (!empty($script))$this->load->view($script);
+  if (!empty($script)) {
+    $this->load->view($script);
+  }
 ?>
 <script type="text/javascript">
   $(document).ready(function(){

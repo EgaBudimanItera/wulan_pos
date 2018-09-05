@@ -48,7 +48,6 @@
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">Pelanggan</th>
                     <th class="hidden-phone">Total</th>
-                    
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
@@ -90,6 +89,7 @@
   <!-- END PAGE CONTAINER-->
 </div>
 <!-- END PAGE -->
+
   
 
 
