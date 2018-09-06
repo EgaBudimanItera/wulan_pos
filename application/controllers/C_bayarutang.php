@@ -145,7 +145,7 @@ class C_bayarutang extends CI_Controller {
 	     //data untk simpan ke tabel pembelian
 	     $databayarutang=array(
 	        'byruNoFaktur'=>$nofaktur,
-	        'byruTanggal'=>date("Y-m-m", strtotime($byruTanggal)),
+	        'byruTanggal'=>date("Y-m-d", strtotime($byruTanggal)),
 	        'byruSplrId'=>$byruSplrId,
 	        'byruTotalBayar'=>$byruTotalBayar,
 	        'byruKet'=>$byruKet,

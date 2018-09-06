@@ -131,7 +131,7 @@ class C_returpembelian extends CI_Controller {
 	     //data untk simpan ke tabel pembelian
 	     $datareturpembelian=array(
 	        'rtpbNoFaktur'=>$rtpbNoFaktur,
-	        'rtpbTanggal'=>date("Y-m-m", strtotime($rtpbTanggal)),
+	        'rtpbTanggal'=>date("Y-m-d", strtotime($rtpbTanggal)),
 	        'rtpbPmblId'=>$rtpbPmblId,
 	        'rtpbSplrId'=>$rtpbSplrId,
 	        'rtpbNilai'=>$rtpbNilai,

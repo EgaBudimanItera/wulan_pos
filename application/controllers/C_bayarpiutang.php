@@ -133,7 +133,7 @@ class C_bayarpiutang extends CI_Controller {
 	    }
 	    else{
 	     // $byruNoFaktur=$this->input->post('pmblKode',true);
-	     $byrpTanggal=$this->input->post('byrpTanggal',true);
+	     $byrpTanggal=date_format(date_create($this->input->post('byrpTanggal',true)),"Y-m-d");
 	     $byrpPlgnId=$this->input->post('byrpPlgnId',true);
 	     $byrpTotalBayar=$pmblTotalBayaPiutang;
 	     $byrpKet=$this->input->post('pmblKet',true);
@@ -141,7 +141,7 @@ class C_bayarpiutang extends CI_Controller {
 	     //data untk simpan ke tabel pembelian
 	     $databayarpiutang=array(
 	        'byrpNoFaktur'=>$nofaktur,
-	        'byrpTanggal'=>date("Y-m-m", strtotime($byrpTanggal)),
+	        'byrpTanggal'=>$byrpTanggal,
 	        'byrpPlgnId'=>$byrpPlgnId,
 	        'byrpTotalBayar'=>$byrpTotalBayar,
 	        'byrpKet'=>$byrpKet,
