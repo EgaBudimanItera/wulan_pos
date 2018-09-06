@@ -96,24 +96,58 @@
   </div>
 </section>
 
-<div class="modal fade" id="detailbarangModal"  role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+<div class="modal fade right" id="detailbarangModal"  role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="false">
   <div class="modal-wrapper">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
       <div class="modal-content">
+        <br>
+          <br>
+          <br>
         <div class="modal-header panel-heading">
+          
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel1">Tambahkan Barang</h4>
         </div>
         <div class="modal-body">
+          <form class="clearfix" role="form" method="post" id="formTambahBarang">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="subject" accesskey="S">Nama Barang</label>
+                    <input name="brngNama" id="brngNama" readonly  type="text" value="" class="form-control" style="color:black" />
+                    <input name="brngId" id="brngId" readonly  type="hidden" value="" class="form-control" style="color:black" />
+                    <input name="dopjDiskon" id="dopjDiskon" readonly  type="hidden" value="" class="form-control" style="color:black" />
+                  </div>
+                  <div class="form-group">
+                    <label for="subject" accesskey="S">Harga Jual</label>
+                    <input name="brngHargaJual" id="brngHargaJual" type="number" readonly value="" class="form-control" style="color:black" />
+                  </div>
+                  <div class="form-group">
+                    <label for="subject" accesskey="S">Jumlah</label>
+                    <input name="dtpjJumlah" id="dtpjJumlah" type="number" required value="" class="form-control" style="color:black" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button type="submit" class="btn  btn-lg btn-primary" onclick="simpan()"><i class="icon-ok"></i> Tambahkan ke Keranjang</button>
+              </div>
+            </div>
+          </form>
           <!--id="formTambahBarang"-->
-          <form class="form-horizontal" id="formTambahBarang" role="form" method="post">
-            <div class="control-group">
-              <label class="control-label">Nama Barang</label>
-              <div class="controls">
-                 <input type="text" class="span12" name="brngNama" id="brngNama" readonly />
-                 <input type="hidden" class="span12" name="brngId" id="brngId" readonly />
-                 <input type="hidden" class="span12" name="dopjDiskon" id="dopjDiskon" value="0" readonly>
-                 
+          <!-- <form class="clearfix" id="formTambahBarang" role="form" method="post">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <label class="control-label">Nama Barang</label>
+                  
+                     <input type="text" class="span12" name="brngNama" id="brngNama" readonly />
+                     <input type="hidden" class="span12" name="brngId" id="brngId" readonly />
+                     <input type="hidden" class="span12" name="dopjDiskon" id="dopjDiskon" value="0" readonly> 
+                  
+                </div> 
               </div>
             </div>
             <div class="control-group">
@@ -133,7 +167,7 @@
             <div class="form-actions">
               <button type="button" class="btn btn-primary" onclick="simpan()"><i class="icon-ok"></i> Tambahkan keKeranjang</button>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </div>

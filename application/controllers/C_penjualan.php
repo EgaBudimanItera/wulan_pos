@@ -8,10 +8,7 @@ class C_penjualan extends CI_Controller {
 		$this->load->model('M_pos');
 	}
 
-	public function index(){
-        
-         // var_dump($max_id);
-         // die();
+	public function index()
 		$data=array(
 			'page'=>'penjualan/datapenjualan',
 			'link'=>'penjualan',
@@ -22,17 +19,6 @@ class C_penjualan extends CI_Controller {
 	}
 
 	public function formtambah(){
-        // $max_id_awal = $this->M_pos->max_id('penjualan','pnjlNoFaktur','pnjlId','DESC');
-        // $max_id_awal = $max_id_awal->pnjlNoFaktur;
-        
-        // $cek_id = explode("-", $max_id_awal);
-        // // var_dump($cek_id);
-        // // die();
-        // if ($cek_id[0] != 'PENJ') {
-        //     $nofaktur = "PENJ-0001";
-        // }else{
-        //     $nofaktur = $this->M_pos->autonumber($max_id_awal,5,4);
-        // }
         $nofaktur=$this->M_pos->kode_penjualan();
 		$query="SELECT * FROM barang join satuan on(brngStunId=stunId)";
 		$data=array(

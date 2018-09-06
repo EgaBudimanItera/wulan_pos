@@ -30,8 +30,8 @@ if (basename(FCPATH)!='wulan_pos')
 else
 	$dir = basename(FCPATH);
 
-$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'];
-//$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/wulan_pos';
+//$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'];
+$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/wulan_pos';
 
 
 
