@@ -8,8 +8,8 @@ class C_penjualan extends CI_Controller {
 		$this->load->model('M_pos');
 	}
 
-	public function index()
-		$data=array(
+	public function index(){
+    	$data=array(
 			'page'=>'penjualan/datapenjualan',
 			'link'=>'penjualan',
 			'list'=>$this->M_pos->list_join('penjualan','pelanggan','pnjlPlgnId=plgnId'),

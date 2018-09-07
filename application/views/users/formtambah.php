@@ -70,6 +70,7 @@
                          <option value="Gudang">Gudang</option>
                          <option value="Penjualan">Penjualan</option>
                          <option value="Keuangan">Keuangan</option>
+                         <option value="Pembelian">Pembelian</option>
                          <option value="Pimpinan">Pimpinan</option>
                          
                        </select>
