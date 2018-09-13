@@ -30,9 +30,9 @@
 		<tr>
 			<td class="col-md-3">Logo</td>
 			<td class="col-md-9">
-				<h2>Laporan Kas</h2>
+				<h2>Invoice</h2>
 				<h4>Pasific Putra<br>
-					Periode : <?=date("d-m-Y",strtotime($daritanggal))?> s/d <?=date("d-m-Y",strtotime($hinggatanggal))?></h4>
+					No Invoice : <?=$nofaktur->pnjlNoFaktur?></h4>
 			</td>
 		</tr>
 	</table>
@@ -41,72 +41,41 @@
                 <thead>
                   <tr>
                     <th class="hidden-phone">No</th>
-                    <th class="hidden-phone">Tanggal</th>
-                    <th class="hidden-phone">No Faktur</th>
-                    <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Debet</th>
-                    <th class="hidden-phone">Kredit</th>
+                    <th class="hidden-phone">Kode Barang</th>
+                    <th class="hidden-phone">Nama Barang</th>
+                    <th class="hidden-phone">Harga</th>
+                    <th class="hidden-phone">Jumlah</th>
+                    <th class="hidden-phone">Subtotal</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     $no=1;
-                    $totaldebet=0;
-                    $totalkredit=0;
+                    $total=0;
                     foreach($list as $l){
+                      $subtotal=$l->dtpjJumlah*$l->dtpjHarga;
+                      $total=$total+$subtotal;
                   ?>
                   <tr>
+                    <!-- isi tabel det pembelian dengan no faktur terpilih -->
                     <td><?=$no++;?></td>
-                    <td><?=$l->cashTanggal;?></td>
-                    <td><?=$l->cashNoFaktur;?></td>
-                    <td ><?=$l->cashKet;?></td>
-                    <td align="right"><?php echo number_format($l->cashDebet)?></td>
-                    <td align="right"><?php echo number_format($l->cashKredit)?></td>
+                    <td><?=$l->brngKode?></td>
+                    <td><?=$l->brngNama?></td>
+                    <td><?php echo number_format($l->dtpjHarga)?></td>
+                    <td><?=$l->dtpjJumlah?></td>
+                    <td><?php echo number_format($subtotal)?></td>
                   </tr>
                   <?php
-                    
-                    $totaldebet=$totaldebet+($l->cashDebet);
-                    $totalkredit=$totalkredit+$l->cashKredit;
                     }
-                   
                   ?>
                   <tr>
-                    <td colspan="4">Total</td>
-                    <td align="right"><?php echo number_format($totaldebet)?></td>
-                    <td align="right"><?php echo number_format($totalkredit)?></td>
-                  </tr>
-                  <tr>
-                    <td colspan="4">Sisa Kas</td>
-                    <td colspan="2" align="right"><?php echo number_format($kas)?></td>
-                  </tr>
+                    <td colspan="5">Total</td><!--  penjumlahan dari subtotal-->
+                    <td><?php echo number_format($total)?></td>
+                  </tr> 
                 </tbody>
-                
               </table>
-              <table class="table">
-              	<thead>
-                  <tr>
-                    <th class="hidden-phone"></th>
-                    <th class="hidden-phone"></th>
-                    <th class="hidden-phone"></th>
-                    <th class="hidden-phone"></th>
-                    <th class="hidden-phone"></th>
-                    <th class="hidden-phone"></th>
-                  </tr>
-                </thead>
-              	<tbody>
-              		<tr>
-                		<td colspan="4">
-                			
-                		</td>
-                		<td colspan="2" style="float: right;">
-                			Bandar Lampung, <?=date("d-F-Y")?> <br><br><br><br>
-                			Kepala Keuangan <br>
-                			()
-                		</td>
-                	</tr>
-              	</tbody>
-                	
-                </table>
+              
 </body>
 <script src="<?php echo base_url() ?>assets/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">

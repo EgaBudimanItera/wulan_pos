@@ -31,7 +31,7 @@
       <td class="col-md-3">Logo</td>
       <td class="col-md-9">
         <h2>Laporan Stok</h2>
-        <h4>Perusahaan<br>
+        <h4>Pasific Putra<br>
           Periode : <?=date("d-m-Y",strtotime($daritanggal))?> s/d <?=date("d-m-Y",strtotime($hinggatanggal))?></h4>
       </td>
     </tr>

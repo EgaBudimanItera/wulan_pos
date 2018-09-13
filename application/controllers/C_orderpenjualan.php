@@ -295,4 +295,15 @@ class C_orderpenjualan extends CI_Controller {
        redirect(base_url().'c_orderpenjualan'); //location
      }      
    }
+
+   public function invoice($nofaktur){
+        $query="SELECT * FROM detorderpenjualan join barang on(dopjBrngId=brngId) WHERE dopjOpnjId='$nofaktur'";
+        $query2="SELECT *FROM orderpenjualan WHERE opnjId='$nofaktur'";
+        $data=array(
+            'list'=>$this->M_pos->kueri($query)->result(),
+            'nofaktur'=>$this->M_pos->kueri($query2)->row(),
+        );
+
+        $this->load->view('orderpenjualan/invoice',$data);
+   }
 }

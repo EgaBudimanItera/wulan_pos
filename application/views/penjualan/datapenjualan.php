@@ -65,6 +65,9 @@
                     <td><?php echo number_format($l->pnjlTotalJual)?></td>
                     <td>
                       <center>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Cetak Invoice" class="btn btn-xs btn-success" href="<?=base_url()?>c_penjualan/invoice/<?=$l->pnjlId?>">
+                            <i class="icon-print"></i>                
+                          </a>
                           <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_penjualan/formdetail/<?=$l->pnjlId?>">
                             <i class="icon-eye-open"></i>                
                           </a>

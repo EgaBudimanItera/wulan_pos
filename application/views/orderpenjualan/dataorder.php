@@ -67,6 +67,9 @@
                     <td><?=$l->opnjStatusOrder?></td>
                     <td>
                       <center>
+                        <a data-toggle="tooltip" data-placement="bottom" title="Cetak Invoice" class="btn btn-xs btn-success" href="<?=base_url()?>c_orderpenjualan/invoice/<?=$l->opnjId?>">
+                            <i class="icon-print"></i>                
+                          </a>
                           <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/formdetail/<?=$l->opnjId?>">
                             <i class="icon-eye-open"></i>                
                           </a>
