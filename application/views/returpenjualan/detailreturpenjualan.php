@@ -82,6 +82,7 @@
                           </button>
                         </a> 
                       </center>
+                    </td>
                   </tr>
                   <?php }?>
                 </tbody>

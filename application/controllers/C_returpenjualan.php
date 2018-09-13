@@ -187,4 +187,15 @@ class C_returpenjualan extends CI_Controller {
         echo json_encode($data);
 	}
 
+	public function invoice($rtpjId){
+        
+        $query2="SELECT * FROM returpenjualan WHERE rtpjId='$rtpjId'";
+        $data=array(
+            'list'=>$this->M_pos->list_join2_where('returpenjualan','detreturpenjualan','rtpjId=drpjRtpjId','barang','drpjBrngId=brngId','',array('drpjRtpjId'=>$rtpjId),''),
+            'nofaktur'=>$this->M_pos->kueri($query2)->row(),
+        );
+
+        $this->load->view('returpenjualan/invoice',$data);
+   }
+
 }
