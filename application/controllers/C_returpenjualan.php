@@ -52,7 +52,8 @@ class C_returpenjualan extends CI_Controller {
 	    $createdby=$this->M_pos->usercreated();
 	    // $createdby=$this->session->userdata('userNama');
 	    $hargajual=$this->input->post('hargajual',true);
-	    if($sisa<=0){
+
+	    if($sisa<0){
 	    	$this->session->set_flashdata(
 	            'msg', 
 	            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah Karena Retur Terlalu banyak!</div>'

@@ -15,8 +15,8 @@
 	              $('#dtpbBrngId').val(res_.dtpbBrngId);
 	              $('#dtpbPmblId').val(res_.dtpbPmblId);
 	              $('#dtpbJumlah').val(res_.dtpbJumlah);
-                  $('#returlalu').val(res_.jumlahretur);
-                  $('#hargabeli').val(res_.dtpbHarga);
+                $('#returlalu').val(res_.jumlahretur);
+                $('#hargabeli').val(res_.dtpbHarga);
 	          }
 	      })
 	  	});
@@ -27,11 +27,13 @@
         var drpbBrngId=$('#dtpbBrngId').val();
         var drpbJumlah=$('#drpbJumlah').val();
         var drpbPmblId=$('#dtpbPmblId').val();
+        var returlalu=$('#returlalu').val();
+        var dtpbJumlah=$('#dtpbJumlah').val();
         $modal = $('#returbeliModal');
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_returpembelian/tambahdetreturpembelian',
-            data: 'drpbBrngId='+drpbBrngId+'&drpbJumlah='+drpbJumlah+'&drpbPmblId='+drpbPmblId,
+            data: 'drpbBrngId='+drpbBrngId+'&drpbJumlah='+drpbJumlah+'&drpbPmblId='+drpbPmblId+'&dtpbJumlah='+dtpbJumlah+'&returlalu='+returlalu,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){

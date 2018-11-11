@@ -30,11 +30,14 @@
         var drpjBrngId=$('#dtpjBrngId').val();
         var drpjJumlah=$('#drpjJumlah').val();
         var drpjPnjlId=$('#dtpjPnjlId').val();
+        var dtpjJumlahJual=$('#dtpjJumlahJual').val();
+        var returlalu=$('#returlalu').val();
+
         $modal = $('#returjualModal');
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_returpenjualan/tambahdetreturpenjualan',
-            data: 'drpjBrngId='+drpjBrngId+'&drpjJumlah='+drpjJumlah+'&drpjPnjlId='+drpjPnjlId,
+            data: 'drpjBrngId='+drpjBrngId+'&drpjJumlah='+drpjJumlah+'&drpjPnjlId='+drpjPnjlId+'&dtpjJumlahJual='+dtpjJumlahJual+'&returlalu='+returlalu,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){

@@ -46,7 +46,7 @@ class C_users extends CI_Controller {
 	public function tambah_users(){
 		$data = array(
 			'userNama' => $this->input->post('userNama', true),
-			'userPassword' => md5($this->input->post('userPassword', true)),
+			'userPassword' => $this->input->post('userPassword', true),
 			'userHakAkses' => $this->input->post('userHakAkses', true),
 		);
 

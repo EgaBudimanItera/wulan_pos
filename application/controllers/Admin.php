@@ -14,7 +14,7 @@ class Admin extends CI_Controller {
 
 	public function loginadmin(){
     $namauser=$this->input->post('userNama',true);
-    $password=md5($this->input->post('userPassword',true));
+    $password=$this->input->post('userPassword',true);
     $where=array(
           'userNama'=>$namauser,
           'userPassword'=>$password,

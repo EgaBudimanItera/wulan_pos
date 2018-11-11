@@ -45,7 +45,7 @@ class C_barang extends CI_Controller {
 		
 		if (!is_uploaded_file($_FILES['brngGambar']['tmp_name'])) {
 
-			$brngKode=$this->M_pos->kode_barang();
+			$brngKode=$this->input->post('brngKode',true);
 			$data = array(
 				'brngKode' => $brngKode,
 				'brngNama' => $this->input->post('brngNama', true),

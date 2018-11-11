@@ -66,7 +66,9 @@ class C_returpembelian extends CI_Controller {
 	    $returlalu=$this->input->post('returlalu',true);
 	    $dtpbJumlah=$this->input->post('dtpbJumlah',true);
 	    $sisa=$dtpbJumlah-$returlalu-$drpbJumlah;
-	    if($sisa<=0){
+	    // var_dump('jumlah beli = '.$dtpbJumlah.' Jumlah retur lalu= '.$returlalu.'jumlah retur skr= '.$drpbJumlah.' SIsanya='.$sisa);
+	    // exit();
+	    if($sisa<0){
 	    	$this->session->set_flashdata(
 	            'msg', 
 	            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal ditambah Karena Retur Terlalu banyak!</div>'

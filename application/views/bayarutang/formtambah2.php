@@ -123,7 +123,7 @@
                     <?php
                             foreach($pembelian as $p){
                           ?>
-                          <option value=""></option>
+                          
                           <option value="<?=$p->pmblId?>"><?=$p->pmblNoFaktur?></option>
                           <?php    
                             }

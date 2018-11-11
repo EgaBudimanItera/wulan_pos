@@ -210,6 +210,7 @@ class C_bayarutang extends CI_Controller {
 
 	public function get_pembelian($pmblId){
 		$data=$this->M_pos->ambil('pmblId',$pmblId,'pembelian')->row_array();
+			
         echo json_encode($data);
 	}
 
