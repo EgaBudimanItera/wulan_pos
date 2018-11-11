@@ -22,7 +22,7 @@ class C_laputang extends CI_Controller {
 	  $splrId=$this->input->post('splrId',true);
 	  $daritanggal=date_format(date_create($this->input->post('daritanggal',true)),"Y-m-d");
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
-	  $query="SELECT * FROM hutang,supplier where htngSplrId='$splrId' and htngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $query="SELECT * FROM hutang,supplier where htngSplrId='$splrId' and htngTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and splrId='$splrId'";
 	  $data=array(
 			'page'=>'laputang/lihatdata',
 			'link'=>'laputang',

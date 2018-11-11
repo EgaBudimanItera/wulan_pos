@@ -394,7 +394,7 @@ CREATE TABLE `hutang` (
 
 /*Data for the table `hutang` */
 
-insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-10-15',1,'BU11180001','Pembayaran Hutang',0,50500000,0,-50500000),(2,'2018-10-16',2,'BU11180002','Pembayaran Hutang',0,14400000,0,-14400000),(3,'2018-10-17',3,'BU11180003','Pembayaran Hutang',0,7020000,0,-7020000),(4,'2018-11-01',8,'BU11180004','Pembayaran Hutang',0,1200000,0,-1200000),(5,'2018-11-07',9,'BU11180005','Pembayaran Hutang',0,5000000,0,-5000000);
+insert  into `hutang`(`htngId`,`htngTanggal`,`htngSplrId`,`htngNoFaktur`,`htngKet`,`htngAwal`,`htngDebet`,`htngKredit`,`htngAkhir`) values (1,'2018-10-15',1,'BU11180001','Pembayaran Hutang',0,50500000,50500000,0),(2,'2018-10-16',2,'BU11180002','Pembayaran Hutang',0,14400000,14400000,0),(3,'2018-10-17',3,'BU11180003','Pembayaran Hutang',0,7020000,7020000,0),(4,'2018-11-01',8,'BU11180004','Pembayaran Hutang',0,1200000,1200000,0),(5,'2018-11-07',9,'BU11180005','Pembayaran Hutang',0,5000000,5000000,0);
 
 /*Table structure for table `orderpenjualan` */
 
@@ -532,7 +532,7 @@ CREATE TABLE `piutang` (
 
 /*Data for the table `piutang` */
 
-insert  into `piutang`(`ptngId`,`ptngTanggal`,`ptngPlgnId`,`ptngNoFaktur`,`ptngKet`,`ptngAwal`,`ptngDebet`,`ptngKredit`,`ptngAkhir`) values (1,'2018-10-18',4,'PJ11180004','Penjualan Barang',0,257500,0,257500),(2,'2018-10-20',5,'PJ11180005','Penjualan Barang',0,485000,0,485000),(3,'2018-10-25',6,'PJ11180006','Penjualan Barang',0,154000,0,154000),(4,'1970-01-01',2,'RJ11180001','Retur Penjualan Kredit',0,0,45000,-45000),(5,'1970-01-01',5,'RJ11180002','Retur Penjualan Kredit',485000,0,94000,391000),(6,'2018-10-12',2,'BP11180001','Pembayaran Piutang',0,0,195000,-195000),(7,'2018-10-15',3,'BP11180002','Pembayaran Piutang',0,0,72500,-72500);
+insert  into `piutang`(`ptngId`,`ptngTanggal`,`ptngPlgnId`,`ptngNoFaktur`,`ptngKet`,`ptngAwal`,`ptngDebet`,`ptngKredit`,`ptngAkhir`) values (1,'2018-10-18',4,'PJ11180004','Penjualan Barang',0,257500,0,257500),(2,'2018-10-20',5,'PJ11180005','Penjualan Barang',0,485000,0,485000),(3,'2018-10-25',6,'PJ11180006','Penjualan Barang',0,154000,0,154000),(4,'1970-01-01',2,'RJ11180001','Retur Penjualan Kredit',0,45000,45000,0),(5,'1970-01-01',5,'RJ11180002','Retur Penjualan Kredit',485000,0,94000,391000),(6,'2018-10-12',2,'BP11180001','Pembayaran Piutang',0,195000,195000,0),(7,'2018-10-15',3,'BP11180002','Pembayaran Piutang',0,72500,72500,0);
 
 /*Table structure for table `returpembelian` */
 
