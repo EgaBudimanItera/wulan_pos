@@ -107,7 +107,7 @@ class C_returpenjualan extends CI_Controller {
 	    else{
 	     // $byruNoFaktur=$this->input->post('pnjlKode',true);
 	     $rtpjNoFaktur=$this->input->post('rtpjNoFaktur',true);
-	     $rtpjTanggal=$this->input->post('rtpjTanggal',true);
+	     $rtpjTanggal=date_format(date_create($this->input->post('rtpjTanggal',true)),"Y-m-d");
 	     $rtpjPnjlId=$this->input->post('pnjlId',true);
 	     $rtpjPlgnId=$this->input->post('pnjlPlgnId',true);
 	     $rtpjNilai=$pnjlTotalReturPenjualan;

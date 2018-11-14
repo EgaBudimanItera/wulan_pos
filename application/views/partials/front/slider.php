@@ -6,7 +6,7 @@
         <!-- Slide 1 -->
         <li data-transition="fade" data-slotamount="7" data-masterspeed="1500" > 
           <!-- Main Image --> 
-          <img src="<?=base_url()?>assets/front-end/images/slides/ola1.jpg" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat"> 
+          <img src="<?=base_url()?>assets/front-end/images/slides/1.jpg" style="opacity:0;" alt="slidebg1"  data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat"> 
           <!-- Layers -->           
           <!-- Layer 1 -->
           <div class="caption sft revolution-starhotel bigtext"  
@@ -21,12 +21,12 @@
     <!-- Slide 2 -->
         <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
           <!-- Main Image --> 
-          <img src="<?=base_url()?>assets/front-end/images/slides/ola2.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"> 
+          <img src="<?=base_url()?>assets/front-end/images/slides/2.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"> 
         </li>
             <!-- Slide 3 -->
         <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000" > 
           <!-- Main Image --> 
-          <img src="<?=base_url()?>assets/front-end/images/slides/ola3.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"> 
+          <img src="<?=base_url()?>assets/front-end/images/slides/3.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat"> 
       </ul>
     </div>
   </div>

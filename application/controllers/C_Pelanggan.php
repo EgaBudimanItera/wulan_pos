@@ -47,7 +47,7 @@ class C_pelanggan extends CI_Controller {
 			'plgnNik' => $this->input->post('plgnNik', true),
 			'plgnNamaUser' => $this->input->post('plgnNamaUser', true),
 			'plgnEmail' => $this->input->post('plgnEmail', true),
-			'plgnPassword'=>md5('123'),
+			'plgnPassword'=>'123',
 		);
 
 		$simpan = $this->M_pos->simpan_data($data,'pelanggan');

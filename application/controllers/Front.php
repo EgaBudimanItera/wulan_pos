@@ -34,7 +34,7 @@ class Front extends CI_Controller {
 
 	public function authpelanggan(){
 		$namauser=$this->input->post('namauser',true);
-    	$password=md5($this->input->post('password',true));
+    	$password=$this->input->post('password',true);
     	$where=array(
           'plgnNamaUser'=>$namauser,
           'plgnPassword'=>$password,

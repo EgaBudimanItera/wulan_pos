@@ -42,7 +42,7 @@
                   <button type="button" class="btn btn-primary" onclick="self.history.back()">
                     <i class="icon-arrow-left"></i> Kembali
                   </button>
-                  <a href="<?=base_url()?>c_lapreturjual/cetak/<?=$daritanggal?>/<?=$hinggatanggal?>" class="btn btn-warning"><i class="icon-print"></i> Cetak</a>
+                  <a href="<?=base_url()?>c_lapreturjual/cetak/<?=$daritanggal?>/<?=$hinggatanggal?>" class="btn btn-warning" target="_blank"><i class="icon-print"></i> Cetak</a>
                 </div>
               </div>
 
@@ -86,7 +86,7 @@
                    
                   ?>
                   <tr>
-                    <td colspan="3">Total Retur Pembelian</td>
+                    <td colspan="3">Total Retur Penjualan</td>
                     <td colspan="7"><?php echo number_format($total)?></td>
                   </tr>
                 </tbody>

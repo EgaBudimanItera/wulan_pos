@@ -9,10 +9,11 @@ class C_orderpenjualan extends CI_Controller {
 	}
 
 	public function index(){
-		$data=array(
+		$query="SELECT * FROM orderpenjualan join pelanggan on opnjPlgnId=plgnId where opnjStatusOrder='order'";
+        $data=array(
 			'page'=>'orderpenjualan/dataorder',
 			'link'=>'orderpenjualan',
-			'list'=>$this->M_pos->list_join('orderpenjualan','pelanggan','opnjPlgnId=plgnId'),
+			'list'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

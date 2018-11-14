@@ -37,7 +37,7 @@
               </div>
               <div class="widget-body">
                 <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
-                <form action="<?=base_url()?>c_lappenjualan/lihat" role="form" method="post" class="form-horizontal">
+                <form action="<?=base_url()?>c_lappenjualan/lihat" role="form" method="post" class="form-horizontal" target="_blank">
                   
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Dari Tanggal</label>

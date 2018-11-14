@@ -120,7 +120,7 @@ class C_returpembelian extends CI_Controller {
 	    else{
 	     // $byruNoFaktur=$this->input->post('pmblKode',true);
 	     $rtpbNoFaktur=$this->input->post('rtpbNoFaktur',true);
-	     $rtpbTanggal=$this->input->post('rtpbTanggal',true);
+	     $rtpbTanggal=date_format(date_create($this->input->post('rtpbTanggal',true)),"Y-m-d");
 	     $rtpbPmblId=$this->input->post('pmblId',true);
 	     $rtpbSplrId=$this->input->post('pmblSplrId',true);
 	     $rtpbNilai=$pmblTotalReturPembelian;
