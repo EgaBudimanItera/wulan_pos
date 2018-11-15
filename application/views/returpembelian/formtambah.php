@@ -171,7 +171,6 @@
               <label class="control-label" for="inputWarning">Harga Beli</label>
               <div class="controls">
                  <input type="number" class="span12" id="hargabeli" readonly name="hargabeli" />
-                 
               </div>
             </div> 
             <div class="control-group">

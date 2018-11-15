@@ -29,11 +29,12 @@
         var drpbPmblId=$('#dtpbPmblId').val();
         var returlalu=$('#returlalu').val();
         var dtpbJumlah=$('#dtpbJumlah').val();
+        var hargabeli=$('#hargabeli').val();
         $modal = $('#returbeliModal');
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_returpembelian/tambahdetreturpembelian',
-            data: 'drpbBrngId='+drpbBrngId+'&drpbJumlah='+drpbJumlah+'&drpbPmblId='+drpbPmblId+'&dtpbJumlah='+dtpbJumlah+'&returlalu='+returlalu,
+            data: 'drpbBrngId='+drpbBrngId+'&drpbJumlah='+drpbJumlah+'&drpbPmblId='+drpbPmblId+'&dtpbJumlah='+dtpbJumlah+'&returlalu='+returlalu+'&hargabeli='+hargabeli,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){

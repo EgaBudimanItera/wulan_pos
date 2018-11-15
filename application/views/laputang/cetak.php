@@ -51,8 +51,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">No Transaksi</th>
-                    <th class="hidden-phone">Kode Supplier</th>
-                    <th class="hidden-phone">Nama Supplier</th>
+                    
                     <th class="hidden-phone">Keterangan</th>
                     <th class="hidden-phone">Hutang Awal</th>
                     <th class="hidden-phone">Hutang Masuk</th>
@@ -69,8 +68,7 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->htngTanggal;?></td>
                     <td><?=$l->htngNoFaktur;?></td>
-                    <td><?=$l->splrKode;?></td>
-                    <td><?=$l->splrNama;?></td>
+                   
                     <td><?=$l->htngKet;?></td>
                     <td><?=number_format($l->htngAwal);?></td>
                     <td><?=@number_format($l->htngDebet);?></td>

@@ -39,7 +39,7 @@ class C_lappiutang extends CI_Controller {
 	  $plgnId=$plgnId;
 	  $daritanggal=$dari;
 	  $hinggatanggal=$hingga;
-	  $query="SELECT * FROM piutang,pelanggan where ptngPlgnId='$plgnId' and ptngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $query="SELECT * FROM piutang where ptngPlgnId='$plgnId' and ptngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  $data=array(
 			'page'=>'lappiutang/lihatdata',
 			'link'=>'lappiutang',

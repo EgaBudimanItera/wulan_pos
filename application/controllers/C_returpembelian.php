@@ -61,6 +61,7 @@ class C_returpembelian extends CI_Controller {
 	    $drpbBrngId=$this->input->post('drpbBrngId',true);  
 	    $drpbJumlah=$this->input->post('drpbJumlah',true); 
 	    $hargabeli=$this->input->post('hargabeli',true); 
+	    
 	    // $createdby=$this->session->userdata('userNama');
 	    $createdby=$this->M_pos->usercreated();
 	    $returlalu=$this->input->post('returlalu',true);
@@ -153,7 +154,7 @@ class C_returpembelian extends CI_Controller {
 	      foreach ($detreturpembelian_temp as $row) {
 	         $ins[$i]['drpbRtpbId']         = $drpbId;
 	         $ins[$i]['drpbBrngId']         = $row->drpbBrngId;
-	         $ins[$i]['drpbJumlah']          = $row->drpbJumlah;
+	         $ins[$i]['drpbJumlah']         = $row->drpbJumlah;
 	         $ins[$i]['drpbHarga']          = $row->drpbHarga;
 	         $i++;  
 	      } 

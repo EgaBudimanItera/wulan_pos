@@ -39,7 +39,7 @@ class C_laputang extends CI_Controller {
 		$splrId=$splrId;
 	 	$daritanggal=$dari;
 	 	$hinggatanggal=$hingga;
-	 	$query="SELECT * FROM hutang,supplier where htngSplrId='$splrId' and htngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	 	$query="SELECT * FROM hutang where htngSplrId='$splrId' and htngTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	 	$data=array(
 			'list'=>$this->M_pos->kueri($query)->result(),
 			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),

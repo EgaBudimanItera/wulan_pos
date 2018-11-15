@@ -45,7 +45,7 @@ class C_orderpenjualan extends CI_Controller {
             'pnjlUangMuka'=>'',
             'pnjlDiskon'=>'',
             'pnjlOngkir'=>'',
-            'pnjlSisaBayar'=>'' ,
+            'pnjlSisaBayar'=>$orderpenjualan->opnjTotalOrder ,
             'pnjlJatuhTempo'=>$pnjlJatuhTempo,
          );
         //var_dump($datapenjualan);

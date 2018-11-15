@@ -51,8 +51,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">No Transaksi</th>
-                    <th class="hidden-phone">Kode Pelanggan</th>
-                    <th class="hidden-phone">Nama Pelanggan</th>
+                    
                     <th class="hidden-phone">Keterangan</th>
                     <th class="hidden-phone">Piutang Awal</th>
                     <th class="hidden-phone">Piutang Masuk</th>
@@ -69,8 +68,7 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->ptngTanggal;?></td>
                     <td><?=$l->ptngNoFaktur;?></td>
-                    <td><?=$l->plgnKode;?></td>
-                    <td><?=$l->plgnNama;?></td>
+                    
                     <td><?=$l->ptngKet;?></td>
                     <td><?=number_format($l->ptngAwal);?></td>
                     <td><?=number_format($l->ptngDebet);?></td>
