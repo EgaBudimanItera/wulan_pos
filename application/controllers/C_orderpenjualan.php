@@ -36,8 +36,9 @@ class C_orderpenjualan extends CI_Controller {
         $pnjlTanggal=date("Y-m-d", strtotime($orderpenjualan->opnjTanggal));
         $pnjlJatuhTempo=strtotime('30 days',strtotime($pnjlTanggal));
         $pnjlJatuhTempo=date("Y-m-d",$pnjlJatuhTempo);
+        $pnjlNoFaktur=$this->M_pos->kode_penjualan();
         $datapenjualan=array(
-            'pnjlNoFaktur'=>$orderpenjualan->opnjNoFaktur,
+            'pnjlNoFaktur'=>$pnjlNoFaktur,
             'pnjlTanggal'=>date("Y-m-d", strtotime($orderpenjualan->opnjTanggal)),
             'pnjlPlgnId'=>$orderpenjualan->opnjPlgnId,
             'pnjlKet'=>$orderpenjualan->opnjKet,

@@ -45,11 +45,14 @@ class C_bayarpiutang extends CI_Controller {
 	}
 
 	public function formtambah2(){
+		$idpelanggan=$this->input->post('byrpPlgnId',true);
+		$query="SELECT * FROM penjualan where pnjlPlgnId='$idpelanggan' and pnjlSisaBayar>0";
 		$data=array(
 			'page'=>'bayarpiutang/formtambah2',
 			'link'=>'bayarpiutang',
 			'script'=>'script/bayarpiutang',
-			'penjualan'=>$this->M_pos->list_data_where('pnjlPlgnId',@$_POST['byrpPlgnId'],'penjualan')->result(),
+			// 'penjualan'=>$this->M_pos->list_data_where('pnjlPlgnId',@$_POST['byrpPlgnId'],'penjualan')->result(),
+			'penjualan'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
