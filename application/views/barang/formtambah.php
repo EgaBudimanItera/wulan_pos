@@ -48,7 +48,7 @@
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Kode Barang</label>
                     <div class="controls">
-                       <input type="text" class="span6" id="brngKode" readonly="" name="brngKode" value="<?=$brngKode?>" />
+                       <input type="text" class="span6" id="brngKode" name="brngKode" value="<?=$brngKode?>" />
                        <span class="help-inline"></span>
                     </div>
                   </div> 
@@ -73,6 +73,9 @@
                        </select>
                     </div>
                  </div>
+                 <?php 
+                 $hakakses=$this->session->userdata('userHakakses');
+                  if($hakakses=='Penjualan'){?>
                  <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Hpp</label>
                     <div class="controls">
@@ -87,6 +90,7 @@
                        <span class="help-inline"></span>
                     </div>
                   </div> 
+                 <?php }?>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Stok</label>
                     <div class="controls">
