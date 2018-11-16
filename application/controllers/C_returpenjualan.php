@@ -28,7 +28,7 @@ class C_returpenjualan extends CI_Controller {
 
 	public function formtambah($nofaktur){
 		// $query="SELECT *,COALESCE((select drpjJumlah from detreturpenjualan_temp,detpenjualan where drpjBrngId=dtpjBrngId and drpjPnjlId=dtpjPnjlId),0) as jumlahreturtemp ,COALESCE((select drpjJumlah from detreturpenjualan,detpenjualan where drpjBrngId=dtpjBrngId and drpjRtpjId=dtpjPnjlId),0) as jumlahretur from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on (dtpjBrngId=brngId) where pnjlNoFaktur='$nofaktur' ";
-		$query="SELECT *,brngNama,dtpjJumlah,dtpjPnjlId,coalesce((select drpjJumlah from detreturpenjualan,returpenjualan where drpjRtpjId=rtpjId and drpjBrngId=dtpjBrngId),0) as jumlahretur,coalesce((select drpjJumlah from detreturpenjualan_temp where drpjPnjlId=dtpjPnjlId and drpjBrngId=dtpjBrngId),0) as jumlahreturtemp from detpenjualan join barang on(dtpjBrngId=brngId) join penjualan on (dtpjPnjlId=pnjlId) where pnjlNoFaktur='$nofaktur' ";
+		$query="SELECT *,brngNama,dtpjJumlah,dtpjPnjlId,coalesce((select sum(drpjJumlah) from detreturpenjualan,returpenjualan where drpjRtpjId=rtpjId and drpjBrngId=dtpjBrngId GROUP BY drpjBrngId),0) as jumlahretur,coalesce((select sum(drpjJumlah) from detreturpenjualan_temp where drpjPnjlId=dtpjPnjlId and drpjBrngId=dtpjBrngId GROUP BY drpjBrngId),0) as jumlahreturtemp from detpenjualan join barang on(dtpjBrngId=brngId) join penjualan on (dtpjPnjlId=pnjlId) where pnjlNoFaktur='$nofaktur' ";
 		$data=array(
 			'page'=>'returpenjualan/formtambah',
 			'link'=>'returpenjualan',

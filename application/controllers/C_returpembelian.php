@@ -28,7 +28,7 @@ class C_returpembelian extends CI_Controller {
 
 	public function formtambah($nofaktur){
 		// $query="SELECT *,COALESCE((select drpbJumlah from detreturpembelian_temp,detpembelian where drpbBrngId=dtpbBrngId and drpbPmblId=dtpbPmblId),0) as jumlahreturtemp ,COALESCE((select drpbJumlah from detreturpembelian,detpembelian where drpbBrngId=dtpbBrngId and drpbRtpbId=dtpbPmblId),0) as jumlahretur from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on (dtpbBrngId=brngId) where pmblNoFaktur='$nofaktur' ";
-		$query="SELECT *,brngNama,dtpbJumlah,dtpbPmblId,coalesce((select drpbJumlah from detreturpembelian,returpembelian where drpbRtpbId=rtpbId and drpbBrngId=dtpbBrngId),0) as jumlahretur,coalesce((select drpbJumlah from detreturpembelian_temp where drpbPmblId=dtpbPmblId and drpbBrngId=dtpbBrngId),0) as jumlahreturtemp from detpembelian join barang on(dtpbBrngId=brngId) join pembelian on (dtpbPmblId=pmblId) and pmblNoFaktur='$nofaktur'";
+		$query="SELECT *,brngNama,dtpbJumlah,dtpbPmblId,coalesce((select sum(drpbJumlah) from detreturpembelian,returpembelian where drpbRtpbId=rtpbId and drpbBrngId=dtpbBrngId GROUP BY drpbBrngId),0) as jumlahretur,coalesce((select sum(drpbJumlah) from detreturpembelian_temp where drpbPmblId=dtpbPmblId and drpbBrngId=dtpbBrngId GROUP BY drpbBrngId),0) as jumlahreturtemp from detpembelian join barang on(dtpbBrngId=brngId) join pembelian on (dtpbPmblId=pmblId) and pmblNoFaktur='$nofaktur'";
 		$data=array(
 			'page'=>'returpembelian/formtambah',
 			'link'=>'returpembelian',
