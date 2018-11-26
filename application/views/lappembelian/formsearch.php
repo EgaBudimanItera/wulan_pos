@@ -38,7 +38,23 @@
               <div class="widget-body">
                 <div id="info-alert"><?=@$this->session->flashdata('msg')?></div>
                 <form action="<?=base_url()?>c_lappembelian/lihat" role="form" method="post" class="form-horizontal">
-                 
+                 <div class="control-group">
+                    <label class="control-label">Supplier</label>
+                    <div class="controls">
+                       <select class="span6 chosen" data-placeholder="--Pilih Supplier--" tabindex="1" name="splrId">
+                          <option value="">Semua</option>
+                          <!-- ambil nilai satuan dari tabel satuan -->
+                          <?php
+                            foreach($supplier as $b){
+                          ?>
+                          <!-- ambil nilai satuan dari tabel satuan -->
+                          <option value="<?=$b->splrId?>" ><?=$b->splrNama?></option>
+                          <?php
+                            }
+                          ?>
+                       </select>
+                    </div>
+                  </div>
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Dari Tanggal</label>
                     <div class="controls">

@@ -42,7 +42,7 @@
                     <label class="control-label">Pelanggan</label>
                     <div class="controls">
                        <select class="span6 chosen" data-placeholder="--Pilih Pelanggan--" tabindex="1" name="plgnId">
-                          <option value=""></option>
+                          <option value="">Semua</option>
                           <!-- ambil nilai satuan dari tabel satuan -->
                           <?php
                             foreach($pelanggan as $b){
