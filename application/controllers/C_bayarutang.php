@@ -83,13 +83,15 @@ class C_bayarutang extends CI_Controller {
 	    $dbyuBayar=$this->input->post('dtpbJumlah',true);  
 	    //$dtpbJumlah=$this->input->post('dtpbJumlah',true); 
 	    // $createdby=$this->session->userdata('userNama');
-	    $createdby=$this->M_pos->usercreated();
+		$createdby=$this->M_pos->usercreated();
+		$pilihanbayar=$this->input->post('pilihanbayar',true);
 	    
 	    $data=array(
 	        'dbyuPmblId'=>$dbyuPmblId,
 	        'dbyuBayar'=>$dbyuBayar,
 	        //'dtpbJumlah'=>$dtpbJumlah,
-	        'dbyuCreatedBy'=>$createdby,
+			'dbyuCreatedBy'=>$createdby,
+			'pilihanbayar'=>$pilihanbayar,
 	    );
 	    $simpandetailtemp=$this->M_pos->simpan_data($data,'detbayarutang_temp');
 	    if($simpandetailtemp){
@@ -166,7 +168,8 @@ class C_bayarutang extends CI_Controller {
 	      foreach ($bayarutang_temp as $row) {
 	         $ins[$i]['dbyuByruId']         = $byru;
 	         $ins[$i]['dbyuPmblId']         = $row->dbyuPmblId;
-	         $ins[$i]['dbyuBayar']          = $row->dbyuBayar;
+			 $ins[$i]['dbyuBayar']          = $row->dbyuBayar;
+			 $ins[$i]['pilihanbayar']       = $row->pilihanbayar;
 	         $i++;  
 	      } 
 

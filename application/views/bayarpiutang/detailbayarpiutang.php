@@ -51,7 +51,7 @@
                     <th class="hidden-phone">No Faktur</th>
                     <th class="hidden-phone">Nama Supplier</th>
                     <th class="hidden-phone">Jumlah Bayar</th>
-                    
+                    <th class="hidden-phone">Pilihan Bayar</th>
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
@@ -68,6 +68,7 @@
                     <th><?=$l->byrpNoFaktur?></th>
                     <th><?=$l->plgnNama?></th>
                     <th><?=number_format($l->dbypBayar)?></th>
+                    <th><?=$l->pilihanbayar?></th>
                     <td>
                        <center>
                         <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dbypId?>" >
