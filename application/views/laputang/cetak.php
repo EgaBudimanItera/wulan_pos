@@ -41,7 +41,7 @@
                     <th rowspan="2" class="hidden-phone">Keterangan</th>
                     <th rowspan="2" class="hidden-phone">Debet</th>
                     <th rowspan="2" class="hidden-phone">Kredit</th>
-                    <th colspan="2" class="hidden-phone" align="center">Saldo</th>
+                    <th colspan="2" class="hidden-phone" ><center>Saldo</center></th>
                   </tr>
                   <tr>
                     <th class="hidden-phone">Debet</th>
