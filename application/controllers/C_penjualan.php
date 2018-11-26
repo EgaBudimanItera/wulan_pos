@@ -205,7 +205,7 @@ class C_penjualan extends CI_Controller {
 
    public function invoice($nofaktur){
         $query="SELECT * FROM detpenjualan join barang on(dtpjBrngId=brngId) WHERE dtpjPnjlId='$nofaktur'";
-        $query2="SELECT *FROM penjualan WHERE pnjlId='$nofaktur'";
+        $query2="SELECT *FROM penjualan JOIN pelanggan ON penjualan.pnjlPlgnId=pelanggan.plgnId WHERE pnjlId='$nofaktur'";
         $data=array(
             'list'=>$this->M_pos->kueri($query)->result(),
             'nofaktur'=>$this->M_pos->kueri($query2)->row(),
