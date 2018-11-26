@@ -48,15 +48,19 @@
 
               <table class="table table-striped table-bordered">
                 <thead>
+                <tr>
+                <th colspan="8"></th>
+                <th colspan="2"><center>SALDO</center></th>
+                </tr>
                   <tr>
-                    <th class="hidden-phone">No</th>
-                    <th class="hidden-phone">Tanggal</th>
-                    <th class="hidden-phone">No Transaksi</th>
-                    <th class="hidden-phone">Kode Supplier</th>
-                    <th class="hidden-phone">Nama Supplier</th>
-                    <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Hutang Awal</th>
-                    <th class="hidden-phone">Hutang Masuk</th>
+                    <th class="hidden-phone" rowspan="2">No</th>
+                    <th class="hidden-phone" rowspan="2">Tanggal</th>
+                    <th class="hidden-phone" rowspan="2">No Transaksi</th>
+                    <th class="hidden-phone" rowspan="2">Kode Supplier</th>
+                    <th class="hidden-phone" rowspan="2">Nama Supplier</th>
+                    <th class="hidden-phone" rowspan="2">Keterangan</th>
+                    <th class="hidden-phone" rowspan="2">Hutang Awal</th>
+                    <th class="hidden-phone" rowspan="2">Hutang Masuk</th>
                     <th class="hidden-phone">Hutang Keluar</th>
                     <th class="hidden-phone">Hutang Akhir</th>
                   </tr>
