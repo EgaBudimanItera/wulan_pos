@@ -35,15 +35,24 @@
   <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th class="hidden-phone">No</th>
-                    <th class="hidden-phone">Tanggal</th>
-                    <th class="hidden-phone">No Transaksi</th>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2" class="hidden-phone">Tanggal</th>
+                    <th rowspan="2"class="hidden-phone">No Transaksi</th>
+                    <th rowspan="2" class="hidden-phone">Keterangan</th>
+                    <th rowspan="2" class="hidden-phone">Debet</th>
+                    <th rowspan="2" class="hidden-phone">Kredit</th>
+                    <th colspan="2" class="hidden-phone" align="center">Saldo</th>
+                  </tr>
+                  <tr>
                     
-                    <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Piutang Awal</th>
-                    <th class="hidden-phone">Piutang Masuk</th>
-                    <th class="hidden-phone">Piutang Keluar</th>
-                    <th class="hidden-phone">Piutang Akhir</th>
+                   
+                    
+                    
+                    
+                    <!-- <th class="hidden-phone">Piutang Awal</th> -->
+                    
+                    <th class="hidden-phone">Debet</th>
+                    <th class="hidden-phone">Kredit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -57,10 +66,11 @@
                     <td><?=$l->ptngNoFaktur;?></td>
                     
                     <td><?=$l->ptngKet;?></td>
-                    <td><?=number_format($l->ptngAwal);?></td>
+                    <!-- <td><?=number_format($l->ptngAwal);?></td> -->
                     <td><?=number_format($l->ptngDebet);?></td>
                     <td><?=number_format($l->ptngKredit);?></td>
                     <td><?=number_format($l->ptngAkhir);?></td>
+                    <td></td>
                   </tr>
                   <?php
                     

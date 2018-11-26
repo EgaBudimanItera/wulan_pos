@@ -35,15 +35,17 @@
   <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th class="hidden-phone">No</th>
-                    <th class="hidden-phone">Tanggal</th>
-                    <th class="hidden-phone">No Transaksi</th>
-                    
-                    <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Hutang Awal</th>
-                    <th class="hidden-phone">Hutang Masuk</th>
-                    <th class="hidden-phone">Hutang Keluar</th>
-                    <th class="hidden-phone">Hutang Akhir</th>
+                    <th rowspan="2" valign="middle" align="center">No</th>
+                    <th rowspan="2" class="hidden-phone">Tanggal</th>
+                    <th rowspan="2"class="hidden-phone">No Transaksi</th>
+                    <th rowspan="2" class="hidden-phone">Keterangan</th>
+                    <th rowspan="2" class="hidden-phone">Debet</th>
+                    <th rowspan="2" class="hidden-phone">Kredit</th>
+                    <th colspan="2" class="hidden-phone" align="center">Saldo</th>
+                  </tr>
+                  <tr>
+                    <th class="hidden-phone">Debet</th>
+                    <th class="hidden-phone">Kredit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -57,9 +59,10 @@
                     <td><?=$l->htngNoFaktur;?></td>
                    
                     <td><?=$l->htngKet;?></td>
-                    <td><?=number_format($l->htngAwal);?></td>
+                    <!-- <td><?=number_format($l->htngAwal);?></td> -->
                     <td><?=@number_format($l->htngDebet);?></td>
                     <td><?=@number_format($l->htngKredit);?></td>
+                    <td></td>
                     <td><?=number_format($l->htngAkhir);?></td>
                   </tr>
                   <?php
