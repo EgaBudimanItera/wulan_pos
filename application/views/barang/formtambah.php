@@ -73,9 +73,7 @@
                        </select>
                     </div>
                  </div>
-                 <?php 
-                 $hakakses=$this->session->userdata('userHakakses');
-                  if($hakakses=='Penjualan'){?>
+                 
                  <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Hpp</label>
                     <div class="controls">
@@ -90,7 +88,7 @@
                        <span class="help-inline"></span>
                     </div>
                   </div> 
-                 <?php }?>
+                
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Stok</label>
                     <div class="controls">

@@ -77,6 +77,14 @@ class C_bayarutang extends CI_Controller {
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
+	public function kwitansi($dbyuId){
+		$query = "SELECT * FROM bayarutang JOIN detbayarutang ON bayarutang.byruId = detbayarutang.dbyuByruId JOIN supplier ON bayarutang.byruSplrId = supplier.splrId WHERE dbyuId = $dbyuId";
+		$data=array(
+			'faktur'=>$this->M_pos->kueri($query)->row(),
+		);
+		$this->load->view('bayarutang/kwitansi',$data);
+	}
+
 	public function tambahdetbayarutang(){
 
 		$dbyuPmblId=$this->input->post('dbypPnjlId',true);
