@@ -9,9 +9,11 @@ class C_lapreturbeli extends CI_Controller {
 	}
 
 	public function index(){
+		$query="SELECT * FROM pelanggan";
 		$data=array(
 			'page'=>'lapreturbeli/formsearch',
-			'link'=>'lapreturbeli'
+			'link'=>'lapreturbeli',
+			'pelanggan'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}

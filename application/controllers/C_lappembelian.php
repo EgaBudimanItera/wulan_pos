@@ -9,9 +9,11 @@ class C_lappembelian extends CI_Controller {
 	}
 
 	public function index(){
+		$query="SELECT * FROM pelanggan";
 		$data=array(
 			'page'=>'lappembelian/formsearch',
-			'link'=>'lappembelian'
+			'link'=>'lappembelian',
+			'pelanggan'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
