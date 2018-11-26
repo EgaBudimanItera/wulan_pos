@@ -60,7 +60,7 @@
                   <label class="control-label" for="inputWarning">Tanggal Retur</label>
                   <div class="controls">
                     <div class="input-append" id="ui_date_picker_trigger">
-                      <input name="rtpjTanggal" type="text"  class="m-wrap medium" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+                      <input name="rtpjTanggal" type="text"  class="m-wrap medium" value="<?=date('m/d/Y')?>" readonly /><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>
                 </div>

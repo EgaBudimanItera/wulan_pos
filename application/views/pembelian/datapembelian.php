@@ -46,6 +46,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">No Faktur</th>
                     <th class="hidden-phone">Tanggal</th>
+                    <th class="hidden-phone">Kode Supplier</th>
                     <th class="hidden-phone">Supplier</th>
                     <th class="hidden-phone">Total</th>
                     <th class="hidden-phone">Aksi</th>
@@ -60,6 +61,7 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->pmblNoFaktur?></td>
                     <td><?=$l->pmblTanggal?></td>
+                    <td><?=$l->splrKode?></td>
                     <td><?=$l->splrNama?></td>
                     <td><?php echo number_format($l->pmblTotalBeli)?></td>
                     <td>

@@ -56,7 +56,7 @@
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
                       <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="pmblTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="pmblTanggal" type="text"  class="m-wrap medium" value="<?=date('m/d/Y')?>" readonly/><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div> 
