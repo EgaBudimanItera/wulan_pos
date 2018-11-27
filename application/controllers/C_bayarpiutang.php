@@ -73,6 +73,14 @@ class C_bayarpiutang extends CI_Controller {
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
+	public function kwitansi($dbypId){
+		$query = "SELECT * FROM bayarpiutang JOIN detbayarpiutang ON bayarpiutang.byrpId = detbayarpiutang.dbypByrpId JOIN pelanggan ON bayarpiutang.byrpPlgnId = pelanggan.plgnId WHERE dbypId = $dbypId";
+		$data=array(
+			'faktur'=>$this->M_pos->kueri($query)->row(),
+		);
+		$this->load->view('bayarpiutang/kwitansi',$data);
+	}
+
 	public function tambahdetbayarpiutang(){
 
 		$dbypPnjlId=$this->input->post('dtpbBrngId',true);

@@ -48,6 +48,10 @@
 
               <table class="table table-striped table-bordered">
                 <thead>
+                <tr>
+                <th colspan="8"></th>
+                <th colspan="2"><center>SALDO</center></th>
+                </tr>
                   <tr>
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Tanggal</th>
