@@ -20,9 +20,9 @@
 			<td class="col-md-9">
 				<h2>Invoice</h2>
 				<h4>Pasific Putra<br>
-					No Invoice : <?=$nofaktur->pnjlNoFaktur?><br>
-          Pelanggan  : <?=$nofaktur->plgnNama?><br>
-          Tanggal      : <?=date_format(date_create($nofaktur->pnjlTanggal),"Y/m/d")?><br>
+					No Invoice : <?=$nofaktur->pmblNoFaktur?><br>
+          Supplier  : <?=$nofaktur->splrNama?><br>
+          Tanggal      : <?=date_format(date_create($nofaktur->pmblNoFaktur),"Y/m/d")?><br>
           </h4>
 			</td>
 		</tr>
@@ -34,10 +34,10 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Kode Barang</th>
                     <th class="hidden-phone">Nama Barang</th>
-                    <th class="hidden-phone">Harga</th>
+                    <th class="hidden-phone">HPP</th>
                     <th class="hidden-phone">Jumlah</th>
                     <th class="hidden-phone">Subtotal</th>
-                   
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,7 @@
                     $no=1;
                     $total=0;
                     foreach($list as $l){
-                      $subtotal=$l->dtpjJumlah*$l->dtpjHarga;
+                      $subtotal=$l->dtpbJumlah*$l->dtpbHarga;
                       $total=$total+$subtotal;
                   ?>
                   <tr>
@@ -53,8 +53,8 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->brngKode?></td>
                     <td><?=$l->brngNama?></td>
-                    <td><?php echo number_format($l->dtpjHarga)?></td>
-                    <td><?=$l->dtpjJumlah?></td>
+                    <td><?php echo number_format($l->dtpbHarga)?></td>
+                    <td><?=$l->dtpbJumlah?></td>
                     <td><?php echo number_format($subtotal)?></td>
                   </tr>
                   <?php
@@ -64,9 +64,8 @@
                     <td colspan="5">Total</td><!--  penjumlahan dari subtotal-->
                     <td><?php echo number_format($total)?></td>
                   </tr> 
+                  
                 </tbody>
-                
-
               </table>
               <table class="table">
                 <tr>

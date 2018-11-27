@@ -11,7 +11,6 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<link href="<?php echo base_url(); ?>assets/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-	
 </head>
 <body>
 	<table class="table">
@@ -20,10 +19,7 @@
 			<td class="col-md-9">
 				<h2>Invoice</h2>
 				<h4>Pasific Putra<br>
-					No Invoice : <?=$nofaktur->pnjlNoFaktur?><br>
-          Pelanggan  : <?=$nofaktur->plgnNama?><br>
-          Tanggal      : <?=date_format(date_create($nofaktur->pnjlTanggal),"Y/m/d")?><br>
-          </h4>
+					No Invoice : <?=$nofaktur->rtpbNoFaktur?></h4>
 			</td>
 		</tr>
 	</table>
@@ -34,39 +30,31 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Kode Barang</th>
                     <th class="hidden-phone">Nama Barang</th>
-                    <th class="hidden-phone">Harga</th>
+                    <th class="hidden-phone">HPP</th>
                     <th class="hidden-phone">Jumlah</th>
                     <th class="hidden-phone">Subtotal</th>
-                   
+                    
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                     $no=1;
-                    $total=0;
+                    $total = 0;
                     foreach($list as $l){
-                      $subtotal=$l->dtpjJumlah*$l->dtpjHarga;
-                      $total=$total+$subtotal;
-                  ?>
-                  <tr>
-                    <!-- isi tabel det pembelian dengan no faktur terpilih -->
-                    <td><?=$no++;?></td>
-                    <td><?=$l->brngKode?></td>
-                    <td><?=$l->brngNama?></td>
-                    <td><?php echo number_format($l->dtpjHarga)?></td>
-                    <td><?=$l->dtpjJumlah?></td>
-                    <td><?php echo number_format($subtotal)?></td>
-                  </tr>
-                  <?php
-                    }
-                  ?>
-                  <tr>
-                    <td colspan="5">Total</td><!--  penjumlahan dari subtotal-->
-                    <td><?php echo number_format($total)?></td>
-                  </tr> 
-                </tbody>
-                
 
+                    //$total+= $l->drpbJumlah*$l->brngHpp;
+                  ?>
+                  <tr>
+                    <th><?=$no++?></th>
+                    <th><?=$l->brngKode?></th>
+                    <th><?=$l->brngNama?></th>
+                    <th><?=number_format($l->brngHpp)?></th>
+                    <th><?=number_format($l->drpbJumlah)?></th>
+                    <th><?=number_format($l->drpbJumlah*$l->brngHpp)?></th>
+                    
+                  </tr>
+                  <?php }?>
+                </tbody>
               </table>
               <table class="table">
                 <tr>
@@ -81,8 +69,6 @@
                     </th>
                 </tr>
               </table>
-
-
               
 </body>
 <script src="<?php echo base_url() ?>assets/js/jquery-1.8.3.min.js"></script>

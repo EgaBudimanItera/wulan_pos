@@ -199,4 +199,23 @@ class C_returpenjualan extends CI_Controller {
         $this->load->view('returpenjualan/invoice',$data);
    }
 
+   public function hapusall($nofaktur){
+    $hapusdet=$this->M_pos->hapus('drpjRtpjId',$nofaktur,'detreturpenjualan');
+    $hapuspenjualan=$this->M_pos->hapus('rtpjId',$nofaktur,'returpenjualan');
+    
+    if($hapuspenjualan && $hapusdet){
+        $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+        );
+        redirect(base_url().'c_returpenjualan'); //location
+     }else{
+       $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+        );
+       redirect(base_url().'c_returpenjualan'); //location
+     }      
+   }
+
 }

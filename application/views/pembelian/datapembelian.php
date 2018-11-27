@@ -66,6 +66,9 @@
                     <td><?php echo number_format($l->pmblTotalBeli)?></td>
                     <td>
                       <center>
+                      <a data-toggle="tooltip" data-placement="bottom" title="Cetak" class="btn btn-xs btn-success" href="<?=base_url()?>c_pembelian/invoice/<?=$l->pmblId?>" target="_blank">
+                            <i class="icon-print"></i>                
+                          </a>
                           <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_pembelian/formdetail/<?=$l->pmblId?>">
                             <i class="icon-eye-open"></i>                
                           </a>

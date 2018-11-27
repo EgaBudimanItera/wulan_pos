@@ -55,6 +55,19 @@
                   <?php }?>
                 </tbody>
               </table>
+              <table class="table">
+                <tr>
+                    <th colspan="2"><center>Pembuat
+                    <br><br><br><br> _____________________</center>
+                    </th>
+                    <th colspan="2"><center>Checker
+                    <br><br><br><br> _____________________</center>
+                    </th>
+                    <th colspan="2"><center>Penerima
+                    <br><br><br><br> _____________________</center>
+                    </th>
+                </tr>
+              </table>
               
 </body>
 <script src="<?php echo base_url() ?>assets/js/jquery-1.8.3.min.js"></script>
