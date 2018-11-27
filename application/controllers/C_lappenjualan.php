@@ -23,6 +23,9 @@ class C_lappenjualan extends CI_Controller {
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
 	  $plgnId = $this->input->post('plgnId');
 	  if (empty($plgnId)) {
+	  	$plgnId = 0;
+	  }
+	  if ($plgnId==0) {
 		 $query="SELECT * from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on(dtpjBrngId=brngId) join pelanggan on(pnjlPlgnId=plgnId) where  pnjlTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  }else{
 		 $query="SELECT * from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on(dtpjBrngId=brngId) join pelanggan on(pnjlPlgnId=plgnId) where  pnjlTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and penjualan.pnjlPlgnId = $plgnId";
@@ -44,7 +47,7 @@ class C_lappenjualan extends CI_Controller {
 	  $daritanggal=$dari;
 	  $hinggatanggal=$hingga;
 	  $plgnId = $plgnId;
-	  if (empty($plgnId)) {
+	  if ($plgnId==0) {
 		 $query="SELECT * from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on(dtpjBrngId=brngId) join pelanggan on(pnjlPlgnId=plgnId) where  pnjlTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  }else{
 		 $query="SELECT * from detpenjualan join penjualan on(dtpjPnjlId=pnjlId) join barang on(dtpjBrngId=brngId) join pelanggan on(pnjlPlgnId=plgnId) where  pnjlTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and penjualan.pnjlPlgnId = $plgnId";

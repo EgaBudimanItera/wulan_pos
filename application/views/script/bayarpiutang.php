@@ -26,11 +26,12 @@
         var dtpbBrngId=$('#dtpbBrngId').val();
         var dtpbHarga=$('#dtpbHarga').val();
         var dtpbJumlah=$('#dtpbJumlah').val();
+        var pilihanbayar=$('#pilihanbayar').val();
         $modal = $('#detailbayarpiutangModal');
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_bayarpiutang/tambahdetbayarpiutang',
-            data: 'dtpbBrngId='+dtpbBrngId+'&dtpbHarga='+dtpbHarga+'&dtpbJumlah='+dtpbJumlah,
+            data: 'dtpbBrngId='+dtpbBrngId+'&dtpbHarga='+dtpbHarga+'&dtpbJumlah='+dtpbJumlah+'&pilihanbayar='+pilihanbayar,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){

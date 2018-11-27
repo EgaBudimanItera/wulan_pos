@@ -25,11 +25,12 @@
         var dbypPnjlId=$('#dbypPnjlId').val();
         var dtpbHarga=$('#dtpbHarga').val();
         var dtpbJumlah=$('#dtpbJumlah').val();
+        var pilihanbayar=$('#pilihanbayar').val();
         $modal = $('#detailbayarutangModal');
         $.ajax({
             type: 'POST',
             url: '<?=base_url()?>c_bayarutang/tambahdetbayarutang',
-            data: 'dbypPnjlId='+dbypPnjlId+'&dtpbHarga='+dtpbHarga+'&dtpbJumlah='+dtpbJumlah,
+            data: 'dbypPnjlId='+dbypPnjlId+'&dtpbHarga='+dtpbHarga+'&dtpbJumlah='+dtpbJumlah+'&pilihanbayar='+pilihanbayar,
             dataType: 'JSON',
             success: function(msg){
                 if(msg.status == 'success'){
