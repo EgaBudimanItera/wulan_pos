@@ -24,6 +24,10 @@ class C_lappembelian extends CI_Controller {
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
 	  $splrId = $this->input->post('splrId');
 	  if (empty($splrId)) {
+	  	$splrId = 0;
+	  }
+
+	  if ($splrId == 0) {
 		  $query="SELECT * from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on(dtpbBrngId=brngId) join supplier on(pmblSplrId=splrId) where  pmblTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  }else{
 		  $query="SELECT * from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on(dtpbBrngId=brngId) join supplier on(pmblSplrId=splrId) where  pmblTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and pembelian.pmblSplrId = $splrId ";
@@ -45,7 +49,7 @@ class C_lappembelian extends CI_Controller {
 		$daritanggal=$dari;
 		$hinggatanggal=$hingga;
 		$splrId=$splrId;
-	  	if (empty($splrId)) {
+	  	if ($splrId == 0) {
 		  $query="SELECT * from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on(dtpbBrngId=brngId) join supplier on(pmblSplrId=splrId) where  pmblTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 		}else{
 			$query="SELECT * from detpembelian join pembelian on(dtpbPmblId=pmblId) join barang on(dtpbBrngId=brngId) join supplier on(pmblSplrId=splrId) where  pmblTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and pembelian.pmblSplrId = $splrId ";

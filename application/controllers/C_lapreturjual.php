@@ -23,6 +23,9 @@ class C_lapreturjual extends CI_Controller {
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
 	  $plgnId = $this->input->post('plgnId');
 	  if (empty($plgnId)) {
+	  	$plgnId = 0;
+	  }
+	  if ($plgnId==0) {
 	  $query="SELECT * from detreturpenjualan join returpenjualan on(drpjRtpjId=rtpjId) join penjualan on(rtpjPnjlId=pnjlId) join barang on(drpjBrngId=brngId) join pelanggan on(rtpjPlgnId=plgnId)  where  rtpjTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  }else{
 	  $query="SELECT * from detreturpenjualan join returpenjualan on(drpjRtpjId=rtpjId) join penjualan on(rtpjPnjlId=pnjlId) join barang on(drpjBrngId=brngId) join pelanggan on(rtpjPlgnId=plgnId)  where  rtpjTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and returpenjualan.rtpjPlgnId = $plgnId";	  
@@ -44,7 +47,7 @@ class C_lapreturjual extends CI_Controller {
 	  $daritanggal=$dari;
 	  $hinggatanggal=$hingga;
 	  $plgnId=$plgnId;
-	  if (empty($plgnId)) {
+	  if ($plgnId==0) {
 	  $query="SELECT * from detreturpenjualan join returpenjualan on(drpjRtpjId=rtpjId) join penjualan on(rtpjPnjlId=pnjlId) join barang on(drpjBrngId=brngId) join pelanggan on(rtpjPlgnId=plgnId)  where  rtpjTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
 	  }else{
 	  $query="SELECT * from detreturpenjualan join returpenjualan on(drpjRtpjId=rtpjId) join penjualan on(rtpjPnjlId=pnjlId) join barang on(drpjBrngId=brngId) join pelanggan on(rtpjPlgnId=plgnId)  where  rtpjTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and returpenjualan.rtpjPlgnId = $plgnId";	  
