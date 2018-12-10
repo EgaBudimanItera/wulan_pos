@@ -48,6 +48,10 @@
 
               <table class="table table-striped table-bordered">
                 <thead>
+                <tr>
+                <th colspan="8"></th>
+                <th colspan="2"><center>SALDO</center></th>
+                </tr>
                   <tr>
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Tanggal</th>
@@ -55,10 +59,11 @@
                     <th class="hidden-phone">Kode Supplier</th>
                     <th class="hidden-phone">Nama Supplier</th>
                     <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Hutang Awal</th>
-                    <th class="hidden-phone">Hutang Masuk</th>
-                    <th class="hidden-phone">Hutang Keluar</th>
-                    <th class="hidden-phone">Hutang Akhir</th>
+                    <!-- <th class="hidden-phone">Hutang Awal</th> -->
+                    <th class="hidden-phone">Debet</th>
+                    <th class="hidden-phone">Kredit</th>
+                    <th class="hidden-phone">Saldo Debet</th>
+                    <th class="hidden-phone">Saldo Kredit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -73,9 +78,10 @@
                     <td><?=$l->splrKode;?></td>
                     <td><?=$l->splrNama;?></td>
                     <td><?=$l->htngKet;?></td>
-                    <td><?=number_format($l->htngAwal);?></td>
+                    <!-- <td><?=number_format($l->htngAwal);?></td> -->
                     <td><?=@number_format($l->htngDebet);?></td>
                     <td><?=@number_format($l->htngKredit);?></td>
+                    <td></td>
                     <td><?=number_format($l->htngAkhir);?></td>
                   </tr>
                   <?php

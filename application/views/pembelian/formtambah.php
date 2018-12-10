@@ -56,7 +56,7 @@
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
                       <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="pmblTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="pmblTanggal" type="text"  class="m-wrap medium" value="<?=date('m/d/Y')?>" readonly/><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div> 
@@ -159,9 +159,9 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputWarning">HPP Satuan Barang</label>
+              <label class="control-label" for="inputWarning">Harga Beli</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpbHarga" readonly="" required="" name="dtpbHarga" />
+                 <input type="text" class="span12" id="dtpbHarga" required="" name="dtpbHarga" />
                  
               </div>
             </div> 

@@ -44,6 +44,7 @@
                 <thead>
                   <tr>
                     <th class="hidden-phone">No</th>
+                    <th class="hidden-phone">Kode</th>
                     <th class="hidden-phone">Nama</th>
                     <th class="hidden-phone">Alamat</th>
                     <th class="hidden-phone">No.Telp</th>
@@ -57,6 +58,7 @@
                   ?>
                   <tr>
                     <td><?=$no++?>.</td>
+                    <td><?=$l->plgnKode?></td>
                     <td><?=$l->plgnNama?></td>
                     <td><?=$l->plgnAlamat?></td>
                     <td><?=$l->plgnTelp1?></td>

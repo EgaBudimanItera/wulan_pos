@@ -66,13 +66,13 @@
                        <span class="help-inline"></span>
                     </div>
                   </div>
-                  <div class="control-group primary">
+                  <!--<div class="control-group primary">
                     <label class="control-label" for="inputWarning">NIK</label>
                     <div class="controls">
                         <input type="text" class="span6" id="plgnNik" required name="plgnNik" />
                        <span class="help-inline"></span>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Email</label>
                     <div class="controls">
@@ -110,13 +110,13 @@
                     </div>
                   </div>
 
-                  <div class="control-group primary">
+                  <!--<div class="control-group primary">
                     <label class="control-label" for="inputWarning">Piutang Awal</label>
                     <div class="controls">
                        <input type="number" class="span6" id="plgnPiutang" required name="plgnPiutang" />
                        <span class="help-inline"></span>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-actions">
                     <button type="submit" class="btn btn-primary"><i class="icon-ok"></i>Simpan Data</button>
                     <!-- <button type="reset" class="btn btn-warning"><i class="icon-remove"></i>Hapus Data</button> -->

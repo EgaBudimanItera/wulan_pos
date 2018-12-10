@@ -51,7 +51,7 @@
                     <th class="hidden-phone">No Faktur</th>
                     <th class="hidden-phone">Nama Supplier</th>
                     <th class="hidden-phone">Jumlah Bayar</th>
-                    
+                    <th class="hidden-phone">Pilihan Bayar</th>
                     <th class="hidden-phone">Aksi</th>
                   </tr>
                 </thead>
@@ -68,11 +68,15 @@
                     <th><?=$l->byrpNoFaktur?></th>
                     <th><?=$l->plgnNama?></th>
                     <th><?=number_format($l->dbypBayar)?></th>
+                    <th><?=$l->pilihanbayar?></th>
                     <td>
                        <center>
                         <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dbypId?>" >
                           <i class="icon-trash"></i>  
                         </a> -->
+                        <a data-toggle="tooltip" data-placement="bottom" title="Cetak Kwitansi" class="btn btn-xs btn-success" href="<?=base_url()?>c_bayarpiutang/kwitansi/<?=$l->dbypId?>" target="_blank">
+                            <i class="icon-print"></i>                
+                          </a>
                         <a href="#" style="color:#DAA520; text-decoration:none;" onclick="if(confirm('Apakah anda yakin?')) hapustemp('<?=$l->dbypId?>');">
                           <button type="button" class="btn btn-danger btn-xs">
                             <i class="icon-trash"></i>                      

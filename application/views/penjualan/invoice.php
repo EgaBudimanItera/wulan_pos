@@ -20,7 +20,10 @@
 			<td class="col-md-9">
 				<h2>Invoice</h2>
 				<h4>Pasific Putra<br>
-					No Invoice : <?=$nofaktur->pnjlNoFaktur?></h4>
+					No Invoice : <?=$nofaktur->pnjlNoFaktur?><br>
+          Pelanggan  : <?=$nofaktur->plgnNama?><br>
+          Tanggal      : <?=date_format(date_create($nofaktur->pnjlTanggal),"Y/m/d")?><br>
+          </h4>
 			</td>
 		</tr>
 	</table>
@@ -62,7 +65,24 @@
                     <td><?php echo number_format($total)?></td>
                   </tr> 
                 </tbody>
+                
+
               </table>
+              <table class="table">
+                <tr>
+                    <th colspan="2"><center>Pembuat
+                    <br><br><br><br> _____________________</center>
+                    </th>
+                    <th colspan="2"><center>Checker
+                    <br><br><br><br> _____________________</center>
+                    </th>
+                    <th colspan="2"><center>Penerima
+                    <br><br><br><br> _____________________</center>
+                    </th>
+                </tr>
+              </table>
+
+
               
 </body>
 <script src="<?php echo base_url() ?>assets/js/jquery-1.8.3.min.js"></script>

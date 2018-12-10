@@ -77,19 +77,29 @@ class C_bayarutang extends CI_Controller {
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
+	public function kwitansi($dbyuId){
+		$query = "SELECT * FROM bayarutang JOIN detbayarutang ON bayarutang.byruId = detbayarutang.dbyuByruId JOIN supplier ON bayarutang.byruSplrId = supplier.splrId WHERE dbyuId = $dbyuId";
+		$data=array(
+			'faktur'=>$this->M_pos->kueri($query)->row(),
+		);
+		$this->load->view('bayarutang/kwitansi',$data);
+	}
+
 	public function tambahdetbayarutang(){
 
 		$dbyuPmblId=$this->input->post('dbypPnjlId',true);
 	    $dbyuBayar=$this->input->post('dtpbJumlah',true);  
 	    //$dtpbJumlah=$this->input->post('dtpbJumlah',true); 
 	    // $createdby=$this->session->userdata('userNama');
-	    $createdby=$this->M_pos->usercreated();
+		$createdby=$this->M_pos->usercreated();
+		$pilihanbayar=$this->input->post('pilihanbayar',true);
 	    
 	    $data=array(
 	        'dbyuPmblId'=>$dbyuPmblId,
 	        'dbyuBayar'=>$dbyuBayar,
 	        //'dtpbJumlah'=>$dtpbJumlah,
-	        'dbyuCreatedBy'=>$createdby,
+			'dbyuCreatedBy'=>$createdby,
+			'pilihanbayar'=>$pilihanbayar,
 	    );
 	    $simpandetailtemp=$this->M_pos->simpan_data($data,'detbayarutang_temp');
 	    if($simpandetailtemp){
@@ -166,7 +176,8 @@ class C_bayarutang extends CI_Controller {
 	      foreach ($bayarutang_temp as $row) {
 	         $ins[$i]['dbyuByruId']         = $byru;
 	         $ins[$i]['dbyuPmblId']         = $row->dbyuPmblId;
-	         $ins[$i]['dbyuBayar']          = $row->dbyuBayar;
+			 $ins[$i]['dbyuBayar']          = $row->dbyuBayar;
+			 $ins[$i]['pilihanbayar']       = $row->pilihanbayar;
 	         $i++;  
 	      } 
 

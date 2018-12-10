@@ -56,7 +56,7 @@
                     <label class="control-label" for="inputWarning">Tanggal</label>
                     <div class="controls">
                        <div class="input-append" id="ui_date_picker_trigger">
-                        <input name="pnjlTanggal" type="text"  class="m-wrap medium" /><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input name="pnjlTanggal" type="text"  class="m-wrap medium" value="<?=date('m/d/Y')?>" readonly/><span class="add-on"><i class="icon-calendar"></i></span>
                       </div>
                     </div>
                   </div> 
@@ -160,7 +160,7 @@
             <div class="control-group">
               <label class="control-label" for="inputWarning">Harga Jual Satuan</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpjHarga" readonly="" name="dtpjHarga" />
+                 <input type="text" class="span12" id="dtpjHarga" required="" name="dtpjHarga" />
                  
               </div>
             </div> 

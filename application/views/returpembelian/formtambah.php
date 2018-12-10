@@ -60,7 +60,7 @@
                   <label class="control-label" for="inputWarning">Tanggal Retur</label>
                   <div class="controls">
                     <div class="input-append" id="ui_date_picker_trigger">
-                      <input name="rtpbTanggal" type="text"  class="m-wrap medium" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+                      <input name="rtpbTanggal" type="text"  class="m-wrap medium" value="<?=date('m/d/Y')?>" readonly /><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>
                 </div>
@@ -94,10 +94,10 @@
                     <tr>
                       <th class="hidden-phone">No</th>
                       <th class="hidden-phone">Nama Barang</th>
-                      <th class="hidden-phone">HPP</th>
-                      <th class="hidden-phone">J.Beli</th>
-                      <th class="hidden-phone">J.Retur Real</th>
-                      <th class="hidden-phone">J.Retur Temp</th>
+                      <th class="hidden-phone">Harga Beli</th>
+                      <th class="hidden-phone">Jumlah Beli</th>
+                      <th class="hidden-phone">Jumlah Retur</th>
+                     <!-- <th class="hidden-phone">J.Retur Temp</th> -->
                       <th class="hidden-phone">Aksi</th>
                     </tr>
                   </thead>

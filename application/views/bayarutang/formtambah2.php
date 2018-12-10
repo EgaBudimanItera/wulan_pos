@@ -76,6 +76,7 @@
                        <span class="help-inline"></span>
                     </div>
                   </div> 
+
                   <div class="form-actions">
                       <a href="#" class="btn btn-success" data-toggle="modal" data-target="#detailbayarutangModal"><i class="icon-plus-sign"></i> Tambahkan Pembayaran
                       </a>
@@ -145,6 +146,16 @@
                  
               </div>
             </div> 
+            <div class="control-group">
+              <label class="control-label">Pilhan Bayar</label>
+              <div class="controls">
+                 <select class="span12 chosen" data-placeholder="Pilih" tabindex="1" name="pilihanbayar" id="pilihanbayar">
+                    <option value="Tunai">Tunai</option>
+                    <option value="Transfer">Transfer</option>
+                    <option value="Giro">Giro</option>
+                 </select>
+              </div>
+            </div>
             <div class="form-actions">
               <button type="button" class="btn btn-primary" onclick="simpan()"><i class="icon-ok"></i> Simpan Pembayaran</button>
             </div>

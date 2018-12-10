@@ -9,9 +9,11 @@ class C_lapreturbeli extends CI_Controller {
 	}
 
 	public function index(){
+		$query="SELECT * FROM supplier";
 		$data=array(
 			'page'=>'lapreturbeli/formsearch',
-			'link'=>'lapreturbeli'
+			'link'=>'lapreturbeli',
+			'supplier'=>$this->M_pos->kueri($query)->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -20,23 +22,37 @@ class C_lapreturbeli extends CI_Controller {
 	  
 	  $daritanggal=date_format(date_create($this->input->post('daritanggal',true)),"Y-m-d");
 	  $hinggatanggal=date_format(date_create($this->input->post('hinggatanggal',true)),"Y-m-d");
-	  $query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $splrId = $this->input->post('splrId');
+	  if (empty($splrId)) {
+	  	$splrId = 0;
+	  }
+	  if ($splrId==0) {
+		$query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  }else{
+		$query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and returpembelian.rtpbSplrId = $splrId ";
+	  }
+	  
 	  $data=array(
 			'page'=>'lapreturbeli/lihatdata',
 			'link'=>'lapreturbeli',
 			'list'=>$this->M_pos->kueri($query)->result(),
 			'jumlah'=>$this->M_pos->kueri($query)->num_rows(),
-			
+			'splrId'=>$splrId,
 			'daritanggal'=>$daritanggal,
 			'hinggatanggal'=>$hinggatanggal,
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
 
-	public function cetak($dari,$hingga){
+	public function cetak($dari,$hingga,$splrId){
 	  $daritanggal=$dari;
 	  $hinggatanggal=$hingga;
-	  $query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  $splrId=$splrId;
+	  if ($splrId==0) {
+		$query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal'";
+	  }else{
+		$query="SELECT * from detreturpembelian join returpembelian on(drpbRtpbId=rtpbId) join barang on(drpbBrngId=brngId) join pembelian on(rtpbPmblId=pmblId) join supplier on(pmblSplrId=splrId)  where  rtpbTanggal BETWEEN '$daritanggal' and '$hinggatanggal' and returpembelian.rtpbSplrId = $splrId ";
+	  }
 	  $data=array(
 			
 			'list'=>$this->M_pos->kueri($query)->result(),

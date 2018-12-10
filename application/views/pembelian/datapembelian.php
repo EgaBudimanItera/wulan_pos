@@ -46,6 +46,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">No Faktur</th>
                     <th class="hidden-phone">Tanggal</th>
+                    <th class="hidden-phone">Kode Supplier</th>
                     <th class="hidden-phone">Supplier</th>
                     <th class="hidden-phone">Total</th>
                     <th class="hidden-phone">Aksi</th>
@@ -60,10 +61,14 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->pmblNoFaktur?></td>
                     <td><?=$l->pmblTanggal?></td>
+                    <td><?=$l->splrKode?></td>
                     <td><?=$l->splrNama?></td>
                     <td><?php echo number_format($l->pmblTotalBeli)?></td>
                     <td>
                       <center>
+                      <a data-toggle="tooltip" data-placement="bottom" title="Cetak" class="btn btn-xs btn-success" href="<?=base_url()?>c_pembelian/invoice/<?=$l->pmblId?>" target="_blank">
+                            <i class="icon-print"></i>                
+                          </a>
                           <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_pembelian/formdetail/<?=$l->pmblId?>">
                             <i class="icon-eye-open"></i>                
                           </a>

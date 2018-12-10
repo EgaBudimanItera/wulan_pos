@@ -188,4 +188,15 @@ class C_pembelian extends CI_Controller {
        redirect(base_url().'c_pembelian'); //location
      }      
    }
+
+   public function invoice($nofaktur){
+        $query="SELECT * FROM detpembelian join barang on(dtpbBrngId=brngId) WHERE dtpbPmblId='$nofaktur'";
+        $query2="SELECT *FROM pembelian JOIN supplier ON pembelian.pmblSplrId=supplier.splrId WHERE pmblId='$nofaktur'";
+        $data=array(
+            'list'=>$this->M_pos->kueri($query)->result(),
+            'nofaktur'=>$this->M_pos->kueri($query2)->row(),
+        );
+
+        $this->load->view('pembelian/invoice',$data);
+   }
 }

@@ -8,6 +8,7 @@
       <th class="col-md-2">No Faktur</th>
       <th class="col-md-2">Jumlah Hutang </th>
       <th class="col-md-2">Jumlah Bayar</th>
+      <th class="col-md-2">Pilihan Bayar</th>
       <th class="col-md-2">Aksi</th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
       <th><?=$l->pmblNoFaktur?></th>
       <th><?=number_format($l->pmblSisaBayar)?></th>
       <th><?=number_format($l->dbyuBayar)?></th>
+      <th><?=$l->pilihanbayar?></th>
       <td>
          <center>
           <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_pembelian/hapusdet/<?=$l->dbyuId?>" >

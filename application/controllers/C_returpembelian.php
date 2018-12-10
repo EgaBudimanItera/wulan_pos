@@ -187,4 +187,34 @@ class C_returpembelian extends CI_Controller {
         echo json_encode($data);
 	}
 
+	public function invoice($rtpbId){
+        
+        $query2="SELECT * FROM returpembelian WHERE rtpbId='$rtpbId'";
+        $data=array(
+            'list'=>$this->M_pos->list_join2_where('returpembelian','detreturpembelian','rtpbId=drpbRtpbId','barang','drpbBrngId=brngId','',array('rtpbId'=>$rtpbId),''),
+            'nofaktur'=>$this->M_pos->kueri($query2)->row(),
+        );
+
+        $this->load->view('returpembelian/invoice',$data);
+   }
+
+   public function hapusall($nofaktur){
+    $hapusdet=$this->M_pos->hapus('drpbRtpbId',$nofaktur,'detreturpembelian');
+    $hapuspenjualan=$this->M_pos->hapus('rtpbId',$nofaktur,'returpembelian');
+    
+    if($hapuspenjualan && $hapusdet){
+        $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Success!</strong> Data berhasil dihapus !</div>'
+        );
+        redirect(base_url().'c_returpembelian'); //location
+     }else{
+       $this->session->set_flashdata(
+            'msg', 
+            '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Peringatan!</strong> Data gagal dihapus !</div>'
+        );
+       redirect(base_url().'c_returpembelian'); //location
+     }      
+   }
+
 }

@@ -63,7 +63,13 @@
                     <td><?=$l->plgnNama?></td>
                     <td><?php echo number_format($l->rtpjNilai)?></td>
                     <td>
-                      <a class="btn btn-primary" href="<?=base_url()?>c_returpenjualan/formdetail/<?=$l->rtpjId?>" title="Detail"><i class="icon-eye-open"></i></a>
+                    <a data-toggle="tooltip" data-placement="bottom" title="Cetak" class="btn btn-xs btn-success" href="<?=base_url()?>c_returpenjualan/invoice/<?=$l->rtpjId?>" target="_blank">
+                            <i class="icon-print"></i>                
+                          </a>
+                      <a class="btn btn-warning" href="<?=base_url()?>c_returpenjualan/formdetail/<?=$l->rtpjId?>" title="Detail"><i class="icon-eye-open"></i></a>
+                      <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_returpenjualan/hapusall/<?=$l->rtpjId?>" onclick="return confirm('yakin akan menghapus data ini?')">
+                            <i class="icon-trash"></i>  
+                          </a>
                     </td>
                   </tr>
                   <?php

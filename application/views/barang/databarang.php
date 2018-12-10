@@ -47,7 +47,7 @@
                     <th class="hidden-phone">Kode</th>
                     <th class="hidden-phone">Nama</th>
                     <th class="hidden-phone">Satuan</th>
-                    <th class="hidden-phone">HPP</th>
+                    <th class="hidden-phone">Harga Beli</th>
                     <th class="hidden-phone">Harga Jual</th>
                     <th class="hidden-phone">Stok</th>
                     <th class="hidden-phone">Aksi</th>

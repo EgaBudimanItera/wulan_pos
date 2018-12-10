@@ -55,10 +55,11 @@
                     <th class="hidden-phone">Kode Pelanggan</th>
                     <th class="hidden-phone">Nama Pelanggan</th>
                     <th class="hidden-phone">Keterangan</th>
-                    <th class="hidden-phone">Piutang Awal</th>
-                    <th class="hidden-phone">Piutang Masuk</th>
-                    <th class="hidden-phone">Piutang Keluar</th>
-                    <th class="hidden-phone">Piutang Akhir</th>
+                    <!-- <th class="hidden-phone">Piutang Awal</th> -->
+                    <th class="hidden-phone">Debet</th>
+                    <th class="hidden-phone">Kredit</th>
+                    <th class="hidden-phone">Saldo Debet</th>
+                    <th class="hidden-phone">Saldo Kredit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -73,10 +74,11 @@
                     <td><?=$l->plgnKode;?></td>
                     <td><?=$l->plgnNama;?></td>
                     <td><?=$l->ptngKet;?></td>
-                    <td><?=number_format($l->ptngAwal);?></td>
+                    <!-- <td><?=number_format($l->ptngAwal);?></td> -->
                     <td><?=number_format($l->ptngDebet);?></td>
                     <td><?=number_format($l->ptngKredit);?></td>
                     <td><?=number_format($l->ptngAkhir);?></td>
+                    <td></td>
                   </tr>
                   <?php
                     

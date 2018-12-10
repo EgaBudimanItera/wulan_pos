@@ -46,6 +46,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">No Faktur</th>
                     <th class="hidden-phone">Tanggal</th>
+                    <th class="hidden-phone">Kode Pelanggan</th>
                     <th class="hidden-phone">Pelanggan</th>
                     <th class="hidden-phone">Total</th>
                     <th class="hidden-phone">Aksi</th>
@@ -61,6 +62,7 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->pnjlNoFaktur?></td>
                     <td><?=$l->pnjlTanggal?></td>
+                    <td><?=$l->plgnKode?></td>
                     <td><?=$l->plgnNama?></td>
                     <td><?php echo number_format($l->pnjlTotalJual)?></td>
                     <td>

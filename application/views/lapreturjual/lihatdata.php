@@ -42,7 +42,7 @@
                   <button type="button" class="btn btn-primary" onclick="self.history.back()">
                     <i class="icon-arrow-left"></i> Kembali
                   </button>
-                  <a href="<?=base_url()?>c_lapreturjual/cetak/<?=$daritanggal?>/<?=$hinggatanggal?>" class="btn btn-warning" target="_blank"><i class="icon-print"></i> Cetak</a>
+                  <a href="<?=base_url()?>c_lapreturjual/cetak/<?=$daritanggal?>/<?=$hinggatanggal?>/<?=$rtpjPlgnId?>" class="btn btn-warning" target="_blank"><i class="icon-print"></i> Cetak</a>
                 </div>
               </div>
 
@@ -52,6 +52,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Tanggal</th>
                     <th class="hidden-phone">No Faktur Penjualan</th>
+                    <th class="hidden-phone">No Retur Penjualan</th>
                     <th class="hidden-phone">Kode Pelanggan</th>
                     <th class="hidden-phone">Nama Pelanggan</th>
                     <th class="hidden-phone">Kode Barang</th>
@@ -71,6 +72,7 @@
                     <td><?=$no++;?></td>
                     <td><?=$l->rtpjTanggal;?></td>
                     <td><?=$l->pnjlNoFaktur;?></td>
+                    <td><?=$l->rtpjNoFaktur;?></td>
                     <td><?=$l->plgnKode;?></td>
                     <td><?=$l->plgnNama;?></td>
                     <td><?=$l->brngKode;?></td>
