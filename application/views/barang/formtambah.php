@@ -93,13 +93,13 @@
                  <input type="hidden" class="span6" id="brngHpp" required name="brngHpp" value="0"/>
                  <input type="hidden" class="span6" id="brngHargaJual" required name="brngHargaJual" value="0"/>
                  <?php }?>
-                  <div class="control-group primary">
+                  <!-- <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Stok</label>
                     <div class="controls">
                        <input type="number" class="span6" id="brngStokAkhir" required name="brngStokAkhir" />
                        <span class="help-inline"></span>
                     </div>
-                  </div> 
+                  </div>  -->
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Gambar Barang</label>
                     <div class="controls">
