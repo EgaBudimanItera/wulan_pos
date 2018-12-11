@@ -114,7 +114,7 @@
                       <td><?=number_format($l->brngHpp)?></td>
                       <td><?=number_format($l->dtpbJumlah)?></td>
                       <td><?=number_format($l->jumlahretur)?></td>
-                      <td><?=number_format($l->jumlahreturtemp)?></td>
+                      <!-- <td><?=number_format($l->jumlahreturtemp)?></td> -->
                       <td>
                         <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
                       </td>
