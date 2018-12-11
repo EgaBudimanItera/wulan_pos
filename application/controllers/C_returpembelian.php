@@ -182,7 +182,7 @@ class C_returpembelian extends CI_Controller {
 	}
 
 	public function get_detpembelian($brngId,$nofakturbeli){
-		$query="SELECT *,brngNama,dtpbJumlah,dtpbPmblId,coalesce((select drpbJumlah from detreturpembelian,returpembelian where drpbRtpbId=rtpbId and drpbBrngId=dtpbBrngId),0) as jumlahretur,coalesce((select drpbJumlah from detreturpembelian_temp where drpbPmblId=dtpbPmblId and drpbBrngId=dtpbBrngId),0) as jumlahreturtemp from detpembelian join barang on(dtpbBrngId=brngId) join pembelian on (dtpbPmblId=pmblId) and pmblNoFaktur='$nofakturbeli' and dtpbBrngId='$brngId'";
+		$query="SELECT *,brngNama,dtpbJumlah,dtpbPmblId,coalesce((select drpbJumlah from detreturpembelian,returpembelian where drpbRtpbId=rtpbId and drpbBrngId=dtpbBrngId GROUP BY drpbBrngId),0) as jumlahretur,coalesce((select drpbJumlah from detreturpembelian_temp where drpbPmblId=dtpbPmblId and drpbBrngId=dtpbBrngId  GROUP BY drpbBrngId),0) as jumlahreturtemp from detpembelian join barang on(dtpbBrngId=brngId) join pembelian on (dtpbPmblId=pmblId) and pmblNoFaktur='$nofakturbeli' and dtpbBrngId='$brngId'";
 		$data=$this->M_pos->kueri($query)->row_array();
         echo json_encode($data);
 	}

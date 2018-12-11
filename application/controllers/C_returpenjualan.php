@@ -12,7 +12,9 @@ class C_returpenjualan extends CI_Controller {
 		$data=array(
 			'page'=>'returpenjualan/datareturpenjualan',
 			'link'=>'returpenjualan',
-			'list'=>$this->M_pos->list_join2('returpenjualan','penjualan','rtpjPnjlId=pnjlId','pelanggan','pnjlPlgnId=plgnId'),
+			'list2'=>$this->M_pos->list_join2('returpenjualan','penjualan','rtpjPnjlId=pnjlId','pelanggan','pnjlPlgnId=plgnId'),
+			'list'=>$this->M_pos->kueri("SELECT * FROM returpenjualan JOIN penjualan ON rtpjPnjlId=pnjlId JOIn pelanggan ON pnjlPlgnId=plgnId JOIN detreturpenjualan ON 
+drpjRtpjId=rtpjId ")->result(),
 		);
 		$this->load->view('partials/back/wrapper',$data);
 	}
@@ -183,7 +185,7 @@ class C_returpenjualan extends CI_Controller {
 	}
 
 	public function get_detpenjualan($brngId,$nofakturjual){
-		$query="SELECT *,brngNama,dtpjJumlah,dtpjPnjlId,coalesce((select drpjJumlah from detreturpenjualan,returpenjualan where drpjRtpjId=rtpjId and drpjBrngId=dtpjBrngId),0) as jumlahretur,coalesce((select drpjJumlah from detreturpenjualan_temp where drpjPnjlId=dtpjPnjlId and drpjBrngId=dtpjBrngId),0) as jumlahreturtemp from detpenjualan join barang on(dtpjBrngId=brngId) join penjualan on (dtpjPnjlId=pnjlId) where pnjlNoFaktur='$nofakturjual' and dtpjBrngId='$brngId'";
+		$query="SELECT *,brngNama,dtpjJumlah,dtpjPnjlId,coalesce((select drpjJumlah from detreturpenjualan,returpenjualan where drpjRtpjId=rtpjId and drpjBrngId=dtpjBrngId GROUP BY drpjBrngId),0) as jumlahretur,coalesce((select drpjJumlah from detreturpenjualan_temp where drpjPnjlId=dtpjPnjlId and drpjBrngId=dtpjBrngId  GROUP BY drpjBrngId),0) as jumlahreturtemp from detpenjualan join barang on(dtpjBrngId=brngId) join penjualan on (dtpjPnjlId=pnjlId) where pnjlNoFaktur='$nofakturjual' and dtpjBrngId='$brngId'";
 		$data=$this->M_pos->kueri($query)->row_array();
         echo json_encode($data);
 	}
