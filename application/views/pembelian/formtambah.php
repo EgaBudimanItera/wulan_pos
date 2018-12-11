@@ -159,12 +159,12 @@
               </div>
             </div>
             <div class="control-group">
-              <label class="control-label" for="inputWarning">HPP Satuan Barang</label>
+              <label class="control-label" for="inputWarning">Harga Beli</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpbHarga" readonly="" required="" name="dtpbHarga" />
-                 
+                 <input type="text" class="span12" id="dtpbHarga" required="" name="dtpbHarga" />
               </div>
             </div> 
+
             <div class="control-group">
               <label class="control-label" for="inputWarning">Jumlah Beli</label>
               <div class="controls">
