@@ -150,34 +150,44 @@ class C_returpembelian extends CI_Controller {
 	      $querytemp="SELECT * FROM detreturpembelian_temp where drpbCreatedby='$createdby'";
 	     //data untuk simpan ke tabel det pembelian
 	      $detreturpembelian_temp=$this->M_pos->kueri($querytemp)->result();
-	      $i=0;
-	      foreach ($detreturpembelian_temp as $row) {
-	         $ins[$i]['drpbRtpbId']         = $drpbId;
-	         $ins[$i]['drpbBrngId']         = $row->drpbBrngId;
-	         $ins[$i]['drpbJumlah']         = $row->drpbJumlah;
-	         $ins[$i]['drpbHarga']          = $row->drpbHarga;
-	         $i++;  
-	      } 
+	      if($this->M_pos->kueri($querytemp)->num_rows()>0){
+	      	  $i=0;
+		      foreach ($detreturpembelian_temp as $row) {
+		         $ins[$i]['drpbRtpbId']         = $drpbId;
+		         $ins[$i]['drpbBrngId']         = $row->drpbBrngId;
+		         $ins[$i]['drpbJumlah']         = $row->drpbJumlah;
+		         $ins[$i]['drpbHarga']          = $row->drpbHarga;
+		         $i++;  
+		      } 
 
-	     //simpan ke det pembelian
-	     $simpandet=$this->M_pos->insertbatch('detreturpembelian',$ins);
-	     //hapus det pembelian temp
-	     $hapustem=$this->M_pos->hapus('drpbCreatedby',$createdby,'detreturpembelian_temp');
+		     //simpan ke det pembelian
+		     $simpandet=$this->M_pos->insertbatch('detreturpembelian',$ins);
+		     //hapus det pembelian temp
+		     $hapustem=$this->M_pos->hapus('drpbCreatedby',$createdby,'detreturpembelian_temp');
 
-	     if($detreturpembelian && $simpandet && $hapustem){
-	        $this->session->set_flashdata(
-	            'msg', 
-	            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Succes</strong> Simpan Data Retur Berhasil </div>'
-	        );
-	        redirect(base_url().'C_returpembelian'); //location
-	     }
-	     else{
-	        $this->session->set_flashdata(
-	            'msg', 
-	            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Retur Gagal </div>'
-	        );
-	        redirect(base_url().'C_returpembelian'); //location
-	     }
+		     if($detreturpembelian && $simpandet && $hapustem){
+		        $this->session->set_flashdata(
+		            'msg', 
+		            '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Succes</strong> Simpan Data Retur Berhasil </div>'
+		        );
+		        redirect(base_url().'C_returpembelian'); //location
+		     }
+		     else{
+		        $this->session->set_flashdata(
+		            'msg', 
+		            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Simpan Data Retur Gagal </div>'
+		        );
+		        redirect(base_url().'C_returpembelian'); //location
+		     }	
+	      }
+	      else{
+	      	$this->session->set_flashdata(
+		            'msg', 
+		            '<div class="alert alert-warning"><a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a><strong>Warning!</strong> Retur Kosong</div>'
+		        );
+		        redirect(base_url().'C_returpembelian'); //location	
+	      }
+	      
 	    }
 	}
 

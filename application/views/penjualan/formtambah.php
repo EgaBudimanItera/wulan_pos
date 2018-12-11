@@ -160,7 +160,7 @@
             <div class="control-group">
               <label class="control-label" for="inputWarning">Harga Jual Satuan</label>
               <div class="controls">
-                 <input type="text" class="span12" id="dtpjHarga" readonly="" name="dtpjHarga" />
+                 <input type="text" class="span12" id="dtpjHarga" required="" name="dtpjHarga" />
                  
               </div>
             </div> 
