@@ -107,7 +107,7 @@
                     </div>
 <<<<<<< HEAD
                   </div> -->
-                  </div> 
+                 
                   <div class="control-group primary">
                     <label class="control-label" for="inputWarning">Gambar Barang</label>
                     <div class="controls">
