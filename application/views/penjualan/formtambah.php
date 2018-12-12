@@ -165,6 +165,13 @@
               </div>
             </div> 
             <div class="control-group">
+              <label class="control-label" for="inputWarning">Stok Barang</label>
+              <div class="controls">
+                 <input type="text" class="span12" id="brngStokAkhir" readonly="" name="brngStokAkhir" />
+                 
+              </div>
+            </div> 
+            <div class="control-group">
               <label class="control-label" for="inputWarning">Jumlah Jual</label>
               <div class="controls">
                  <input type="number" class="span12" id="dtpjJumlah" required name="dtpjJumlah" />

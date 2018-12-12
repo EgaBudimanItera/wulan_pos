@@ -110,7 +110,9 @@
                     </div>
                   </div>
 
-                  <!--<div class="control-group primary">
+<!-- 
+                  <div class="control-group primary">
+
                     <label class="control-label" for="inputWarning">Piutang Awal</label>
                     <div class="controls">
                        <input type="number" class="span6" id="plgnPiutang" required name="plgnPiutang" />

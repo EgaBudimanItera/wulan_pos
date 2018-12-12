@@ -43,7 +43,7 @@ class C_supplier extends CI_Controller {
 			'splrTelp1' => $this->input->post('splrTelp1', true),
 			'splrTelp2' => $this->input->post('splrTelp2', true),
 			'splrAlamat' => $this->input->post('splrAlamat', true),
-			'splrHutang' => $this->input->post('splrHutang', true),
+			'splrHutang' => 0,
 		);
 
 		$simpan = $this->M_pos->simpan_data($data,'supplier');

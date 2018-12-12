@@ -20,6 +20,7 @@
 	          success: function(res) {
 	              var res_ = JSON.parse(res);
 	              $('#dtpjHarga').val(res_.brngHargaJual);
+                $('#brngStokAkhir').val(res_.brngStokAkhir);
 	          }
 	      })
 	  	});
