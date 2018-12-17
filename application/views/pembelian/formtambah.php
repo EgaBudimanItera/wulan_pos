@@ -162,6 +162,7 @@
               <label class="control-label" for="inputWarning">Harga Beli</label>
               <div class="controls">
                  <input type="text" class="span12" id="dtpbHarga" required="" name="dtpbHarga" />
+
               </div>
             </div> 
 

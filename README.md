@@ -1,1 +1,1 @@
-# tika_kredit
+# Aplikasi Point Of Sales Sederhana

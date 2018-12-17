@@ -50,7 +50,7 @@
                     <th class="hidden-phone">No</th>
                     <th class="hidden-phone">Kode Barang</th>
                     <th class="hidden-phone">Nama Barang</th>
-                    <th class="hidden-phone">HPP</th>
+                    <th class="hidden-phone">Harga Beli</th>
                     <th class="hidden-phone">Jumlah</th>
                     <th class="hidden-phone">Subtotal</th>
                     <th class="hidden-phone">Aksi</th>

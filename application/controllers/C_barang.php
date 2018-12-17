@@ -93,7 +93,7 @@ class C_barang extends CI_Controller {
 						'brngStunId' => $this->input->post('brngStunId', true),
 						'brngHpp' => $this->input->post('brngHpp', true),
 						'brngHargaJual' => $this->input->post('brngHargaJual', true),
-						'brngStokAkhir' => $this->input->post('brngStokAkhir', true),
+						'brngStokAkhir' => '0',
 						'brngGambar'=>$upload_data['file_name']
 					);
 

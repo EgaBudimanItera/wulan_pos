@@ -94,10 +94,10 @@
                     <tr>
                       <th class="hidden-phone">No</th>
                       <th class="hidden-phone">Nama Barang</th>
-                      <th class="hidden-phone">HPP</th>
-                      <th class="hidden-phone">J.Beli</th>
-                      <th class="hidden-phone">J.Retur Real</th>
-                      <th class="hidden-phone">J.Retur Temp</th>
+                      <th class="hidden-phone">Harga Beli</th>
+                      <th class="hidden-phone">Jumlah Beli</th>
+                      <th class="hidden-phone">Jumlah Retur</th>
+                     <!-- <th class="hidden-phone">J.Retur Temp</th> -->
                       <th class="hidden-phone">Aksi</th>
                     </tr>
                   </thead>
@@ -114,7 +114,7 @@
                       <td><?=number_format($l->brngHpp)?></td>
                       <td><?=number_format($l->dtpbJumlah)?></td>
                       <td><?=number_format($l->jumlahretur)?></td>
-                      <td><?=number_format($l->jumlahreturtemp)?></td>
+                      <!-- <td><?=number_format($l->jumlahreturtemp)?></td> -->
                       <td>
                         <a id="<?=$l->brngId?>" class="btn btn-success edit_retur" href="#" data-toggle="modal" data-target="#returbeliModal"><i class="icon-pencil"></i></a>
                       </td>
