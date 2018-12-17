@@ -67,9 +67,9 @@
                             <i class="icon-print"></i>                
                           </a>
                       <a class="btn btn-warning" href="<?=base_url()?>c_returpembelian/formdetail/<?=$l->rtpbId?>" title="Detail"><i class="icon-eye-open"></i></a>
-                      <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_returpembelian/hapusall/<?=$l->rtpbId?>" onclick="return confirm('yakin akan menghapus data ini?')">
+                      <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_returpembelian/hapusall/<?=$l->rtpbId?>" onclick="return confirm('yakin akan menghapus data ini?')">
                             <i class="icon-trash"></i>  
-                          </a>
+                          </a> -->
                     </td>
                   </tr>
                   <?php

@@ -73,9 +73,9 @@
                           <a data-toggle="tooltip" data-placement="bottom" title="Detail" class="btn btn-xs btn-warning" href="<?=base_url()?>c_orderpenjualan/formdetail/<?=$l->opnjId?>">
                             <i class="icon-eye-open"></i>                
                           </a>
-                          <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_orderpenjualan/hapusall/<?=$l->opnjId?>" onclick="return confirm('yakin akan menghapus data ini?')">
+                          <!-- <a data-toggle="tooltip" data-placement="bottom" title="Hapus" class="btn btn-xs btn-danger" href="<?=base_url()?>c_orderpenjualan/hapusall/<?=$l->opnjId?>" onclick="return confirm('yakin akan menghapus data ini?')">
                             <i class="icon-trash"></i>  
-                          </a>
+                          </a> -->
                         </center>
                     </td>
                   </tr>
